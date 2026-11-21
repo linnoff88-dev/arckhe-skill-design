@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 1.4 — design-designer | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#34d399', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento emerald */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5,150,105,0.18); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #059669; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .bg-cyan-500\/10 { background-color: rgba(8,145,178,0.08); }
+    html:not(.dark) .border-cyan-500\/30 { border-color: rgba(8,145,178,0.25); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(220,38,38,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* SVG animations */
+    @keyframes dd-beam { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+    @keyframes dd-pulse { 0%,100% { opacity:.3 } 50% { opacity:1 } }
+    @keyframes dd-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes dd-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: no-preference) {
+      .dd-anim-beam { animation: dd-beam 2.4s linear infinite; stroke-dasharray: 200; }
+      .dd-anim-pulse { animation: dd-pulse 2.8s ease-in-out infinite; }
+      .dd-anim-pulse:nth-child(2) { animation-delay: .5s; }
+      .dd-anim-pulse:nth-child(3) { animation-delay: 1s; }
+      .dd-anim-float { animation: dd-float 3s ease-in-out infinite; }
+      .dd-anim-spin { animation: dd-spin 10s linear infinite; transform-origin: 200px 110px; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha1/modulo-1-4.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha1/modulo-1-4.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha1/modulo-1-4.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-1-4.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha1/modulo-1-4.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha1/modulo-1-4.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-emerald-400 hover:text-emerald-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Motion</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Publicar</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- BREADCRUMB -->
+<nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-sm text-neutral-500 mb-6">
+<a class="hover:text-emerald-400 transition-colors" href="../../index.html">Início</a>
+<span>/</span>
+<a class="hover:text-emerald-400 transition-colors" href="index.html">Trilha 1 — Construir</a>
+<span>/</span>
+<span class="text-emerald-400 font-medium">Módulo 1.4</span>
+</nav>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-2 mb-8 rounded-xl px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4 tracking-widest uppercase">MÓDULO 1.4</span>
+<h1 class="text-3xl sm:text-4xl font-extrabold text-neutral-100 mb-3">🎯 design-designer</h1>
+<p class="text-neutral-300 text-lg mb-6">Entrevista rápida, prompt perfeito. Transforme seu briefing em uma instrução otimizada para o Claude Design (<code class="text-emerald-400 bg-dark-700 px-1 rounded">claude.ai/design</code>) gerar landing pages, pitch decks e apps clicáveis de uma vez só.</p>
+<!-- Stats -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center">
+<div class="text-2xl font-bold text-emerald-400">6</div>
+<div class="text-xs text-neutral-500 mt-0.5">Tópicos</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center">
+<div class="text-2xl font-bold text-emerald-400">25</div>
+<div class="text-xs text-neutral-500 mt-0.5">Minutos</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center">
+<div class="text-2xl font-bold text-emerald-400">Int.</div>
+<div class="text-xs text-neutral-500 mt-0.5">Nível</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center">
+<div class="text-2xl font-bold text-emerald-400">UX</div>
+<div class="text-xs text-neutral-500 mt-0.5">Categoria</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA: design pipeline -->
+<div class="flex justify-center lg:justify-end">
+<svg aria-label="Fluxo do design-designer: entrevista do usuário até o prompt otimizado para o Claude Design" class="w-full h-auto" role="img" viewbox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="dd-grad-em" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#34d399"></stop>
+<stop offset="100%" stop-color="#10b981"></stop>
+</lineargradient>
+<lineargradient id="dd-grad-cy" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#38bdf8"></stop>
+<stop offset="100%" stop-color="#0ea5e9"></stop>
+</lineargradient>
+<filter id="dd-glow">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<!-- Background -->
+<rect fill="#0e2018" height="240" rx="16" width="400"></rect>
+<!-- Grid lines -->
+<line stroke="#34d39920" stroke-width="1" x1="0" x2="400" y1="80" y2="80"></line>
+<line stroke="#34d39920" stroke-width="1" x1="0" x2="400" y1="160" y2="160"></line>
+<line stroke="#34d39920" stroke-width="1" x1="133" x2="133" y1="0" y2="240"></line>
+<line stroke="#34d39920" stroke-width="1" x1="267" x2="267" y1="0" y2="240"></line>
+<!-- User node -->
+<circle cx="60" cy="120" fill="#0e2018" filter="url(#dd-glow)" r="32" stroke="#34d399" stroke-width="2"></circle>
+<text fill="#34d399" font-size="20" text-anchor="middle" x="60" y="115">👤</text>
+<text fill="#bfe6ff" font-family="monospace" font-size="8" text-anchor="middle" x="60" y="130">briefing</text>
+<!-- Interview flow beams -->
+<path class="dd-anim-beam" d="M92,110 Q130,90 168,105" fill="none" opacity="0.85" stroke="#34d399" stroke-width="2"></path>
+<path class="dd-anim-beam" d="M92,130 Q130,150 168,135" fill="none" opacity="0.7" stroke="#38bdf8" stroke-width="1.5"></path>
+<!-- Design-designer box -->
+<rect fill="#0e2018" filter="url(#dd-glow)" height="60" rx="10" stroke="#34d399" stroke-width="2" width="80" x="170" y="90"></rect>
+<text fill="#34d399" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle" x="210" y="115">/design</text>
+<text fill="#38bdf8" font-family="monospace" font-size="9" text-anchor="middle" x="210" y="128">-designer</text>
+<!-- Prompt beam out -->
+<path class="dd-anim-beam" d="M250,115 Q290,95 318,105" fill="none" opacity="0.85" stroke="#34d399" stroke-width="2"></path>
+<!-- Claude Design node -->
+<circle class="dd-anim-float" cx="345" cy="120" fill="#0e1b26" filter="url(#dd-glow)" r="35" stroke="#38bdf8" stroke-width="2"></circle>
+<text fill="#38bdf8" font-size="18" text-anchor="middle" x="345" y="113">✦</text>
+<text fill="#bfe6ff" font-family="monospace" font-size="7.5" text-anchor="middle" x="345" y="128">claude.ai</text>
+<text fill="#bfe6ff" font-family="monospace" font-size="7.5" text-anchor="middle" x="345" y="139">/design</text>
+<!-- Pulse dots on nodes -->
+<circle class="dd-anim-pulse" cx="210" cy="80" fill="#34d399" r="4"></circle>
+<circle class="dd-anim-pulse" cx="210" cy="160" fill="#38bdf8" r="4"></circle>
+<circle class="dd-anim-pulse" cx="60" cy="168" fill="#34d399" r="3"></circle>
+<!-- Output label -->
+<text fill="#4b5563" font-family="monospace" font-size="9" text-anchor="middle" x="200" y="220">briefing → prompt otimizado → design gerado</text>
+</svg>
+</div>
+</div>
+</header>
+<!-- ─────────────────────────────────────────── -->
+<!-- TÓPICO 1: O que é / o que faz -->
+<!-- ─────────────────────────────────────────── -->
+<section class="mb-10" id="topico-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<h2 class="text-2xl font-bold text-neutral-100">🧩 O que é / o que faz</h2>
+</div>
+<!-- Conceito principal -->
+<div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+<div class="flex items-start gap-4">
+<span class="text-3xl">🎯</span>
+<div>
+<h3 class="text-lg font-bold text-emerald-400 mb-2">Prompt engineer para Claude Design</h3>
+<p class="text-neutral-300">O <strong class="text-neutral-100">design-designer</strong> é um skill que conduz uma entrevista rápida com o usuário e, em seguida, constrói um <em>prompt otimizado</em> para ser colado no <strong>claude.ai/design</strong>. Ele é baseado no próprio system prompt do Claude Design — sabe exatamente o que o modelo precisa ouvir para gerar o resultado certo de uma vez.</p>
+</div>
+</div>
+</div>
+<!-- Grid FAZER / EVITAR -->
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+<h4 class="text-emerald-400 font-semibold mb-3 flex items-center gap-2"><span>✓</span> O que ele entrega</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Prompt completo, estruturado e pronto para colar no Claude Design</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Cobertura de: tipo de artefato, audiência, estilo visual, conteúdo, paleta, comportamento interativo</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Eliminação do loop de perguntas que o Claude Design faria na UI</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Adaptação ao caso: landing page, pitch deck, protótipo mobile, app clicável</li>
+</ul>
+</div>
+<div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+<h4 class="text-red-400 font-semibold mb-3 flex items-center gap-2"><span>✗</span> O que ele NÃO faz</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não gera o design em si — apenas o prompt para levá-lo ao Claude Design</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não substitui o frontend-design (que gera HTML/CSS real via código)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não produz assets exportáveis diretamente no Claude Code</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não funciona bem para fluxos complexos que exigem back-end real</li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">claude.ai/design</div>
+<div class="text-xs text-neutral-500">destino do prompt gerado</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">system prompt</div>
+<div class="text-xs text-neutral-500">base técnica do skill</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">entrevista</div>
+<div class="text-xs text-neutral-500">coleta estruturada de briefing</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">one-shot design</div>
+<div class="text-xs text-neutral-500">gera o resultado de uma vez</div>
+</div>
+</div>
+</section>
+<!-- ─────────────────────────────────────────── -->
+<!-- TÓPICO 2: Quando dispara -->
+<!-- ─────────────────────────────────────────── -->
+<section class="mb-10" id="topico-2">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<h2 class="text-2xl font-bold text-neutral-100">🎣 Quando dispara</h2>
+</div>
+<!-- Tip box -->
+<div class="bg-primary/10 border border-emerald-500/30 rounded-xl p-5 mb-6 flex items-start gap-3">
+<span class="text-2xl flex-shrink-0">💡</span>
+<div>
+<p class="text-neutral-300 text-sm">O Claude Code aciona o <strong class="text-neutral-100">design-designer</strong> automaticamente quando detecta qualquer uma das frases-gatilho abaixo na sua mensagem. Você não precisa saber o nome exato do skill.</p>
+</div>
+</div>
+<!-- Trigger phrases timeline -->
+<div class="space-y-4 mb-6">
+<h3 class="text-neutral-400 text-sm font-semibold uppercase tracking-widest">Frases-gatilho da description</h3>
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center flex-shrink-0 text-sm">1</div>
+<div class="bg-dark-700 rounded-xl p-4 flex-1 border border-dark-600">
+<code class="text-emerald-400 text-sm font-mono">/design-designer</code>
+<p class="text-neutral-400 text-xs mt-1">Comando direto — invocação explícita do skill</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center flex-shrink-0 text-sm">2</div>
+<div class="bg-dark-700 rounded-xl p-4 flex-1 border border-dark-600">
+<code class="text-emerald-400 text-sm font-mono">"prompt for claude design"</code>
+<p class="text-neutral-400 text-xs mt-1">Pedido natural em inglês</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center flex-shrink-0 text-sm">3</div>
+<div class="bg-dark-700 rounded-xl p-4 flex-1 border border-dark-600">
+<code class="text-emerald-400 text-sm font-mono">"build a claude design prompt"</code>
+<p class="text-neutral-400 text-xs mt-1">Variação de construção de briefing</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center flex-shrink-0 text-sm">4</div>
+<div class="bg-dark-700 rounded-xl p-4 flex-1 border border-dark-600">
+<code class="text-emerald-400 text-sm font-mono">"design a landing page prompt"</code>
+<p class="text-neutral-400 text-xs mt-1">Foco em landing page — dispara mesmo sem mencionar o skill</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center flex-shrink-0 text-sm">5</div>
+<div class="bg-dark-700 rounded-xl p-4 flex-1 border border-dark-600">
+<code class="text-emerald-400 text-sm font-mono">"build me a claude design brief"</code>
+<p class="text-neutral-400 text-xs mt-1">Solicitação de briefing estruturado</p>
+</div>
+</div>
+</div>
+<!-- Atalho quick path -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mb-6 flex items-start gap-3">
+<span class="text-2xl flex-shrink-0">⚡</span>
+<div>
+<h4 class="text-blue-400 font-semibold mb-1">Quick Path disponível</h4>
+<p class="text-neutral-300 text-sm">Se você disser <strong>"skip the interview, just build it"</strong>, o skill pula a fase de entrevista e gera o prompt com o que foi fornecido. Útil quando você já tem o briefing pronto e quer só formatar.</p>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">trigger phrase</div>
+<div class="text-xs text-neutral-500">frase que ativa o skill</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">skill description</div>
+<div class="text-xs text-neutral-500">metadado que o Claude lê</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">quick path</div>
+<div class="text-xs text-neutral-500">atalho sem entrevista</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">invocação explícita</div>
+<div class="text-xs text-neutral-500">/design-designer direto</div>
+</div>
+</div>
+</section>
+<!-- ─────────────────────────────────────────── -->
+<!-- TÓPICO 3: Como melhora seus resultados -->
+<!-- ─────────────────────────────────────────── -->
+<section class="mb-10" id="topico-3">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<h2 class="text-2xl font-bold text-neutral-100">🚀 Como melhora seus resultados</h2>
+</div>
+<!-- Tip box -->
+<div class="bg-primary/10 border border-emerald-500/30 rounded-xl p-5 mb-6 flex items-start gap-3">
+<span class="text-2xl flex-shrink-0">🎯</span>
+<div>
+<p class="text-neutral-300 text-sm">O Claude Design é poderoso mas exigente: precisa de contexto denso para gerar algo de nível profissional. Sem um prompt bem estruturado, ele vai fazer perguntas ou gerar genérico. O <strong class="text-neutral-100">design-designer</strong> resolve isso front-loading todas as respostas.</p>
+</div>
+</div>
+<!-- Box de dados -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mb-6">
+<h4 class="text-blue-400 font-semibold mb-3">📊 O que muda com o skill</h4>
+<div class="grid md:grid-cols-3 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 text-center">
+<div class="text-2xl font-bold text-blue-400 mb-1">1</div>
+<div class="text-xs text-neutral-400">rodada de perguntas<br/>ao invés de 5–10</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-4 text-center">
+<div class="text-2xl font-bold text-blue-400 mb-1">100%</div>
+<div class="text-xs text-neutral-400">do contexto coberto<br/>na primeira entrega</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-4 text-center">
+<div class="text-2xl font-bold text-blue-400 mb-1">4</div>
+<div class="text-xs text-neutral-400">tipos de artefato<br/>suportados</div>
+</div>
+</div>
+</div>
+<!-- Tipos de artefato suportados -->
+<h3 class="text-neutral-400 text-sm font-semibold uppercase tracking-widest mb-4">Tipos de artefato que o skill sabe gerar prompt</h3>
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">🌐</span>
+<div>
+<h4 class="font-semibold text-neutral-100 text-sm">Landing Page</h4>
+<p class="text-xs text-neutral-400 mt-1">Scroll-driven, hero + seções + CTA. Ideal para lançamentos e produtos SaaS.</p>
+</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">📊</span>
+<div>
+<h4 class="font-semibold text-neutral-100 text-sm">Pitch Deck</h4>
+<p class="text-xs text-neutral-400 mt-1">Slides visuais para apresentação de startups, produtos ou projetos.</p>
+</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">📱</span>
+<div>
+<h4 class="font-semibold text-neutral-100 text-sm">Protótipo Mobile</h4>
+<p class="text-xs text-neutral-400 mt-1">Telas navegáveis de app, com fluxo simulado de interação.</p>
+</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">🖱️</span>
+<div>
+<h4 class="font-semibold text-neutral-100 text-sm">App Clicável</h4>
+<p class="text-xs text-neutral-400 mt-1">Protótipo interativo com navegação entre estados, formulários, botões.</p>
+</div>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">front-loading</div>
+<div class="text-xs text-neutral-500">colocar contexto antes</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">legendary output</div>
+<div class="text-xs text-neutral-500">meta declarada do skill</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">scroll-driven</div>
+<div class="text-xs text-neutral-500">sites com narrativa em scroll</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">one-shot</div>
+<div class="text-xs text-neutral-500">gera sem revisões extras</div>
+</div>
+</div>
+</section>
+<!-- ─────────────────────────────────────────── -->
+<!-- TÓPICO 4: Como funciona por dentro -->
+<!-- ─────────────────────────────────────────── -->
+<section class="mb-10" id="topico-4">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<h2 class="text-2xl font-bold text-neutral-100">⚙️ Como funciona por dentro</h2>
+</div>
+<!-- Timeline das 4 fases -->
+<h3 class="text-neutral-400 text-sm font-semibold uppercase tracking-widest mb-5">As 4 fases da execução</h3>
+<div class="space-y-5 mb-8">
+<!-- Fase 1 -->
+<div class="flex gap-5 items-start">
+<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center flex-shrink-0">1</div>
+<div class="flex-1 bg-dark-700 rounded-xl p-5 border border-dark-600">
+<h4 class="font-bold text-neutral-100 mb-2">Phase 1: The Interview</h4>
+<p class="text-neutral-300 text-sm mb-3">O skill faz até 8 perguntas estratégicas em sequência conversacional, coletando: tipo de artefato desejado, audiência-alvo, proposta de valor, estilo visual (referências, paleta, tom), conteúdo das seções, comportamento interativo esperado, restrições técnicas e prazo.</p>
+<div class="bg-dark-800 rounded-lg p-3 text-xs text-neutral-400">
+              Perguntas são adaptadas ao caso: uma landing page recebe perguntas diferentes de um pitch deck.
+            </div>
+</div>
+</div>
+<!-- Fase 2 -->
+<div class="flex gap-5 items-start">
+<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center flex-shrink-0">2</div>
+<div class="flex-1 bg-dark-700 rounded-xl p-5 border border-dark-600">
+<h4 class="font-bold text-neutral-100 mb-2">Phase 2: Synthesize</h4>
+<p class="text-neutral-300 text-sm">O Claude processa todas as respostas e identifica padrões: estilo dominante, lacunas de informação, contradições. Preenche lacunas com defaults inteligentes baseados no type de artefato escolhido.</p>
+</div>
+</div>
+<!-- Fase 3 -->
+<div class="flex gap-5 items-start">
+<div class="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center flex-shrink-0">3</div>
+<div class="flex-1 bg-dark-700 rounded-xl p-5 border border-cyan-500/30">
+<h4 class="font-bold text-neutral-100 mb-2">Phase 3: Generate the Optimized Prompt</h4>
+<p class="text-neutral-300 text-sm mb-3">Monta o prompt seguindo a estrutura que o Claude Design espera: tipo, audiência, conteúdo, visual, interatividade, tom, restrições. Inclui instruções explícitas para scroll, animação, responsividade se necessário.</p>
+<div class="text-xs text-cyan-400 font-mono bg-dark-800 rounded p-2">SKILL baseado no system prompt real do Claude Design</div>
+</div>
+</div>
+<!-- Fase 4 -->
+<div class="flex gap-5 items-start">
+<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center flex-shrink-0">4</div>
+<div class="flex-1 bg-dark-700 rounded-xl p-5 border border-dark-600">
+<h4 class="font-bold text-neutral-100 mb-2">Phase 4: Deliver</h4>
+<p class="text-neutral-300 text-sm mb-2">Entrega o prompt formatado inline ou salvo em arquivo. Caminho de output padrão:</p>
+<code class="text-emerald-400 text-xs font-mono bg-dark-800 rounded px-2 py-1 block">outputs/claude_design_prompts/YYYY-MM-DD/{'{'}slug{'}'}_prompt.md</code>
+</div>
+</div>
+</div>
+<!-- Grid FAZER / EVITAR na aplicação -->
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+<h4 class="text-emerald-400 font-semibold mb-3">✓ Boas práticas na entrevista</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Forneça referências visuais reais (URLs, marcas, estilos)</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Descreva a audiência com precisão (cargo, dor, contexto)</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Mencione o que NÃO quer no design (restrições são igualmente valiosas)</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Especifique o CTA principal esperado</li>
+</ul>
+</div>
+<div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+<h4 class="text-red-400 font-semibold mb-3">✗ Erros comuns</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex gap-2"><span class="text-red-400">✗</span> Responder "moderno" sem dar referências — o modelo não consegue ancorar</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Pular seções ("tanto faz") — cada lacuna vira genérico no output</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Pedir funcionalidades de back-end dentro do prompt (não é suportado)</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Usar o skill para UI de sistemas internos complexos</li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">4 fases</div>
+<div class="text-xs text-neutral-500">Interview→Synthesize→Generate→Deliver</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">8 perguntas</div>
+<div class="text-xs text-neutral-500">máximo da entrevista</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">defaults</div>
+<div class="text-xs text-neutral-500">preenche lacunas auto</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">output path</div>
+<div class="text-xs text-neutral-500">salva o .md se pedido</div>
+</div>
+</div>
+</section>
+<!-- ─────────────────────────────────────────── -->
+<!-- TÓPICO 5: Exemplo prático + PROMPT pronto -->
+<!-- ─────────────────────────────────────────── -->
+<section class="mb-10" id="topico-5">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<h2 class="text-2xl font-bold text-neutral-100">💬 Exemplo prático + PROMPT gerado</h2>
+</div>
+<!-- Cenário -->
+<div class="bg-dark-700 border border-dark-600 rounded-xl p-5 mb-5">
+<h3 class="text-neutral-100 font-semibold mb-2">Cenário: Landing page para uma ferramenta SaaS de análise de contratos</h3>
+<p class="text-neutral-400 text-sm">Usuário dispara o skill com <code class="text-emerald-400">/design-designer</code>. O skill conduz 5 perguntas objetivas e, com as respostas, gera o prompt abaixo.</p>
+</div>
+<!-- Como invocar -->
+<div class="bg-dark-800 border border-emerald-500/30 rounded-xl p-4 mb-5 font-mono text-sm overflow-x-auto">
+<p class="text-neutral-500 text-xs mb-2"># Como invocar no Claude Code:</p>
+<p class="text-emerald-400">/design-designer</p>
+<p class="text-neutral-400 mt-2"># ou em linguagem natural:</p>
+<p class="text-emerald-300">"Quero um prompt para o Claude Design criar a landing page da LexAI"</p>
+</div>
+<!-- Prompt gerado pelo skill — exemplo real -->
+<div class="bg-dark-800 border border-cyan-500/30 rounded-xl p-5 mb-5">
+<div class="flex items-center justify-between mb-3">
+<span class="text-cyan-400 text-xs font-semibold uppercase tracking-widest">Prompt gerado pelo design-designer</span>
+<span class="text-neutral-500 text-xs">cole em claude.ai/design</span>
+</div>
+<pre class="font-mono text-xs text-neutral-300 whitespace-pre-wrap leading-relaxed overflow-x-auto"><span class="text-emerald-400">## Artefato</span>
+Landing page completa para SaaS B2B · desktop-first, responsivo mobile
+
+<span class="text-emerald-400">## Produto</span>
+LexAI — plataforma de análise automatizada de contratos jurídicos.
+Lê PDFs de contratos, extrai cláusulas de risco, gera relatório em 30 segundos.
+
+<span class="text-emerald-400">## Audiência</span>
+Advogados corporativos e gestores jurídicos de médias e grandes empresas.
+Dor: revisar contratos manualmente leva horas e gera erros que custam caro.
+
+<span class="text-emerald-400">## Estrutura da página</span>
+1. Hero — headline "Revise contratos 10× mais rápido, sem erro humano"
+   CTA primário: "Analisar meu primeiro contrato — grátis"
+2. Social proof — logos de escritórios parceiros + número "47.000 contratos analisados"
+3. Como funciona — 3 passos animados: Upload → Análise → Relatório
+4. Features — grid 3 colunas: detecção de risco, resumo executivo, integração com DocuSign
+5. Pricing — 3 planos com destaque no Profissional
+6. FAQ — 5 perguntas frequentes expansíveis
+7. Footer com CTA final
+
+<span class="text-emerald-400">## Visual</span>
+Estilo: clean tech, minimalista, sério. Referência: Linear.app + Notion.
+Paleta: fundo #0a0a0f, acento primário #6366f1 (índigo), texto #f8fafc.
+Tipografia: Inter ou Geist. Sem elementos decorativos excessivos.
+
+<span class="text-emerald-400">## Interatividade</span>
+Scroll suave entre seções. Animação de upload no "Como funciona".
+Hover nos cards de feature com borda iluminada. Acordeão no FAQ.
+
+<span class="text-emerald-400">## Restrições</span>
+Não incluir formulário de cadastro (só CTA para rota externa).
+Sem back-end — tudo estático. Priorizar velocidade de carregamento percebida.</pre>
+</div>
+<!-- Alerta -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4 mb-6 flex items-start gap-3">
+<span class="text-red-400 text-xl flex-shrink-0">⚠️</span>
+<div>
+<h4 class="text-red-400 font-semibold text-sm mb-1">Atenção: limitações do Claude Design</h4>
+<p class="text-neutral-300 text-sm">O Claude Design não faz back-end real, banco de dados, autenticação ou integração com APIs externas. Esses casos exigem o <strong>frontend-design</strong> + desenvolvimento real. O skill avisa o usuário sobre essas limitações na Phase 4.</p>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">hero + CTA</div>
+<div class="text-xs text-neutral-500">estrutura obrigatória</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">social proof</div>
+<div class="text-xs text-neutral-500">componente de conversão</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">paleta explícita</div>
+<div class="text-xs text-neutral-500">hex no prompt = mais controle</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">interatividade</div>
+<div class="text-xs text-neutral-500">descreva hover e animações</div>
+</div>
+</div>
+</section>
+<!-- ─────────────────────────────────────────── -->
+<!-- TÓPICO 6: Combina com / limites -->
+<!-- ─────────────────────────────────────────── -->
+<section class="mb-10" id="topico-6">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<h2 class="text-2xl font-bold text-neutral-100">🧬 Combina com / limites</h2>
+</div>
+<!-- Tip box -->
+<div class="bg-primary/10 border border-emerald-500/30 rounded-xl p-5 mb-6 flex items-start gap-3">
+<span class="text-2xl flex-shrink-0">🔗</span>
+<div>
+<p class="text-neutral-300 text-sm">O <strong class="text-neutral-100">design-designer</strong> ocupa uma posição específica no ecossistema de skills de design: ele é o <em>briefing engine</em>, não o gerador final. Funciona melhor quando combinado com outros skills antes ou depois.</p>
+</div>
+</div>
+<!-- Relação com frontend-design e impeccable -->
+<div class="bg-gradient-to-r from-emerald-900/20 to-cyan-900/20 border border-emerald-500/30 rounded-xl p-6 mb-6">
+<h3 class="text-emerald-400 font-bold mb-4">🤝 Relação com frontend-design e impeccable</h3>
+<div class="grid md:grid-cols-2 gap-6">
+<div>
+<h4 class="text-neutral-100 font-semibold text-sm mb-2">design-designer → frontend-design</h4>
+<p class="text-neutral-400 text-sm mb-3">O <strong class="text-neutral-100">frontend-design</strong> gera HTML/CSS/JS real, diretamente no Claude Code, sem precisar do claude.ai/design. É para quando você quer controle total do código. Use a dupla quando: o Claude Design gerou o visual, você gostou, e agora quer implementar em código limpo com o <strong>frontend-design</strong>.</p>
+<div class="bg-dark-800 rounded-lg p-3 font-mono text-xs text-neutral-400">
+              design-designer → prompt → Claude Design → screenshot → frontend-design → código
+            </div>
+</div>
+<div>
+<h4 class="text-neutral-100 font-semibold text-sm mb-2">design-designer → impeccable</h4>
+<p class="text-neutral-400 text-sm mb-3">O <strong class="text-neutral-100">impeccable</strong> revisa e refina qualquer output gerado — texto, estrutura, hierarquia visual. Use quando o prompt gerado pelo design-designer produzir um resultado bom mas com imperfeições: copy fraco, hierarquia confusa, CTA pouco claro.</p>
+<div class="bg-dark-800 rounded-lg p-3 font-mono text-xs text-neutral-400">
+              design-designer → output → impeccable → versão refinada
+            </div>
+</div>
+</div>
+</div>
+<!-- Mapa de combinação -->
+<h3 class="text-neutral-400 text-sm font-semibold uppercase tracking-widest mb-4">Com quais skills do curso combina</h3>
+<div class="space-y-3 mb-6">
+<div class="bg-dark-700 rounded-xl p-4 flex items-center gap-4 border border-dark-600">
+<span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">+</span>
+<div class="flex-1">
+<span class="text-neutral-100 font-semibold text-sm">frontend-design</span>
+<p class="text-neutral-400 text-xs mt-0.5">Implementa em código real o que o Claude Design prototipou</p>
+</div>
+<span class="text-emerald-400 text-xs font-semibold bg-emerald-500/10 px-2 py-0.5 rounded">T1 → T1</span>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 flex items-center gap-4 border border-dark-600">
+<span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">+</span>
+<div class="flex-1">
+<span class="text-neutral-100 font-semibold text-sm">impeccable</span>
+<p class="text-neutral-400 text-xs mt-0.5">Refina copy e hierarquia do output gerado pelo Claude Design</p>
+</div>
+<span class="text-emerald-400 text-xs font-semibold bg-emerald-500/10 px-2 py-0.5 rounded">T1 → T1</span>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 flex items-center gap-4 border border-dark-600">
+<span class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold flex items-center justify-center flex-shrink-0">+</span>
+<div class="flex-1">
+<span class="text-neutral-100 font-semibold text-sm">brand-guidelines (T2)</span>
+<p class="text-neutral-400 text-xs mt-0.5">Alimenta a entrevista do design-designer com a identidade visual já definida</p>
+</div>
+<span class="text-cyan-400 text-xs font-semibold bg-cyan-500/10 px-2 py-0.5 rounded">T1 + T2</span>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 flex items-center gap-4 border border-dark-600">
+<span class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold flex items-center justify-center flex-shrink-0">+</span>
+<div class="flex-1">
+<span class="text-neutral-100 font-semibold text-sm">animation-designer (T3)</span>
+<p class="text-neutral-400 text-xs mt-0.5">Adiciona camada de motion ao protótipo gerado pelo Claude Design</p>
+</div>
+<span class="text-cyan-400 text-xs font-semibold bg-cyan-500/10 px-2 py-0.5 rounded">T1 + T3</span>
+</div>
+</div>
+<!-- Quando NÃO usar -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5 mb-6">
+<h4 class="text-red-400 font-semibold mb-3">🚫 Quando NÃO usar o design-designer</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex gap-2"><span class="text-red-400">✗</span> Quando você quer <strong>código HTML/CSS gerado diretamente</strong> — use o <strong>frontend-design</strong></li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Quando o design requer back-end, banco de dados ou APIs reais</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Para UI de dashboards complexos com muitos estados e lógica condicional</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Quando você já tem o prompt e só quer executar — vá direto ao claude.ai/design</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Para gerar assets exportáveis (ícones, SVGs, imagens) — use ferramentas dedicadas</li>
+</ul>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">briefing engine</div>
+<div class="text-xs text-neutral-500">papel no ecossistema</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">frontend-design</div>
+<div class="text-xs text-neutral-500">parceiro para código real</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">impeccable</div>
+<div class="text-xs text-neutral-500">refinamento pós-output</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-1">sem back-end</div>
+<div class="text-xs text-neutral-500">limitação fundamental</div>
+</div>
+</div>
+</section>
+<!-- ─────────────────────────────────────────── -->
+<!-- RESUMO DO MÓDULO -->
+<!-- ─────────────────────────────────────────── -->
+<section class="mb-10" id="resumo">
+<div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 border border-emerald-500/30 rounded-2xl p-8">
+<h2 class="text-2xl font-bold text-neutral-100 mb-6">✅ Resumo do Módulo 1.4</h2>
+<!-- Checklist -->
+<div class="grid md:grid-cols-2 gap-3 mb-8">
+<div class="flex items-start gap-3">
+<span class="text-emerald-400 text-lg mt-0.5">✓</span>
+<span class="text-neutral-300 text-sm">O design-designer é um <strong class="text-neutral-100">briefing engine</strong> baseado no system prompt do Claude Design</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-emerald-400 text-lg mt-0.5">✓</span>
+<span class="text-neutral-300 text-sm">Dispara com <code class="text-emerald-400">/design-designer</code> ou frases naturais sobre "claude design prompt"</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-emerald-400 text-lg mt-0.5">✓</span>
+<span class="text-neutral-300 text-sm">Conduz entrevista em até 8 perguntas; tem Quick Path para pular a entrevista</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-emerald-400 text-lg mt-0.5">✓</span>
+<span class="text-neutral-300 text-sm">Suporta 4 tipos: landing page, pitch deck, protótipo mobile, app clicável</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-emerald-400 text-lg mt-0.5">✓</span>
+<span class="text-neutral-300 text-sm">Executa em 4 fases: Interview → Synthesize → Generate → Deliver</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-emerald-400 text-lg mt-0.5">✓</span>
+<span class="text-neutral-300 text-sm">Combina com <strong class="text-neutral-100">frontend-design</strong> (código real) e <strong class="text-neutral-100">impeccable</strong> (refinamento)</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-emerald-400 text-lg mt-0.5">✓</span>
+<span class="text-neutral-300 text-sm">Não substitui o frontend-design — serve de ponte para o claude.ai/design</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-emerald-400 text-lg mt-0.5">✓</span>
+<span class="text-neutral-300 text-sm">Output pode ser entregue inline ou salvo em <code class="text-emerald-400 text-xs">outputs/claude_design_prompts/</code></span>
+</div>
+</div>
+<!-- Próximo módulo -->
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-5 mb-6">
+<p class="text-neutral-400 text-xs font-semibold uppercase tracking-widest mb-3">Fim da Trilha 1 — Construir</p>
+<h4 class="text-neutral-100 font-bold mb-1">Próxima parada: Trilha 2 — 🎨 Identidade</h4>
+<p class="text-neutral-400 text-sm">Na Trilha 2 você vai dominar os skills de identidade visual: brand guidelines, paleta, tipografia e sistemas de design coerentes. Fundação para que tudo que você construiu na Trilha 1 tenha uma identidade reconhecível.</p>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Voltar para Trilha 1</a>
+<a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="../trilha2/index.html">Trilha 2: Identidade 🎨 →</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Conteúdo do <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Trilha 1: Construir · Módulo 1.4 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

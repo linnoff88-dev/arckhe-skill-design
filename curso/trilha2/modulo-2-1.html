@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 2.1 — theme-factory | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento blue - T2 */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,0.18); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-sky-300 { color: #0284c7; }
+    html:not(.dark) .text-yellow-400 { color: #b45309; }
+    html:not(.dark) .text-yellow-300 { color: #92400e; }
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    /* Bordas dark suaves */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* SVG animations */
+    @media (prefers-reduced-motion: no-preference) {
+      .m21-pulse { animation: pulse-dot 2s ease-in-out infinite; }
+      .m21-flow { animation: flow-dash 1.5s linear infinite; }
+      @keyframes pulse-dot { 0%,100%{opacity:.4} 50%{opacity:1} }
+      @keyframes flow-dash { from{stroke-dashoffset:20} to{stroke-dashoffset:0} }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha2/modulo-2-1.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha2/modulo-2-1.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha2/modulo-2-1.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-2-1.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha2/modulo-2-1.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha2/modulo-2-1.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Mídia</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Apoio</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-blue-400 transition-colors" href="../../index.html">Início</a>
+<span>/</span>
+<a class="hover:text-blue-400 transition-colors" href="index.html">🎨 Trilha 2 — Identidade</a>
+<span>/</span>
+<span class="text-blue-400">Módulo 2.1 — theme-factory</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="grid lg:grid-cols-2 gap-10 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.1</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🎨 theme-factory</h1>
+<p class="text-lg text-neutral-400 max-w-xl">Toolkit para estilizar artifacts — slides, docs, relatórios e landing pages HTML — aplicando um tema com cores e fontes cuidadosamente selecionados. 10 temas prontos ou gere um novo on-the-fly.</p>
+<div class="grid grid-cols-4 gap-3 mt-6">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">6</div>
+<div class="text-xs text-neutral-400">Tópicos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">~20</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Inter</div>
+<div class="text-xs text-neutral-400">Nível</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Visual</div>
+<div class="text-xs text-neutral-400">Categoria</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — Theme Factory -->
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4">
+<svg aria-label="Diagrama futurista do theme-factory: paleta de cores e fontes aplicadas a artifacts" class="w-full h-auto" role="img" viewbox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="tf-bg-grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#0e1622;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0e1b26;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="tf-blue-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="tf-cyan-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1"></stop>
+</lineargradient>
+<filter height="140%" id="tf-glow" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<rect fill="url(#tf-bg-grad)" height="240" rx="12" width="400"></rect>
+<!-- grid lines -->
+<g opacity="0.4" stroke="#1e3a5f" stroke-width="0.5">
+<line x1="0" x2="400" y1="60" y2="60"></line>
+<line x1="0" x2="400" y1="120" y2="120"></line>
+<line x1="0" x2="400" y1="180" y2="180"></line>
+<line x1="80" x2="80" y1="0" y2="240"></line>
+<line x1="200" x2="200" y1="0" y2="240"></line>
+<line x1="320" x2="320" y1="0" y2="240"></line>
+</g>
+<!-- Title -->
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="13" font-weight="800" text-anchor="middle" x="200" y="24">theme-factory</text>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" letter-spacing="2" text-anchor="middle" x="200" y="40">CORES · FONTES · IDENTIDADE VISUAL</text>
+<!-- Artifact box (left) -->
+<rect fill="#0e1622" filter="url(#tf-glow)" height="115" rx="8" stroke="#60a5fa" stroke-width="1.5" width="90" x="15" y="75"></rect>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="60" y="95">Artifact</text>
+<rect fill="#1e3a5f" height="8" opacity="0.8" rx="2" width="70" x="25" y="102"></rect>
+<rect fill="#1e3a5f" height="6" opacity="0.6" rx="2" width="55" x="25" y="114"></rect>
+<rect fill="#1e3a5f" height="6" opacity="0.6" rx="2" width="65" x="25" y="124"></rect>
+<rect fill="#1a2e47" height="30" opacity="0.7" rx="4" stroke="#38bdf8" stroke-width="0.8" width="70" x="25" y="138"></rect>
+<text fill="#7db8f7" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="60" y="158">sem tema</text>
+<!-- Arrow -->
+<path class="m21-flow" d="M105 132 L145 132" fill="none" stroke="#38bdf8" stroke-dasharray="6,4" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="145,128 153,132 145,136"></polygon>
+<!-- Theme Engine (center) -->
+<rect fill="#0e1622" filter="url(#tf-glow)" height="115" rx="8" stroke="#38bdf8" stroke-width="2" width="94" x="153" y="75"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="200" y="95">10 Temas</text>
+<!-- Color swatches -->
+<circle class="m21-pulse" cx="173" cy="110" fill="#1e3040" r="6" stroke="#38bdf8" stroke-width="1"></circle>
+<circle class="m21-pulse" cx="188" cy="110" fill="#2a1525" r="6" stroke="#c084fc" stroke-width="1"></circle>
+<circle class="m21-pulse" cx="203" cy="110" fill="#1a2e14" r="6" stroke="#34d399" stroke-width="1"></circle>
+<circle class="m21-pulse" cx="218" cy="110" fill="#2d1f08" r="6" stroke="#fbbf24" stroke-width="1"></circle>
+<circle class="m21-pulse" cx="233" cy="110" fill="#1f1428" r="6" stroke="#818cf8" stroke-width="1"></circle>
+<!-- Font label -->
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="200" y="128">Ocean · Galaxy · Forest</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="200" y="138">Sunset · Arctic · Desert</text>
+<text fill="#7db8f7" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="200" y="150">+ 4 mais · custom on-the-fly</text>
+<rect fill="#1e3a5f" height="16" rx="4" stroke="#60a5fa" stroke-width="0.8" width="74" x="163" y="158"></rect>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="7" font-weight="700" text-anchor="middle" x="200" y="169">cores + fontes</text>
+<!-- Arrow 2 -->
+<path class="m21-flow" d="M247 132 L287 132" fill="none" stroke="#38bdf8" stroke-dasharray="6,4" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="287,128 295,132 287,136"></polygon>
+<!-- Artifact styled (right) -->
+<rect fill="#0e1622" filter="url(#tf-glow)" height="115" rx="8" stroke="#3b82f6" stroke-width="1.5" width="90" x="295" y="75"></rect>
+<text fill="#3b82f6" font-family="Inter,sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="340" y="95">Artifact</text>
+<rect fill="#38bdf8" height="8" opacity="0.6" rx="2" width="70" x="305" y="102"></rect>
+<rect fill="#60a5fa" height="6" opacity="0.4" rx="2" width="55" x="305" y="114"></rect>
+<rect fill="#60a5fa" height="6" opacity="0.4" rx="2" width="65" x="305" y="124"></rect>
+<rect fill="#0e2a4a" height="30" rx="4" stroke="#3b82f6" stroke-width="1.2" width="70" x="305" y="138"></rect>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="7" font-weight="700" text-anchor="middle" x="340" y="158">com tema</text>
+<!-- step labels -->
+<text class="m21-pulse" fill="#60a5fa" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="60" y="200">① INPUT</text>
+<text class="m21-pulse" fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="200" y="200">② ESCOLHA</text>
+<text class="m21-pulse" fill="#3b82f6" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="340" y="200">③ OUTPUT</text>
+<!-- decorative dots -->
+<circle class="m21-pulse" cx="16" cy="16" fill="#38bdf8" opacity="0.6" r="2"></circle>
+<circle class="m21-pulse" cx="384" cy="16" fill="#60a5fa" opacity="0.6" r="2"></circle>
+<circle class="m21-pulse" cx="16" cy="224" fill="#60a5fa" opacity="0.6" r="2"></circle>
+<circle class="m21-pulse" cx="384" cy="224" fill="#38bdf8" opacity="0.6" r="2"></circle>
+</svg>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+<!-- TÓPICO 1: O que é / o que faz -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">1</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🧩 O que é o theme-factory</h2>
+<p class="text-neutral-400 mt-2">Um toolkit para estilizar artifacts com um tema. Funciona com slides, docs, relatórios e landing pages HTML — aplicando uma identidade visual consistente: paleta de cores + pares de fontes selecionados.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- conceito principal -->
+<div class="rounded-xl bg-gradient-to-br from-blue-900/30 to-dark-700/50 border border-blue-500/30 p-5">
+<div class="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-2">Conceito Principal</div>
+<p class="text-neutral-200 font-medium">O theme-factory entende que estética importa tanto quanto conteúdo. Ele oferece 10 temas pré-definidos com combinações de cores e fontes cuidadosamente escolhidas — cada um com identidade visual distinta — e permite que você gere um tema completamente novo descrevendo o que quer.</p>
+<p class="text-neutral-400 text-sm mt-3">Cada tema vive em um arquivo de especificação no diretório <code class="text-blue-300">themes/</code>, com palette hex completa e pares de fontes complementares.</p>
+</div>
+<!-- Os 10 temas -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Os 10 Temas Pré-Definidos</div>
+<div class="grid sm:grid-cols-2 gap-3 text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">🌊</span>
+<div><div class="font-semibold text-neutral-200">Ocean Depths</div><div class="text-neutral-500 text-xs">Profissional e calmo, paleta marítima</div></div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">🌅</span>
+<div><div class="font-semibold text-neutral-200">Sunset Boulevard</div><div class="text-neutral-500 text-xs">Quente e vibrante, cores de pôr do sol</div></div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">🌳</span>
+<div><div class="font-semibold text-neutral-200">Forest Canopy</div><div class="text-neutral-500 text-xs">Natural e sólido, tons terrosos</div></div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">⬜</span>
+<div><div class="font-semibold text-neutral-200">Modern Minimalist</div><div class="text-neutral-500 text-xs">Limpo e contemporâneo, escala de cinza</div></div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">🌾</span>
+<div><div class="font-semibold text-neutral-200">Golden Hour</div><div class="text-neutral-500 text-xs">Rico e quente, paleta outonal</div></div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">❄️</span>
+<div><div class="font-semibold text-neutral-200">Arctic Frost</div><div class="text-neutral-500 text-xs">Frio e preciso, inspiração invernal</div></div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">🌹</span>
+<div><div class="font-semibold text-neutral-200">Desert Rose</div><div class="text-neutral-500 text-xs">Suave e sofisticado, tons empoeirados</div></div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">⚡</span>
+<div><div class="font-semibold text-neutral-200">Tech Innovation</div><div class="text-neutral-500 text-xs">Ousado e moderno, estética tech</div></div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">🌿</span>
+<div><div class="font-semibold text-neutral-200">Botanical Garden</div><div class="text-neutral-500 text-xs">Fresco e orgânico, cores de jardim</div></div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 flex items-start gap-3">
+<span class="text-2xl">🌌</span>
+<div><div class="font-semibold text-neutral-200">Midnight Galaxy</div><div class="text-neutral-500 text-xs">Dramático e cósmico, tonalidades profundas</div></div>
+</div>
+</div>
+</div>
+<!-- grid FAZER / EVITAR -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+<div class="text-emerald-400 font-semibold text-sm mb-3">✓ O que o theme-factory É</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Skill de aplicação de tema: cores + fontes + identidade</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> 10 temas pré-definidos com showcase em PDF</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Geração de tema customizado on-the-fly por descrição</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Funciona com qualquer artifact: slides, docs, HTML, relatórios</li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+<div class="text-red-400 font-semibold text-sm mb-3">✗ O que o theme-factory NÃO É</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não cria o artifact em si — só o estiliza</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não é um sistema de design completo com componentes</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não substitui brand-guidelines de uma marca específica</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não automatiza geração de imagens ou ícones</li>
+</ul>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🎨</div><div class="text-xs font-semibold text-neutral-200">Tema</div><div class="text-xs text-neutral-500">Cores + Fontes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">📁</div><div class="text-xs font-semibold text-neutral-200">themes/</div><div class="text-xs text-neutral-500">Specs em arquivos</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔟</div><div class="text-xs font-semibold text-neutral-200">10 Prontos</div><div class="text-xs text-neutral-500">Pré-definidos</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">✨</div><div class="text-xs font-semibold text-neutral-200">On-the-fly</div><div class="text-xs text-neutral-500">Custom sob demanda</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2: Quando dispara -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">2</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🎣 Quando o Claude aciona o theme-factory</h2>
+<p class="text-neutral-400 mt-2">O skill é acionado quando o pedido envolve estilizar ou tematizar um artifact existente ou novo com cores e fontes coesas.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- tip box -->
+<div class="rounded-xl bg-blue-500/10 border border-blue-500/30 p-4 flex gap-3">
+<span class="text-blue-400 text-xl flex-shrink-0">💡</span>
+<div>
+<div class="text-blue-400 font-semibold text-sm mb-1">Como o Claude decide usar este skill</div>
+<p class="text-neutral-400 text-sm">A description do skill é: "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly." O Claude interpreta pedidos de "aplicar tema", "deixar mais bonito", "usar uma paleta" ou "estilizar" como gatilhos diretos.</p>
+</div>
+</div>
+<!-- timeline dos gatilhos -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Gatilhos típicos</div>
+<div class="space-y-3">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm">1</div>
+<div class="flex-1 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-neutral-200 text-sm mb-1">Pedido de tema explícito</div>
+<p class="text-neutral-400 text-xs">"Aplica o tema Ocean Depths nesse slide", "quero um visual dark elegante", "usa o tema Tech Innovation"</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm">2</div>
+<div class="flex-1 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-neutral-200 text-sm mb-1">Pedido de estilização sem tema nomeado</div>
+<p class="text-neutral-400 text-xs">"Deixa esse relatório com cara mais profissional", "melhora o visual dessa landing page", "precisa de uma identidade visual"</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm">3</div>
+<div class="flex-1 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-neutral-200 text-sm mb-1">Pedido de tema customizado</div>
+<p class="text-neutral-400 text-xs">"Cria um tema com tons de vinho e tipografia elegante", "quero um tema florestal moderno para minha startup"</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center flex-shrink-0 text-cyan-400 font-bold text-sm">4</div>
+<div class="flex-1 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-neutral-200 text-sm mb-1">Artifact criado e aguardando tema</div>
+<p class="text-neutral-400 text-xs">Slides ou docs já existentes que o usuário quer uniformizar visualmente antes de apresentar</p>
+</div>
+</div>
+</div>
+</div>
+<!-- alerta -->
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4 flex gap-3">
+<span class="text-red-400 text-xl flex-shrink-0">⚠️</span>
+<div>
+<div class="text-red-400 font-semibold text-sm mb-1">Não confundir com brand-guidelines</div>
+<p class="text-neutral-400 text-sm">Se o pedido menciona uma marca específica com identidade visual definida (logo, cores institucionais, fonte proprietária), o skill brand-guidelines é mais adequado. theme-factory é para quando qualquer tema belo serve — sem restrições de marca.</p>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🎯</div><div class="text-xs font-semibold text-neutral-200">Estilizar</div><div class="text-xs text-neutral-500">Gatilho-chave</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🖌️</div><div class="text-xs font-semibold text-neutral-200">Aplicar tema</div><div class="text-xs text-neutral-500">Pedido direto</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🆕</div><div class="text-xs font-semibold text-neutral-200">Custom</div><div class="text-xs text-neutral-500">Descrição livre</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3: Como melhora suas páginas -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">3</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🚀 Como melhora seus artifacts</h2>
+<p class="text-neutral-400 mt-2">Coerência visual transforma conteúdo bom em apresentação memorável. O theme-factory entrega isso sem que você precise ser designer.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- box dados -->
+<div class="rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
+<div class="text-blue-400 font-semibold text-sm mb-3">📊 O que muda ao aplicar um tema</div>
+<div class="grid sm:grid-cols-3 gap-3 text-sm">
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-blue-400 font-bold mb-1">Paleta de cores</div>
+<div class="text-neutral-400 text-xs">Hex codes coesos para fundo, texto, destaque, bordas e botões. Contraste adequado garantido pelo curadoria do tema.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-blue-400 font-bold mb-1">Par de fontes</div>
+<div class="text-neutral-400 text-xs">Fonte de heading + fonte de body selecionadas para harmonia tipográfica. Sem conflito entre h1 e parágrafos.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-blue-400 font-bold mb-1">Identidade distinta</div>
+<div class="text-neutral-400 text-xs">Cada tema tem personalidade clara: tech, natural, luxo, minimalismo. O artifact comunica mais do que o texto.</div>
+</div>
+</div>
+</div>
+<!-- comparativo antes/depois -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Antes vs depois de aplicar um tema</div>
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-dark-600 bg-dark-700/30 p-4">
+<div class="text-neutral-500 font-semibold text-sm mb-3">❌ Sem tema</div>
+<ul class="space-y-2 text-xs text-neutral-400">
+<li>• Cores padrão do browser (azul de link, preto de texto)</li>
+<li>• Fonte genérica (Arial, sans-serif)</li>
+<li>• Inconsistência entre seções</li>
+<li>• Parece rascunho, não produto</li>
+</ul>
+</div>
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+<div class="text-emerald-400 font-semibold text-sm mb-3">✓ Com tema Ocean Depths</div>
+<ul class="space-y-2 text-xs text-neutral-300">
+<li>• Paleta marítima coesa do título ao rodapé</li>
+<li>• Par tipográfico harmonioso selecionado</li>
+<li>• Cada elemento tem cor intencional</li>
+<li>• Parece produto acabado, apresentável</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- tip box 2 -->
+<div class="rounded-xl bg-blue-500/10 border border-blue-500/30 p-4 flex gap-3">
+<span class="text-blue-400 text-xl flex-shrink-0">💡</span>
+<div>
+<div class="text-blue-400 font-semibold text-sm mb-1">Showcase para escolher</div>
+<p class="text-neutral-400 text-sm">O skill referencia um <code class="text-blue-300">theme-showcase.pdf</code> com todos os 10 temas visualizados. Peça ao Claude para mostrar o showcase antes de escolher — assim você decide com base em referência visual real, não só no nome.</p>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🎯</div><div class="text-xs font-semibold text-neutral-200">Consistência</div><div class="text-xs text-neutral-500">Visual coeso</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔡</div><div class="text-xs font-semibold text-neutral-200">Tipografia</div><div class="text-xs text-neutral-500">Par harmonioso</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🌈</div><div class="text-xs font-semibold text-neutral-200">Paleta</div><div class="text-xs text-neutral-500">Hex curados</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">📄</div><div class="text-xs font-semibold text-neutral-200">Showcase</div><div class="text-xs text-neutral-500">PDF de referência</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4: Como funciona por dentro -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">4</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">⚙️ Como funciona por dentro</h2>
+<p class="text-neutral-400 mt-2">O processo de aplicação de tema segue etapas definidas: escolha → leitura do arquivo de especificação → aplicação consistente em todo o artifact.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- timeline do processo -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Processo de aplicação (Application Process)</div>
+<div class="space-y-3">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm">1</div>
+<div class="flex-1 pb-4 border-b border-dark-600">
+<div class="font-semibold text-neutral-200 text-sm">Tema preferido é selecionado</div>
+<p class="text-neutral-400 text-xs mt-1">O Claude apresenta as opções ou o usuário nomeia diretamente. Se nenhum dos 10 serve, parte para criação customizada.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm">2</div>
+<div class="flex-1 pb-4 border-b border-dark-600">
+<div class="font-semibold text-neutral-200 text-sm">Leitura do arquivo <code class="text-blue-300">themes/&lt;nome&gt;</code></div>
+<p class="text-neutral-400 text-xs mt-1">Cada tema tem um arquivo de spec no diretório <code class="text-blue-300">themes/</code> com palette hex completa e par de fontes. O Claude lê esse arquivo antes de aplicar.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm">3</div>
+<div class="flex-1 pb-4 border-b border-dark-600">
+<div class="font-semibold text-neutral-200 text-sm">Aplicação consistente em todo o artifact</div>
+<p class="text-neutral-400 text-xs mt-1">Cores e fontes são aplicadas uniformemente — fundo, textos, bordas, botões, destaques. Contraste e legibilidade são mantidos.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center flex-shrink-0 text-cyan-400 font-bold text-sm">4</div>
+<div class="flex-1">
+<div class="font-semibold text-neutral-200 text-sm">Identidade visual mantida em todos os slides/seções</div>
+<p class="text-neutral-400 text-xs mt-1">O tema se propaga por todos os elementos para criar uma experiência visual unificada do início ao fim.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- estrutura de arquivos -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Estrutura do skill</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-3"># Organização interna do theme-factory</div>
+<div><span class="text-blue-400">theme-factory/</span></div>
+<div class="ml-4"><span class="text-cyan-400">SKILL.md</span> <span class="text-neutral-500">← definição do skill (lida pelo Claude)</span></div>
+<div class="ml-4"><span class="text-cyan-400">themes/</span> <span class="text-neutral-500">← specs dos 10 temas</span></div>
+<div class="ml-8"><span class="text-neutral-400">ocean-depths</span></div>
+<div class="ml-8"><span class="text-neutral-400">midnight-galaxy</span></div>
+<div class="ml-8"><span class="text-neutral-400">tech-innovation</span></div>
+<div class="ml-8"><span class="text-neutral-400">... (7 mais)</span></div>
+<div class="ml-4"><span class="text-cyan-400">theme-showcase.pdf</span> <span class="text-neutral-500">← referência visual</span></div>
+</div>
+</div>
+<!-- criação de tema customizado -->
+<div class="rounded-xl bg-gradient-to-br from-blue-900/30 to-dark-700/50 border border-blue-500/30 p-5">
+<div class="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-2">Geração on-the-fly</div>
+<p class="text-neutral-200 font-medium">Quando nenhum dos 10 temas serve, o Claude gera um tema novo baseado nos inputs do usuário. O tema recebe um nome descritivo, é mostrado para revisão/aprovação e depois aplicado. O processo espelha os temas existentes em estrutura.</p>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">📁</div><div class="text-xs font-semibold text-neutral-200">themes/</div><div class="text-xs text-neutral-500">Specs em arquivos</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔍</div><div class="text-xs font-semibold text-neutral-200">Leitura</div><div class="text-xs text-neutral-500">Antes de aplicar</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔄</div><div class="text-xs font-semibold text-neutral-200">Consistência</div><div class="text-xs text-neutral-500">Todos os elementos</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🆕</div><div class="text-xs font-semibold text-neutral-200">Custom</div><div class="text-xs text-neutral-500">On-the-fly</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5: Exemplo prático + PROMPT -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-5">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">5</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">💬 Exemplo prático + prompts prontos</h2>
+<p class="text-neutral-400 mt-2">Cenários reais de uso do theme-factory, com prompts que você pode copiar e colar direto no Claude Code.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- cenário 1 -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Cenário 1 — Aplicar tema existente</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2"># Cole no Claude Code</div>
+<div class="text-neutral-200">Tenho uma landing page HTML para o meu produto SaaS.</div>
+<div class="text-neutral-200 mt-1">Aplica o tema <span class="text-cyan-400">Tech Innovation</span> nela.</div>
+<div class="text-neutral-200 mt-1">Quero o visual dark, bold e moderno que esse tema oferece.</div>
+</div>
+</div>
+<!-- cenário 2 -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Cenário 2 — Ver showcase e escolher</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2"># Cole no Claude Code</div>
+<div class="text-neutral-200">Preciso estilizar esses slides de apresentação de resultados.</div>
+<div class="text-neutral-200 mt-1">Quais temas do <span class="text-blue-400">theme-factory</span> ficam bem para relatório executivo?</div>
+<div class="text-neutral-200 mt-1">Me mostra as opções e aplica o que eu escolher.</div>
+</div>
+</div>
+<!-- cenário 3 — tema customizado -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Cenário 3 — Gerar tema customizado on-the-fly</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2"># Cole no Claude Code</div>
+<div class="text-neutral-200">Meu produto é uma plataforma de bem-estar corporativo.</div>
+<div class="text-neutral-200 mt-1">Nenhum dos temas existentes é perfeito. Cria um tema customizado</div>
+<div class="text-neutral-200 mt-1">com tons de <span class="text-cyan-400">verde-sage e lavanda</span>, fontes modernas e suaves.</div>
+<div class="text-neutral-200 mt-1">Mostra o tema antes de aplicar nos meus slides.</div>
+</div>
+</div>
+<!-- tip box -->
+<div class="rounded-xl bg-blue-500/10 border border-blue-500/30 p-4 flex gap-3">
+<span class="text-blue-400 text-xl flex-shrink-0">💡</span>
+<div>
+<div class="text-blue-400 font-semibold text-sm mb-1">Dica: revisão antes da aplicação</div>
+<p class="text-neutral-400 text-sm">Sempre que pedir um tema customizado, o Claude vai mostrar o tema para aprovação antes de aplicar. Isso evita retrabalho — você valida cores e fontes em modo de rascunho e só então parte para o artifact completo.</p>
+</div>
+</div>
+<!-- grid FAZER / EVITAR -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+<div class="text-emerald-400 font-semibold text-sm mb-3">✓ Prompts que funcionam bem</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Nomear o tema diretamente ("Ocean Depths")</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Descrever o mood ("dark elegante", "natural orgânico")</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Citar o contexto do artifact ("slides de vendas")</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Pedir revisão antes da aplicação final</li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+<div class="text-red-400 font-semibold text-sm mb-3">✗ Evite estes padrões</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Pedir tema sem ter um artifact para aplicar</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Misturar dois temas ao mesmo tempo no mesmo artifact</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Usar theme-factory para logos ou ícones (não é seu escopo)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Ignorar a revisão do tema customizado antes de aplicar</li>
+</ul>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">📋</div><div class="text-xs font-semibold text-neutral-200">Prompt direto</div><div class="text-xs text-neutral-500">Nome o tema</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🎭</div><div class="text-xs font-semibold text-neutral-200">Mood</div><div class="text-xs text-neutral-500">Descreva o clima</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">👁️</div><div class="text-xs font-semibold text-neutral-200">Revisão</div><div class="text-xs text-neutral-500">Aprovar antes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🎨</div><div class="text-xs font-semibold text-neutral-200">Aplicação</div><div class="text-xs text-neutral-500">Uniforme</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6: Combina com / limites -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-6">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">6</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🧬 Combina com / limites</h2>
+<p class="text-neutral-400 mt-2">O theme-factory brilha quando combinado com outros skills — especialmente brand-guidelines e frontend-design — e tem limites claros quando a identidade visual já é prescrita.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- combinações principais -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Combinações poderosas nesta trilha</div>
+<div class="space-y-4">
+<!-- brand-guidelines -->
+<div class="rounded-xl border border-blue-500/30 bg-dark-700/30 p-4">
+<div class="flex items-start gap-3 mb-3">
+<span class="text-2xl">🏷️</span>
+<div>
+<div class="font-semibold text-neutral-200">theme-factory + brand-guidelines</div>
+<div class="text-xs text-neutral-500 mt-0.5">Módulo 2.2 — a extensão natural</div>
+</div>
+</div>
+<p class="text-neutral-400 text-sm">O <strong class="text-neutral-200">theme-factory</strong> é ótimo quando qualquer tema bonito serve. O <strong class="text-neutral-200">brand-guidelines</strong> entra quando você tem uma marca específica com cores e fontes institucionais definidas — logo proprietário, manual de identidade visual, regras de uso. Use theme-factory para protótipos e materiais internos; brand-guidelines quando o output vai para clientes ou representa a marca oficialmente.</p>
+<div class="mt-3 rounded-lg bg-blue-500/10 border border-blue-500/20 p-3 text-xs text-neutral-400">
+<strong class="text-blue-400">Fluxo típico:</strong> theme-factory para explorar → brand-guidelines para consolidar a identidade da marca → frontend-design para implementar em páginas.
+              </div>
+</div>
+<!-- frontend-design -->
+<div class="rounded-xl border border-blue-500/30 bg-dark-700/30 p-4">
+<div class="flex items-start gap-3 mb-3">
+<span class="text-2xl">⚛️</span>
+<div>
+<div class="font-semibold text-neutral-200">theme-factory + frontend-design</div>
+<div class="text-xs text-neutral-500 mt-0.5">Trilha 1, Módulo 1.1 — implementação</div>
+</div>
+</div>
+<p class="text-neutral-400 text-sm">O theme-factory define a paleta e as fontes. O <strong class="text-neutral-200">frontend-design</strong> implementa esse sistema em componentes React/Tailwind/shadcn — botões, cards, headers, formulários. Juntos cobrem do visual ao código: tema → design system → componentes de produção.</p>
+</div>
+<!-- canvas-design -->
+<div class="rounded-xl border border-blue-500/30 bg-dark-700/30 p-4">
+<div class="flex items-start gap-3 mb-3">
+<span class="text-2xl">🖼️</span>
+<div>
+<div class="font-semibold text-neutral-200">theme-factory + canvas-design</div>
+<div class="text-xs text-neutral-500 mt-0.5">Módulo 2.3 — composições visuais</div>
+</div>
+</div>
+<p class="text-neutral-400 text-sm">Após definir um tema, o canvas-design usa as mesmas cores e fontes para criar composições artísticas — banners, thumbnails, covers. Consistência visual se estende além dos docs.</p>
+</div>
+</div>
+</div>
+<!-- quando NÃO usar -->
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-5">
+<div class="text-red-400 font-semibold text-sm mb-3">⚠️ Quando NÃO usar o theme-factory</div>
+<ul class="space-y-3 text-sm text-neutral-300">
+<li class="flex items-start gap-2">
+<span class="text-red-400 mt-0.5">✗</span>
+<div><strong class="text-neutral-200">Marca com identidade prescrita:</strong> se a empresa já tem manual de marca com hex codes definidos, use brand-guidelines diretamente — não faz sentido escolher um dos 10 temas.</div>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-red-400 mt-0.5">✗</span>
+<div><strong class="text-neutral-200">Artifact com tema correto já aplicado:</strong> se o documento já está estilizado e consistente, aplicar outro tema vai sobrescrever escolhas intencionais.</div>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-red-400 mt-0.5">✗</span>
+<div><strong class="text-neutral-200">Necessidade de animação ou motion design:</strong> para isso, animation-designer ou remotion são os skills certos.</div>
+</li>
+</ul>
+</div>
+<!-- mapa de posição na trilha -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Posição na Trilha 2 — Identidade</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="rounded-lg border-2 border-blue-500 bg-blue-500/15 p-3 text-center">
+<div class="text-blue-400 font-bold text-sm">2.1</div>
+<div class="text-xs font-semibold text-neutral-200 mt-1">🎨 theme-factory</div>
+<div class="text-xs text-blue-400 mt-1">← Você está aqui</div>
+</div>
+<div class="rounded-lg border border-dark-600 bg-dark-700/30 p-3 text-center">
+<div class="text-neutral-500 font-bold text-sm">2.2</div>
+<div class="text-xs font-semibold text-neutral-400 mt-1">🏷️ brand-guidelines</div>
+<div class="text-xs text-neutral-500 mt-1">Marca específica</div>
+</div>
+<div class="rounded-lg border border-dark-600 bg-dark-700/30 p-3 text-center">
+<div class="text-neutral-500 font-bold text-sm">2.3</div>
+<div class="text-xs font-semibold text-neutral-400 mt-1">🖼️ canvas-design</div>
+<div class="text-xs text-neutral-500 mt-1">Composições</div>
+</div>
+<div class="rounded-lg border border-dark-600 bg-dark-700/30 p-3 text-center">
+<div class="text-neutral-500 font-bold text-sm">2.4</div>
+<div class="text-xs font-semibold text-neutral-400 mt-1">🌀 algorithmic-art</div>
+<div class="text-xs text-neutral-500 mt-1">Arte generativa</div>
+</div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🏷️</div><div class="text-xs font-semibold text-neutral-200">brand-guidelines</div><div class="text-xs text-neutral-500">Com marca definida</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">⚛️</div><div class="text-xs font-semibold text-neutral-200">frontend-design</div><div class="text-xs text-neutral-500">Implementação</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🖼️</div><div class="text-xs font-semibold text-neutral-200">canvas-design</div><div class="text-xs text-neutral-500">Composição</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-red-400 text-lg mb-1">⚠️</div><div class="text-xs font-semibold text-neutral-200">Não sobrescrever</div><div class="text-xs text-neutral-500">Marca prescrita</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="rounded-2xl bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 border border-blue-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 text-blue-400">📋 Resumo do Módulo 2.1</h2>
+<div class="grid sm:grid-cols-2 gap-6 mb-8">
+<div>
+<div class="text-sm font-semibold text-neutral-400 mb-3">O que você aprendeu</div>
+<ul class="space-y-2">
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-blue-400 mt-0.5">✓</span> theme-factory é um toolkit para estilizar slides, docs, relatórios e landing pages HTML</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-blue-400 mt-0.5">✓</span> 10 temas pré-definidos: Ocean Depths, Midnight Galaxy, Tech Innovation e mais 7</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-blue-400 mt-0.5">✓</span> Cada tema define paleta hex + par de fontes em arquivo no diretório <code class="text-blue-300">themes/</code></li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-blue-400 mt-0.5">✓</span> Temas customizados gerados on-the-fly por descrição + revisão antes da aplicação</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-blue-400 mt-0.5">✓</span> Use brand-guidelines quando tiver marca específica com identidade prescrita</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-blue-400 mt-0.5">✓</span> Combina com frontend-design (implementação) e canvas-design (composições)</li>
+</ul>
+</div>
+<!-- próximo módulo -->
+<div class="bg-dark-700/50 rounded-xl border border-blue-500/20 p-5">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Próximo módulo</div>
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold">2.2</div>
+<div>
+<div class="font-semibold text-neutral-200">🏷️ brand-guidelines</div>
+<div class="text-sm text-neutral-400 mt-1">Quando o projeto tem uma marca específica, o brand-guidelines aplica a identidade visual institucional — cores, fontes, logo, tom de voz — com rigor de manual de marca.</div>
+</div>
+</div>
+<a class="mt-4 flex items-center justify-start gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors" href="modulo-2-2.html">
+            Ir para o módulo 2.2 →
+          </a>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Voltar para Trilha 2</a>
+<a class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors" href="modulo-2-2.html">Próximo Módulo: 2.2 brand-guidelines →</a>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Conteúdo do <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Trilha 2: Identidade · Módulo 2.1 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 3.4 — Seedance + HyperFrames/FFmpeg · Ruta 3 Medios · Skill Design</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'dark': { 600: '#4b5563', 700: '#374151', 800: '#1f2937', 900: '#111827' }
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Light mode — base */
+    html:not(.dark) body { background-color: #f9fafb; color: #111827; }
+    html:not(.dark) .bg-dark-900 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-800 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-700 { background-color: #e5e7eb; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .bg-dark-700\/40 { background-color: rgba(229,231,235,0.4); }
+    html:not(.dark) .bg-dark-700\/50 { background-color: rgba(229,231,235,0.5); }
+    html:not(.dark) .bg-dark-900\/40 { background-color: rgba(249,250,251,0.4); }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-200 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #374151; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    /* Light mode — T3 purple accent */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,0.12); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,0.3); }
+    html:not(.dark) .from-purple-900\/30 { --tw-gradient-from: rgba(88,28,135,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none; background-color: #f3f4f6; }
+    /* outras trilhas hover */
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    /* Dark mode — bordas suavizadas (obrigatório) */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* SVG animations */
+    @keyframes m34-flow { 0% { stroke-dashoffset: 120; } 100% { stroke-dashoffset: 0; } }
+    @keyframes m34-pulse { 0%,100% { opacity:.4 } 50% { opacity:1 } }
+    @keyframes m34-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes m34-loop { 0%,100% { stroke-dashoffset: 0; } 50% { stroke-dashoffset: 80; } }
+    @media (prefers-reduced-motion: no-preference) {
+      .m34-anim-flow { animation: m34-flow 2.5s linear infinite; stroke-dasharray: 8,4; }
+      .m34-anim-pulse { animation: m34-pulse 2.8s ease-in-out infinite; }
+      .m34-anim-pulse:nth-child(2) { animation-delay: .5s; }
+      .m34-anim-pulse:nth-child(3) { animation-delay: 1s; }
+      .m34-anim-loop { animation: m34-loop 3s ease-in-out infinite; stroke-dasharray: 8,4; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha3/modulo-3-4.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha3/modulo-3-4.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha3/modulo-3-4.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha3/modulo-3-4.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha3/modulo-3-4.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-3-4.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Skills</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Diseño</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Medios</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Soporte</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.706-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-purple-400 transition-colors" href="../../index.html">Inicio</a>
+<span>/</span>
+<a class="hover:text-purple-400 transition-colors" href="index.html">Ruta 3 — Medios</a>
+<span>/</span>
+<span class="text-purple-400 font-medium">Módulo 3.4</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-10 items-center">
+<div>
+<div class="inline-flex items-center gap-2 bg-purple-500/20 border border-purple-500/30 rounded-full px-4 py-1.5 mb-4">
+<span class="text-purple-400 text-xs font-bold uppercase tracking-widest">Módulo 3.4</span>
+</div>
+<h1 class="text-3xl sm:text-4xl font-bold text-neutral-100 mb-3">🔁 Seedance + HyperFrames/FFmpeg</h1>
+<p class="text-neutral-400 text-lg mb-6">Tres motores de video que trabajan juntos: Seedance 2 genera loops de fondo para sitios web sin cortes; HyperFrames convierte HTML en MP4 mediante Chrome headless; FFmpeg aparece detrás de ambos como motor de codificación universal.</p>
+<!-- stats -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-xl font-bold text-purple-400">6</div>
+<div class="text-xs text-neutral-500 mt-0.5">Temas</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-xl font-bold text-purple-400">30</div>
+<div class="text-xs text-neutral-500 mt-0.5">Minutos</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-xl font-bold text-purple-400">Avanzado</div>
+<div class="text-xs text-neutral-500 mt-0.5">Nivel</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-xl font-bold text-purple-400">Video</div>
+<div class="text-xs text-neutral-500 mt-0.5">Categoría</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — Seedance Loop + HyperFrames + FFmpeg -->
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4">
+<svg aria-label="Diagrama futurista: Seedance loop + HyperFrames HTML→MP4 + FFmpeg como base" class="w-full h-auto" role="img" viewbox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="m34-bg" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#1a1230;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0e1b26;stop-opacity:1"></stop>
+</lineargradient>
+<filter id="m34-glow">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<rect fill="url(#m34-bg)" height="260" rx="12" width="400"></rect>
+<!-- title -->
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="11" font-weight="700" letter-spacing="1" text-anchor="middle" x="200" y="22">TRÍO DE VIDEO</text>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" letter-spacing="2" text-anchor="middle" x="200" y="36">SEEDANCE · HYPERFRAMES · FFMPEG</text>
+<!-- SEEDANCE node — top left -->
+<rect fill="#1a1230" height="72" rx="8" stroke="#c084fc" stroke-width="1.5" width="110" x="16" y="52"></rect>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="71" y="73">Seedance 2</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="71" y="87">prompt estructurado</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="71" y="100">→ video loop 10s</text>
+<text fill="#a78bfa" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="71" y="113">background del sitio</text>
+<text class="m34-anim-pulse" fill="#c084fc" font-family="Inter,sans-serif" font-size="8" opacity="0.8" text-anchor="middle" x="71" y="44">① LOOP</text>
+<!-- HYPERFRAMES node — top right -->
+<rect fill="#0e1622" height="72" rx="8" stroke="#38bdf8" stroke-width="1.5" width="110" x="274" y="52"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="329" y="73">HyperFrames</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="329" y="87">HTML + GSAP</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="329" y="100">→ frames PNG</text>
+<text fill="#7dd3fc" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="329" y="113">Chrome headless</text>
+<text class="m34-anim-pulse" fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" opacity="0.8" text-anchor="middle" x="329" y="44">② HTML→MP4</text>
+<!-- Arrow left → center -->
+<path class="m34-anim-flow" d="M126 88 L170 130" fill="none" stroke="#c084fc" stroke-width="1.5"></path>
+<polygon fill="#c084fc" points="166,133 174,132 170,124"></polygon>
+<!-- Arrow right → center -->
+<path class="m34-anim-flow" d="M274 88 L230 130" fill="none" stroke="#38bdf8" stroke-width="1.5"></path>
+<polygon fill="#38bdf8" points="234,133 226,132 230,124"></polygon>
+<!-- FFmpeg center node -->
+<rect fill="#0e1622" filter="url(#m34-glow)" height="68" rx="8" stroke="#a855f7" stroke-width="2" width="104" x="148" y="128"></rect>
+<text fill="#a855f7" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="200" y="150">FFmpeg</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="200" y="165">motor universal</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="200" y="178">H.264 · WAV sincronizado</text>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="200" y="189">-nostdin (git-bash)</text>
+<!-- Arrow down → MP4 output -->
+<path class="m34-anim-flow" d="M200 196 L200 222" fill="none" stroke="#a855f7" stroke-width="2"></path>
+<polygon fill="#a855f7" points="196,222 204,222 200,230"></polygon>
+<!-- MP4 output -->
+<rect fill="#0a1a2e" height="22" rx="6" stroke="#38bdf8" stroke-width="1" width="120" x="140" y="230"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="200" y="245">🎬 .mp4 final</text>
+<!-- loop arrows around seedance -->
+<path class="m34-anim-loop" d="M16 88 Q8 88 8 100 Q8 120 16 120" fill="none" stroke="#c084fc" stroke-linecap="round" stroke-width="1.2"></path>
+<polygon fill="#c084fc" points="12,120 20,122 16,113"></polygon>
+<!-- dot decorations -->
+<circle class="m34-anim-pulse" cx="380" cy="20" fill="#c084fc" opacity="0.4" r="2"></circle>
+<circle class="m34-anim-pulse" cx="370" cy="240" fill="#38bdf8" opacity="0.4" r="2"></circle>
+<circle class="m34-anim-pulse" cx="20" cy="240" fill="#a855f7" opacity="0.4" r="2"></circle>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+<!-- SEÇÃO 1 — O QUE É / O QUE FAZ -->
+<section id="topico-1">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">1</div>
+<h2 class="text-2xl font-bold text-neutral-100">🧩 Qué es / qué hace</h2>
+</div>
+<!-- três boxes lado a lado -->
+<div class="grid md:grid-cols-3 gap-5 mb-6">
+<!-- Seedance -->
+<div class="rounded-xl bg-gradient-to-br from-purple-900/30 to-dark-700/50 border border-purple-500/30 p-5">
+<div class="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-2">seedance-loop-prompt</div>
+<h3 class="text-lg font-bold text-neutral-100 mb-2">Generador de prompts</h3>
+<p class="text-neutral-400 text-sm">Construye prompts muy detallados para <strong class="text-purple-300">Seedance 2</strong> (image-to-video) que producen videos de fondo en loop perfecto para sitios web. Exige especificidad en cámara, iluminación, timing, coreografía del texto y mecánica del loop.</p>
+<div class="mt-3 text-xs text-purple-300 bg-purple-500/10 rounded px-2 py-1 inline-block">salida: prompt estructurado en 7 secciones</div>
+</div>
+<!-- HyperFrames -->
+<div class="rounded-xl bg-gradient-to-br from-cyan-900/20 to-dark-700/50 border border-cyan-500/30 p-5">
+<div class="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-2">video-explicativo (HyperFrames)</div>
+<h3 class="text-lg font-bold text-neutral-100 mb-2">HTML → MP4 local</h3>
+<p class="text-neutral-400 text-sm">Genera videos narrados, animados y renderizados a partir de un tema. Stack: <strong class="text-cyan-300">HyperFrames</strong> (Chrome headless captura frames) + <strong class="text-cyan-300">FFmpeg</strong> codifica + <strong class="text-cyan-300">Kokoro TTS</strong> local. Sin clave de API, sin costo por render.</p>
+<div class="mt-3 text-xs text-cyan-300 bg-cyan-500/10 rounded px-2 py-1 inline-block">salida: MP4 narrado en 16:9 y 9:16</div>
+</div>
+<!-- FFmpeg -->
+<div class="rounded-xl bg-gradient-to-br from-violet-900/20 to-dark-700/50 border border-violet-500/30 p-5">
+<div class="text-xs font-semibold text-violet-400 uppercase tracking-widest mb-2">FFmpeg — motor base</div>
+<h3 class="text-lg font-bold text-neutral-100 mb-2">Encode universal</h3>
+<p class="text-neutral-400 text-sm"><strong class="text-violet-300">FFmpeg</strong> es el motor de codificación H.264 que aparece detrás de casi todos los skills de video. Extrae fotogramas, crea MP4, sincroniza el audio WAV y requiere <code class="text-violet-300">-nostdin</code> en git-bash para evitar exit 0 silencioso.</p>
+<div class="mt-3 text-xs text-violet-300 bg-violet-500/10 rounded px-2 py-1 inline-block">binario en C:\ffmpeg\bin</div>
+</div>
+</div>
+<!-- box dados -->
+<div class="rounded-xl bg-blue-900/20 border border-blue-500/30 p-4 mb-6">
+<div class="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-3">Por dentro de los nombres reales</div>
+<div class="grid sm:grid-cols-2 gap-4 text-sm">
+<div><span class="text-blue-300 font-semibold">seedance-loop-prompt</span> — skill que genera prompts; no renderiza video, llama a Seedance 2 (plataforma externa).</div>
+<div><span class="text-blue-300 font-semibold">video-explicativo</span> — skill HyperFrames; todo se ejecuta localmente mediante <code class="text-blue-300">npx hyperframes render</code>.</div>
+<div><span class="text-blue-300 font-semibold">HyperFrames</span> — de código abierto con licencia MIT, repo github.com/heygen-com/hyperframes.</div>
+<div><span class="text-blue-300 font-semibold">Kokoro TTS</span> — <code class="text-blue-300">pip install kokoro-onnx soundfile</code>, sin espeak-ng, ya fonemiza PT-BR.</div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-purple-400 text-lg mb-1">🔁</div><div class="text-xs font-semibold text-neutral-200">Loop sin cortes</div><div class="text-xs text-neutral-500 mt-1">mismo frame de inicio y fin</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🌐</div><div class="text-xs font-semibold text-neutral-200">HTML → MP4</div><div class="text-xs text-neutral-500 mt-1">browser como motor de renderizado</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-violet-400 text-lg mb-1">⚙️</div><div class="text-xs font-semibold text-neutral-200">FFmpeg básico</div><div class="text-xs text-neutral-500 mt-1">motor detrás de todo</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-purple-400 text-lg mb-1">🔇</div><div class="text-xs font-semibold text-neutral-200">Sin API externa</div><div class="text-xs text-neutral-500 mt-1">Kokoro TTS local</div></div>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 2 — QUANDO DISPARA -->
+<section id="topico-2">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">2</div>
+<h2 class="text-2xl font-bold text-neutral-100">🎣 Cuándo se activa</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<!-- Seedance triggers -->
+<div>
+<div class="text-sm font-semibold text-purple-400 mb-3">Disparadores: seedance-loop-prompt</div>
+<div class="space-y-2">
+<div class="flex gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<span class="text-purple-400 text-lg">🎬</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">Frases explícitas</div>
+<div class="text-xs text-neutral-400 mt-0.5">"loop video", "website background video", "product loop", "endless loop video", "video de fondo para sitio web"</div>
+</div>
+</div>
+<div class="flex gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<span class="text-purple-400 text-lg">🧴</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">Producto + concepto visual</div>
+<div class="text-xs text-neutral-400 mt-0.5">El usuario describe un producto o una escena para un background continuo de una página web, menciona Seedance o pide "looping video prompt".</div>
+</div>
+</div>
+<div class="flex gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<span class="text-purple-400 text-lg">📰</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">Titulares para integrar</div>
+<div class="text-xs text-neutral-400 mt-0.5">Proporciona 1-2 frases de texto para que aparezcan coreografiadas en el video de fondo.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- HyperFrames triggers -->
+<div>
+<div class="text-sm font-semibold text-cyan-400 mb-3">Disparadores: video-explicativo (HyperFrames)</div>
+<div class="space-y-2">
+<div class="flex gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<span class="text-cyan-400 text-lg">📹</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">Solicitud directa de video</div>
+<div class="text-xs text-neutral-400 mt-0.5">"hacer un video", "video explicativo", "video sobre X", "mini tutorial en video", "video de INEMA"</div>
+</div>
+</div>
+<div class="flex gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<span class="text-cyan-400 text-lg">📱</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">Formato específico</div>
+<div class="text-xs text-neutral-400 mt-0.5">"video para Shorts/Reels", "video narrado listo", "9:16", "16:9 YouTube"</div>
+</div>
+</div>
+<div class="flex gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<span class="text-cyan-400 text-lg">🎯</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">Tema + render local</div>
+<div class="text-xs text-neutral-400 mt-0.5">El usuario indica un tema y quiere un video narrado con guion, locución, animación y CTA de INEMA.CLUB, todo junto.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- tip box -->
+<div class="rounded-xl bg-purple-500/10 border border-purple-500/30 p-4 flex gap-3 mb-6">
+<span class="text-purple-400 text-xl flex-shrink-0">💡</span>
+<div>
+<div class="text-purple-400 font-semibold text-sm mb-1">Puerta de confianza de Seedance</div>
+<p class="text-neutral-400 text-sm">Si el usuario describe el diagrama en lenguaje natural, Claude genera el código Mermaid válido consultando la referencia</p>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-purple-400 text-lg mb-1">🗣️</div><div class="text-xs font-semibold text-neutral-200">Activación por frase</div><div class="text-xs text-neutral-500 mt-1">palabras clave en la description</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🎞️</div><div class="text-xs font-semibold text-neutral-200">Video narrado</div><div class="text-xs text-neutral-500 mt-1">tema → guion → render</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-purple-400 text-lg mb-1">🌐</div><div class="text-xs font-semibold text-neutral-200">Fondo del sitio</div><div class="text-xs text-neutral-500 mt-1">continuo sin interrupciones</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-violet-400 text-lg mb-1">⚡</div><div class="text-xs font-semibold text-neutral-200">Genera de inmediato</div><div class="text-xs text-neutral-500 mt-1">siempre que tenga subject</div></div>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 3 — COMO MELHORA SUAS PÁGINAS -->
+<section id="topico-3">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">3</div>
+<h2 class="text-2xl font-bold text-neutral-100">🚀 Cómo mejora tus páginas</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<!-- FAZER -->
+<div>
+<div class="text-sm font-semibold text-emerald-400 mb-3">✓ HACER con estas skills</div>
+<div class="space-y-2">
+<div class="flex gap-2 bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-3"><span class="text-emerald-400">✓</span><span class="text-sm text-neutral-300">Agregar un <code class="text-emerald-300">&lt;video loop muted autoplay&gt;</code> como fondo hero usando el .mp4 de Seedance</span></div>
+<div class="flex gap-2 bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-3"><span class="text-emerald-400">✓</span><span class="text-sm text-neutral-300">Crear un video explicativo 16:9 para insertar en un módulo del curso con <code class="text-emerald-300">HyperFrames</code></span></div>
+<div class="flex gap-2 bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-3"><span class="text-emerald-400">✓</span><span class="text-sm text-neutral-300">Generar Shorts/Reels 9:16 a partir del mismo proyecto HTML sin rehacer el trabajo</span></div>
+<div class="flex gap-2 bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-3"><span class="text-emerald-400">✓</span><span class="text-sm text-neutral-300">TTS Kokoro narrado en PT-BR: calidad premium sin costo por carácter</span></div>
+<div class="flex gap-2 bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-3"><span class="text-emerald-400">✓</span><span class="text-sm text-neutral-300">Preservar la privacidad: todo se ejecuta localmente, el contenido propietario nunca sale de la máquina</span></div>
+</div>
+</div>
+<!-- EVITAR -->
+<div>
+<div class="text-sm font-semibold text-red-400 mb-3">✗ EVITAR / limitaciones reales</div>
+<div class="space-y-2">
+<div class="flex gap-2 bg-red-900/20 border border-red-500/30 rounded-lg p-3"><span class="text-red-400">✗</span><span class="text-sm text-neutral-300">Usar Seedance para videos largos (&gt;30s): está optimizado para loops de 5–10s</span></div>
+<div class="flex gap-2 bg-red-900/20 border border-red-500/30 rounded-lg p-3"><span class="text-red-400">✗</span><span class="text-sm text-neutral-300">Esperar edición en tiempo real: HyperFrames renderiza fotograma a fotograma (lento en máquinas lentas)</span></div>
+<div class="flex gap-2 bg-red-900/20 border border-red-500/30 rounded-lg p-3"><span class="text-red-400">✗</span><span class="text-sm text-neutral-300">Olvidar <code class="text-red-300">-nostdin</code> en git-bash: FFmpeg devuelve exit 0 sin generar un archivo</span></div>
+<div class="flex gap-2 bg-red-900/20 border border-red-500/30 rounded-lg p-3"><span class="text-red-400">✗</span><span class="text-sm text-neutral-300">Animar el wrapper <code class="text-red-300">.clip</code>: HyperFrames fuerza <code>opacity:1</code> — animar solo <code>.scene-inner</code></span></div>
+</div>
+</div>
+</div>
+<!-- conceito principal -->
+<div class="rounded-xl bg-gradient-to-br from-purple-900/30 to-dark-700/50 border border-purple-500/30 p-5 mb-6">
+<div class="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-2">Impacto combinado</div>
+<p class="text-neutral-200 font-medium mb-2">Una landing page con Seedance en el hero + HyperFrames en los módulos del curso = experiencia de producto premium sin depender de ningún servicio externo de video de pago. FFmpeg es el enlace que garantiza la compatibilidad universal del .mp4 generado.</p>
+<div class="grid sm:grid-cols-3 gap-3 mt-3">
+<div class="text-center bg-dark-800/60 rounded-lg p-3"><div class="text-purple-400 font-bold text-lg">10s</div><div class="text-xs text-neutral-500">duración predeterminada del loop de Seedance</div></div>
+<div class="text-center bg-dark-800/60 rounded-lg p-3"><div class="text-cyan-400 font-bold text-lg">30fps</div><div class="text-xs text-neutral-500">frames capturados por Chrome</div></div>
+<div class="text-center bg-dark-800/60 rounded-lg p-3"><div class="text-violet-400 font-bold text-lg">4K</div><div class="text-xs text-neutral-500">Seedance si es compatible</div></div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-purple-400 text-lg mb-1">🏠</div><div class="text-xs font-semibold text-neutral-200">Fondo del hero</div><div class="text-xs text-neutral-500 mt-1">video autoplay loop muted</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🎓</div><div class="text-xs font-semibold text-neutral-200">Video en curso</div><div class="text-xs text-neutral-500 mt-1">módulo explicativo integrado</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-emerald-400 text-lg mb-1">🔒</div><div class="text-xs font-semibold text-neutral-200">100% local</div><div class="text-xs text-neutral-500 mt-1">costo cero por render</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-violet-400 text-lg mb-1">📐</div><div class="text-xs font-semibold text-neutral-200">Formato dual</div><div class="text-xs text-neutral-500 mt-1">16:9 y 9:16 del mismo proyecto</div></div>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 4 — COMO FUNCIONA POR DENTRO -->
+<section id="topico-4">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">4</div>
+<h2 class="text-2xl font-bold text-neutral-100">⚙️ Cómo funciona por dentro</h2>
+</div>
+<div class="grid lg:grid-cols-2 gap-8 mb-6">
+<!-- Seedance por dentro -->
+<div>
+<div class="text-sm font-semibold text-purple-400 mb-4">Seedance 2 — estructura del prompt en 7 secciones</div>
+<div class="relative pl-8 space-y-0">
+<div class="absolute left-3 top-2 bottom-2 w-0.5 bg-purple-500/30"></div>
+<div class="relative pb-4">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-purple-500 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">1</span></div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-purple-400 text-sm">SCENE</div>
+<p class="text-neutral-400 text-xs mt-1">Producto/sujeto con detalles precisos de material, color y forma. Entorno. Referencias visuales reales (ej.: "Apple product film meets Dyson reveal").</p>
+</div>
+</div>
+<div class="relative pb-4">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-purple-500 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">2</span></div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-purple-400 text-sm">CAMERA</div>
+<p class="text-neutral-400 text-xs mt-1">Posición exacta, ángulo, movimiento. "Órbita horizontal con 15° de elevación, 1 rotación completa" — nunca "la cámara se mueve".</p>
+</div>
+</div>
+<div class="relative pb-4">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-cyan-500 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">3</span></div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-cyan-400 text-sm">ACTION ARC</div>
+<p class="text-neutral-400 text-xs mt-1">Build lento → pico al 40–60% → resolución satisfactoria. Cada loop tiene un clímax visual.</p>
+</div>
+</div>
+<div class="relative pb-4">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-cyan-500 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">4</span></div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-cyan-400 text-sm">COREOGRAFÍA DEL TEXTO</div>
+<p class="text-neutral-400 text-xs mt-1">Titulares integrados en el video. La legibilidad es la prioridad número 1: si un efecto visual compite con el texto, se elimina el efecto.</p>
+</div>
+</div>
+<div class="relative pb-4">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-purple-400 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">5</span></div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-purple-400 text-sm">LIGHTING &amp; ATMOSPHERE</div>
+<p class="text-neutral-400 text-xs mt-1">Iluminación estática durante todo el video. Sin variación de temperatura de color: innegociable para mantener la consistencia en el loop.</p>
+</div>
+</div>
+<div class="relative pb-4">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-violet-400 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">6</span></div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-violet-400 text-sm">LOOP SEAL</div>
+<p class="text-neutral-400 text-xs mt-1">Image-to-video con la misma imagen en el 1.º y el último frame. La cámara vuelve exactamente a la posición inicial. Las partículas vuelven al estado inicial.</p>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-purple-500 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">7</span></div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="font-semibold text-purple-400 text-sm">TÉCNICO</div>
+<p class="text-neutral-400 text-xs mt-1">Duración (por defecto 10s), resolución 4K si es compatible, sin marcas de agua, en loop continuo.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- HyperFrames + FFmpeg por dentro -->
+<div>
+<div class="text-sm font-semibold text-cyan-400 mb-4">HyperFrames: flujo en 7 etapas</div>
+<div class="space-y-3">
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">1</span><span class="text-cyan-400 font-semibold text-sm">SCRIPT.md</span></div>
+<p class="text-neutral-400 text-xs">6–9 escenas. Narración ≈100s de voz. Siglas expandidas para la locución ("SKILL.md" → "SKILL punto M D").</p>
+</div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">2</span><span class="text-cyan-400 font-semibold text-sm">npx hyperframes init</span></div>
+<p class="text-neutral-400 text-xs"><code class="text-cyan-300">--example blank --non-interactive</code>. Copia design.md (house style) a la raíz.</p>
+</div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">3</span><span class="text-cyan-400 font-semibold text-sm">node fetch-fonts.mjs</span></div>
+<p class="text-neutral-400 text-xs">Descarga .woff2 subset latin → assets/fonts/fonts.css</p>
+</div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">4</span><span class="text-cyan-400 font-semibold text-sm">Kokoro TTS</span></div>
+<p class="text-neutral-400 text-xs">Voz <code class="text-cyan-300">pf_dora --speed 0.98</code>. Genera WAV por escena. Sin espeak-ng.</p>
+</div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">5</span><span class="text-violet-400 font-semibold text-sm">Captura de Chrome headless</span></div>
+<p class="text-neutral-400 text-xs">Para cada frame: llama <code class="text-violet-300">anim(t)</code>, espera a que el DOM se estabilice, screenshot PNG 30fps. Tiempo virtual: no se pierde ningún frame.</p>
+</div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">6</span><span class="text-violet-400 font-semibold text-sm">FFmpeg codifica</span></div>
+<p class="text-neutral-400 text-xs">PNG → H.264. Sincroniza el WAV. <code class="text-violet-300">ffmpeg -nostdin</code> en git-bash (evita exit 0 sin output). Path: <code class="text-violet-300">C:\ffmpeg\bin</code>.</p>
+</div>
+<div class="bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">7</span><span class="text-cyan-400 font-semibold text-sm">Render final</span></div>
+<p class="text-neutral-400 text-xs"><code class="text-cyan-300">--quality draft</code> primero, después <code class="text-cyan-300">--quality high</code>. Genera 16:9 y 9:16 por separado.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- box alerta FFmpeg -->
+<div class="rounded-xl bg-red-900/20 border border-red-500/30 p-4 flex gap-3 mb-6">
+<span class="text-red-400 text-xl flex-shrink-0">⚠️</span>
+<div>
+<div class="text-red-400 font-semibold text-sm mb-1">FFmpeg en git-bash: flag obligatoria</div>
+<p class="text-neutral-400 text-sm">Sin <code class="text-red-300">-nostdin</code>, FFmpeg en git-bash devuelve exit 0 silenciosamente sin generar ningún archivo. Usa siempre: <code class="text-red-300">ffmpeg -nostdin [opções]</code>. También: verifica <code class="text-red-300">npx hyperframes doctor</code> si algo falla en el flujo.</p>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-purple-400 text-lg mb-1">📋</div><div class="text-xs font-semibold text-neutral-200">7 secciones fijas</div><div class="text-xs text-neutral-500 mt-1">todo prompt Seedance</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🕐</div><div class="text-xs font-semibold text-neutral-200">Tiempo virtual</div><div class="text-xs text-neutral-500 mt-1">anim(t) — sin pérdida de frames</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-violet-400 text-lg mb-1">🔊</div><div class="text-xs font-semibold text-neutral-200">pf_dora 0.98</div><div class="text-xs text-neutral-500 mt-1">voz Kokoro PT-BR</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-red-400 text-lg mb-1">🚨</div><div class="text-xs font-semibold text-neutral-200">-nostdin</div><div class="text-xs text-neutral-500 mt-1">FFmpeg git-bash obligatorio</div></div>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 5 — EXEMPLO PRÁTICO + PROMPT -->
+<section id="topico-5">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">5</div>
+<h2 class="text-2xl font-bold text-neutral-100">💬 Ejemplo práctico + prompt listo</h2>
+</div>
+<!-- tip box -->
+<div class="rounded-xl bg-purple-500/10 border border-purple-500/30 p-4 flex gap-3 mb-6">
+<span class="text-purple-400 text-xl flex-shrink-0">💡</span>
+<div>
+<div class="text-purple-400 font-semibold text-sm mb-1">Dos casos de uso distintos</div>
+<p class="text-neutral-400 text-sm">Seedance = fondo visual del sitio (el usuario <em>mira</em> al fondo). HyperFrames = video explicativo de contenido (el usuario <em>aprende</em> con el video). Los prompts de abajo cubren cada caso por separado.</p>
+</div>
+</div>
+<div class="grid lg:grid-cols-2 gap-6 mb-6">
+<!-- Prompt Seedance -->
+<div>
+<div class="text-sm font-semibold text-purple-400 mb-3">Prompt: generar un loop de fondo con Seedance</div>
+<div class="bg-dark-900 border border-purple-500/30 rounded-xl overflow-hidden">
+<div class="bg-purple-500/10 px-4 py-2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-purple-500"></div>
+<span class="text-xs text-purple-300 font-mono">para Claude Code</span>
+</div>
+<pre class="p-4 text-sm font-mono text-neutral-300 overflow-x-auto whitespace-pre-wrap"><code>Quero um background loop para o hero do meu
+site de cursos INEMA.CLUB. Produto: dashboard
+de cursos dark premium com partículas de dados
+flutuantes. Headlines: "APRENDA COM QUEM FAZ"
+e "INEMA.CLUB". Loop de 10 segundos, paleta
+purple e ciano, mood: tecnologia artesanal.</code></pre>
+</div>
+<div class="mt-3 text-xs text-neutral-500 bg-dark-800 rounded-lg px-3 py-2 border border-dark-600">
+            El skill seedance-loop-prompt genera el prompt estructurado en 7 secciones (SCENE, CAMERA, ACTION ARC, TEXT CHOREOGRAPHY, LIGHTING, LOOP SEAL, TECHNICAL), listo para pegar en Seedance 2 en modo image-to-video.
+          </div>
+</div>
+<!-- Prompt HyperFrames -->
+<div>
+<div class="text-sm font-semibold text-cyan-400 mb-3">Prompt: crear un video explicativo con HyperFrames</div>
+<div class="bg-dark-900 border border-cyan-500/30 rounded-xl overflow-hidden">
+<div class="bg-cyan-500/10 px-4 py-2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-cyan-500"></div>
+<span class="text-xs text-cyan-300 font-mono">para Claude Code</span>
+</div>
+<pre class="p-4 text-sm font-mono text-neutral-300 overflow-x-auto whitespace-pre-wrap"><code>Faça um vídeo explicativo sobre o skill
+seedance-loop-prompt do INEMA.CLUB. PT-BR,
+dark premium, accent âmbar. Gere 16:9 e 9:16.
+Termina com a cena de CTA do INEMA.CLUB.
+Assunto: como criar background loops de site
+com prompt estruturado para o Seedance 2.</code></pre>
+</div>
+<div class="mt-3 text-xs text-neutral-500 bg-dark-800 rounded-lg px-3 py-2 border border-dark-600">
+            El skill video-explicativo ejecuta: guion SCRIPT.md → inicialización del proyecto → fuentes → Kokoro TTS (pf_dora) → captura con Chrome headless → codificación con FFmpeg → MP4 final en los dos formatos.
+          </div>
+</div>
+</div>
+<!-- Comandos FFmpeg reais -->
+<div class="mb-6">
+<div class="text-sm font-semibold text-violet-400 mb-3">Comandos FFmpeg relevantes</div>
+<div class="bg-dark-900 border border-violet-500/30 rounded-xl overflow-hidden">
+<div class="bg-violet-500/10 px-4 py-2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-violet-500"></div>
+<span class="text-xs text-violet-300 font-mono">bash (git-bash / terminal)</span>
+</div>
+<pre class="p-4 text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-neutral-500"># Render HyperFrames 16:9</span>
+node build-index.mjs
+npx hyperframes render --quality high \
+  --output renders/meu-video-16x9.mp4
+
+<span class="text-neutral-500"># Render HyperFrames 9:16</span>
+node build-index.mjs --vertical
+npx hyperframes render --quality high \
+  --output renders/meu-video-9x16.mp4
+
+<span class="text-neutral-500"># FFmpeg direto (com -nostdin obrigatório no git-bash)</span>
+ffmpeg -nostdin -framerate 30 \
+  -i frames/frame_%04d.png \
+  -i audio/narration.wav \
+  -c:v libx264 -crf 18 -pix_fmt yuv420p \
+  output.mp4
+
+<span class="text-neutral-500"># Verificar instalação</span>
+npx hyperframes doctor</code></pre>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-purple-400 text-lg mb-1">📝</div><div class="text-xs font-semibold text-neutral-200">Prompt completo</div><div class="text-xs text-neutral-500 mt-1">pégalo directamente en Seedance 2</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🎬</div><div class="text-xs font-semibold text-neutral-200">"haz un video"</div><div class="text-xs text-neutral-500 mt-1">activa la skill HyperFrames</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-violet-400 text-lg mb-1">💻</div><div class="text-xs font-semibold text-neutral-200">hyperframes doctor</div><div class="text-xs text-neutral-500 mt-1">diagnóstico de configuración</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">🏁</div><div class="text-xs font-semibold text-neutral-200">CTA INEMA.CLUB</div><div class="text-xs text-neutral-500 mt-1">escena final predeterminada</div></div>
+</div>
+</div>
+</section>
+<!-- SEÇÃO 6 — COMBINA COM / LIMITES -->
+<section id="topico-6">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">6</div>
+<h2 class="text-2xl font-bold text-neutral-100">🧬 Combina con / límites</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<!-- Combina com -->
+<div>
+<div class="text-sm font-semibold text-emerald-400 mb-3">✓ Combina muy bien con</div>
+<div class="space-y-3">
+<div class="flex gap-3 bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-3">
+<span class="text-emerald-400">✓</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">animation-designer</div>
+<div class="text-xs text-neutral-400 mt-0.5">Crea animaciones CSS/GSAP para la página; HyperFrames puede capturarlas con Chrome headless y convertirlas en escenas de video.</div>
+</div>
+</div>
+<div class="flex gap-3 bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-3">
+<span class="text-emerald-400">✓</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">3d-animation-creator</div>
+<div class="text-xs text-neutral-400 mt-0.5">Genera animaciones 3D WebGL/Three.js que pueden renderizarse mediante HyperFrames como escenas de video explicativo.</div>
+</div>
+</div>
+<div class="flex gap-3 bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-3">
+<span class="text-emerald-400">✓</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">canvas-design / web-artifacts-builder</div>
+<div class="text-xs text-neutral-400 mt-0.5">Los prototipos HTML creados con estos skills pueden convertirse en video con HyperFrames, creando demos animadas del producto.</div>
+</div>
+</div>
+<div class="flex gap-3 bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-3">
+<span class="text-emerald-400">✓</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">formato-curso / printing-press</div>
+<div class="text-xs text-neutral-400 mt-0.5">Las páginas de cursos creadas con formato-curso pueden integrar los MP4 de HyperFrames y usar el background loop de Seedance en el hero.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Limites / quando NÃO usar -->
+<div>
+<div class="text-sm font-semibold text-red-400 mb-3">✗ Cuándo NO usar / límites reales</div>
+<div class="space-y-3">
+<div class="flex gap-3 bg-red-900/20 border border-red-500/30 rounded-lg p-3">
+<span class="text-red-400">✗</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">Video con actores reales</div>
+<div class="text-xs text-neutral-400 mt-0.5">HyperFrames renderiza HTML/CSS/GSAP. Para imágenes de personas o cámaras reales, usa plataformas convencionales de producción de video.</div>
+</div>
+</div>
+<div class="flex gap-3 bg-red-900/20 border border-red-500/30 rounded-lg p-3">
+<span class="text-red-400">✗</span>
+<div>
+<div class="text-sm font-semibold text=" text-neutral-200"="">Seedance para videos narrativos</div>
+<div class="text-xs text-neutral-400 mt-0.5">Seedance es un loop de fondo sin narración. Para videos explicativos con locución, usa HyperFrames + Kokoro TTS.</div>
+</div>
+</div>
+<div class="flex gap-3 bg-red-900/20 border border-red-500/30 rounded-lg p-3">
+<span class="text-red-400">✗</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">Máquinas sin Node 22+ / Chrome / FFmpeg</div>
+<div class="text-xs text-neutral-400 mt-0.5">HyperFrames requiere un entorno configurado. Sin estos requisitos previos, el flujo no funciona. Seedance no tiene requisitos previos locales.</div>
+</div>
+</div>
+<div class="flex gap-3 bg-red-900/20 border border-red-500/30 rounded-lg p-3">
+<span class="text-red-400">✗</span>
+<div>
+<div class="text-sm font-semibold text-neutral-200">Renders en servidores CI/CD</div>
+<div class="text-xs text-neutral-400 mt-0.5">Chrome headless y FFmpeg local no son nativos de CI. Pensado para la máquina del desarrollador.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- box link curso irmão HyperFrames -->
+<div class="rounded-xl bg-blue-900/20 border border-blue-500/30 p-5 mb-6">
+<div class="flex items-start gap-4">
+<span class="text-blue-400 text-3xl flex-shrink-0">🎓</span>
+<div>
+<div class="text-blue-400 font-bold text-base mb-1">Curso complementario: HyperFrames completo</div>
+<p class="text-neutral-400 text-sm mb-3">Este módulo abarca los dos skills de forma panorámica. Para dominar todos los detalles de HyperFrames (setup, escenas, GSAP, Kokoro, debug, deploy), accede al curso dedicado:</p>
+<a class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors" href="https://inematds.github.io/skill-hyperframes-videos" target="_blank">
+              🔗 inematds.github.io/skill-hyperframes-videos →
+            </a>
+</div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-emerald-400 text-lg mb-1">🤝</div><div class="text-xs font-semibold text-neutral-200">animation-designer</div><div class="text-xs text-neutral-500 mt-1">CSS/GSAP → escena HF</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🧊</div><div class="text-xs font-semibold text-neutral-200">3d-animation-creator</div><div class="text-xs text-neutral-500 mt-1">Three.js → video</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">📚</div><div class="text-xs font-semibold text-neutral-200">Curso de HyperFrames</div><div class="text-xs text-neutral-500 mt-1">github.io dedicado</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-red-400 text-lg mb-1">🚫</div><div class="text-xs font-semibold text-neutral-200">No es para footage</div><div class="text-xs text-neutral-500 mt-1">renderizado solo con HTML/CSS</div></div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="rounded-2xl bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 border border-purple-500/30 p-8" id="resumo">
+<div class="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-4">Resumen del Módulo 3.4</div>
+<h2 class="text-2xl font-bold text-neutral-100 mb-6">Qué aprendiste</h2>
+<div class="grid sm:grid-cols-2 gap-6 mb-8">
+<div>
+<div class="text-sm font-semibold text-neutral-400 mb-3">Skills cubiertos</div>
+<ul class="space-y-2">
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-purple-400 mt-0.5">✓</span> seedance-loop-prompt: prompt hiperdetallado en 7 secciones para Seedance 2</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-purple-400 mt-0.5">✓</span> video-explicativo (HyperFrames): HTML+GSAP → Chrome headless → FFmpeg → MP4</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-purple-400 mt-0.5">✓</span> FFmpeg como motor base: H.264, sincronización WAV, <code class="text-purple-300">-nostdin</code> en git-bash</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-purple-400 mt-0.5">✓</span> Kokoro TTS: <code class="text-purple-300">pf_dora --speed 0.98</code>, PT-BR, sin espeak-ng</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-purple-400 mt-0.5">✓</span> Loop cerrado: mismo frame al inicio y al final → loop sin cortes</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-purple-400 mt-0.5">✓</span> 16:9 y 9:16 del mismo proyecto de HyperFrames</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-purple-400 mt-0.5">✓</span> Combina con animation-designer, 3d-animation-creator, formato-curso</li>
+</ul>
+</div>
+<div>
+<div class="text-sm font-semibold text-neutral-400 mb-3">Reglas innegociables</div>
+<ul class="space-y-2">
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-cyan-400 mt-0.5">→</span> Seedance: iluminación estática durante todo el video (consistencia del loop)</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-cyan-400 mt-0.5">→</span> HyperFrames: animar <code class="text-cyan-300">.scene-inner</code>, nunca el <code class="text-cyan-300">.clip</code></li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-cyan-400 mt-0.5">→</span> FFmpeg: <code class="text-cyan-300">-nostdin</code> en git-bash es innegociable</li>
+<li class="flex items-start gap-2 text-sm text-neutral-200"><span class="text-cyan-400 mt-0.5">→</span> La legibilidad del texto es la prioridad #1 en Seedance</li>
+</ul>
+<!-- box próxima trilha -->
+<div class="mt-6 rounded-xl bg-amber-500/10 border border-amber-500/30 p-4">
+<div class="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-1">Próxima parada</div>
+<div class="text-amber-300 font-bold text-base mb-1">🔎 Ruta 4 — Apoyo</div>
+<p class="text-neutral-400 text-sm">Skills de soporte al flujo: investigación, diagnóstico, memoria, agentes auxiliares.</p>
+</div>
+</div>
+</div>
+<!-- CTA final — último módulo da Trilha 3 -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Volver a la ruta 3: Medios</a>
+<a class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors" href="../trilha4/index.html">Ruta 4: Apoyo →</a>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Contenido de <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Ruta 3: Medios · Módulo 3.4 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

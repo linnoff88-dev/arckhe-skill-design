@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ruta 3 — Medios y video | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    .modal.hidden { display: none; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento purple */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124,58,237,0.18); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    @keyframes m3-pulse { 0%,100% { opacity:.4 } 50% { opacity:1 } }
+    @keyframes m3-drift { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-6px) } }
+    @media (prefers-reduced-motion: no-preference) {
+      .m3-a { animation: m3-pulse 2.8s ease-in-out infinite; }
+      .m3-a:nth-child(2){animation-delay:.3s} .m3-a:nth-child(3){animation-delay:.6s} .m3-a:nth-child(4){animation-delay:.9s}
+      .m3-drift { animation: m3-drift 3.5s ease-in-out infinite; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha3/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha3/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha3/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha3/" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha3/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="./" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidad</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Medios</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Soporte</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">RECORRIDO 3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🎞️ Medios y video</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">De Framer Motion al MP4 final. Cuatro skills que cubren todo el espectro de medios en Claude Code: animaciones web con CSS, scroll-driven video al estilo Apple, video programático en React con Remotion y loops de fondo + HTML→MP4 mediante HyperFrames y FFmpeg.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">4</div><div class="text-xs text-neutral-400">Módulos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">24</div><div class="text-xs text-neutral-400">Temas</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~2h</div><div class="text-xs text-neutral-400">Duración</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Avanzado</div><div class="text-xs text-neutral-400">Nivel</div></div>
+</div>
+<!-- HERO SVG: vídeo/animação entrando em uma página — purple + ciano -->
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mt-8 overflow-hidden">
+<svg aria-label="Video y animaciones que convergen dentro de una página web: símbolo de la ruta Medios" class="w-full h-auto" role="img" viewbox="0 0 1000 220">
+<defs>
+<lineargradient id="m3-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c084fc"></stop><stop offset="1" stop-color="#a855f7"></stop></lineargradient>
+<lineargradient id="m3-cyan" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#38bdf8"></stop><stop offset="1" stop-color="#0ea5e9"></stop></lineargradient>
+<filter height="160%" id="m3-glow" width="160%" x="-30%" y="-30%"><fegaussianblur result="b" stddeviation="4"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="28" id="m3-dots" patternunits="userSpaceOnUse" width="28"><circle cx="1.2" cy="1.2" fill="#a855f7" opacity="0.10" r="1.2"></circle></pattern>
+<marker id="m3-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#a855f7"></path></marker>
+<marker id="m3-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<!-- background -->
+<rect fill="url(#m3-dots)" height="220" width="1000"></rect>
+<!-- Fontes de mídia à esquerda -->
+<!-- Bloco Framer Motion -->
+<g class="m3-a" filter="url(#m3-glow)">
+<rect fill="#1a1230" height="40" rx="10" stroke="url(#m3-grad)" stroke-width="2" width="160" x="30" y="20"></rect>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="110" y="45">🎬 Framer Motion</text>
+</g>
+<!-- Bloco Scroll Video -->
+<g class="m3-a" filter="url(#m3-glow)">
+<rect fill="#1a1230" height="40" rx="10" stroke="url(#m3-grad)" stroke-width="2" width="160" x="30" y="75"></rect>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="110" y="100">🖱️ Video con scroll</text>
+</g>
+<!-- Bloco Remotion -->
+<g class="m3-a" filter="url(#m3-glow)">
+<rect fill="#0e1b26" height="40" rx="10" stroke="url(#m3-cyan)" stroke-width="2" width="160" x="30" y="130"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="110" y="155">⚛️ Remotion</text>
+</g>
+<!-- Bloco FFmpeg/HyperFrames -->
+<g class="m3-a" filter="url(#m3-glow)">
+<rect fill="#0e1b26" height="30" rx="9" stroke="url(#m3-cyan)" stroke-width="2" width="160" x="30" y="185"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="12" font-weight="700" text-anchor="middle" x="110" y="204">🔁 FFmpeg + HyperFrames</text>
+</g>
+<!-- Setas convergindo -->
+<path d="M190,40 Q350,40 390,110" fill="none" marker-end="url(#m3-ah)" stroke="#a855f7" stroke-width="2"></path>
+<path d="M190,95 L390,110" fill="none" marker-end="url(#m3-ah)" stroke="#a855f7" stroke-width="2"></path>
+<path d="M190,150 Q350,150 390,110" fill="none" marker-end="url(#m3-ahc)" stroke="#38bdf8" stroke-width="2"></path>
+<path d="M190,200 Q350,200 390,115" fill="none" marker-end="url(#m3-ahc)" stroke="#38bdf8" stroke-width="2"></path>
+<!-- Página central — destino -->
+<g class="m3-drift" filter="url(#m3-glow)">
+<rect fill="#1a1230" height="150" rx="16" stroke="url(#m3-grad)" stroke-width="2.5" width="220" x="395" y="50"></rect>
+<!-- barra de browser -->
+<rect fill="#2d1855" height="18" rx="5" width="196" x="407" y="62"></rect>
+<circle cx="420" cy="71" fill="#c084fc" opacity="0.6" r="4"></circle>
+<circle cx="432" cy="71" fill="#a855f7" opacity="0.4" r="4"></circle>
+<circle cx="444" cy="71" fill="#7c3aed" opacity="0.3" r="4"></circle>
+<!-- tela animada -->
+<rect fill="#120b23" height="104" rx="5" width="196" x="407" y="85"></rect>
+<!-- linhas de animação dentro da página -->
+<rect fill="#c084fc" height="8" opacity="0.5" rx="3" width="80" x="415" y="93"></rect>
+<rect fill="#a855f7" height="6" opacity="0.35" rx="3" width="55" x="415" y="106"></rect>
+<rect fill="#38bdf8" height="6" opacity="0.4" rx="3" width="70" x="415" y="118"></rect>
+<!-- "vídeo" retângulo com play -->
+<rect fill="#0e1b26" height="52" rx="6" stroke="#38bdf8" stroke-width="1.5" width="90" x="415" y="130"></rect>
+<polygon fill="#38bdf8" opacity="0.9" points="445,152 445,168 460,160"></polygon>
+<!-- barra de progresso -->
+<rect fill="#374151" height="4" rx="2" width="90" x="415" y="186"></rect>
+<rect fill="#c084fc" height="4" rx="2" width="38" x="415" y="186"></rect>
+<!-- stats à direita dentro da página -->
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="10" font-weight="600" x="516" y="148">fps 60</text>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="10" x="516" y="163">MP4</text>
+<text fill="#a855f7" font-family="Inter,sans-serif" font-size="10" x="516" y="178">bucle</text>
+</g>
+<!-- Seta saída para outputs -->
+<path d="M615,110 L680,70" fill="none" marker-end="url(#m3-ah)" stroke="#a855f7" stroke-width="2"></path>
+<path d="M615,115 L680,115" fill="none" marker-end="url(#m3-ahc)" stroke="#38bdf8" stroke-width="2"></path>
+<path d="M615,120 L680,160" fill="none" marker-end="url(#m3-ahc)" stroke="#38bdf8" stroke-width="2"></path>
+<!-- Outputs direita -->
+<g class="m3-a">
+<rect fill="#1a1230" height="34" rx="9" stroke="url(#m3-grad)" stroke-width="2" width="140" x="680" y="48"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle" x="750" y="70">Web Animation</text>
+</g>
+<g class="m3-a">
+<rect fill="#0e1b26" height="34" rx="9" stroke="url(#m3-cyan)" stroke-width="2" width="140" x="680" y="98"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle" x="750" y="120">MP4 / Loop</text>
+</g>
+<g class="m3-a">
+<rect fill="#0e1b26" height="34" rx="9" stroke="url(#m3-cyan)" stroke-width="2" width="140" x="680" y="148"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle" x="750" y="170">Experiencia de scroll</text>
+</g>
+<!-- label central -->
+<text fill="#7c3aed" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="505" y="215">Los medios entran en la página, el video sale en el formato correcto</text>
+</svg>
+<p class="text-center text-xs text-neutral-500 mt-2">Flujo de la Trilha 3 — animaciones y video convergen en una página, que se entrega como experiencia o archivo</p>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- MAPA DA TRILHA -->
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Mapa de la ruta</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all" href="#modulo-3-1">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.1</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">🎬 animation-designer</h3>
+<p class="text-xs text-neutral-400">Framer Motion + CSS</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all" href="#modulo-3-2">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.2</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">🖱️ 3d-animation-creator</h3>
+<p class="text-xs text-neutral-400">Video al desplazarse</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all" href="#modulo-3-3">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.3</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">⚛️ remotion</h3>
+<p class="text-xs text-neutral-400">Video en React</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all" href="#modulo-3-4">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold text-sm">3.4</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">🔁 seedance + HyperFrames</h3>
+<p class="text-xs text-neutral-400">Loops y HTML→MP4</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Contenido detallado</h2>
+<!-- MÓDULO 3.1 — animation-designer -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-3-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.1</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🎬 animation-designer</h3>
+<p class="text-neutral-400 text-sm">Especialista en animaciones web, transiciones y motion design. Sabe crear desde un fade-in sencillo hasta listas escalonadas, efectos activados por el scroll y microinteracciones con Framer Motion y CSS keyframes.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<!-- Tópico 1 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span><div><span class="font-medium">Qué es animation-designer</span><span class="text-neutral-500 text-sm ml-2">- motion design en Claude</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Una skill especializada en crear animaciones web con Framer Motion y CSS. Incluye fade-in, listas escalonadas, estados hover, modales animados, transiciones de página, animaciones activadas por scroll y parallax, todo en React/TypeScript o CSS puro.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Sin el skill, recibes código de animación genérico. Con él, Claude sigue patrones de rendimiento (transform + opacity, nunca top/left), la duración recomendada (150–400ms) y reduce automáticamente el movimiento para mejorar la accesibilidad.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Framer Motion, CSS keyframes, diseño de movimiento, microinteracciones, accesibilidad (<code>prefers-reduced-motion</code>).</p></div>
+</div></div>
+</div>
+<!-- Tópico 2 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Cuándo lo activa Claude</span><span class="text-neutral-500 text-sm ml-2">- los disparadores</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">La skill se activa cuando pides una animación, transición, diseño de movimiento, Framer Motion, animación al desplazarse, animación de carga, efecto hover, microinteracción o efecto visual en un componente de React.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Conocer los disparadores ayuda a formular la solicitud adecuada. «Crea un fade-in» la activa; «agrega una transición CSS» también la activa.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Palabras desencadenantes: animación, transición, motion, hover, scroll, loading, microinteracción.</p></div>
+</div></div>
+</div>
+<!-- Tópico 3 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🚀</span><div><span class="font-medium">Cómo mejora tus páginas</span><span class="text-neutral-500 text-sm ml-2">- valor concreto</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">La skill ofrece patrones listos: Fade In on Mount, Staggered List, Button Hover, Modal con AnimatePresence, Page Transition, Scroll Progress Indicator y Parallax — todos con buen rendimiento y accesibles.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Las animaciones bien hechas reducen la carga cognitiva, guían la mirada y transmiten calidad. Las animaciones mal hechas (que usan top/left, sin reduced-motion) perjudican el rendimiento y la accesibilidad.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Rendimiento percibido, UI pulida, compatible con GPU (transform/opacity), AnimatePresence para montar y desmontar.</p></div>
+</div></div>
+</div>
+<!-- Tópico 4 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Cómo funciona por dentro</span><span class="text-neutral-500 text-sm ml-2">- stack real</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Usa <code>framer-motion</code> (npm install framer-motion) como biblioteca principal, con <code>motion.*</code>, <code>AnimatePresence</code>, <code>useScroll</code>, <code>useTransform</code> e <code>useSpring</code>. Para CSS puro, genera <code>@keyframes</code> y clases de Tailwind (<code>animate-*</code>). Sigue reglas de easing (ease-out para entradas, ease-in para salidas) y duración (micro 150ms, standard 200–300ms, complex 400ms).</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Entender el stack permite ajustar parámetros (damping, stiffness en spring animations) y saber cuándo usar CSS frente a Framer Motion.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">framer-motion, useScroll, useTransform, AnimatePresence, spring vs tween, Tailwind animate.</p></div>
+</div></div>
+</div>
+<!-- Tópico 5 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">💬</span><div><span class="font-medium">Ejemplo práctico + prompt</span><span class="text-neutral-500 text-sm ml-2">- copia y pega</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Un ejemplo clásico: una lista de tarjetas que aparecen en cascada (stagger) cuando se carga la página, cada tarjeta con hover lift y shadow. La skill genera el componente completo con Framer Motion y variants.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Ver un ejemplo real muestra cómo la skill interpreta la solicitud y qué props define de forma predeterminada.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">staggerChildren, variants, whileHover, exit animations.</p></div>
+</div></div>
+</div>
+<!-- Tópico 6 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧬</span><div><span class="font-medium">Combina con / límites</span><span class="text-neutral-500 text-sm ml-2">- composición y bordes</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Combina muy bien con <strong>canvas-design</strong> (UI base) y <strong>3d-animation-creator</strong> (video fuente para scroll). No cubre video real (usa remotion o hyperframes), ni animaciones 3D Three.js.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Saber cuáles son los límites evita frustraciones: para exportar un MP4, usa remotion; para un video con scroll en un sitio web, usa 3d-animation-creator.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Frontera: animación web vs. video exportado; complementario a 3d-animation-creator.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-3-1')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors" href="modulo-3-1.html">Ver completo</a>
+</div>
+</div>
+<!-- MÓDULO 3.2 — 3d-animation-creator -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-3-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.2</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🖱️ 3d-animation-creator</h3>
+<p class="text-neutral-400 text-sm">Toma un video y construye un sitio con animación controlada por el scroll, al estilo de Apple: el video avanza o retrocede según el usuario se desplaza. Extrae fotogramas con FFmpeg y los renderiza en un canvas.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<!-- Tópico 1 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span><div><span class="font-medium">Qué es 3d-animation-creator</span><span class="text-neutral-500 text-sm ml-2">- video con scroll como Apple</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Una skill que recibe un video MP4/MOV y construye un sitio HTML/CSS/JS completo donde el scroll controla el video. La posición del scroll determina qué frame se muestra: el video avanza o retrocede según tú bajes o subas por la página.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Es el mismo efecto que usa Apple en las páginas del iPhone. Con fotogramas extraídos y un canvas, creas la ilusión de un video 3D sin WebGL.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Animación basada en el scroll, extracción de fotogramas, renderizado en canvas, narrativa al estilo Apple.</p></div>
+</div></div>
+</div>
+<!-- Tópico 2 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Cuándo lo activa Claude</span><span class="text-neutral-500 text-sm ml-2">- los disparadores</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Se activa cuando pides "crea un sitio como Apple", "scroll-driven video", "video que se reproduce al desplazarse", "animation scroll" o "extrae fotogramas del video para el scroll". La skill empieza con una entrevista obligatoria: nombre del producto, color, estilo, secciones.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">La entrevista inicial reúne todas las decisiones de diseño antes de construir, lo que evita retrabajo. Sin ella, la skill no avanza.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Step 0 obligatorio: entrevista de diseño; palabra clave "Apple-style".</p></div>
+</div></div>
+</div>
+<!-- Tópico 3 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🚀</span><div><span class="font-medium">Cómo mejora tus páginas</span><span class="text-neutral-500 text-sm ml-2">- efecto wow</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Transforma cualquier video en una landing page premium donde el producto se revela mientras haces scroll. Las tarjetas de anotación aparecen en momentos específicos del video, y las secciones de funciones y especificaciones se integran en la narrativa visual.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Una landing page con video controlado por scroll genera más conversiones al crear inmersión. Con esta skill, el costo de producción bajó de semanas a horas.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Inmersión, storytelling visual, conversión, landing page premium.</p></div>
+</div></div>
+</div>
+<!-- Tópico 4 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Cómo funciona por dentro</span><span class="text-neutral-500 text-sm ml-2">- FFmpeg + canvas</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Paso 1: analiza los FPS y la duración del video. Paso 2: extrae frames con FFmpeg (<code>ffmpeg -i video.mp4 frames/frame_%04d.jpg -q:v 85</code>). Paso 3: construye HTML con <code>&lt;canvas&gt;</code> sticky, una altura de scroll de 350vh y JavaScript que asigna <code>scrollY</code> para obtener el índice del cuadro correcto mediante <code>requestAnimationFrame</code>. En mobile usa 250vh.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">El motor real es FFmpeg para la extracción y canvas para el renderizado. Saberlo permite ajustar la calidad (-q:v), la tasa de frames y resolver errores de rutas.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">FFmpeg, canvas, requestAnimationFrame, scroll height, frame index mapping.</p></div>
+</div></div>
+</div>
+<!-- Tópico 5 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">💬</span><div><span class="font-medium">Ejemplo práctico + prompt</span><span class="text-neutral-500 text-sm ml-2">- copia y pega</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Crea una landing page estilo Apple para un producto tecnológico. El video <code>produto.mp4</code> está en <code>/tmp/</code>. Extrae los frames con FFmpeg, construye el sitio con scroll-driven animation, agrega 3 cards de anotación en los frames 30, 90 y 150, y una sección de specs debajo.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">El prompt completo incluye la ubicación del video, la cantidad de tarjetas y las secciones; estos detalles evitan la entrevista interactiva.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Ubicación del video, fotogramas objetivo para las tarjetas, secciones de contenido.</p></div>
+</div></div>
+</div>
+<!-- Tópico 6 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧬</span><div><span class="font-medium">Combina con / límites</span><span class="text-neutral-500 text-sm ml-2">- composición y bordes</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Combina con <strong>animation-designer</strong> para animar las tarjetas y secciones alrededor del video. Para generar el video fuente, usa <strong>remotion</strong> o <strong>seedance-loop-prompt</strong>. No sirve para páginas sin video; en ese caso, usa solo animation-designer.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">El stack completo es: seedance genera un loop → 3d-animation-creator usa el loop como fuente → animation-designer anima las secciones de texto alrededor.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Requiere video fuente; stack: seedance → 3d-animation-creator → animation-designer.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-3-2')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors" href="modulo-3-2.html">Ver completo</a>
+</div>
+</div>
+<!-- MÓDULO 3.3 — remotion -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-3-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.3</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="text-2xl font-bold mb-2">⚛️ remotion</h3>
+<p class="text-neutral-400 text-sm">Buenas prácticas de Remotion: crea videos mediante programación en React. Composiciones, secuencias, animaciones cuadro a cuadro con interpolate y spring — todo tipado, todo versionable.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<!-- Tópico 1 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span><div><span class="font-medium">Qué es Remotion</span><span class="text-neutral-500 text-sm ml-2">- video en React</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Remotion es un framework para crear videos programáticamente en React. En lugar de una timeline visual, escribes componentes React que reciben <code>frame</code> e <code>fps</code> como props y representan el estado de ese instante. El resultado se convierte en MP4 mediante renderizado headless.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Video con control de versiones en Git, datos dinámicos de API, tipado TypeScript y composición de escenas como componentes: es Motion Canvas/After Effects, pero en tu editor.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Composition, useCurrentFrame, interpolate, spring, Sequence, AbsoluteFill.</p></div>
+</div></div>
+</div>
+<!-- Tópico 2 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Cuándo lo activa Claude</span><span class="text-neutral-500 text-sm ml-2">- los disparadores</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Se activa cuando mencionas Remotion, "crea un video en React", "composición de video programática", "exportar MP4 mediante código" o "animar datos para video". También se activa con pedidos de Shorts/Reels programáticos.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Saber cuáles son los desencadenantes te ayuda a orientar la solicitud: menciona "Remotion" explícitamente si quieres la skill; de lo contrario, Claude puede usar una animación CSS genérica.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Palabra desencadenante: Remotion, video de React, composición programática, MP4 mediante código.</p></div>
+</div></div>
+</div>
+<!-- Tópico 3 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🚀</span><div><span class="font-medium">Cómo mejora tus páginas</span><span class="text-neutral-500 text-sm ml-2">- video como código</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Con Remotion generas videos de presentación, intros animadas, visualizaciones de datos y publicaciones para redes sociales directamente desde tu codebase — sin Adobe, sin Lottie y sin diseño manual. Cada video es un componente de React reutilizable.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">El video producido se puede usar directamente en la página (mediante <code>&lt;video&gt;</code>), integrado como hero o publicado en YouTube/Instagram: todo desde el mismo código.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Video como componente, datos dinámicos, reutilización, CI/CD para video.</p></div>
+</div></div>
+</div>
+<!-- Tópico 4 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Cómo funciona por dentro</span><span class="text-neutral-500 text-sm ml-2">- stack real</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Usa <code>@remotion/core</code>, <code>@remotion/player</code> y opcionalmente <code>@remotion/media-utils</code>. Las composiciones se registran en <code>Root.tsx</code>, cada escena es un componente con <code>useCurrentFrame()</code>. Exportación mediante <code>npx remotion render</code> o Remotion Lambda. La animación usa <code>interpolate(frame, [0,30], [0,1])</code> e <code>spring({frame, fps, config})</code>.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Entender interpolate y spring es clave: interpolate asigna frames a valores, spring crea una física natural. Ambos hacen que la animación sea predecible y ajustable.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">@remotion/core, Root.tsx, useCurrentFrame, interpolate, spring, npx remotion render.</p></div>
+</div></div>
+</div>
+<!-- Tópico 5 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">💬</span><div><span class="font-medium">Ejemplo práctico + prompt</span><span class="text-neutral-500 text-sm ml-2">- copia y pega</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Crea una composición de Remotion de 30s (30fps) con: una intro animada (texto que aparece con spring), 3 escenas de características de 5s cada una y un outro con CTA. Usa <code>Sequence</code> para organizar escenas. Colores: fondo #0f0f0f, acento #a855f7.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Especificar la duración, los fps, el número de escenas y la paleta en el prompt ahorra iteraciones.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Especificar la duración total, los fps, el número de Sequences y la paleta de colores.</p></div>
+</div></div>
+</div>
+<!-- Tópico 6 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧬</span><div><span class="font-medium">Combina con / límites</span><span class="text-neutral-500 text-sm ml-2">- composición y bordes</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">El MP4 generado por Remotion alimenta el <strong>3d-animation-creator</strong> (video fuente para scroll) y el <strong>HyperFrames</strong> (pipeline HTML→MP4). No lo uses para animaciones web en tiempo real: usa animation-designer. No usa FFmpeg directamente (eso es HyperFrames).</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Remotion es el creador de contenido; 3d-animation-creator y HyperFrames son los consumidores del MP4 generado.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Remotion crea MP4 → 3d-animation-creator consume → HyperFrames distribuye.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-3-3')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors" href="modulo-3-3.html">Ver completo</a>
+</div>
+</div>
+<!-- MÓDULO 3.4 — seedance + HyperFrames/FFmpeg -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-3-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.4</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🔁 seedance + HyperFrames/FFmpeg</h3>
+<p class="text-neutral-400 text-sm">El combo final de medios: seedance-loop-prompt genera prompts para videos de fondo sin cortes, HyperFrames convierte páginas HTML en MP4 mediante Chrome + FFmpeg, y FFmpeg es el motor detrás de casi todo. El curso hermano <strong>HyperFrames</strong> profundiza en este pipeline.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<!-- Tópico 1 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span><div><span class="font-medium">Qué son seedance y HyperFrames</span><span class="text-neutral-500 text-sm ml-2">- dos skills, un pipeline</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm"><strong>seedance-loop-prompt</strong>: genera prompts estructurados para IA de video (Seedance), creando loops de fondo sin cortes: el inicio y el final del video se conectan perfectamente. <strong>HyperFrames (video explicativo)</strong>: skill que graba una página HTML animada cuadro a cuadro con Chrome headless y crea el MP4 con FFmpeg: transforma HTML en un video exportable.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Juntos cubren ambos sentidos: seedance crea video para incorporarlo a la web; HyperFrames convierte la web en video para exportarlo. FFmpeg es el motor compartido.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Loop sin cortes, prompt estructurado para IA de video, HTML→MP4, Chrome headless, FFmpeg.</p></div>
+</div></div>
+</div>
+<!-- Tópico 2 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Cuándo lo activa Claude</span><span class="text-neutral-500 text-sm ml-2">- los disparadores</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm"><strong>seedance-loop-prompt</strong> se activa cuando pides "crea un prompt para video en bucle", "fondo sin cortes", "looping video prompt" o mencionas Seedance. <strong>HyperFrames</strong> se activa con "crea un video explicativo", "graba HTML en video", "HTML a MP4", "Shorts animado" o "video para INEMA.CLUB".</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Los desencadenantes son distintos: seedance = prompt para una IA generadora; HyperFrames = grabar la propia página animada.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">seedance: "loop sin cortes"; HyperFrames: "video explicativo", "HTML→MP4".</p></div>
+</div></div>
+</div>
+<!-- Tópico 3 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🚀</span><div><span class="font-medium">Cómo mejora tus páginas</span><span class="text-neutral-500 text-sm ml-2">- resultados concretos</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">seedance entrega un prompt listo en 7 bloques (SCENE, CAMERA, ACTION ARC, TEXT, LIGHTING, LOOP SEAL, TECHNICAL) que pegas en la IA de video y obtienes un loop cinematográfico. HyperFrames entrega un MP4 de alta calidad de cualquier página HTML animada — ideal para Shorts, intros y demos.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Con seedance tienes fondos premium sin un banco de videos. Con HyperFrames transformas cualquier curso HTML en un video listo para publicar en YouTube.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Prompt estructurado en 7 bloques, loop cinematográfico, HTML→MP4 para redes sociales.</p></div>
+</div></div>
+</div>
+<!-- Tópico 4 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Cómo funciona por dentro</span><span class="text-neutral-500 text-sm ml-2">- FFmpeg como eje</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">seedance-loop-prompt es solo texto: interpreta tu briefing y arma el prompt en los 7 bloques con reglas estrictas (sin texto en pantalla, inicio=fin para el loop, sin cortes). HyperFrames usa: Chrome headless para capturar cada frame de la animación → FFmpeg para ensamblar los frames en MP4 (<code>ffmpeg -framerate 30 -i frame_%04d.png -c:v libx264 -pix_fmt yuv420p output.mp4</code>). Requisitos previos ya instalados: Chrome, FFmpeg, Python.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">FFmpeg aparece en casi todos los módulos de esta ruta: extrae frames (3.2), ensambla frames (3.4), renderiza (3.3). Es la herramienta central de video en la línea de comandos.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Chrome headless, ffmpeg -framerate, libx264, yuv420p, requisitos previos instalados.</p></div>
+</div></div>
+</div>
+<!-- Tópico 5 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">💬</span><div><span class="font-medium">Ejemplo práctico + prompt</span><span class="text-neutral-500 text-sm ml-2">- copia y pega</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">Dos prompts listos: (1) Para seedance: "Crea el prompt para un loop de fondo: bosque de datos neón, cámara orbital lenta, atmósfera cyberpunk púrpura y cian, 6 segundos, sin texto en pantalla." (2) Para HyperFrames: "Graba la página /tmp/intro.html en un video de 15 segundos, 30fps, resolución 1080x1920 para Shorts. Usa Chrome headless y FFmpeg."</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-neutral-300 text-sm">Ver los dos prompts lado a lado deja clara la diferencia de propósito: uno genera un prompt para una IA externa; el otro graba la página local.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Briefing visual para seedance; path + resolución + fps para HyperFrames.</p></div>
+</div></div>
+</div>
+<!-- Tópico 6 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧬</span><div><span class="font-medium">Combina con / límites</span><span class="text-neutral-500 text-sm ml-2">- y el curso hermano</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-purple-400 font-semibold">Qué es:</span><p class="text-neutral-300 text-sm">seedance alimenta el fondo de las páginas grabadas por HyperFrames. HyperFrames combina con animation-designer (una página animada más rica = un video más impactante) y remotion (alternativa cuando quieres un video versionable en React). El curso hermano <strong>HyperFrames</strong> (<a class="text-purple-400 underline" href="/home/nmaldaner/projetos/skill-hyperframes-videos">skill-hyperframes-videos</a>) profundiza todo este pipeline en 4 rutas.</p></div>
+<div><span class="text-purple-400 font-semibold">Por qué aprender:</span><p class="text-purple-300 text-sm">Seedance no genera el video: genera el prompt. Necesitas una IA de video (Seedance, Sora, etc.) para ejecutarlo. HyperFrames no edita videos existentes: graba páginas HTML.</p></div>
+<div><span class="text-purple-400 font-semibold">Conceptos clave:</span><p class="text-neutral-300 text-sm">Curso complementario de HyperFrames; seedance ≠ generador de video; HyperFrames ≠ editor de video.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-3-4')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors" href="modulo-3-4.html">Ver completo</a>
+</div>
+</div>
+<!-- NAVEGAÇÃO INFERIOR -->
+<div class="flex flex-col sm:flex-row gap-3 mt-12">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 hover:bg-dark-600 rounded-lg font-semibold hover:text-white transition-colors" href="../../index.html">← Todas las rutas</a>
+<a class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors" href="../trilha4/index.html">Ruta 4: Apoyo →</a>
+</div>
+</main>
+<!-- MODAIS -->
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-3-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3">
+<span class="text-purple-400 font-bold">3.1</span>
+<span class="font-semibold">🎬 animation-designer</span>
+</div>
+<button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-3-1.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-3-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3">
+<span class="text-purple-400 font-bold">3.2</span>
+<span class="font-semibold">🖱️ 3d-animation-creator</span>
+</div>
+<button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-3-2.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-3-3" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3">
+<span class="text-purple-400 font-bold">3.3</span>
+<span class="font-semibold">⚛️ remotion</span>
+</div>
+<button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-3-3.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-3-4" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+<div class="flex items-center space-x-3">
+<span class="text-purple-400 font-bold">3.4</span>
+<span class="font-semibold">🔁 seedance + HyperFrames/FFmpeg</span>
+</div>
+<button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button>
+</div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-3-4.html"></iframe>
+</div>
+</div>
+<!-- FOOTER -->
+<footer class="border-t border-dark-600 mt-16 py-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+<div class="flex items-center space-x-2 text-yellow-400">
+<span class="text-xl">🎨</span><span class="font-bold">Skill Design</span>
+</div>
+<p class="text-neutral-500 text-sm text-center">Ruta 3 — Medios y video · Parte del curso <span class="text-purple-400 font-semibold">Skill Design</span></p>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+</footer>
+<script>
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    function applyTheme(dark) {
+      if (dark) {
+        document.documentElement.classList.add('dark');
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        lightIcon.classList.add('hidden');
+        darkIcon.classList.remove('hidden');
+      }
+    }
+
+    const stored = localStorage.getItem('theme');
+    const isDark = stored ? stored === 'dark' : true;
+    applyTheme(isDark);
+
+    toggle.addEventListener('click', () => {
+      const nowDark = !document.documentElement.classList.contains('dark');
+      applyTheme(nowDark);
+      localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+    });
+
+    // Toggle tópico
+    function toggleTopic(btn) {
+      const explanation = btn.parentElement.querySelector('.topic-explanation');
+      const isActive = explanation.classList.contains('active');
+      // fecha todos
+      document.querySelectorAll('.topic-explanation.active').forEach(el => el.classList.remove('active'));
+      if (!isActive) explanation.classList.add('active');
+    }
+
+    // Modal
+    let currentModal = null;
+    function openModal(id) {
+      if (currentModal) closeModal();
+      const modal = document.getElementById(id);
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      currentModal = modal;
+    }
+    function closeModal() {
+      if (currentModal) {
+        currentModal.classList.add('hidden');
+        document.body.style.overflow = '';
+        currentModal = null;
+      }
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>

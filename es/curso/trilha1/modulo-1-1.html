@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 1.1 — ⚛️ frontend-design | Skill Design</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'dark': {
+              600: '#4b5563',
+              700: '#374151',
+              800: '#1f2937',
+              900: '#111827',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; color: #f3f4f6; }
+
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (trilha emerald) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5, 150, 105, 0.06); }
+    html:not(.dark) .bg-emerald-900\/30 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .from-emerald-900\/30 { --tw-gradient-from: rgba(5, 150, 105, 0.08); }
+
+    /* Light mode - remove gradientes */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161, 98, 7, 0.20); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+    html:not(.dark) .bg-dark-800\/50 { background-color: rgba(249, 250, 251, 0.8); }
+
+    /* Light mode - box dados/blue */
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37, 99, 235, 0.06); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+
+    /* Light mode - box alerta red */
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(220, 38, 38, 0.06); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220, 38, 38, 0.25); }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+
+    /* Dark mode - bordas suavizadas (OBRIGATORIO) */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* SVG light mode */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    /* Animação SVG */
+    @media (prefers-reduced-motion: no-preference) {
+      .m11-pulse { animation: m11-pulse 3s ease-in-out infinite; }
+      .m11-flow { animation: m11-flow 4s linear infinite; }
+      @keyframes m11-pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+      @keyframes m11-flow { 0% { stroke-dashoffset: 100; } 100% { stroke-dashoffset: 0; } }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha1/modulo-1-1.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha1/modulo-1-1.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha1/modulo-1-1.html" hreflang="es" rel="alternate"/></head>
+<body class="min-h-screen text-neutral-100"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha1/modulo-1-1.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha1/modulo-1-1.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-1-1.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAV GLOBAL -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span>
+<span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html">
+<span class="sm:hidden">T1</span>
+<span class="hidden sm:inline">Construir</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html">
+<span class="sm:hidden">T2</span>
+<span class="hidden sm:inline">Identidad</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html">
+<span class="sm:hidden">T3</span>
+<span class="hidden sm:inline">Medios</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html">
+<span class="sm:hidden">T4</span>
+<span class="hidden sm:inline">Soporte</span>
+</a>
+<button aria-label="Cambiar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20">
+<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+</svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav aria-label="Ruta de navegación" class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-emerald-400 transition-colors" href="../../index.html">Inicio</a>
+<span>/</span>
+<a class="hover:text-emerald-400 transition-colors" href="index.html">Ruta 1 — Construir</a>
+<span>/</span>
+<span class="text-neutral-300">Módulo 1.1</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4 tracking-widest uppercase">
+        Módulo 1.1
+      </span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">⚛️ frontend-design</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        El skill que transforma solicitudes comunes de interfaz en páginas listas para producción, con un punto de vista estético definido, tipografía poco común y cero clichés de "IA genérica".
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">6</div>
+<div class="text-xs text-neutral-400">Temas</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">30</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Intermedio</div>
+<div class="text-xs text-neutral-400">Nivel</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Skill</div>
+<div class="text-xs text-neutral-400">Tipo</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+<!-- SVG FUTURISTA -->
+<div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-6 overflow-x-auto">
+<svg aria-label="Diagrama: frontend-design convierte una solicitud de interfaz en código production-grade con un punto de vista estético" class="w-full h-auto" font-family="Inter,sans-serif" role="img" viewbox="0 0 780 280">
+<defs>
+<filter id="m11-glow">
+<fegaussianblur result="blur" stddeviation="1.8"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+<lineargradient id="m11-grad-emerald" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#34d399"></stop>
+<stop offset="100%" stop-color="#10b981"></stop>
+</lineargradient>
+<lineargradient id="m11-grad-cyan" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#38bdf8"></stop>
+<stop offset="100%" stop-color="#0ea5e9"></stop>
+</lineargradient>
+<marker id="m11-arrow" markerheight="6" markerwidth="8" orient="auto" refx="8" refy="3">
+<polygon fill="#34d399" points="0 0, 8 3, 0 6"></polygon>
+</marker>
+<marker id="m11-arrow-cyan" markerheight="6" markerwidth="8" orient="auto" refx="8" refy="3">
+<polygon fill="#38bdf8" points="0 0, 8 3, 0 6"></polygon>
+</marker>
+</defs>
+<!-- Background grid -->
+<rect fill="#0e2018" height="280" rx="12" width="780"></rect>
+<g stroke="#34d39915" stroke-width="1">
+<line x1="0" x2="780" y1="56" y2="56"></line>
+<line x1="0" x2="780" y1="112" y2="112"></line>
+<line x1="0" x2="780" y1="168" y2="168"></line>
+<line x1="0" x2="780" y1="224" y2="224"></line>
+<line x1="130" x2="130" y1="0" y2="280"></line>
+<line x1="260" x2="260" y1="0" y2="280"></line>
+<line x1="390" x2="390" y1="0" y2="280"></line>
+<line x1="520" x2="520" y1="0" y2="280"></line>
+<line x1="650" x2="650" y1="0" y2="280"></line>
+</g>
+<!-- BOX 1: PEDIDO -->
+<rect fill="#0e2018" filter="url(#m11-glow)" height="100" rx="10" stroke="#34d399" stroke-width="2" width="160" x="20" y="90"></rect>
+<text fill="#34d399" font-size="11" font-weight="600" text-anchor="middle" x="100" y="122">SOLICITUD DEL USUARIO</text>
+<text fill="#bfe6ff" font-size="10" text-anchor="middle" x="100" y="144">"crea una landing page"</text>
+<text fill="#6b7280" font-size="9" text-anchor="middle" x="100" y="162">"dashboard React/Tailwind"</text>
+<text fill="#6b7280" font-size="9" text-anchor="middle" x="100" y="176">"dale estilo a este componente"</text>
+<!-- Seta 1 → skill -->
+<line class="m11-flow" marker-end="url(#m11-arrow)" stroke="#34d399" stroke-dasharray="6,3" stroke-width="2" x1="180" x2="258" y1="140" y2="140"></line>
+<!-- BOX 2: SKILL frontend-design -->
+<rect fill="#0e2018" filter="url(#m11-glow)" height="160" rx="10" stroke="#34d399" stroke-width="2.5" width="200" x="260" y="60"></rect>
+<text fill="#34d399" font-size="12" font-weight="600" text-anchor="middle" x="360" y="90">⚛️ frontend-design</text>
+<rect fill="#34d39940" height="1" width="168" x="276" y="100"></rect>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="360" y="118">① Design Thinking</text>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="360" y="133">② Aesthetic Direction</text>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="360" y="148">③ Typography Stack</text>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="360" y="163">④ Motion / Animation</text>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="360" y="178">⑤ Spatial Composition</text>
+<text class="m11-pulse" fill="#6b7280" font-size="8" text-anchor="middle" x="360" y="200">producción en curso...</text>
+<!-- Seta 2 → output -->
+<line class="m11-flow" marker-end="url(#m11-arrow-cyan)" stroke="#38bdf8" stroke-dasharray="6,3" stroke-width="2" x1="460" x2="538" y1="140" y2="140"></line>
+<!-- BOX 3: OUTPUT -->
+<rect fill="#0e1b26" filter="url(#m11-glow)" height="160" rx="10" stroke="#38bdf8" stroke-width="2" width="220" x="540" y="60"></rect>
+<text fill="#38bdf8" font-size="12" font-weight="600" text-anchor="middle" x="650" y="90">RESULTADO</text>
+<rect fill="#38bdf840" height="1" width="188" x="556" y="100"></rect>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="650" y="118">HTML/CSS/JS de calidad de producción</text>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="650" y="133">React + Tailwind + shadcn</text>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="650" y="148">Tipografía distintiva</text>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="650" y="163">Animaciones CSS / Motion lib</text>
+<text fill="#bfe6ff" font-size="9" text-anchor="middle" x="650" y="178">Cero cliché de "IA genérica"</text>
+<text fill="#38bdf8" font-size="8" font-weight="600" text-anchor="middle" x="650" y="200">✓ Memorable</text>
+<!-- Label inferior -->
+<text fill="#4b5563" font-size="9" text-anchor="middle" x="390" y="258">Skill Design — Ruta 1: Crear · Módulo 1.1 · Ilustrativo</text>
+</svg>
+</div>
+<!-- TÓPICO 1: O que é / o que faz -->
+<section id="topico-1">
+<div class="flex items-start space-x-4 mb-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-lg">1</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-2">🧩 Qué es / qué hace</h2>
+<p class="text-neutral-400">Definición precisa basada en el SKILL.md — lo que el <code class="text-emerald-400 bg-dark-800 px-1 rounded text-sm">frontend-design</code> entrega y lo que la diferencia de cualquier respuesta estándar de Claude.</p>
+</div>
+</div>
+<!-- Box conceito principal -->
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+<span class="mr-2">🎯</span> Definición oficial
+        </h3>
+<p class="text-neutral-300 mb-4">
+<strong class="text-neutral-100">frontend-design</strong> crea interfaces frontend distintas y de calidad production-grade, con un diseño de alta calidad. La descripción exacta: <em>"Crea interfaces frontend distintivas, listas para producción y con alta calidad de diseño."</em>
+</p>
+<ul class="space-y-2 text-neutral-300">
+<li class="flex items-start space-x-2">
+<span class="text-emerald-400 mt-1">•</span>
+<span><strong class="text-neutral-100">Apto para producción y funcional</strong> — no es un prototipo. El código generado va directamente a uso real.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-emerald-400 mt-1">•</span>
+<span><strong class="text-neutral-100">Visualmente impactante y memorable</strong> — cada generación tiene identidad propia. No hay plantillas repetidas.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-emerald-400 mt-1">•</span>
+<span><strong class="text-neutral-100">Punto de vista estético coherente</strong> — la skill elige una dirección (minimalismo brutalista, editorial, retrofuturista, art déco…) y la ejecuta con precisión.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-emerald-400 mt-1">•</span>
+<span><strong class="text-neutral-100">Refinamiento meticuloso de cada detalle</strong> — espaciado, peso tipográfico, microinteracciones, composición espacial.</span>
+</li>
+</ul>
+</div>
+<!-- Grid Fazer vs Evitar #1 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Qué HACE frontend-design</h4>
+<ul class="space-y-3 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Elige una dirección estética y ejecútala con intención</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Varía las fuentes, los temas y la composición entre generaciones</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Usa Motion library en React cuando está disponible</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Aplica gradientes, texturas y sombras dramáticas como atmósfera</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Lo que el skill PROHÍBE</h4>
+<ul class="space-y-3 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Fuentes genéricas: Inter, Roboto, Arial, system-ui</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Esquemas trillados: gradiente morado sobre fondo blanco</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Diseños predecibles sin contexto específico</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Space Grotesk como elección predeterminada entre generaciones</span></li>
+</ul>
+</div>
+</div>
+<!-- Mini-cards conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🎨</div>
+<div class="text-xs font-semibold text-neutral-300">Dirección estética</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">⚙️</div>
+<div class="text-xs font-semibold text-neutral-300">Apto para producción</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🔤</div>
+<div class="text-xs font-semibold text-neutral-300">Tipografía distintiva</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🚫</div>
+<div class="text-xs font-semibold text-neutral-300">Cero IA genérica</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2: Quando dispara -->
+<section id="topico-2">
+<div class="flex items-start space-x-4 mb-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-lg">2</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-2">🎣 Cuándo se activa</h2>
+<p class="text-neutral-400">Los desencadenantes exactos de la descripción: las solicitudes que hacen que Claude active el skill <code class="text-emerald-400 bg-dark-800 px-1 rounded text-sm">frontend-design</code> automáticamente.</p>
+</div>
+</div>
+<!-- Box dados/pesquisa -->
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+<span class="mr-2">📋</span> Disparadores de la description (texto exacto del SKILL.md)
+        </h3>
+<p class="text-neutral-300 mb-3">El skill se activa cuando el usuario pide que <strong class="text-neutral-100">construir web components, páginas, artefactos, pósteres o aplicaciones</strong>. Ejemplos citados literalmente en la description:</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+<div class="bg-dark-800 rounded-lg px-3 py-2 text-neutral-300">🌐 sitios web / páginas de destino</div>
+<div class="bg-dark-800 rounded-lg px-3 py-2 text-neutral-300">📊 dashboards</div>
+<div class="bg-dark-800 rounded-lg px-3 py-2 text-neutral-300">⚛️ React components</div>
+<div class="bg-dark-800 rounded-lg px-3 py-2 text-neutral-300">🎨 Diseños HTML/CSS</div>
+<div class="bg-dark-800 rounded-lg px-3 py-2 text-neutral-300">✨ aplicar estilos/mejorar cualquier interfaz web</div>
+<div class="bg-dark-800 rounded-lg px-3 py-2 text-neutral-300">🖼️ pósteres / artefactos visuales</div>
+</div>
+</div>
+<!-- Timeline de casos de disparo -->
+<div class="space-y-4 mb-6">
+<h4 class="font-semibold text-neutral-300 mb-3">Ejemplos reales de solicitudes que activan el skill:</h4>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-sm">A</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+<h4 class="font-semibold text-white mb-1">Creación de página</h4>
+<p class="text-sm text-neutral-400">"crea una landing page para mi SaaS de análisis de datos"</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-sm">B</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+<h4 class="font-semibold text-white mb-1">Componente React</h4>
+<p class="text-sm text-neutral-400">"haz una tarjeta de producto en React con Tailwind y shadcn"</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-sm">C</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+<h4 class="font-semibold text-white mb-1">Estilización/embellecimiento</h4>
+<p class="text-sm text-neutral-400">"haz que este formulario se vea mejor" / "embellece este dashboard"</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center">
+<span class="text-cyan-400 font-bold text-sm">D</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+<h4 class="font-semibold text-white mb-1">Dashboard HTML puro</h4>
+<p class="text-sm text-neutral-400">"crea un panel de métricas en HTML/CSS sin framework"</p>
+</div>
+</div>
+</div>
+<!-- Tip box -->
+<div class="bg-primary/10 border border-primary/30 rounded-xl p-5 mb-6">
+<h4 class="font-semibold text-yellow-400 mb-2">💡 Consejo práctico</h4>
+<p class="text-neutral-300 text-sm">El skill es independiente del framework: funciona con HTML/CSS puro, React, Vue y cualquier stack de UI. Lo que siempre aporta es el <strong class="text-neutral-100">razonamiento de diseño</strong> antes del código — Purpose, Tone, Constraints, Differentiation.</p>
+</div>
+<!-- Mini-cards conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🌐</div>
+<div class="text-xs font-semibold text-neutral-300">Landing pages</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">📊</div>
+<div class="text-xs font-semibold text-neutral-300">Dashboards</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">⚛️</div>
+<div class="text-xs font-semibold text-neutral-300">Componentes de React</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">✨</div>
+<div class="text-xs font-semibold text-neutral-300">Beautify web UI</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3: Como melhora suas páginas -->
+<section id="topico-3">
+<div class="flex items-start space-x-4 mb-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-lg">3</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-2">🚀 Cómo mejora tus páginas</h2>
+<p class="text-neutral-400">Valor concreto que se entrega en el resultado final: qué cambia en la práctica cuando la skill está activa.</p>
+</div>
+</div>
+<!-- Grid Fazer vs Evitar #2 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ CON frontend-design</h4>
+<ul class="space-y-3 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Tipografía con carácter: una fuente display y una fuente de texto combinadas según el contexto</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Una animación de entrada orquestada con revelaciones escalonadas crea más deleite que 10 microinteracciones dispersas</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Diseños asimétricos, superposiciones, elementos que rompen la cuadrícula</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>CSS variables para una paleta coherente, colores dominantes con acentos nítidos</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ SIN el skill (respuesta predeterminada)</h4>
+<ul class="space-y-3 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Inter en todos los tamaños, sin una jerarquía visual real</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Transiciones genéricas al pasar el cursor por todo, sin impacto</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Cuadrícula de 3 columnas iguales, padding uniforme, sin asimetría</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Paleta de 5 colores distribuidos de manera uniforme, sin predominio</span></li>
+</ul>
+</div>
+</div>
+<!-- Box dados: o que o SKILL.md fala sobre resultados -->
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+<span class="mr-2">📐</span> Principios de estética frontend (del SKILL.md)
+        </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-neutral-300">
+<div>
+<p class="font-semibold text-neutral-100 mb-1">Tipografía</p>
+<p>Fuentes hermosas, únicas e interesantes. Pares: display + texto refinado. Opciones inesperadas y llenas de carácter.</p>
+</div>
+<div>
+<p class="font-semibold text-neutral-100 mb-1">Color y tema</p>
+<p>CSS variables para mantener la coherencia. Los colores dominantes con acentos nítidos superan a las paletas tímidas distribuidas de forma uniforme.</p>
+</div>
+<div>
+<p class="font-semibold text-neutral-100 mb-1">Movimiento</p>
+<p>CSS-only para HTML puro. Motion library para React. Un momento bien orquestado vale más que microinteracciones dispersas.</p>
+</div>
+<div>
+<p class="font-semibold text-neutral-100 mb-1">Composición espacial</p>
+<p>Diseños inesperados. Asimetría. Superposición. Flujo diagonal. Elementos que rompen la cuadrícula.</p>
+</div>
+</div>
+</div>
+<!-- Tip box 2 -->
+<div class="bg-primary/10 border border-primary/30 rounded-xl p-5 mb-6">
+<h4 class="font-semibold text-yellow-400 mb-2">💡 El principio del punto de vista</h4>
+<p class="text-neutral-300 text-sm">El SKILL.md es explícito: «Tanto el maximalismo audaz como el minimalismo refinado funcionan; la clave es <strong class="text-neutral-100">intencionalidad, no intensidad</strong>." El skill no impone un estilo: elige uno y lo ejecuta con precisión para ese contexto.</p>
+</div>
+<!-- Mini-cards conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🔤</div>
+<div class="text-xs font-semibold text-neutral-300">Font pairing</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🎭</div>
+<div class="text-xs font-semibold text-neutral-300">Movimiento orquestado</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">📐</div>
+<div class="text-xs font-semibold text-neutral-300">Asimetría / grid-break</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🌈</div>
+<div class="text-xs font-semibold text-neutral-300">Paleta dominante</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4: Como funciona por dentro -->
+<section id="topico-4">
+<div class="flex items-start space-x-4 mb-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-lg">4</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-2">⚙️ Cómo funciona por dentro</h2>
+<p class="text-neutral-400">Stack, enfoque, etapas internas y dependencias reales descritas en SKILL.md.</p>
+</div>
+</div>
+<!-- Box conceito principal -->
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+<span class="mr-2">🧠</span> Design Thinking — Fase 1 (SIEMPRE antes del código)
+        </h3>
+<p class="text-neutral-300 mb-4">Antes de escribir una línea de código, la skill plantea 4 preguntas obligatorias:</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="bg-dark-800/60 rounded-lg p-3">
+<p class="text-emerald-400 font-semibold text-sm mb-1">Purpose</p>
+<p class="text-neutral-400 text-xs">¿Qué problema resuelve esta interfaz? ¿Quién la usa?</p>
+</div>
+<div class="bg-dark-800/60 rounded-lg p-3">
+<p class="text-emerald-400 font-semibold text-sm mb-1">Tone</p>
+<p class="text-neutral-400 text-xs">Elige un extremo: minimalismo brutal, maximalismo, retrofuturista, orgánico, lujo, editorial, brutalista, art déco, suave/pastel…</p>
+</div>
+<div class="bg-dark-800/60 rounded-lg p-3">
+<p class="text-emerald-400 font-semibold text-sm mb-1">Restricciones</p>
+<p class="text-neutral-400 text-xs">Requisitos técnicos: framework, rendimiento, accesibilidad.</p>
+</div>
+<div class="bg-dark-800/60 rounded-lg p-3">
+<p class="text-emerald-400 font-semibold text-sm mb-1">Diferenciación</p>
+<p class="text-neutral-400 text-xs">¿Qué hará que esta página sea INOLVIDABLE? Algo que el usuario recuerde.</p>
+</div>
+</div>
+</div>
+<!-- Timeline de execução -->
+<div class="space-y-4 mb-6">
+<h4 class="font-semibold text-neutral-300 mb-3">Fase 2 — Implementación (stack compatible):</h4>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-sm">1</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+<h4 class="font-semibold text-white mb-1">HTML/CSS/JS puro</h4>
+<p class="text-sm text-neutral-400">Página estática. Animaciones con CSS keyframes. Sin dependencia de build.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-sm">2</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+<h4 class="font-semibold text-white mb-1">React + Tailwind + shadcn</h4>
+<p class="text-sm text-neutral-400">Stack moderno. Usa <strong class="text-neutral-200">Biblioteca de movimiento</strong> (Framer Motion) para animaciones cuando esté disponible.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center">
+<span class="text-cyan-400 font-bold text-sm">3</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+<h4 class="font-semibold text-white mb-1">Vue, otros</h4>
+<p class="text-sm text-neutral-400">El skill se describe como independiente del framework: "HTML/CSS/JS, React, Vue, etc."; aplica el mismo enfoque de pensamiento de diseño.</p>
+</div>
+</div>
+</div>
+<!-- Box alerta -->
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5 mb-6">
+<h4 class="font-semibold text-red-400 mb-2">⚠️ Atención: complejidad proporcional a la visión</h4>
+<p class="text-neutral-300 text-sm">El SKILL.md es explícito: «Los diseños maximalistas necesitan código elaborado con animaciones extensas. Los diseños minimalistas necesitan contención, precisión y atención a los detalles de espaciado». No existe una implementación genérica: el código generado siempre refleja la dirección estética elegida.</p>
+</div>
+<!-- Mini-cards conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🎯</div>
+<div class="text-xs font-semibold text-neutral-300">Design Thinking</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">⚛️</div>
+<div class="text-xs font-semibold text-neutral-300">React / Tailwind</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🎬</div>
+<div class="text-xs font-semibold text-neutral-300">Biblioteca de movimiento</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🎨</div>
+<div class="text-xs font-semibold text-neutral-300">CSS variables</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5: Exemplo prático + PROMPT pronto -->
+<section id="topico-5">
+<div class="flex items-start space-x-4 mb-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-lg">5</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-2">💬 Ejemplo práctico + PROMPT listo</h2>
+<p class="text-neutral-400">Prompts reales para pegar en Claude Code y activar el skill de inmediato.</p>
+</div>
+</div>
+<!-- Box conceito: contexto do exemplo -->
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-3">🖥️ Escenario: landing page para SaaS de analítica</h3>
+<p class="text-neutral-300 text-sm">Objetivo: crear una landing page de nivel de producción en HTML/CSS/JS puro para una herramienta de analítica, con estética editorial, tipografía llamativa y una animación de entrada orquestada.</p>
+</div>
+<!-- Box prompt mono -->
+<div class="bg-dark-900 rounded-xl border border-emerald-500/30 p-6 mb-6 overflow-x-auto">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-semibold text-emerald-400 uppercase tracking-widest">Prompt — pégalo directamente en Claude Code</span>
+<span class="text-xs text-neutral-500">frontend-design</span>
+</div>
+<pre class="font-mono text-sm text-neutral-300 whitespace-pre-wrap leading-relaxed"><code>/frontend-design
+
+Cria uma landing page em HTML/CSS/JS puro para um SaaS de analytics chamado "Prism".
+
+Direção estética: editorial/magazine — dark mode com tipografia serifada no hero,
+corpo em sans-serif geométrica sem-clichê. Paleta: quase-preto + laranja elétrico
+como acento único. Layout assimétrico no hero: headline enorme à esquerda, mock
+de dashboard inclinado à direita. Animação de entrada: staggered reveal da headline
+em 3 partes com animation-delay. Nenhuma fonte genérica (não Inter, não Roboto).
+
+Seções: Hero / Features 3 colunas / Pricing / CTA final.
+Sem dependências externas além de Google Fonts.</code></pre>
+</div>
+<!-- Segundo prompt: React -->
+<div class="bg-dark-900 rounded-xl border border-emerald-500/30 p-6 mb-6 overflow-x-auto">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-semibold text-emerald-400 uppercase tracking-widest">Prompt alternativo — React + Motion</span>
+<span class="text-xs text-neutral-500">frontend-design</span>
+</div>
+<pre class="font-mono text-sm text-neutral-300 whitespace-pre-wrap leading-relaxed"><code>/frontend-design
+
+Cria um card de produto React para e-commerce de sneakers premium.
+Stack: React + Tailwind + shadcn + Motion library (Framer Motion).
+
+Tom: luxo refinado — fundo quase-preto, acentos dourados, tipografia
+condensada display para o nome do produto. Hover: imagem escala 1.08 com
+sombra neon dourada. Clique no CTA: micro-animação de "add to bag" com
+ícone que se transforma em ✓. Sem purple gradient, sem card genérico.</code></pre>
+</div>
+<!-- Tip box -->
+<div class="bg-primary/10 border border-primary/30 rounded-xl p-5 mb-6">
+<h4 class="font-semibold text-yellow-400 mb-2">💡 Cómo potenciar el prompt</h4>
+<p class="text-neutral-300 text-sm">Cuanto más especificas la <strong class="text-neutral-100">dirección estética</strong> y los <strong class="text-neutral-100">antipatrones que debes evitar</strong>, más el skill puede diferenciarse de lo genérico. «Editorial» + «con serifas» + «sin Inter» es mucho más eficaz que solo «bonito».</p>
+</div>
+<!-- Mini-cards conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">📝</div>
+<div class="text-xs font-semibold text-neutral-300">Dirección en el prompt</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🚫</div>
+<div class="text-xs font-semibold text-neutral-300">Antipatrones explícitos</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🎬</div>
+<div class="text-xs font-semibold text-neutral-300">Movimiento especificado</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🎯</div>
+<div class="text-xs font-semibold text-neutral-300">Stack declarado</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6: Combina com / limites -->
+<section id="topico-6">
+<div class="flex items-start space-x-4 mb-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+<span class="text-emerald-400 font-bold text-lg">6</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-2">🧬 Combina con / límites</h2>
+<p class="text-neutral-400">Cómo el <code class="text-emerald-400 bg-dark-800 px-1 rounded text-sm">frontend-design</code> cómo encaja en el ecosistema de la Trilha 1 y cuándo no usarlo.</p>
+</div>
+</div>
+<!-- Grid de combinações -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+<div class="bg-gradient-to-br from-emerald-900/20 to-dark-800 rounded-xl border border-emerald-500/30 p-5">
+<div class="text-2xl mb-2">✨</div>
+<h4 class="font-bold text-emerald-400 mb-2">+ impeccable</h4>
+<p class="text-sm text-neutral-300 mb-3">Usa <strong class="text-neutral-100">frontend-design</strong> para construir, después <strong class="text-neutral-100">impeccable</strong> para pulir. impeccable audita el código ya generado: elimina inconsistencias, corrige la accesibilidad, mejora los microtextos. Es el «refinamiento posterior a la generación».</p>
+<div class="text-xs text-emerald-400 font-semibold">Módulo 1.2 →</div>
+</div>
+<div class="bg-gradient-to-br from-emerald-900/20 to-dark-800 rounded-xl border border-emerald-500/30 p-5">
+<div class="text-2xl mb-2">🎨</div>
+<h4 class="font-bold text-emerald-400 mb-2">+ theme-factory</h4>
+<p class="text-sm text-neutral-300 mb-3">O <strong class="text-neutral-100">theme-factory</strong> (Ruta 2) define tokens de diseño: paleta, tipografía, espaciado. Úsalo ANTES para crear el sistema; después, usa frontend-design para construir componentes dentro de ese sistema.</p>
+<div class="text-xs text-neutral-500 font-semibold">Ruta 2, Módulo 2.1</div>
+</div>
+<div class="bg-gradient-to-br from-emerald-900/20 to-dark-800 rounded-xl border border-emerald-500/30 p-5">
+<div class="text-2xl mb-2">🧱</div>
+<h4 class="font-bold text-emerald-400 mb-2">+ web-artifacts-builder</h4>
+<p class="text-sm text-neutral-300 mb-3">O <strong class="text-neutral-100">web-artifacts-builder</strong> (Módulo 1.3) monta la estructura de varios archivos del proyecto — rutas, layout, configs. Frontend-design entra después, dando estilo a cada página desde un punto de vista estético.</p>
+<div class="text-xs text-emerald-400 font-semibold">Módulo 1.3 →</div>
+</div>
+</div>
+<!-- Fluxo de uso combinado -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<h4 class="font-semibold text-neutral-300 mb-4">Flujo de producción recomendado — Trilha 1:</h4>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 text-sm">
+<div class="bg-emerald-500/20 border border-emerald-500/30 rounded-lg px-3 py-2 text-emerald-400 font-semibold whitespace-nowrap">theme-factory<br/><span class="text-xs font-normal text-neutral-400">define tokens</span></div>
+<span class="text-neutral-500">→</span>
+<div class="bg-emerald-500/20 border border-emerald-500/30 rounded-lg px-3 py-2 text-emerald-400 font-semibold whitespace-nowrap">web-artifacts-builder<br/><span class="text-xs font-normal text-neutral-400">estructura el proyecto</span></div>
+<span class="text-neutral-500">→</span>
+<div class="bg-emerald-900/40 border border-emerald-500/50 rounded-lg px-3 py-2 text-emerald-300 font-bold whitespace-nowrap">frontend-design<br/><span class="text-xs font-normal text-neutral-400">construye con estética</span></div>
+<span class="text-neutral-500">→</span>
+<div class="bg-emerald-500/20 border border-emerald-500/30 rounded-lg px-3 py-2 text-emerald-400 font-semibold whitespace-nowrap">impeccable<br/><span class="text-xs font-normal text-neutral-400">pulido final</span></div>
+</div>
+</div>
+<!-- Box alerta: quando NÃO usar -->
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5 mb-6">
+<h4 class="font-semibold text-red-400 mb-3">⚠️ Cuándo NO usar frontend-design</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2">
+<span class="text-red-400 mt-0.5">✗</span>
+<span><strong class="text-neutral-100">Código backend / lógica de negocio pura</strong> — la skill es exclusivamente de front-end. Para APIs, bases de datos y autenticación: no hay beneficio.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-red-400 mt-0.5">✗</span>
+<span><strong class="text-neutral-100">Prototipado rápido sin preocuparse por lo visual</strong> — si necesitas primero la funcionalidad básica, el Design Thinking obligatorio puede ser una carga.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-red-400 mt-0.5">✗</span>
+<span><strong class="text-neutral-100">Sistemas de diseño ya definidos con reglas estrictas</strong> — si el proyecto tiene una guía de estilo externa muy restrictiva, la libertad creativa de la skill entra en conflicto.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-red-400 mt-0.5">✗</span>
+<span><strong class="text-neutral-100">Video, 3D, audio</strong> — para esos medios, usa la Trilha 3 (Mídia): animation-designer, 3d-animation-creator, remotion.</span>
+</li>
+</ul>
+</div>
+<!-- Mini-cards conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">✨</div>
+<div class="text-xs font-semibold text-neutral-300">+ impeccable</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🎨</div>
+<div class="text-xs font-semibold text-neutral-300">+ theme-factory</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-lg mb-1">🧱</div>
+<div class="text-xs font-semibold text-neutral-300">+ web-artifacts-builder</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-red-400 text-lg mb-1">🚫</div>
+<div class="text-xs font-semibold text-neutral-300">No: backend / 3D</div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-2xl border border-emerald-500/30 p-8" id="resumo">
+<h2 class="text-2xl font-bold mb-6 text-emerald-400">📋 Resumen del Módulo 1.1</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+<div>
+<h3 class="font-semibold text-neutral-200 mb-4">Qué aprendiste:</h3>
+<ul class="space-y-2 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>frontend-design crea interfaces <strong class="text-neutral-100">production-grade distintivas</strong> — no genéricas.</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Se activa con pedidos de <strong class="text-neutral-100">web components, pages, dashboards, React, HTML/CSS</strong> o «beautify».</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Siempre se ejecuta <strong class="text-neutral-100">Design Thinking</strong> antes del código: Purpose, Tone, Constraints, Differentiation.</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Admite HTML puro, React + Tailwind + shadcn, Motion library, Vue y otros.</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Prohíbe Inter/Roboto/Arial, el gradiente morado genérico y los diseños predecibles sin contexto.</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Combina con impeccable (para pulir), theme-factory (tokens) y web-artifacts-builder (estructura).</span></li>
+</ul>
+</div>
+<div>
+<h3 class="font-semibold text-neutral-200 mb-4">Conceptos centrales del skill:</h3>
+<div class="space-y-2">
+<div class="bg-dark-800/60 rounded-lg px-4 py-2 flex items-center space-x-3">
+<span class="text-emerald-400 text-sm">▸</span>
+<span class="text-sm text-neutral-300"><strong class="text-neutral-100">Dirección estética</strong> — una elección extrema, ejecutada con precisión</span>
+</div>
+<div class="bg-dark-800/60 rounded-lg px-4 py-2 flex items-center space-x-3">
+<span class="text-emerald-400 text-sm">▸</span>
+<span class="text-sm text-neutral-300"><strong class="text-neutral-100">Tipografía distintiva</strong> — combinaciones inesperadas de display + cuerpo tipográfico</span>
+</div>
+<div class="bg-dark-800/60 rounded-lg px-4 py-2 flex items-center space-x-3">
+<span class="text-emerald-400 text-sm">▸</span>
+<span class="text-sm text-neutral-300"><strong class="text-neutral-100">Movimiento orquestado</strong> — un momento bien hecho &gt; decenas dispersas</span>
+</div>
+<div class="bg-dark-800/60 rounded-lg px-4 py-2 flex items-center space-x-3">
+<span class="text-emerald-400 text-sm">▸</span>
+<span class="text-sm text-neutral-300"><strong class="text-neutral-100">Intencionalidad</strong> — el maximalismo y el minimalismo funcionan por igual</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Próximo módulo -->
+<div class="bg-dark-800/60 rounded-xl border border-emerald-500/20 p-5 mb-6">
+<p class="text-sm text-neutral-400 mb-1">Próximo módulo:</p>
+<p class="font-bold text-neutral-100 text-lg">1.2 ✨ impeccable</p>
+<p class="text-sm text-neutral-400 mt-1">El skill de pulido: cómo auditar y refinar el código ya generado para eliminar inconsistencias, mejorar la accesibilidad y elevar la calidad final.</p>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Volver a la ruta 1</a>
+<a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="modulo-1-2.html">Próximo módulo: 1.2 impeccable →</a>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Contenido de <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Ruta 1: Crear · Módulo 1.1 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

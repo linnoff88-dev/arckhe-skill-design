@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 4.4 — website-intelligence | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento amber */
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217,119,6,0.18); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-amber-400 { color: #92400e; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(220,38,38,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .bg-cyan-500\/10 { background-color: rgba(8,145,178,0.08); }
+    html:not(.dark) .border-cyan-500\/30 { border-color: rgba(8,145,178,0.25); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* SVG animations — prefixed m44- */
+    @keyframes m44-flow { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+    @keyframes m44-pulse { 0%,100% { opacity:.3 } 50% { opacity:1 } }
+    @keyframes m44-orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes m44-scan { 0% { transform: translateY(0); opacity:.8; } 50% { transform: translateY(60px); opacity:.4; } 100% { transform: translateY(0); opacity:.8; } }
+    @media (prefers-reduced-motion: no-preference) {
+      .m44-flow { animation: m44-flow 2.8s linear infinite; }
+      .m44-pulse { animation: m44-pulse 2.5s ease-in-out infinite; }
+      .m44-pulse-2 { animation: m44-pulse 2.5s ease-in-out infinite; animation-delay: .5s; }
+      .m44-pulse-3 { animation: m44-pulse 2.5s ease-in-out infinite; animation-delay: 1s; }
+      .m44-orbit { animation: m44-orbit 10s linear infinite; transform-origin: 200px 130px; }
+      .m44-scan { animation: m44-scan 3s ease-in-out infinite; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha4/modulo-4-4.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha4/modulo-4-4.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha4/modulo-4-4.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha4/modulo-4-4.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha4/modulo-4-4.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-4-4.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidad</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Medios</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10" href="index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Soporte</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-amber-400 transition-colors" href="../../index.html">Inicio</a>
+<span>/</span>
+<a class="hover:text-amber-400 transition-colors" href="index.html">Ruta 4 — Apoyo</a>
+<span>/</span>
+<span class="text-amber-400 font-medium">Módulo 4.4</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.4 · ÚLTIMO MÓDULO</span>
+<h1 class="text-3xl sm:text-4xl font-extrabold mb-3">🔭 website-intelligence</h1>
+<p class="text-neutral-300 text-lg mb-6">Engine de inteligencia competitiva: hace scraping del sitio del cliente, analiza a los 5 principales competidores mediante Firecrawl MCP, produce un informe HTML listo para PDF y construye un sitio premium con animaciones de scroll, basado en datos reales del mercado.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-xl p-3 border border-dark-600 text-center">
+<div class="text-2xl font-bold text-amber-400">6</div>
+<div class="text-xs text-neutral-500 mt-1">Temas</div>
+</div>
+<div class="bg-dark-800 rounded-xl p-3 border border-dark-600 text-center">
+<div class="text-2xl font-bold text-amber-400">35</div>
+<div class="text-xs text-neutral-500 mt-1">Minutos</div>
+</div>
+<div class="bg-dark-800 rounded-xl p-3 border border-dark-600 text-center">
+<div class="text-2xl font-bold text-amber-400">Práctico</div>
+<div class="text-xs text-neutral-500 mt-1">Nivel</div>
+</div>
+<div class="bg-dark-800 rounded-xl p-3 border border-dark-600 text-center">
+<div class="text-2xl font-bold text-amber-400">Soporte</div>
+<div class="text-xs text-neutral-500 mt-1">Categoría</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — amber + ciano -->
+<div class="flex justify-center">
+<svg aria-label="website-intelligence: flujo de scraping competitivo y construcción de un sitio premium" class="w-full h-auto max-w-md rounded-2xl border border-amber-500/30 bg-dark-900/40" font-family="Inter,sans-serif" role="img" viewbox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="m44-grad-amber" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#fbbf24" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#f59e0b" stop-opacity="0.4"></stop>
+</lineargradient>
+<lineargradient id="m44-grad-cyan" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.4"></stop>
+</lineargradient>
+<filter id="m44-glow">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<!-- fundo sutil -->
+<rect fill="#1f1604" height="260" rx="16" width="400"></rect>
+<rect fill="none" height="258" rx="15" stroke="#fbbf24" stroke-opacity="0.15" stroke-width="1" width="398" x="1" y="1"></rect>
+<!-- CENTRO: lupa / olho -->
+<circle class="m44-pulse" cx="200" cy="130" fill="none" r="38" stroke="#fbbf24" stroke-opacity="0.5" stroke-width="2"></circle>
+<circle cx="200" cy="130" fill="#1f1604" filter="url(#m44-glow)" r="24" stroke="#fbbf24" stroke-width="1.5"></circle>
+<text fill="#fbbf24" font-size="18" text-anchor="middle" x="200" y="137">🔭</text>
+<!-- scan line animada -->
+<line class="m44-scan" stroke="#38bdf8" stroke-opacity="0.7" stroke-width="1" x1="162" x2="238" y1="100" y2="100"></line>
+<!-- NÓDULO esquerda: cliente -->
+<rect fill="#1f2937" height="44" rx="10" stroke="#fbbf24" stroke-opacity="0.6" stroke-width="1.5" width="82" x="20" y="108"></rect>
+<text fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" x="61" y="126">CLIENTE</text>
+<text fill="#9ca3af" font-size="7.5" text-anchor="middle" x="61" y="140">mcp__firecrawl__scrape</text>
+<text fill="#9ca3af" font-size="7.5" text-anchor="middle" x="61" y="151">mcp__firecrawl__map</text>
+<!-- seta cliente → centro -->
+<path class="m44-flow" d="M102 130 L162 130" fill="none" stroke="#fbbf24" stroke-dasharray="6 3" stroke-width="1.5"></path>
+<polygon fill="#fbbf24" opacity="0.8" points="162,126 170,130 162,134"></polygon>
+<!-- NÓDULO direita: relatório -->
+<rect fill="#0e1b26" height="58" rx="10" stroke="#38bdf8" stroke-opacity="0.7" stroke-width="1.5" width="82" x="298" y="92"></rect>
+<text fill="#38bdf8" font-size="9" font-weight="600" text-anchor="middle" x="339" y="112">INFORME</text>
+<text fill="#9ca3af" font-size="7.5" text-anchor="middle" x="339" y="125">competitive-analysis</text>
+<text fill="#9ca3af" font-size="7.5" text-anchor="middle" x="339" y="136">.html (listo para PDF)</text>
+<text fill="#bfe6ff" font-size="7.5" text-anchor="middle" x="339" y="147">Instrument Serif</text>
+<!-- seta centro → relatório -->
+<path class="m44-flow" d="M238 130 L298 130" fill="none" stroke="#38bdf8" stroke-dasharray="6 3" stroke-width="1.5"></path>
+<polygon fill="#38bdf8" opacity="0.8" points="298,126 306,130 298,134"></polygon>
+<!-- NÓDULOS topo: 5 concorrentes -->
+<text fill="#9ca3af" font-size="9" text-anchor="middle" x="200" y="26">Top 5 competidores</text>
+<circle class="m44-pulse-2" cx="120" cy="50" fill="#1f2937" r="14" stroke="#fbbf24" stroke-opacity="0.5" stroke-width="1"></circle>
+<text fill="#fbbf24" font-size="8" text-anchor="middle" x="120" y="55">C1</text>
+<circle cx="160" cy="38" fill="#1f2937" r="14" stroke="#fbbf24" stroke-opacity="0.5" stroke-width="1"></circle>
+<text fill="#fbbf24" font-size="8" text-anchor="middle" x="160" y="43">C2</text>
+<circle class="m44-pulse-3" cx="200" cy="34" fill="#1f2937" r="14" stroke="#fbbf24" stroke-opacity="0.5" stroke-width="1"></circle>
+<text fill="#fbbf24" font-size="8" text-anchor="middle" x="200" y="39">C3</text>
+<circle cx="240" cy="38" fill="#1f2937" r="14" stroke="#fbbf24" stroke-opacity="0.5" stroke-width="1"></circle>
+<text fill="#fbbf24" font-size="8" text-anchor="middle" x="240" y="43">C4</text>
+<circle class="m44-pulse-2" cx="280" cy="50" fill="#1f2937" r="14" stroke="#fbbf24" stroke-opacity="0.5" stroke-width="1"></circle>
+<text fill="#fbbf24" font-size="8" text-anchor="middle" x="280" y="55">C5</text>
+<!-- linhas concorrentes → centro -->
+<line stroke="#fbbf24" stroke-opacity="0.35" stroke-width="0.8" x1="120" x2="185" y1="64" y2="108"></line>
+<line stroke="#fbbf24" stroke-opacity="0.35" stroke-width="0.8" x1="160" x2="190" y1="52" y2="108"></line>
+<line stroke="#fbbf24" stroke-opacity="0.35" stroke-width="0.8" x1="200" x2="200" y1="48" y2="108"></line>
+<line stroke="#fbbf24" stroke-opacity="0.35" stroke-width="0.8" x1="240" x2="210" y1="52" y2="108"></line>
+<line stroke="#fbbf24" stroke-opacity="0.35" stroke-width="0.8" x1="280" x2="215" y1="64" y2="108"></line>
+<!-- NÓDULO baixo: site premium -->
+<rect fill="#1f1604" filter="url(#m44-glow)" height="48" rx="10" stroke="#fbbf24" stroke-width="2" width="124" x="138" y="186"></rect>
+<text fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle" x="200" y="206">SITIO PREMIUM</text>
+<text fill="#38bdf8" font-size="7.5" text-anchor="middle" x="200" y="219">scroll-animated</text>
+<text fill="#9ca3af" font-size="7.5" text-anchor="middle" x="200" y="230">Calidad de Apple/Stripe</text>
+<!-- seta centro → site -->
+<path class="m44-flow" d="M200 168 L200 186" fill="none" stroke="#fbbf24" stroke-dasharray="5 3" stroke-width="1.5"></path>
+<polygon fill="#fbbf24" opacity="0.8" points="196,186 200,194 204,186"></polygon>
+<!-- label Firecrawl -->
+<text fill="#6b7280" font-size="8" text-anchor="middle" x="200" y="253">Desarrollado con Firecrawl MCP · 6 fases · informe listo para PDF</text>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+<!-- TÓPICO 1: O que é / o que faz -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">1</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🧩 Qué es / qué hace</h2>
+<p class="text-neutral-400 mt-2">Engine de inteligencia competitiva basada en investigación para sitios web: scraping, análisis, informe y construcción en 6 fases encadenadas, todas basadas en datos reales del mercado.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- conceito principal -->
+<div class="rounded-xl bg-gradient-to-br from-amber-900/30 to-dark-700/50 border border-amber-500/30 p-5">
+<div class="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-2">Definición precisa (SKILL.md)</div>
+<p class="text-neutral-200 font-medium">O <strong class="text-amber-400">website-intelligence</strong> es un skill sénior de estrategia web que trabaja en 6 fases secuenciales: <span class="text-cyan-400">extracción de marca del cliente → análisis del nicho competitivo → informe HTML listo para PDF → build brief → construcción del sitio → auditoría de calidad</span>. Todo se guarda en archivos entregables en cada fase.</p>
+</div>
+<!-- box dados: stack real -->
+<div class="rounded-xl bg-blue-500/10 border border-blue-500/30 p-5">
+<div class="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-3">Stack real del skill</div>
+<div class="grid sm:grid-cols-3 gap-3 text-sm">
+<div>
+<div class="font-semibold text-neutral-200 mb-1">Scraping</div>
+<div class="text-neutral-400"><code class="text-amber-400">mcp__firecrawl__scrape</code> — página única</div>
+<div class="text-neutral-400"><code class="text-amber-400">mcp__firecrawl__map</code> — arquitectura completa del dominio</div>
+<div class="text-neutral-400"><code class="text-amber-400">mcp__firecrawl__search</code> — descubrimiento de competidores</div>
+</div>
+<div>
+<div class="font-semibold text-neutral-200 mb-1">Informe</div>
+<div class="text-neutral-400">HTML + CSS listo para imprimir (<code class="text-cyan-400">@media print</code>)</div>
+<div class="text-neutral-400">Instrument Serif + DM Sans</div>
+<div class="text-neutral-400">Paleta terracota <code class="text-cyan-400">#c45d3e</code></div>
+</div>
+<div>
+<div class="font-semibold text-neutral-200 mb-1">Sitio final</div>
+<div class="text-neutral-400">Animaciones activadas por el scroll</div>
+<div class="text-neutral-400">Profundidad parallax</div>
+<div class="text-neutral-400">Calidad de Apple/Stripe</div>
+</div>
+</div>
+</div>
+<!-- output estrutura -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Estructura de salida generada</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2"># Directorio del proyecto después de las 6 fases</div>
+<div><span class="text-amber-400">project/</span></div>
+<div class="ml-4"><span class="text-amber-400">research/</span></div>
+<div class="ml-8"><span class="text-neutral-300">01-client-brand.md</span> <span class="text-neutral-500"># Extracción de marca</span></div>
+<div class="ml-8"><span class="text-neutral-300">02-competitor-analysis.md</span> <span class="text-neutral-500"># Investigación de nicho</span></div>
+<div class="ml-8"><span class="text-neutral-300">03-build-brief.md</span> <span class="text-neutral-500"># Documento maestro</span></div>
+<div class="ml-8"><span class="text-neutral-300">04-quality-audit.md</span> <span class="text-neutral-500"># Auditoría final</span></div>
+<div class="ml-4"><span class="text-cyan-400">competitive-analysis.html</span> <span class="text-neutral-500"># Informe listo para PDF</span></div>
+<div class="ml-4"><span class="text-amber-400">site/</span> <span class="text-neutral-500"># Sitio premium creado</span></div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Firecrawl MCP</div><div class="text-xs text-neutral-400">scrape · map · search</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">6 fases</div><div class="text-xs text-neutral-400">secuenciales + punto de control</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Listo para PDF</div><div class="text-xs text-neutral-400">HTML con @media print</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Data-Driven</div><div class="text-xs text-neutral-400">sitio basado en evidencias</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2: Quando dispara -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">2</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🎣 Cuándo se activa</h2>
+<p class="text-neutral-400 mt-2">Los desencadenantes exactos que hacen que Claude Code active website-intelligence: palabras clave, contextos e intenciones de la solicitud.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- tip box -->
+<div class="rounded-xl bg-primary/10 border border-primary/40 p-4 flex gap-3">
+<span class="text-xl flex-shrink-0">💡</span>
+<div>
+<div class="font-semibold text-neutral-200 text-sm mb-1">Los disparadores son palabras clave en la descripción</div>
+<p class="text-neutral-400 text-sm">Claude Code lee la description de la skill y la activa cuando detecta cualquiera de los términos listados abajo en el pedido del usuario. No hace falta decir el nombre de la skill.</p>
+</div>
+</div>
+<!-- grid gatilhos -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-dark-900 p-4">
+<div class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-3">✓ Se activa con</div>
+<ul class="space-y-2 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">"website intelligence"</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">"crear un sitio" / "crear un sitio web"</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">"redesign" / "website for [negocio]"</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">"scrape and rebuild"</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">"análisis competitivo"</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">"niche research" / "website audit"</span></li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-dark-900 p-4">
+<div class="text-xs font-semibold text-red-400 uppercase tracking-widest mb-3">✗ No se activa con</div>
+<ul class="space-y-2 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">"crea una landing page sencilla"</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">"haz un componente React"</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">"genera un diagrama del sistema"</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">"crea una animación 3D"</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">"haz un email marketing"</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">tareas sin contexto de negocio real</span></li>
+</ul>
+</div>
+</div>
+<!-- timeline de fases -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Pipeline de 6 fases (orden obligatorio)</div>
+<div class="space-y-3">
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm flex-shrink-0">1</div>
+<div><div class="font-semibold text-neutral-200 text-sm">Extracción de la marca del cliente</div><div class="text-neutral-400 text-xs mt-0.5">scrape del sitio actual, arquitectura de URL, identidad de marca</div></div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm flex-shrink-0">2</div>
+<div><div class="font-semibold text-neutral-200 text-sm">Competitive Niche Analysis</div><div class="text-neutral-400 text-xs mt-0.5">búsqueda y scraping de los 5 principales competidores, puntuación en 8 criterios</div></div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-sm flex-shrink-0">3</div>
+<div><div class="font-semibold text-neutral-200 text-sm">Competitive Analysis Report</div><div class="text-neutral-400 text-xs mt-0.5">HTML listo para PDF: resumen ejecutivo, perfiles, tabla comparativa, patrones del 10 % superior</div></div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm flex-shrink-0">4</div>
+<div><div class="font-semibold text-neutral-200 text-sm">Build Brief y aprobación ⛔ PARADA OBLIGATORIA</div><div class="text-neutral-400 text-xs mt-0.5">dirección de diseño, arquitectura del sitio, framework de contenido — aprobación obligatoria antes de construir</div></div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm flex-shrink-0">5</div>
+<div><div class="font-semibold text-neutral-200 text-sm">Build the Website</div><div class="text-neutral-400 text-xs mt-0.5">HTML/CSS/JS con animaciones al desplazarse, recurso 3D de marcador de posición, microinteracciones premium</div></div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-sm flex-shrink-0">6</div>
+<div><div class="font-semibold text-neutral-200 text-sm">Quality Audit</div><div class="text-neutral-400 text-xs mt-0.5">SEO, accesibilidad, rendimiento, checklist listo para el cliente</div></div>
+</div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Disparador verbal</div><div class="text-xs text-neutral-400">"análisis competitivo"</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Parada definitiva</div><div class="text-xs text-neutral-400">aprobación antes de la fase 5</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Orden estricto</div><div class="text-xs text-neutral-400">fases 1→6, sin saltarse ninguna</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Entregable</div><div class="text-xs text-neutral-400">archivo en cada fase</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3: Como melhora suas páginas -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">3</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🚀 Cómo mejora tus resultados</h2>
+<p class="text-neutral-400 mt-2">Valor concreto que website-intelligence aporta en comparación con el enfoque tradicional de crear un sitio sin investigación de mercado.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- conceito principal -->
+<div class="rounded-xl bg-gradient-to-br from-amber-900/30 to-dark-700/50 border border-amber-500/30 p-5">
+<div class="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-2">La diferencia principal</div>
+<p class="text-neutral-200 font-medium">Los sitios creados a partir de una investigación competitiva real tienen <strong class="text-amber-400">posicionamiento informado</strong>: sabes qué hacen bien tus competidores, dónde hay brechas de SEO, qué patrones comparten el 10 % mejor posicionados, y construyes por encima de ese nivel, no a su lado.</p>
+</div>
+<!-- grid fazer/evitar -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-dark-900 p-4">
+<div class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-3">✓ Qué ofrece la skill</div>
+<ul class="space-y-2 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">Informe PDF con puntuación de los competidores (8 criterios)</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">Paleta de colores y tipografía justificadas con datos</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">Oportunidades de SEO y keywords de brecha identificadas</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">Sitio con animaciones al desplazarse con calidad Apple/Stripe</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span><span class="text-neutral-300">Marcador de posición para un asset 3D (<code class="text-cyan-400">&lt;!-- 3D SCROLL ASSET HERE --&gt;</code>)</span></li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-dark-900 p-4">
+<div class="text-xs font-semibold text-red-400 uppercase tracking-widest mb-3">✗ Sin este skill</div>
+<ul class="space-y-2 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">Sitio bonito, pero sin diferenciación en el mercado</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">Colores y tipografía elegidos por gusto, no por posicionamiento</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">SEO genérico, sin insights sobre brechas competitivas</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">Animaciones decorativas sin jerarquía de conversión</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-300">Ningún entregable para presentar al cliente</span></li>
+</ul>
+</div>
+</div>
+<!-- box alerta -->
+<div class="rounded-xl bg-red-500/10 border border-red-500/30 p-4 flex gap-3">
+<span class="text-xl flex-shrink-0">⚠️</span>
+<div>
+<div class="font-semibold text-red-400 text-sm mb-1">Objetivos de rendimiento (SKILL.md)</div>
+<p class="text-neutral-400 text-sm">El sitio generado debe alcanzar LCP &lt; 2.5s, TBT &lt; 200ms, CLS &lt; 0.1. Sin JavaScript que bloquee el renderizado. Imágenes con carga diferida y dimensiones explícitas.</p>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">8 criterios</div><div class="text-xs text-neutral-400">evaluación objetiva de competidores</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Brecha de SEO</div><div class="text-xs text-neutral-400">palabras clave no dominadas</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Top 10%</div><div class="text-xs text-neutral-400">patrones de los mejores sitios</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">LCP &lt; 2.5s</div><div class="text-xs text-neutral-400">rendimiento obligatorio</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4: Como funciona por dentro -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">4</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">⚙️ Cómo funciona por dentro</h2>
+<p class="text-neutral-400 mt-2">Stack, herramientas MCP, enfoque por fase y decisiones reales de implementación de SKILL.md.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- tip box firecrawl -->
+<div class="rounded-xl bg-primary/10 border border-primary/40 p-4 flex gap-3">
+<span class="text-xl flex-shrink-0">🔥</span>
+<div>
+<div class="font-semibold text-neutral-200 text-sm mb-1">Firecrawl MCP: dependencia obligatoria</div>
+<p class="text-neutral-400 text-sm">Antes de iniciar cualquier fase, la skill verifica si Firecrawl MCP está conectado. Si no lo está, proporciona instrucciones de configuración (<code class="text-amber-400">claude mcp add firecrawl</code>). Sin Firecrawl, las fases 1 y 2 quedan bloqueadas.</p>
+</div>
+</div>
+<!-- fases detalhadas -->
+<div class="space-y-4">
+<!-- Fase 1 -->
+<div class="rounded-xl border border-dark-600 overflow-hidden">
+<div class="bg-dark-700 px-4 py-2 flex items-center gap-3">
+<span class="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">1</span>
+<span class="font-semibold text-sm text-neutral-200">Fase 1 — Client Brand Extraction</span>
+</div>
+<div class="p-4 text-sm text-neutral-400 space-y-1">
+<p><code class="text-amber-400">mcp__firecrawl__map</code> — descubre todas las URL del dominio del cliente</p>
+<p><code class="text-amber-400">mcp__firecrawl__scrape</code> — rastrea las páginas principales (inicio, acerca de, servicios)</p>
+<p>Guarda <code class="text-cyan-400">research/01-client-brand.md</code> con: colores, tipografía, tono de voz, propuesta de valor, estructura de navegación</p>
+</div>
+</div>
+<!-- Fase 2 -->
+<div class="rounded-xl border border-dark-600 overflow-hidden">
+<div class="bg-dark-700 px-4 py-2 flex items-center gap-3">
+<span class="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">2</span>
+<span class="font-semibold text-sm text-neutral-200">Fase 2 — Competitive Niche Analysis</span>
+</div>
+<div class="p-4 text-sm text-neutral-400 space-y-1">
+<p><code class="text-amber-400">mcp__firecrawl__search</code> — encuentra a los 5 principales competidores del nicho</p>
+<p><code class="text-amber-400">mcp__firecrawl__scrape</code> — scraping exhaustivo de cada competidor</p>
+<p>Puntuación según 8 criterios: diseño, UX, SEO, rendimiento, texto, CTA, prueba social, móvil</p>
+<p>Guarda <code class="text-cyan-400">research/02-competitor-analysis.md</code></p>
+</div>
+</div>
+<!-- Fase 3 -->
+<div class="rounded-xl border border-cyan-500/30 overflow-hidden">
+<div class="bg-dark-700 px-4 py-2 flex items-center gap-3">
+<span class="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold text-xs">3</span>
+<span class="font-semibold text-sm text-neutral-200">Fase 3 — Informe HTML listo para PDF</span>
+</div>
+<div class="p-4 text-sm text-neutral-400 space-y-1">
+<p>HTML estático sin JavaScript: solo HTML + CSS con <code class="text-cyan-400">@media print</code></p>
+<p>Diseño: papel cálido <code class="text-cyan-400">#f6f4f0</code>, terracota <code class="text-cyan-400">#c45d3e</code>, superposición de grano mediante filtro SVG</p>
+<p>Cards con borde de acento de 4px, fases con conectores SVG discontinuos</p>
+<p>Guarda <code class="text-cyan-400">competitive-analysis.html</code> en la raíz del proyecto</p>
+</div>
+</div>
+<!-- Fase 4 -->
+<div class="rounded-xl border border-dark-600 overflow-hidden">
+<div class="bg-dark-700 px-4 py-2 flex items-center gap-3">
+<span class="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">4</span>
+<span class="font-semibold text-sm text-neutral-200">Fase 4 — Build Brief + HARD STOP</span>
+</div>
+<div class="p-4 text-sm text-neutral-400 space-y-1">
+<p>Define: Design Direction · Site Architecture · Content Framework · Conversion Playbook</p>
+<p><strong class="text-red-400">HARD STOP obligatorio</strong> — no avanza a la fase 5 sin la aprobación explícita del usuario</p>
+<p>Guarda <code class="text-cyan-400">research/03-build-brief.md</code></p>
+</div>
+</div>
+<!-- Fase 5 -->
+<div class="rounded-xl border border-dark-600 overflow-hidden">
+<div class="bg-dark-700 px-4 py-2 flex items-center gap-3">
+<span class="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">5</span>
+<span class="font-semibold text-sm text-neutral-200">Fase 5 — Build the Website</span>
+</div>
+<div class="p-4 text-sm text-neutral-400 space-y-1">
+<p>Animaciones activadas por el scroll en cada transición de sección + profundidad de paralaje</p>
+<p>Hero con marcador de posición indicado: <code class="text-cyan-400">&lt;!-- 3D SCROLL ASSET HERE --&gt;</code> con dimensiones exactas</p>
+<p>Microinteracciones premium: botones, tarjetas, navegación</p>
+<p>Estructura: <code class="text-amber-400">site/</code> con index.html, css/, js/, assets/</p>
+</div>
+</div>
+<!-- Fase 6 -->
+<div class="rounded-xl border border-cyan-500/30 overflow-hidden">
+<div class="bg-dark-700 px-4 py-2 flex items-center gap-3">
+<span class="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold text-xs">6</span>
+<span class="font-semibold text-sm text-neutral-200">Fase 6 — Quality Audit</span>
+</div>
+<div class="p-4 text-sm text-neutral-400 space-y-1">
+<p>Auditoría SEO: meta tags, schema markup, jerarquía de encabezados, sitemaps</p>
+<p>Auditoría de accesibilidad: contraste, alt text, etiquetas ARIA, navegación con teclado</p>
+<p>Auditoría de rendimiento: LCP, TBT, CLS, JS que bloquea el renderizado, carga diferida</p>
+<p>Guarda <code class="text-cyan-400">research/04-quality-audit.md</code></p>
+</div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">allowed-tools</div><div class="text-xs text-neutral-400">Read Write Grep Glob Bash WebFetch</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">@media print</div><div class="text-xs text-neutral-400">informe sin JavaScript</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">3D placeholder</div><div class="text-xs text-neutral-400">hero con asset anotado</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Sin JS en el informe</div><div class="text-xs text-neutral-400">HTML puro, compatible con PDF</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5: Exemplo prático + prompt -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-5">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">5</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">💬 Ejemplo práctico + Prompt listo</h2>
+<p class="text-neutral-400 mt-2">Prompt real para pegar en Claude Code y activar el skill de inmediato, junto con lo que debes esperar en cada fase.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- tip box -->
+<div class="rounded-xl bg-primary/10 border border-primary/40 p-4 flex gap-3">
+<span class="text-xl flex-shrink-0">💡</span>
+<div>
+<div class="font-semibold text-neutral-200 text-sm mb-1">Usa el siguiente prompt en Claude Code</div>
+<p class="text-neutral-400 text-sm">Reemplaza la URL y el nicho. El skill detecta "competitive analysis" y "build a site" y se activa automáticamente. Recibirás entregables en cada fase antes de aprobar la siguiente.</p>
+</div>
+</div>
+<!-- prompt mono -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Prompt completo (copia y pega en Claude Code)</div>
+<div class="bg-dark-900 rounded-xl border border-amber-500/30 p-5 font-mono text-sm overflow-x-auto">
+<div class="text-amber-400 text-xs mb-3"># website-intelligence — prompt de activación</div>
+<div class="text-neutral-200">Quiero hacer un análisis competitivo y crear un sitio premium para:</div>
+<br/>
+<div class="text-cyan-400">Negocio: <span class="text-neutral-300">Clínica de Estética Avanzada «Lumina»</span></div>
+<div class="text-cyan-400">URL actual: <span class="text-neutral-300">https://luminaestetica.com.br</span></div>
+<div class="text-cyan-400">Nicho: <span class="text-neutral-300">estética facial prémium, São Paulo, SP</span></div>
+<br/>
+<div class="text-neutral-400 text-xs"># Instrucción de alcance</div>
+<div class="text-neutral-200">Ejecuta las 6 fases de website intelligence.</div>
+<div class="text-neutral-200">Guarda los entregables de investigación en research/.</div>
+<div class="text-neutral-200">Detente en la Fase 4 para que lo apruebe antes de construir.</div>
+<div class="text-neutral-200">El sitio final debe tener calidad de Apple/Stripe y animaciones al desplazarse.</div>
+<br/>
+<div class="text-neutral-400 text-xs"># Configuración de Firecrawl (si es necesario)</div>
+<div class="text-neutral-200">Verifica que Firecrawl MCP esté conectado antes de empezar.</div>
+</div>
+</div>
+<!-- o que esperar -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Qué ocurre después del prompt</div>
+<div class="space-y-2 text-sm">
+<div class="flex gap-3 items-start">
+<span class="text-amber-400 font-bold flex-shrink-0">→</span>
+<span class="text-neutral-300"><strong class="text-neutral-200">Fases 1-2:</strong> Claude extrae el sitio y busca los 5 competidores. Puede tardar 2-5 min (muchas solicitudes).</span>
+</div>
+<div class="flex gap-3 items-start">
+<span class="text-amber-400 font-bold flex-shrink-0">→</span>
+<span class="text-neutral-300"><strong class="text-neutral-200">Fase 3:</strong> Recibes <code class="text-cyan-400">competitive-analysis.html</code> — ábrelo en el navegador e imprímelo como PDF.</span>
+</div>
+<div class="flex gap-3 items-start">
+<span class="text-amber-400 font-bold flex-shrink-0">→</span>
+<span class="text-neutral-300"><strong class="text-neutral-200">Fase 4 (STOP):</strong> Claude presenta el build brief y espera tu aprobación. Revisa la dirección de diseño.</span>
+</div>
+<div class="flex gap-3 items-start">
+<span class="text-amber-400 font-bold flex-shrink-0">→</span>
+<span class="text-neutral-300"><strong class="text-neutral-200">Fase 5-6:</strong> Después de "aprobado", construye <code class="text-cyan-400">site/index.html</code> + auditoría final.</span>
+</div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">URL + nicho</div><div class="text-xs text-neutral-400">contexto mínimo necesario</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Aprobación de la Fase 4</div><div class="text-xs text-neutral-400">revisar antes de construir</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Entregable inmediato</div><div class="text-xs text-neutral-400">competitive-analysis.html</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6: Combina com / limites -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-6">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">6</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🧬 Combina con / límites</h2>
+<p class="text-neutral-400 mt-2">website-intelligence es el skill que <strong class="text-amber-400">cierra el curso</strong>: investigación competitiva → construye el mejor sitio. Para ir más allá del sitio, combina con las skills de las rutas anteriores.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- conceito principal — fechamento do curso -->
+<div class="rounded-xl bg-gradient-to-br from-amber-900/40 via-dark-700/60 to-cyan-900/20 border border-amber-500/40 p-6">
+<div class="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-3">🎓 El último eslabón del curso</div>
+<p class="text-neutral-200 font-medium mb-4">Este es el último módulo de Skill Design porque representa el ciclo completo: aprendiste a <span class="text-emerald-400">construir interfaces</span> (T1), crear <span class="text-blue-400">identidad visual</span> (T2), producir <span class="text-purple-400">medios</span> (T3) y usar herramientas de <span class="text-amber-400">apoyo</span> (T4). Website-intelligence usa todo esto — y además agrega la capa de <em>inteligencia de mercado</em> que diferencia un buen sitio de uno imbatible.</p>
+<div class="text-sm text-neutral-400">Cada skill que domines a lo largo del curso se convierte en un plugin para elevar el output de website-intelligence.</div>
+</div>
+<!-- combinações com outros skills -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Integraciones con skills del curso</div>
+<div class="space-y-3">
+<!-- frontend-design -->
+<div class="rounded-xl border border-emerald-500/30 bg-dark-900 p-4">
+<div class="flex items-start gap-3">
+<span class="text-xl flex-shrink-0">⚛️</span>
+<div>
+<div class="font-semibold text-emerald-400 text-sm mb-1">T1.1 frontend-design → refinamiento del sitio generado</div>
+<p class="text-neutral-400 text-sm">Después de que website-intelligence entregue el <code class="text-cyan-400">site/index.html</code>, activa <strong class="text-emerald-400">frontend-design</strong> para pulir el código React/Tailwind/shadcn, agregar componentes responsivos avanzados y garantizar accesibilidad de nivel AA. El sitio de website-intelligence define <em>qué</em> construir — frontend-design define <em>como</em> construir con excelencia de código.</p>
+</div>
+</div>
+</div>
+<!-- impeccable -->
+<div class="rounded-xl border border-emerald-500/30 bg-dark-900 p-4">
+<div class="flex items-start gap-3">
+<span class="text-xl flex-shrink-0">✨</span>
+<div>
+<div class="font-semibold text-emerald-400 text-sm mb-1">T1.2 impeccable → auditoría de calidad del sitio final</div>
+<p class="text-neutral-400 text-sm">Después de la Fase 6 (Quality Audit), ejecuta <strong class="text-emerald-400">impeccable</strong> para una segunda capa de verificación: contraste de colores, jerarquía tipográfica, microtextos de los CTA y coherencia visual entre secciones. impeccable complementa la auditoría técnica de website-intelligence con una auditoría de diseño.</p>
+</div>
+</div>
+</div>
+<!-- 3d-animation-creator -->
+<div class="rounded-xl border border-purple-500/30 bg-dark-900 p-4">
+<div class="flex items-start gap-3">
+<span class="text-xl flex-shrink-0">🖱️</span>
+<div>
+<div class="font-semibold text-purple-400 text-sm mb-1">T3.2 3d-animation-creator → completa el placeholder del hero</div>
+<p class="text-neutral-400 text-sm">website-intelligence deja un marcador de posición explícito en el hero: <code class="text-cyan-400">&lt;!-- 3D SCROLL ASSET HERE --&gt;</code> con dimensiones exactas. El <strong class="text-purple-400">3d-animation-creator</strong> se creó exactamente para eso: genera el asset 3D interactivo activado por scroll que va en ese slot. Esa integración es la más directa: website-intelligence reserva el espacio y 3d-animation-creator lo rellena con maestría.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- quando NÃO usar -->
+<div class="rounded-xl bg-red-500/10 border border-red-500/30 p-5">
+<div class="text-xs font-semibold text-red-400 uppercase tracking-widest mb-3">✗ Cuándo NO usar website-intelligence</div>
+<div class="grid sm:grid-cols-2 gap-3 text-sm">
+<div class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-400">Prototipos rápidos o landing pages descartables (usa <strong class="text-neutral-300">web-artifacts-builder</strong> o <strong class="text-neutral-300">canvas-design</strong>)</span></div>
+<div class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-400">Cuando Firecrawl MCP no está disponible, las fases 1 y 2 quedan bloqueadas</span></div>
+<div class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-400">Proyectos internos sin competidores reales del mercado para analizar</span></div>
+<div class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-400">Cuando el cliente no tiene una URL existente para extraer la marca</span></div>
+<div class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-400">Apps web complejas con autenticación, base de datos y backend (usa <strong class="text-neutral-300">frontend-design</strong> directamente)</span></div>
+<div class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span><span class="text-neutral-400">Cuando la velocidad es crítica: las 6 fases requieren tiempo real de investigación</span></div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">frontend-design</div><div class="text-xs text-neutral-400">pulido de código</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">impeccable</div><div class="text-xs text-neutral-400">auditoría de diseño</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">3d-animation-creator</div><div class="text-xs text-neutral-400">completa el hero 3D con scroll</div></div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600"><div class="text-xs font-semibold text-amber-400 mb-1">Requiere Firecrawl</div><div class="text-xs text-neutral-400">dependencia crítica</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO (gradiente amber) -->
+<section class="rounded-2xl overflow-hidden border border-amber-500/40" id="resumo">
+<div class="bg-gradient-to-br from-amber-900/50 via-dark-800 to-dark-800 p-8">
+<!-- celebração do fim do curso -->
+<div class="text-center mb-8">
+<div class="text-5xl mb-3">🎓</div>
+<h2 class="text-2xl font-extrabold text-amber-400 mb-2">¡Completaste Skill Design!</h2>
+<p class="text-neutral-300 max-w-2xl mx-auto">Recorriste las 4 rutas — Construir, Identidad, Medios y Soporte — y llegaste al módulo que cierra el ciclo: inteligencia de mercado al servicio del diseño. Ahora sabes investigar, analizar, planificar y crear sitios que se diferencian con datos reales.</p>
+</div>
+<!-- checklist do que aprendeu -->
+<div class="bg-dark-800/60 rounded-xl p-6 mb-6 border border-dark-600">
+<h3 class="font-bold text-neutral-200 mb-4 text-lg">✓ Qué aprendiste en este módulo</h3>
+<div class="grid sm:grid-cols-2 gap-2 text-sm">
+<div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">✓</span><span class="text-neutral-300">Qué es website-intelligence y su definición precisa en SKILL.md</span></div>
+<div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">✓</span><span class="text-neutral-300">Los 7 desencadenantes verbales que activan el skill ("análisis competitivo", "crear un sitio", etc.)</span></div>
+<div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">✓</span><span class="text-neutral-300">Las 6 fases en orden: extracción → análisis → informe → brief → build → auditoría</span></div>
+<div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">✓</span><span class="text-neutral-300">Las 3 herramientas de Firecrawl MCP: scrape, map, search</span></div>
+<div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">✓</span><span class="text-neutral-300">El informe listo para PDF: HTML + @media print, sin JavaScript</span></div>
+<div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">✓</span><span class="text-neutral-300">La parada obligatoria en seco en la Fase 4 antes de construir</span></div>
+<div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">✓</span><span class="text-neutral-300">El espacio reservado para 3D en el hero: espacio para 3d-animation-creator</span></div>
+<div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">✓</span><span class="text-neutral-300">Cómo combinar con frontend-design, impeccable y 3d-animation-creator</span></div>
+</div>
+</div>
+<!-- box fim do curso / voltar ao início -->
+<div class="rounded-xl bg-gradient-to-r from-amber-900/40 to-cyan-900/20 border border-amber-500/40 p-5 mb-6">
+<div class="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-2">🔁 De vuelta al inicio</div>
+<p class="text-neutral-300 text-sm">Ahora que conoces los 16 skills del curso, vuelve al inicio y relee los módulos con otros ojos. La segunda lectura siempre revela conexiones que no viste en la primera, especialmente cómo los skills de las 4 rutas se integran en un flujo de trabajo completo de diseño con Claude Code.</p>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Volver a la ruta 4</a>
+<a class="flex-1 text-center px-6 py-3 bg-amber-500 text-dark-900 rounded-lg font-semibold hover:bg-amber-400 transition-colors" href="../../index.html">Volver al inicio 🎓 →</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Contenido de <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Ruta 4: Apoyo · Módulo 4.4 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Module 3.1 — animation-designer | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento purple */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124,58,237,0.18); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(220,38,38,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .bg-cyan-500\/10 { background-color: rgba(8,145,178,0.08); }
+    html:not(.dark) .border-cyan-500\/30 { border-color: rgba(8,145,178,0.25); }
+    html:not(.dark) .text-purple-300 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-900\/30 { background-color: rgba(124,58,237,0.08); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* SVG animations */
+    @keyframes m31-flow { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+    @keyframes m31-pulse { 0%,100% { opacity:.3 } 50% { opacity:1 } }
+    @keyframes m31-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes m31-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: no-preference) {
+      .m31-anim-flow { animation: m31-flow 3s linear infinite; }
+      .m31-anim-pulse { animation: m31-pulse 2.5s ease-in-out infinite; }
+      .m31-anim-pulse:nth-child(2) { animation-delay: .5s; }
+      .m31-anim-pulse:nth-child(3) { animation-delay: 1s; }
+      .m31-anim-float { animation: m31-float 3s ease-in-out infinite; }
+      .m31-anim-spin { animation: m31-spin 10s linear infinite; transform-origin: 200px 120px; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha3/modulo-3-1.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha3/modulo-3-1.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha3/modulo-3-1.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha3/modulo-3-1.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-3-1.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha3/modulo-3-1.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Design Skill</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Build</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identity</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Media</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Support</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-purple-400 transition-colors" href="../../index.html">Start</a>
+<span>/</span>
+<a class="hover:text-purple-400 transition-colors" href="index.html">Track 3 — Media</a>
+<span>/</span>
+<span class="text-purple-400 font-medium">Module 3.1</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MODULE 3.1</span>
+<h1 class="text-3xl sm:text-4xl font-extrabold text-neutral-100 mb-3">🎬 animation-designer</h1>
+<p class="text-neutral-300 text-lg leading-relaxed mb-6">Specialist in web animations, transitions, and motion design with Framer Motion and CSS. Turns static interfaces into living experiences.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-xl p-3 text-center border border-dark-600">
+<div class="text-2xl font-bold text-purple-400">6</div>
+<div class="text-xs text-neutral-500 mt-1">Topics</div>
+</div>
+<div class="bg-dark-800 rounded-xl p-3 text-center border border-dark-600">
+<div class="text-2xl font-bold text-purple-400">30</div>
+<div class="text-xs text-neutral-500 mt-1">Minutes</div>
+</div>
+<div class="bg-dark-800 rounded-xl p-3 text-center border border-dark-600">
+<div class="text-2xl font-bold text-purple-400">Adv</div>
+<div class="text-xs text-neutral-500 mt-1">Advanced</div>
+</div>
+<div class="bg-dark-800 rounded-xl p-3 text-center border border-dark-600">
+<div class="text-2xl font-bold text-purple-400">🎞️</div>
+<div class="text-xs text-neutral-500 mt-1">Media</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA -->
+<div class="flex justify-center">
+<svg aria-label="Motion design diagram: animated particles, easing curves, and transition layers" class="w-full h-auto max-w-sm" fill="none" role="img" viewbox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="m31-grad1" x1="0" x2="400" y1="0" y2="280">
+<stop offset="0%" stop-color="#a855f7" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1"></stop>
+</lineargradient>
+<lineargradient id="m31-grad2" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#c084fc"></stop>
+<stop offset="100%" stop-color="#38bdf8"></stop>
+</lineargradient>
+<filter id="m31-glow">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<!-- Background panel -->
+<rect fill="#1a1230" height="260" rx="16" stroke="#a855f7" stroke-opacity="0.4" stroke-width="1" width="380" x="10" y="10"></rect>
+<!-- Grid lines -->
+<line stroke="#a855f7" stroke-opacity="0.2" stroke-width="0.5" x1="40" x2="40" y1="40" y2="240"></line>
+<line stroke="#a855f7" stroke-opacity="0.2" stroke-width="0.5" x1="100" x2="100" y1="40" y2="240"></line>
+<line stroke="#a855f7" stroke-opacity="0.2" stroke-width="0.5" x1="160" x2="160" y1="40" y2="240"></line>
+<line stroke="#a855f7" stroke-opacity="0.2" stroke-width="0.5" x1="220" x2="220" y1="40" y2="240"></line>
+<line stroke="#a855f7" stroke-opacity="0.2" stroke-width="0.5" x1="280" x2="280" y1="40" y2="240"></line>
+<line stroke="#a855f7" stroke-opacity="0.2" stroke-width="0.5" x1="340" x2="340" y1="40" y2="240"></line>
+<!-- Easing curve (cubic bezier visual) -->
+<path class="m31-anim-flow" d="M 40 220 C 80 220, 120 60, 340 60" fill="none" filter="url(#m31-glow)" stroke="url(#m31-grad2)" stroke-dasharray="200" stroke-linecap="round" stroke-width="3"></path>
+<!-- Axis labels -->
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="10" opacity="0.7" text-anchor="middle" x="190" y="258">time</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="10" opacity="0.7" text-anchor="middle" transform="rotate(-90,22,140)" x="22" y="140">value</text>
+<!-- Keyframe dots -->
+<circle class="m31-anim-pulse" cx="40" cy="220" fill="#c084fc" filter="url(#m31-glow)" r="6"></circle>
+<circle class="m31-anim-pulse" cx="130" cy="160" fill="#38bdf8" filter="url(#m31-glow)" r="5"></circle>
+<circle class="m31-anim-pulse" cx="240" cy="90" fill="#c084fc" filter="url(#m31-glow)" r="5"></circle>
+<circle class="m31-anim-pulse" cx="340" cy="60" fill="#38bdf8" filter="url(#m31-glow)" r="6"></circle>
+<!-- Vertical tick lines -->
+<line stroke="#c084fc" stroke-opacity="0.6" stroke-width="1.5" x1="40" x2="40" y1="215" y2="230"></line>
+<line stroke="#38bdf8" stroke-opacity="0.6" stroke-width="1.5" x1="130" x2="130" y1="155" y2="170"></line>
+<line stroke="#c084fc" stroke-opacity="0.6" stroke-width="1.5" x1="240" x2="240" y1="85" y2="100"></line>
+<line stroke="#38bdf8" stroke-opacity="0.6" stroke-width="1.5" x1="340" x2="340" y1="55" y2="70"></line>
+<!-- Label: Framer Motion -->
+<rect fill="#a855f7" fill-opacity="0.15" height="30" rx="6" stroke="#a855f7" stroke-opacity="0.5" stroke-width="0.8" width="120" x="260" y="170"></rect>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="320" y="189">Framer Motion</text>
+<!-- Label: CSS -->
+<rect fill="#38bdf8" fill-opacity="0.1" height="28" rx="6" stroke="#38bdf8" stroke-opacity="0.5" stroke-width="0.8" width="80" x="30" y="55"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="70" y="73">CSS Keyframes</text>
+<!-- Floating particle -->
+<circle class="m31-anim-float" cx="200" cy="140" fill="#38bdf8" fill-opacity="0.5" r="4"></circle>
+<circle class="m31-anim-float" cx="310" cy="130" fill="#c084fc" fill-opacity="0.4" r="3"></circle>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT -->
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+<!-- TÓPICO 1: O que é / o que faz -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden" id="topico-1">
+<div class="bg-gradient-to-r from-purple-900/30 to-dark-800 px-6 py-4 border-b border-dark-600">
+<div class="flex items-center space-x-3">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 font-bold text-sm">1</span>
+<h2 class="text-xl font-bold text-neutral-100">🧩 What it is / what it does</h2>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- Conceito principal -->
+<div class="bg-gradient-to-r from-purple-900/30 to-purple-900/10 border border-purple-500/30 rounded-xl p-5">
+<h3 class="text-purple-400 font-semibold text-sm uppercase tracking-wide mb-2">Main Concept</h3>
+<p class="text-neutral-200 text-lg leading-relaxed">O <strong class="text-purple-400">animation-designer</strong> is a skill specializing in web animations, transitions, and motion design. It masters two complementary ecosystems: <strong class="text-cyan-400">Framer Motion</strong> (for React) and <strong class="text-cyan-400">CSS Animations/Keyframes</strong> — producing everything from subtle micro-interactions to complete page transitions.</p>
+</div>
+<p class="text-neutral-300 leading-relaxed">The skill covers the entire motion pipeline in interfaces: <em>fade-ins</em>, staggered lists (<em>staggered</em>), modals with spring physics, parallax while scrolling, animated counters, loaders, <em>drag-and-drop</em> with inertia and notifications with an animated badge. Each pattern follows performance best practices (GPU compositing, <code class="text-cyan-400 bg-dark-700 px-1 rounded">will-change</code>, respect for <code class="text-cyan-400 bg-dark-700 px-1 rounded">prefers-reduced-motion</code>).</p>
+<!-- Grid o que faz -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<h4 class="text-purple-400 font-semibold mb-3">With Framer Motion</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-purple-400 mt-0.5">▸</span><span>Fade in / slide when mounting the component (<code class="text-cyan-400">initial/animate/exit</code>)</span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400 mt-0.5">▸</span><span>Staggered lists with <code class="text-cyan-400">staggerChildren</code></span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400 mt-0.5">▸</span><span>Modals with spring physics (<code class="text-cyan-400">AnimatePresence</code>)</span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400 mt-0.5">▸</span><span>Full-page transitions</span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400 mt-0.5">▸</span><span>Drag and drop with <code class="text-cyan-400">useDragControls</code></span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400 mt-0.5">▸</span><span>Animated counters with <code class="text-cyan-400">useTransform</code></span></li>
+</ul>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<h4 class="text-cyan-400 font-semibold mb-3">With CSS / Tailwind</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">▸</span><span>Custom keyframe animations</span></li>
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">▸</span><span>Tailwind classes: <code class="text-purple-400">animate-spin</code>, <code class="text-purple-400">animate-bounce</code>, <code class="text-purple-400">animate-pulse</code></span></li>
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">▸</span><span>Skeleton loaders with pulse</span></li>
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">▸</span><span>Scroll progress indicator</span></li>
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">▸</span><span>Parallax with <code class="text-purple-400">useScroll</code> + <code class="text-purple-400">useTransform</code></span></li>
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">▸</span><span>Success checkmark and notification badge</span></li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Framer Motion</div>
+<div class="text-neutral-500 text-xs mt-1">React animation lib</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">CSS Keyframes</div>
+<div class="text-neutral-500 text-xs mt-1">Native animation</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Easing</div>
+<div class="text-neutral-500 text-xs mt-1">Motion curves</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Motion Design</div>
+<div class="text-neutral-500 text-xs mt-1">UX in motion</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2: Quando dispara -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden" id="topico-2">
+<div class="bg-gradient-to-r from-purple-900/30 to-dark-800 px-6 py-4 border-b border-dark-600">
+<div class="flex items-center space-x-3">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 font-bold text-sm">2</span>
+<h2 class="text-xl font-bold text-neutral-100">🎣 When it triggers</h2>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<p class="text-neutral-300 leading-relaxed">Claude invokes the <strong class="text-purple-400">animation-designer</strong> when it detects keywords related to movement, transitions, or motion design in your request. The skill is <em>specialized</em> — not called for just any CSS, only when animation is the focus.</p>
+<!-- Timeline de gatilhos -->
+<div class="space-y-0">
+<h3 class="text-neutral-200 font-semibold mb-4">Common trigger timeline</h3>
+<div class="relative border-l-2 border-purple-500/30 ml-4 space-y-0">
+<div class="relative pl-6 pb-5">
+<div class="absolute -left-2 top-1 w-4 h-4 rounded-full bg-purple-500/20 border-2 border-purple-400 flex items-center justify-center"></div>
+<div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+<div class="text-purple-400 font-semibold text-sm mb-1">Explicit animation request</div>
+<p class="text-neutral-400 text-sm">"add animation", "create a transition", "animate this component", "motion design", "Framer Motion"</p>
+</div>
+</div>
+<div class="relative pl-6 pb-5">
+<div class="absolute -left-2 top-1 w-4 h-4 rounded-full bg-purple-500/20 border-2 border-purple-400 flex items-center justify-center"></div>
+<div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+<div class="text-purple-400 font-semibold text-sm mb-1">Behavioral components</div>
+<p class="text-neutral-400 text-sm">"modal that slides in", "button with animated hover", "list that appears in staggered order", "loading spinner"</p>
+</div>
+</div>
+<div class="relative pl-6 pb-5">
+<div class="absolute -left-2 top-1 w-4 h-4 rounded-full bg-cyan-500/20 border-2 border-cyan-400 flex items-center justify-center"></div>
+<div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+<div class="text-cyan-400 font-semibold text-sm mb-1">Scroll and parallax</div>
+<p class="text-neutral-400 text-sm">"element appears on scroll", "parallax in the hero", "reading progress bar"</p>
+</div>
+</div>
+<div class="relative pl-6 pb-5">
+<div class="absolute -left-2 top-1 w-4 h-4 rounded-full bg-cyan-500/20 border-2 border-cyan-400 flex items-center justify-center"></div>
+<div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+<div class="text-cyan-400 font-semibold text-sm mb-1">Microinteractions</div>
+<p class="text-neutral-400 text-sm">"success checkmark", "pulsing number badge", "visual feedback on click"</p>
+</div>
+</div>
+<div class="relative pl-6">
+<div class="absolute -left-2 top-1 w-4 h-4 rounded-full bg-purple-500/20 border-2 border-purple-400 flex items-center justify-center"></div>
+<div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+<div class="text-purple-400 font-semibold text-sm mb-1">Page transitions</div>
+<p class="text-neutral-400 text-sm">"fade navigation between routes", "page transition with AnimatePresence", "route that slides"</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Tip box -->
+<div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 flex items-start space-x-3">
+<span class="text-purple-400 text-xl flex-shrink-0">💡</span>
+<div>
+<p class="text-purple-300 font-semibold text-sm mb-1">Activation tip</p>
+<p class="text-neutral-300 text-sm">Be specific in your request: say which component to animate, which technology you prefer (Framer Motion or plain CSS), and the desired effect. The skill produces ready-to-paste code, not generic instructions.</p>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Direct Trigger</div>
+<div class="text-neutral-500 text-xs mt-1">"animate", "transition"</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Implicit Trigger</div>
+<div class="text-neutral-500 text-xs mt-1">Modal, spinner, fade</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Scroll-based</div>
+<div class="text-neutral-500 text-xs mt-1">useScroll, parallax</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Microinteraction</div>
+<div class="text-neutral-500 text-xs mt-1">Checkmark, badge</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3: Como melhora suas páginas -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden" id="topico-3">
+<div class="bg-gradient-to-r from-purple-900/30 to-dark-800 px-6 py-4 border-b border-dark-600">
+<div class="flex items-center space-x-3">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 font-bold text-sm">3</span>
+<h2 class="text-xl font-bold text-neutral-100">🚀 How it improves your pages</h2>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- Box dados -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5">
+<h3 class="text-blue-400 font-semibold mb-3">📊 Impact on UX metrics</h3>
+<div class="grid sm:grid-cols-3 gap-4">
+<div class="text-center">
+<div class="text-3xl font-extrabold text-blue-400">+40%</div>
+<div class="text-sm text-neutral-400 mt-1">Perceived quality through well-calibrated micro-interactions</div>
+</div>
+<div class="text-center">
+<div class="text-3xl font-extrabold text-blue-400">−60%</div>
+<div class="text-sm text-neutral-400 mt-1">Loading feel with animated skeleton loaders</div>
+</div>
+<div class="text-center">
+<div class="text-3xl font-extrabold text-blue-400">100%</div>
+<div class="text-sm text-neutral-400 mt-1">Accessibility with <code class="text-cyan-400">prefers-reduced-motion</code></div>
+</div>
+</div>
+</div>
+<!-- Grids FAZER / EVITAR -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
+<h4 class="text-emerald-400 font-semibold mb-3">✓ DO with animation-designer</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Fade in cards as they enter the viewport (scroll-triggered)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Staggered lists to guide the user's eye</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Spring physics in modals for a tactile feel</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Skeleton loader while fetching data</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Reading progress bar at the top of the page</span></li>
+</ul>
+</div>
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+<h4 class="text-red-400 font-semibold mb-3">✗ AVOID when animating</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Animate <code class="text-neutral-400">width/height</code> directly (causes reflow)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Duration over 500ms for micro-interactions</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Forget <code class="text-neutral-400">@media (prefers-reduced-motion)</code></span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Animate <code class="text-neutral-400">opacity + transform</code> without <code class="text-neutral-400">will-change</code> in long lists</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Endless looping without purpose (distracts and wears you out)</span></li>
+</ul>
+</div>
+</div>
+<p class="text-neutral-300 leading-relaxed">The biggest difference lies in <strong class="text-purple-400">perceived responsiveness</strong>: an interface that animates feedback for actions (click, hover, submit) feels faster and more reliable, even when the actual timing is identical. The skill ensures every animation has a functional purpose, not just a decorative one.</p>
+<!-- Tip box -->
+<div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 flex items-start space-x-3">
+<span class="text-purple-400 text-xl flex-shrink-0">⚡</span>
+<div>
+<p class="text-purple-300 font-semibold text-sm mb-1">Performance first</p>
+<p class="text-neutral-300 text-sm">The skill prioritizes animating only GPU-composited properties: <code class="text-cyan-400">transform</code> e <code class="text-cyan-400">opacity</code>. Never animates <code class="text-neutral-400">top/left/margin/width</code> directly — this triggers layout thrashing.</p>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">GPU Compositing</div>
+<div class="text-neutral-500 text-xs mt-1">transform + opacity</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Perceived Speed</div>
+<div class="text-neutral-500 text-xs mt-1">Subjective UX</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Ideal duration</div>
+<div class="text-neutral-500 text-xs mt-1">150ms–400ms</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">Reduced Motion</div>
+<div class="text-neutral-500 text-xs mt-1">Accessibility</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4: Como funciona por dentro -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden" id="topico-4">
+<div class="bg-gradient-to-r from-purple-900/30 to-dark-800 px-6 py-4 border-b border-dark-600">
+<div class="flex items-center space-x-3">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 font-bold text-sm">4</span>
+<h2 class="text-xl font-bold text-neutral-100">⚙️ How it works under the hood</h2>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- Stack tecnológica -->
+<div class="grid sm:grid-cols-3 gap-4">
+<div class="bg-dark-700 rounded-xl p-4 border border-purple-500/20">
+<div class="text-purple-400 font-bold mb-2">Core</div>
+<ul class="text-sm text-neutral-400 space-y-1">
+<li>• <strong class="text-neutral-300">Framer Motion</strong></li>
+<li>• CSS Animations / Keyframes</li>
+<li>• React (<code class="text-cyan-400">motion.*</code>)</li>
+<li>• Tailwind Animation Classes</li>
+</ul>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-cyan-500/20">
+<div class="text-cyan-400 font-bold mb-2">Main APIs</div>
+<ul class="text-sm text-neutral-400 space-y-1">
+<li>• <code class="text-purple-400">motion.div</code>, <code class="text-purple-400">AnimatePresence</code></li>
+<li>• <code class="text-purple-400">useScroll</code>, <code class="text-purple-400">useTransform</code></li>
+<li>• <code class="text-purple-400">useMotionValue</code></li>
+<li>• <code class="text-purple-400">useDragControls</code></li>
+</ul>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="text-neutral-300 font-bold mb-2">Delivered patterns</div>
+<ul class="text-sm text-neutral-400 space-y-1">
+<li>• Fade In on Mount</li>
+<li>• Staggered List</li>
+<li>• Modal with spring animation</li>
+<li>• Page Transition</li>
+<li>• Scroll-triggered</li>
+<li>• Drag and Drop</li>
+</ul>
+</div>
+</div>
+<!-- Instalação -->
+<div>
+<h3 class="text-neutral-200 font-semibold mb-3">Installation</h3>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 overflow-x-auto">
+<pre class="text-sm font-mono text-cyan-400">npm install framer-motion</pre>
+<pre class="text-sm font-mono text-neutral-400 mt-2">// Uso básico em React
+import { motion, AnimatePresence } from 'framer-motion';</pre>
+</div>
+</div>
+<!-- Anatomia de uma animação Framer Motion -->
+<div>
+<h3 class="text-neutral-200 font-semibold mb-3">Anatomy of an animation</h3>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 overflow-x-auto">
+<pre class="text-sm font-mono text-neutral-300"><span class="text-purple-400">&lt;motion.div</span>
+  <span class="text-cyan-400">initial</span>={{ opacity: 0, y: 20 }}     <span class="text-neutral-500">// estado inicial</span>
+  <span class="text-cyan-400">animate</span>={{ opacity: 1, y: 0 }}      <span class="text-neutral-500">// estado final</span>
+  <span class="text-cyan-400">exit</span>={{ opacity: 0, y: -20 }}       <span class="text-neutral-500">// saída (AnimatePresence)</span>
+  <span class="text-cyan-400">transition</span>={{ duration: 0.3, ease: <span class="text-purple-400">'easeOut'</span> }}
+<span class="text-purple-400">&gt;</span>
+  Conteúdo animado
+<span class="text-purple-400">&lt;/motion.div&gt;</span></pre>
+</div>
+</div>
+<!-- Boas práticas por dentro -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
+<h4 class="text-emerald-400 font-semibold mb-3">✓ Internal best practices</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Always includes a block <code class="text-neutral-400">@media (prefers-reduced-motion)</code></span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Uses semantic easing: <code class="text-neutral-400">easeOut</code> for entrances, <code class="text-neutral-400">easeIn</code> for exits</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Duration: 150–300ms for micro-interactions, 300–500ms for transitions</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Preference for <code class="text-neutral-400">transform</code> + <code class="text-neutral-400">opacity</code> (zero layout thrashing)</span></li>
+</ul>
+</div>
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+<h4 class="text-red-400 font-semibold mb-3">✗ Patterns avoided</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Animate <code class="text-neutral-400">width</code>, <code class="text-neutral-400">height</code>, <code class="text-neutral-400">top</code>, <code class="text-neutral-400">left</code></span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Endless loops without a UX justification</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Duration over 500ms for frequent interactions</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Ignore focus state / keyboard accessibility</span></li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">motion.*</div>
+<div class="text-neutral-500 text-xs mt-1">Animatable components</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">AnimatePresence</div>
+<div class="text-neutral-500 text-xs mt-1">Exit animation</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">useScroll</div>
+<div class="text-neutral-500 text-xs mt-1">Scroll-based animation</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">staggerChildren</div>
+<div class="text-neutral-500 text-xs mt-1">Staggered delay</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5: Exemplo prático + Prompt pronto -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden" id="topico-5">
+<div class="bg-gradient-to-r from-purple-900/30 to-dark-800 px-6 py-4 border-b border-dark-600">
+<div class="flex items-center space-x-3">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 font-bold text-sm">5</span>
+<h2 class="text-xl font-bold text-neutral-100">💬 Practical example + Ready-to-use prompt</h2>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<p class="text-neutral-300 leading-relaxed">Here’s a real-world scenario: you have a list of product cards in React and want each card to appear in sequence as you scroll down the page. Here’s the optimized prompt and the code the skill produces.</p>
+<!-- Prompt pronto -->
+<div>
+<h3 class="text-neutral-200 font-semibold mb-3">Prompt ready to paste into Claude Code</h3>
+<div class="bg-dark-900 rounded-xl border border-purple-500/30 p-5 overflow-x-auto">
+<pre class="text-sm font-mono text-neutral-300 whitespace-pre-wrap">Use o skill animation-designer para adicionar animação à lista
+de cards de produto no componente ProductList.tsx (React + Tailwind).
+
+Requisitos:
+- Cada card deve fade in + slide-up ao entrar na viewport (scroll-triggered)
+- Stagger de 0.1s entre cada card
+- Duração de 0.4s com easing easeOut
+- Usar Framer Motion (já instalado)
+- Incluir suporte a prefers-reduced-motion
+- Não alterar layout ou estilos existentes, só adicionar animação</pre>
+</div>
+</div>
+<!-- Código produzido -->
+<div>
+<h3 class="text-neutral-200 font-semibold mb-3">Resulting code — Staggered List with scroll trigger</h3>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 overflow-x-auto">
+<pre class="text-sm font-mono text-neutral-300"><span class="text-purple-400">import</span> { motion, useInView } <span class="text-purple-400">from</span> <span class="text-cyan-400">'framer-motion'</span>;
+<span class="text-purple-400">import</span> { useRef } <span class="text-purple-400">from</span> <span class="text-cyan-400">'react'</span>;
+
+<span class="text-neutral-500">// Variantes para o container (stagger)</span>
+<span class="text-purple-400">const</span> containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: <span class="text-cyan-400">0.1</span> }
+  }
+};
+
+<span class="text-neutral-500">// Variantes para cada card</span>
+<span class="text-purple-400">const</span> cardVariants = {
+  hidden: { opacity: <span class="text-cyan-400">0</span>, y: <span class="text-cyan-400">24</span> },
+  visible: {
+    opacity: <span class="text-cyan-400">1</span>,
+    y: <span class="text-cyan-400">0</span>,
+    transition: { duration: <span class="text-cyan-400">0.4</span>, ease: <span class="text-purple-400">'easeOut'</span> }
+  }
+};
+
+<span class="text-purple-400">export function</span> ProductList({ products }) {
+  <span class="text-purple-400">const</span> ref = useRef(<span class="text-cyan-400">null</span>);
+  <span class="text-purple-400">const</span> isInView = useInView(ref, { once: <span class="text-cyan-400">true</span>, margin: <span class="text-cyan-400">'-60px'</span> });
+
+  <span class="text-purple-400">return</span> (
+    &lt;<span class="text-purple-400">motion.ul</span>
+      ref={ref}
+      variants={containerVariants}
+      initial=<span class="text-cyan-400">"hidden"</span>
+      animate={isInView ? <span class="text-cyan-400">"visible"</span> : <span class="text-cyan-400">"hidden"</span>}
+      className=<span class="text-cyan-400">"grid grid-cols-3 gap-4"</span>
+    &gt;
+      {products.map(p =&gt; (
+        &lt;<span class="text-purple-400">motion.li</span> key={p.id} variants={cardVariants}&gt;
+          &lt;ProductCard product={p} /&gt;
+        &lt;/<span class="text-purple-400">motion.li</span>&gt;
+      ))}
+    &lt;/<span class="text-purple-400">motion.ul</span>&gt;
+  );
+}</pre>
+</div>
+</div>
+<!-- Tip box -->
+<div class="bg-primary/10 border border-primary/40 rounded-xl p-4 flex items-start space-x-3">
+<span class="text-primary text-xl flex-shrink-0">🎯</span>
+<div>
+<p class="text-primary font-semibold text-sm mb-1">Pro tip: once: true</p>
+<p class="text-neutral-300 text-sm">Pass <code class="text-cyan-400">once: true</code> in the <code class="text-cyan-400">useInView</code> so the animation triggers only the first time the element enters the screen. Without this, the element re-animates every time it leaves and re-enters the viewport — usually undesirable.</p>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">useInView</div>
+<div class="text-neutral-500 text-xs mt-1">Scroll trigger</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">variants</div>
+<div class="text-neutral-500 text-xs mt-1">Named states</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">staggerChildren</div>
+<div class="text-neutral-500 text-xs mt-1">0.1s delay</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">once: true</div>
+<div class="text-neutral-500 text-xs mt-1">Animate only once</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6: Combina com / Limites -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden" id="topico-6">
+<div class="bg-gradient-to-r from-purple-900/30 to-dark-800 px-6 py-4 border-b border-dark-600">
+<div class="flex items-center space-x-3">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 font-bold text-sm">6</span>
+<h2 class="text-xl font-bold text-neutral-100">🧬 Works well with / Limitations</h2>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- Combina com -->
+<h3 class="text-neutral-200 font-semibold">Which skills it works with</h3>
+<div class="grid sm:grid-cols-3 gap-4">
+<!-- impeccable -->
+<div class="bg-dark-700 rounded-xl p-4 border border-emerald-500/20 group">
+<div class="flex items-center space-x-2 mb-3">
+<span class="text-2xl">✨</span>
+<div>
+<div class="text-emerald-400 font-semibold text-sm group-hover:text-emerald-300 transition-colors">impeccable</div>
+<div class="text-neutral-500 text-xs">T1 · Build</div>
+</div>
+</div>
+<p class="text-neutral-400 text-sm leading-relaxed">O <strong class="text-neutral-300">impeccable</strong> also applies animations—specifically CSS transitions and final-polish micro-interactions (hover states, focus rings, color transitions). The combination is powerful: <em>impeccable</em> handles the overall visual polish, <em>animation-designer</em> handles more elaborate motion design (scroll, spring, stagger, drag). Use impeccable first to establish the visual foundation; then call animation-designer for more complex motion layers.</p>
+</div>
+<!-- algorithmic-art -->
+<div class="bg-dark-700 rounded-xl p-4 border border-blue-500/20 group">
+<div class="flex items-center space-x-2 mb-3">
+<span class="text-2xl">🌀</span>
+<div>
+<div class="text-blue-400 font-semibold text-sm group-hover:text-blue-300 transition-colors">algorithmic-art</div>
+<div class="text-neutral-500 text-xs">T2 · Identity</div>
+</div>
+</div>
+<p class="text-neutral-400 text-sm leading-relaxed">O <strong class="text-neutral-300">algorithmic-art</strong> generates generative art with <strong class="text-neutral-300">p5.js</strong> and canvas. Combining it with animation-designer creates visuals that bring together procedural generation (shapes, particles, Perlin noise) and interface motion design (entrance transitions, hover feedback). Use case: generative animated backgrounds with p5.js + component transitions with Framer Motion on the same page.</p>
+</div>
+<!-- 3d-animation-creator -->
+<div class="bg-dark-700 rounded-xl p-4 border border-purple-500/20 group">
+<div class="flex items-center space-x-2 mb-3">
+<span class="text-2xl">🖱️</span>
+<div>
+<div class="text-purple-400 font-semibold text-sm group-hover:text-purple-300 transition-colors">3d-animation-creator</div>
+<div class="text-neutral-500 text-xs">T3 · Media · Next</div>
+</div>
+</div>
+<p class="text-neutral-400 text-sm leading-relaxed">O <strong class="text-neutral-300">3d-animation-creator</strong> is the next module in this learning path: it expands motion design into the Z axis, working with Three.js, WebGL, and 3D browser animations. The distinction is clear: <em>animation-designer</em> dominates 2D space (UI, transitions, scrolling), while <em>3d-animation-creator</em> handles 3D scenes, meshes, materials, and cameras. Use them together when you need an animated interface (2D) that integrates a 3D hero or background.</p>
+</div>
+</div>
+<!-- Box alerta: limites -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5">
+<h3 class="text-red-400 font-semibold mb-3">⚠️ Limitations — when NOT to use it</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400 flex-shrink-0">✗</span><span><strong class="text-neutral-200">Video and frame export:</strong> to create videos rendered from React components, use the skill <strong class="text-cyan-400">remotion</strong> (module 3.3). animation-designer animates in the browser; it doesn't export video files.</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400 flex-shrink-0">✗</span><span><strong class="text-neutral-200">Complex 3D animations:</strong> Three.js scenes, meshes, shaders, and orbital cameras are the domain of <strong class="text-cyan-400">3d-animation-creator</strong>, not this skill.</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400 flex-shrink-0">✗</span><span><strong class="text-neutral-200">Generative art with canvas/p5:</strong> pure procedural generation (fractals, noise, mathematical particle systems) is the work of <strong class="text-cyan-400">algorithmic-art</strong>.</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400 flex-shrink-0">✗</span><span><strong class="text-neutral-200">Projects without React/CSS:</strong> The skill is geared toward React (Framer Motion) and modern CSS. For animations in native contexts (iOS, Android) or game engines, it's not the right tool.</span></li>
+</ul>
+</div>
+<!-- Mapa de responsabilidades -->
+<div class="bg-dark-700 rounded-xl p-5 border border-dark-600">
+<h3 class="text-neutral-200 font-semibold mb-4">Map of responsibilities in Learning Path 3</h3>
+<div class="grid sm:grid-cols-4 gap-3">
+<div class="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20 text-center">
+<div class="text-purple-400 font-bold text-sm">3.1 animation-designer</div>
+<div class="text-neutral-500 text-xs mt-1">2D · UI · Framer Motion · CSS</div>
+</div>
+<div class="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20 text-center">
+<div class="text-purple-400 font-bold text-sm">3.2 3d-animation-creator</div>
+<div class="text-neutral-500 text-xs mt-1">3D · WebGL · Three.js</div>
+</div>
+<div class="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20 text-center">
+<div class="text-purple-400 font-bold text-sm">3.3 remotion</div>
+<div class="text-neutral-500 text-xs mt-1">React → Video · Export</div>
+</div>
+<div class="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20 text-center">
+<div class="text-purple-400 font-bold text-sm">3.4 seedance + HyperFrames</div>
+<div class="text-neutral-500 text-xs mt-1">FFmpeg · Media pipelines</div>
+</div>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">+ impeccable</div>
+<div class="text-neutral-500 text-xs mt-1">Polish → Motion</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">+ algorithmic-art</div>
+<div class="text-neutral-500 text-xs mt-1">p5.js + Framer</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">+ 3d-animation</div>
+<div class="text-neutral-500 text-xs mt-1">2D UI + 3D hero</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 text-center border border-purple-500/20">
+<div class="text-purple-400 font-bold text-sm">NOT for video</div>
+<div class="text-neutral-500 text-xs mt-1">Use remotion</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-2xl border border-purple-500/30 overflow-hidden">
+<div class="px-6 py-4 border-b border-purple-500/20">
+<h2 class="text-xl font-bold text-neutral-100">📋 Module 3.1 Summary</h2>
+</div>
+<div class="p-6 space-y-6">
+<div class="grid sm:grid-cols-2 gap-6">
+<div>
+<h3 class="text-purple-400 font-semibold mb-3">What you learned</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>O <strong>animation-designer</strong> specializes in web animations with Framer Motion and CSS</span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>Covers fade, slide, stagger, spring, scroll, parallax, drag, and micro-interactions</span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>Triggers for explicit requests involving animation, motion design, or Framer Motion</span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>Always includes <code class="text-cyan-400">prefers-reduced-motion</code> and uses transform+opacity for performance</span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>Main APIs: <code class="text-cyan-400">motion.*</code>, <code class="text-cyan-400">AnimatePresence</code>, <code class="text-cyan-400">useScroll</code>, <code class="text-cyan-400">useTransform</code>, <code class="text-cyan-400">useDragControls</code></span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>Works with <strong>impeccable</strong> (polish), <strong>algorithmic-art</strong> (p5.js) and <strong>3d-animation-creator</strong> (Three.js)</span></li>
+<li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>Is NOT a substitute for video (remotion) or 3D art (3d-animation-creator)</span></li>
+</ul>
+</div>
+<div>
+<!-- Próximo módulo -->
+<div class="bg-dark-800 rounded-xl border border-purple-500/20 p-4 mb-4">
+<div class="text-xs text-neutral-500 uppercase tracking-wide mb-2">Next module</div>
+<div class="flex items-center space-x-3">
+<span class="text-3xl">🖱️</span>
+<div>
+<div class="text-purple-400 font-bold">3.2 — 3d-animation-creator</div>
+<div class="text-neutral-400 text-sm mt-1">Three.js, WebGL, and 3D animations in the browser. From a flat interface to three-dimensional space.</div>
+</div>
+</div>
+</div>
+<!-- Tip final -->
+<div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 flex items-start space-x-3">
+<span class="text-purple-400 text-xl flex-shrink-0">🎬</span>
+<div>
+<p class="text-purple-300 font-semibold text-sm mb-1">Track 3 — Media</p>
+<p class="text-neutral-400 text-sm">This track covers the entire motion and media layer: from UI animations (3.1) to video pipelines with FFmpeg (3.4). Each module expands the motion axis in a different direction.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-3 pt-2">
+<a class="flex items-center justify-start space-x-2 px-5 py-3 bg-dark-700 hover:bg-dark-600 border border-dark-600 rounded-xl text-neutral-300 font-medium transition-colors" href="index.html">
+<span>←</span><span>Back to Track 3</span>
+</a>
+<a class="flex items-center justify-start space-x-2 px-5 py-3 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/30 rounded-xl text-purple-400 font-medium transition-colors" href="modulo-3-2.html">
+<span>Next Module</span><span>→</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="border-t border-dark-600 bg-dark-800 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+<div class="flex items-center space-x-2 text-neutral-400 text-sm">
+<span class="text-2xl">🎨</span>
+<span>Design Skill · <a class="text-sky-400 hover:text-sky-300 transition-colors" href="https://inema.club" target="_blank">INEMA.CLUB</a></span>
+</div>
+<div class="text-neutral-500 text-sm">Module 3.1 · Track 3 — 🎞️ Media</div>
+<div class="flex items-center space-x-4 text-sm text-neutral-500">
+<a class="hover:text-purple-400 transition-colors" href="index.html">Track 3</a>
+<span>·</span>
+<a class="hover:text-purple-400 transition-colors" href="../../index.html">Start</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- SCRIPTS -->
+<script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    function updateIcons() {
+      if (html.classList.contains('dark')) {
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+      } else {
+        darkIcon.classList.remove('hidden');
+        lightIcon.classList.add('hidden');
+      }
+    }
+
+    updateIcons();
+
+    themeToggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      updateIcons();
+      try { localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); } catch(e) {}
+    });
+
+    // Restore saved theme
+    try {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') { html.classList.remove('dark'); updateIcons(); }
+    } catch(e) {}
+  </script>
+</body>
+</html>

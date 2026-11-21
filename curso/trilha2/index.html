@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trilha 2 — Identidade &amp; Temas | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    .modal.hidden { display: none; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento blue */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,0.18); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.2s} .wf-a:nth-child(3){animation-delay:.4s} .wf-a:nth-child(4){animation-delay:.6s}
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha2/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha2/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha2/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha2/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha2/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Mídia</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Apoio</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">TRILHA 2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🎨 Identidade &amp; Temas</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Do tema avulso à identidade visual consistente. Aqui você aprende a aplicar paletas, tipografias e sistemas de cor a qualquer artifact — slides, docs, landing pages — usando as skills que transformam aparência em linguagem.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">4</div><div class="text-xs text-neutral-400">Skills</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">24</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~1.5h</div><div class="text-xs text-neutral-400">Duração</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Intermediário</div><div class="text-xs text-neutral-400">Nível</div></div>
+</div>
+<!-- HERO SVG: artifact recebendo paleta/tipografia/tema blue+ciano -->
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mt-8 overflow-hidden">
+<svg aria-label="Um artifact recebe uma paleta de cores e tipografia, e é transformado em uma peça com identidade visual consistente" class="w-full h-auto" role="img" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="t2-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#60a5fa"></stop><stop offset="1" stop-color="#3b82f6"></stop></lineargradient>
+<lineargradient id="t2-cyan" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#38bdf8"></stop><stop offset="1" stop-color="#0ea5e9"></stop></lineargradient>
+<filter height="180%" id="t2-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="3"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="t2-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#3b82f6" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="t2-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"></path></marker>
+<marker id="t2-ah2" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#t2-grid)" height="200" width="1000" x="0" y="0"></rect>
+<!-- Paleta de cores (entrada) -->
+<g filter="url(#t2-glow)">
+<rect fill="#0e1622" height="100" rx="12" stroke="url(#t2-grad)" stroke-width="2.5" width="160" x="30" y="50"></rect>
+</g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="110" y="80">Paleta + Fonte</text>
+<rect fill="#3b82f6" height="20" rx="4" width="20" x="50" y="90"></rect>
+<rect fill="#38bdf8" height="20" rx="4" width="20" x="78" y="90"></rect>
+<rect fill="#a855f7" height="20" rx="4" width="20" x="106" y="90"></rect>
+<rect fill="#f8fafc" height="20" rx="4" width="20" x="134" y="90"></rect>
+<text fill="#93c5fd" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="110" y="135">Inter · Lora · Space Grotesk</text>
+<!-- Seta 1 -->
+<path d="M190,100 L260,100" fill="none" marker-end="url(#t2-ah)" stroke="#60a5fa" stroke-width="2"></path>
+<!-- Skill (processamento) -->
+<g filter="url(#t2-glow)">
+<rect fill="#0e1622" height="84" rx="12" stroke="url(#t2-cyan)" stroke-width="2.5" width="180" x="260" y="58"></rect>
+</g>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="15" font-weight="700" text-anchor="middle" x="350" y="88">Skill Design</text>
+<g class="wf-a"><text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="350" y="110">theme-factory</text></g>
+<g class="wf-a"><text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="350" y="126">brand-guidelines · canvas</text></g>
+<!-- Seta 2 -->
+<path d="M440,100 L510,100" fill="none" marker-end="url(#t2-ah2)" stroke="#38bdf8" stroke-width="2"></path>
+<!-- Artifact transformado (saída) -->
+<g filter="url(#t2-glow)">
+<rect fill="#0e1622" height="48" rx="10" stroke="url(#t2-grad)" stroke-width="2" width="160" x="510" y="38"></rect>
+</g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="12" font-weight="700" text-anchor="middle" x="590" y="60">Slides</text>
+<text fill="#93c5fd" font-family="Inter,sans-serif" font-size="10" text-anchor="middle" x="590" y="78">com identidade</text>
+<g filter="url(#t2-glow)">
+<rect fill="#0e1622" height="48" rx="10" stroke="url(#t2-grad)" stroke-width="2" width="160" x="510" y="96"></rect>
+</g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="12" font-weight="700" text-anchor="middle" x="590" y="118">Landing Page</text>
+<text fill="#93c5fd" font-family="Inter,sans-serif" font-size="10" text-anchor="middle" x="590" y="136">visual consistente</text>
+<!-- Seta final -->
+<path d="M670,100 L740,100" fill="none" stroke="#60a5fa" stroke-dasharray="5,4" stroke-width="2"></path>
+<text fill="#93c5fd" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="820" y="90">Identidade</text>
+<text fill="#93c5fd" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="820" y="110">visual aplicada</text>
+</svg>
+<p class="text-center text-xs text-neutral-500 mt-2">Fluxo da trilha — artifact + skills de identidade = resultado visual coeso</p>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- MAPA DA TRILHA -->
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-1">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.1</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🎨 theme-factory</h3>
+<p class="text-xs text-neutral-400">10 temas, ou crie o seu</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-2">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.2</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🏷️ brand-guidelines</h3>
+<p class="text-xs text-neutral-400">A marca, aplicada</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-3">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.3</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🖼️ canvas-design</h3>
+<p class="text-xs text-neutral-400">Pôsteres e arte estática</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-4">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.4</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🌀 algorithmic-art</h3>
+<p class="text-xs text-neutral-400">Fundos generativos p5.js</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+<!-- MÓDULO 2.1 — theme-factory -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-2-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.1</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🎨 theme-factory</h3>
+<p class="text-neutral-400 text-sm">Toolkit para aplicar um dos 10 presets de cor e fonte a qualquer artifact — slides, docs, landing pages HTML — ou gerar um tema completamente novo on-the-fly a partir de uma descrição.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<!-- Tópico 1 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span><div><span class="font-medium">O que é a theme-factory</span><span class="text-neutral-500 text-sm ml-2">- um toolkit de temas prontos</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A theme-factory é uma skill que mantém 10 temas visuais pré-definidos (cada um com paleta de cores e par de fontes) prontos para aplicar a qualquer artifact de apresentação ou interface HTML.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Em vez de escolher cores e fontes do zero a cada novo slide ou página, você escolhe um tema e o Claude aplica tudo de forma coerente e profissional.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Presets, paleta de cores, par tipográfico, consistência visual.</p></div>
+</div></div>
+</div>
+<!-- Tópico 2 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Quando a skill dispara</span><span class="text-neutral-500 text-sm ml-2">- os gatilhos da description</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill é acionada quando o usuário pede para aplicar um tema, trocar o visual de um deck, ou menciona "theme-factory", "tema", "palette", "cores e fontes" no contexto de um artifact.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Conhecer os gatilhos ajuda a formular pedidos que disparam a skill certa na hora certa, sem precisar invocá-la manualmente.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Description como gatilho, frases-chave, invocação automática.</p></div>
+</div></div>
+</div>
+<!-- Tópico 3 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🎨</span><div><span class="font-medium">Os 10 temas disponíveis</span><span class="text-neutral-500 text-sm ml-2">- presets de identidade</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada um dos 10 presets vive num arquivo dedicado na pasta <code>themes/</code> e define cores com hex exatos, fontes para títulos e corpo, e uma identidade visual distinta para contextos diferentes (corporativo, criativo, minimalista, etc.).</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Escolher o tema certo antes de gerar o artifact economiza retrabalho — cada preset já foi pensado para um tipo de audiência ou contexto.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Presets nomeados, pasta themes/, identidade por contexto.</p></div>
+</div></div>
+</div>
+<!-- Tópico 4 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">✨</span><div><span class="font-medium">Criar um tema novo</span><span class="text-neutral-500 text-sm ml-2">- on-the-fly a partir de descrição</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Além dos presets, é possível descrever a identidade desejada em linguagem natural ("quero algo sombrio com tons de roxo e tipografia serifada") e a skill gera um tema coerente do zero.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Libera a criação de identidades visuais únicas sem precisar saber escolher fontes ou construir paletas a mão.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Geração de tema, linguagem natural, paleta on-demand.</p></div>
+</div></div>
+</div>
+<!-- Tópico 5 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Como o tema é aplicado</span><span class="text-neutral-500 text-sm ml-2">- o processo por dentro</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Claude lê o arquivo do tema escolhido, extrai as cores e fontes especificadas, e substitui de forma consistente todos os pontos de cor e tipografia do artifact — mantendo contraste e legibilidade.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender o processo ajuda a criar artifacts que se beneficiam do tema (usar variáveis CSS ou classes nomeadas, não valores hardcoded espalhados).</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Substituição consistente, contraste, legibilidade.</p></div>
+</div></div>
+</div>
+<!-- Tópico 6 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🔗</span><div><span class="font-medium">Com o que combina</span><span class="text-neutral-500 text-sm ml-2">- parceiros naturais</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">theme-factory é a camada de estilo que se aplica em cima de qualquer artifact gerado por outra skill — frontend-design, web-artifacts-builder, canvas-design — deixando o resultado final visualmente unificado.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber que ela é um "passo final de estilo" ajuda a planejar o fluxo: gera o conteúdo primeiro, aplica o tema depois.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Camada de estilo, composição, passo final.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-1')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-1.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.2 — brand-guidelines -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-2-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🏷️ brand-guidelines</h3>
+<p class="text-neutral-400 text-sm">Aplica as cores e a tipografia oficiais da marca Anthropic (look-and-feel corporativo) a qualquer artifact que se beneficie de padrão visual de marca — documentos técnicos, interfaces, apresentações institucionais.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<!-- Tópico 1 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🏛️</span><div><span class="font-medium">O que é brand-guidelines</span><span class="text-neutral-500 text-sm ml-2">- a marca como instrução</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma skill que encapsula o manual de identidade visual Anthropic: paleta de cores oficial, tipografia corporativa (Poppins para UI, Lora para leitura longa), e regras de aplicação de acento e formas.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Permite gerar qualquer artifact no padrão visual da marca sem consultar o manual a cada vez ou errar nas cores exatas.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Manual de marca, paleta oficial, tipografia corporativa.</p></div>
+</div></div>
+</div>
+<!-- Tópico 2 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Quando dispara</span><span class="text-neutral-500 text-sm ml-2">- pedidos de marca e institucional</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill é acionada quando se pede aplicação de "brand guidelines", "identidade Anthropic", "look-and-feel da marca", ou quando o contexto envolve documentos oficiais, apresentações corporativas ou artefatos institucionais.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Distinguir quando usar brand-guidelines (marca específica) de theme-factory (tema genérico) evita aplicar o visual errado ao contexto errado.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Contexto institucional, gatilhos de marca, especificidade.</p></div>
+</div></div>
+</div>
+<!-- Tópico 3 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🎨</span><div><span class="font-medium">Cores e tipografia Anthropic</span><span class="text-neutral-500 text-sm ml-2">- o sistema visual real</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A paleta inclui tons neutros escuros para fundos, coral/terracota como acento primário, e brancos para textos. Tipografia: Poppins (títulos e UI) e Lora (corpo de texto longo) — carregadas via Google Fonts quando necessário.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Conhecer o sistema permite criar artifacts que parecem genuinamente Anthropic — não apenas "parecidos".</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Poppins, Lora, paleta Anthropic, acento de cor.</p></div>
+</div></div>
+</div>
+<!-- Tópico 4 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">✍️</span><div><span class="font-medium">Smart Font Application</span><span class="text-neutral-500 text-sm ml-2">- fonte certa no elemento certo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill aplica automaticamente a fonte correta por tipo de elemento: Poppins em headings, botões e labels de UI; Lora em parágrafos de leitura longa. Não é uma substituição cega — é inteligente ao contexto de cada tag.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Misturar fontes manualmente é onde a maioria dos designs de amador falha. A skill faz isso certo por padrão.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Hierarquia tipográfica, UI font vs reading font, aplicação contextual.</p></div>
+</div></div>
+</div>
+<!-- Tópico 5 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🔷</span><div><span class="font-medium">Formas e cores de acento</span><span class="text-neutral-500 text-sm ml-2">- shapes e highlights da marca</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Além de cores e fontes, a skill orienta o uso de formas geométricas e acentos visuais que compõem o estilo Anthropic — bordas sutis, fundos com gradiente suave, ícones alinhados ao sistema.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">São os detalhes que elevam um artifact de "bem-formatado" para "genuinamente on-brand".</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Shapes, acentos, gradientes sutis, completude visual.</p></div>
+</div></div>
+</div>
+<!-- Tópico 6 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">⚖️</span><div><span class="font-medium">brand-guidelines vs theme-factory</span><span class="text-neutral-500 text-sm ml-2">- quando usar cada uma</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">brand-guidelines aplica uma identidade específica e fixa (a da Anthropic). theme-factory aplica qualquer um de 10 temas neutros ou um gerado sob demanda. Use brand-guidelines para contexto institucional; theme-factory para liberdade criativa.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Confundir as duas resulta em artifact "genérico" quando se queria "corporativo" — ou o contrário.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Identidade específica vs genérica, contexto de uso, escolha consciente.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-2')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-2.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.3 — canvas-design -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-2-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.3</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🖼️ canvas-design</h3>
+<p class="text-neutral-400 text-sm">Cria arte visual estática — pôsteres, peças gráficas, banners — com filosofia de design própria. O resultado final é uma imagem exportável (.png, .pdf) gerada a partir de um conceito visual elaborado pelo Claude.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<!-- Tópico 1 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🖼️</span><div><span class="font-medium">O que é canvas-design</span><span class="text-neutral-500 text-sm ml-2">- arte estática com filosofia</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma skill que cria peças de arte visual original — pôsteres, thumbnails, banners, peças de campanha — usando uma metodologia de "design philosophy" que vai do conceito à execução HTML/CSS renderizável.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diferente de gerar uma imagem por prompt de texto, canvas-design produz HTML/CSS que pode ser ajustado, exportado e reproduzido com qualidade consistente.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Arte estática, filosofia visual, HTML/CSS exportável.</p></div>
+</div></div>
+</div>
+<!-- Tópico 2 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Quando a skill dispara</span><span class="text-neutral-500 text-sm ml-2">- pedidos de arte e pôster</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill é acionada quando o usuário pede "crie um pôster", "faça uma peça gráfica", "design para um banner", ou menciona canvas-design. Também dispara em pedidos de "arte visual" com dimensões fixas.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber os gatilhos evita acionar a skill para casos onde bastaria editar um template existente — ela é melhor para criação original.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Criação original, pedidos de arte, dimensões fixas.</p></div>
+</div></div>
+</div>
+<!-- Tópico 3 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🧠</span><div><span class="font-medium">A filosofia de design</span><span class="text-neutral-300 text-sm ml-2">- do conceito à execução</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Antes de escrever uma linha de CSS, a skill gera uma "design philosophy": a essência visual do que será criado, a referência implícita deduzida do pedido, o sistema de cores e tipografia escolhido. É o cérebro antes das mãos.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Essa etapa de conceituação é o que diferencia arte com intenção de layout aleatório — e pode ser refinada antes de executar.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Filosofia visual, referência implícita, conceito antes do código.</p></div>
+</div></div>
+</div>
+<!-- Tópico 4 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Como funciona por dentro</span><span class="text-neutral-500 text-sm ml-2">- HTML/CSS + canvas export</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O canvas é gerado como HTML/CSS com dimensões exatas em pixels. A skill usa elementos absolutos posicionados, camadas de cor e tipografia precisa para compor a peça. Para exportar para .png ou .pdf, o artifact HTML é convertido via browser.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender o formato HTML/CSS permite editar manualmente qualquer elemento antes de exportar — controle total.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Posicionamento absoluto, camadas, exportação via browser.</p></div>
+</div></div>
+</div>
+<!-- Tópico 5 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🖼️</span><div><span class="font-medium">Multi-página e variações</span><span class="text-neutral-500 text-sm ml-2">- série de peças coesas</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill suporta criação de múltiplas peças conectadas pela mesma filosofia visual — por exemplo, um pôster principal + versão stories + banner horizontal — mantendo identidade coesa em todos os formatos.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Campanhas visuais precisam de múltiplos formatos. A skill faz isso sem recriar o conceito do zero a cada peça.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Multi-formato, identidade coesa, reutilização de filosofia.</p></div>
+</div></div>
+</div>
+<!-- Tópico 6 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🔗</span><div><span class="font-medium">canvas-design vs algorithmic-art</span><span class="text-neutral-500 text-sm ml-2">- estático vs generativo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">canvas-design cria peças estáticas e únicas com intenção compositiva consciente. algorithmic-art cria arte generativa em loop, ótima para fundos e animações, mas sem o mesmo controle de composição estática.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">As duas skills se complementam: canvas-design para o pôster, algorithmic-art para o fundo animado atrás dele.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Estático vs generativo, composição vs sistema, complementaridade.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-3')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-3.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.4 — algorithmic-art -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-2-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.4</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🌀 algorithmic-art</h3>
+<p class="text-neutral-400 text-sm">Arte algorítmica e generativa com p5.js — flow fields, sistemas de partículas, randomness com seed. Ideal para heros de página, backgrounds interativos e arte reproduzível que se comporta diferente a cada seed.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<!-- Tópico 1 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🌀</span><div><span class="font-medium">O que é algorithmic-art</span><span class="text-neutral-500 text-sm ml-2">- sistema, não imagem</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma skill que cria arte visual usando algoritmos e p5.js — a saída não é uma imagem fixa, mas um sistema que gera visuais diferentes a cada execução (ou de forma reproduzível com o mesmo seed). Inclui flow fields, partículas, noise, geometria generativa.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Arte generativa produz variações infinitas de uma mesma ideia visual — perfeita para backgrounds, heros e peças onde a estática pareceria rígida.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">p5.js, sistema generativo, variações infinitas.</p></div>
+</div></div>
+</div>
+<!-- Tópico 2 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Quando dispara</span><span class="text-neutral-500 text-sm ml-2">- pedidos de generativo e background</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill dispara quando o usuário menciona "arte generativa", "p5.js", "flow field", "background animado", "fundo de página", "partículas", "noise field", ou quando pede algo "que gere variações". Também responde a "algorithmic art" explícito.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Pedidos vagos como "fundo legal" não disparam a skill — ser específico sobre o tipo de visual garante que a ferramenta certa entre em ação.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Gatilhos precisos, arte generativa, p5.js nomeado.</p></div>
+</div></div>
+</div>
+<!-- Tópico 3 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🧮</span><div><span class="font-medium">Seeded randomness e reprodutibilidade</span><span class="text-neutral-500 text-sm ml-2">- mesmo seed, mesmo visual</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Todo algoritmo usa <code>randomSeed(seed)</code> e <code>noiseSeed(seed)</code> para tornar o resultado reproduzível: dado o mesmo número de seed, o visual gerado é idêntico. Inspirado no padrão Art Blocks de NFT generativo.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Reprodutibilidade permite iterar: encontrou uma variação bonita, anote o seed e ela sempre volta. Sem seed, a arte seria impossível de recuperar.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">randomSeed, noiseSeed, padrão Art Blocks, reprodutibilidade.</p></div>
+</div></div>
+</div>
+<!-- Tópico 4 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🎛️</span><div><span class="font-medium">Controles interativos e sidebar</span><span class="text-neutral-500 text-sm ml-2">- parâmetros em tempo real</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O artifact gerado inclui uma sidebar com controles interativos: sliders para parâmetros numéricos (quantidade, escala, velocidade), color pickers opcionais, navegação Prev/Next/Random para seeds, e botões Regenerate, Reset, Download PNG.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Os controles transformam a arte de "gerada uma vez" para "explorada interativamente" — o usuário pode encontrar a variação perfeita sem reabrir o Claude.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Sliders, seed navigation, Download PNG, artifact auto-suficiente.</p></div>
+</div></div>
+</div>
+<!-- Tópico 5 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🌊</span><div><span class="font-medium">Filosofia algorítmica</span><span class="text-neutral-500 text-sm ml-2">- conceito antes do código</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Assim como canvas-design usa uma "design philosophy", algorithmic-art define uma "algorithmic philosophy" antes de codificar: qual é a essência do sistema? Orgânico? Matemático? Caos controlado? O algoritmo flui da filosofia, não de um menu de padrões.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem uma filosofia clara, o resultado é ruído aleatório sem personalidade. A filosofia é o que faz a arte ter caráter.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Filosofia algorítmica, caráter visual, sistema com intenção.</p></div>
+</div></div>
+</div>
+<!-- Tópico 6 -->
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🔗</span><div><span class="font-medium">Uso em heros e backgrounds</span><span class="text-neutral-500 text-sm ml-2">- onde encaixa numa página</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">algorithmic-art é ideal como background de hero section de landing page, fundo de slide animado, ou arte de destaque em portfólio. O canvas em p5.js pode ser embutido como elemento HTML e controlado por CSS para ficar atrás do conteúdo.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber onde encaixar a arte generativa numa página real é o passo da criação à aplicação — e é onde o valor visual é percebido pelo usuário final.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Hero background, canvas embutido, z-index, aplicação em página real.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-4')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-4.html">Ver Completo</a>
+</div>
+</div>
+<!-- NAV TRILHA -->
+<div class="flex flex-col sm:flex-row gap-4 mt-10">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../index.html">← Todas as trilhas</a>
+<a class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors" href="../trilha3/index.html">Trilha 3: Mídia →</a>
+</div>
+</main>
+<!-- MODAIS -->
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.1</span><span class="font-semibold">theme-factory</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-1.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.2</span><span class="font-semibold">brand-guidelines</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-2.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-3" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.3</span><span class="font-semibold">canvas-design</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-3.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-4" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.4</span><span class="font-semibold">algorithmic-art</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-4.html"></iframe>
+</div>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Conteúdo do <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Trilha 2: Identidade &amp; Temas · 2026</p>
+</div>
+</footer>
+<script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+    const themeToggle=document.getElementById('theme-toggle');
+    const di=document.getElementById('theme-toggle-dark-icon'), li=document.getElementById('theme-toggle-light-icon');
+    const root=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){ di.classList.remove('hidden'); root.classList.remove('dark'); } else { li.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', ()=>{ di.classList.toggle('hidden'); li.classList.toggle('hidden'); root.classList.toggle('dark'); localStorage.setItem('theme', root.classList.contains('dark')?'dark':'light'); });
+  </script>
+</body>
+</html>

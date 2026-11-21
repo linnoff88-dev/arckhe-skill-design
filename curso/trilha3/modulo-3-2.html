@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 3.2 — 3d-animation-creator | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#a855f7', dark: { 900: '#0f0a1a', 800: '#1a1230', 700: '#2a1f45', 600: '#3d2e60' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #0f0a1a; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento purple */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124,58,237,0.18); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #6d28d9; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(109,40,217,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(109,40,217,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(220,38,38,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .bg-cyan-500\/10 { background-color: rgba(8,145,178,0.08); }
+    html:not(.dark) .border-cyan-500\/30 { border-color: rgba(8,145,178,0.25); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    .dark .border-dark-600 { border-color: #3d2e60; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #3d2e60; }
+    /* SVG animations */
+    @keyframes m32-flow { 0% { stroke-dashoffset: 120; } 100% { stroke-dashoffset: 0; } }
+    @keyframes m32-pulse { 0%,100% { opacity:.35 } 50% { opacity:1 } }
+    @keyframes m32-scroll { 0% { transform: translateY(0); } 50% { transform: translateY(18px); } 100% { transform: translateY(0); } }
+    @keyframes m32-star { 0%,100% { opacity:.2 } 50% { opacity:.9 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .m32-flow { animation: m32-flow 2.5s linear infinite; }
+      .m32-pulse { animation: m32-pulse 2.8s ease-in-out infinite; }
+      .m32-pulse-2 { animation: m32-pulse 2.8s ease-in-out infinite; animation-delay: .5s; }
+      .m32-pulse-3 { animation: m32-pulse 2.8s ease-in-out infinite; animation-delay: 1s; }
+      .m32-scroll { animation: m32-scroll 2s ease-in-out infinite; }
+      .m32-star { animation: m32-star 3s ease-in-out infinite; }
+      .m32-star-2 { animation: m32-star 2.4s ease-in-out infinite; animation-delay: .7s; }
+      .m32-star-3 { animation: m32-star 3.5s ease-in-out infinite; animation-delay: 1.3s; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha3/modulo-3-2.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha3/modulo-3-2.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha3/modulo-3-2.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-3-2.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha3/modulo-3-2.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha3/modulo-3-2.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Mídia</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Apoio</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-purple-400 transition-colors" href="../../index.html">Início</a>
+<span>/</span>
+<a class="hover:text-purple-400 transition-colors" href="index.html">Trilha 3 — Mídia</a>
+<span>/</span>
+<span class="text-purple-400 font-medium">Módulo 3.2</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🖱️ 3d-animation-creator</h1>
+<p class="text-lg text-neutral-400 max-w-xl">Pega um vídeo (deconstrução de produto, antes/depois, animação 3D) e constrói um site production-quality com scroll-driven animation à la Apple — o vídeo toca para frente e para trás conforme o usuário rola a página.</p>
+<div class="grid grid-cols-4 gap-3 mt-6">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-purple-400">6</div>
+<div class="text-xs text-neutral-400">Tópicos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-purple-400">~30</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-purple-400">Avançado</div>
+<div class="text-xs text-neutral-400">Nível</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-purple-400">Vídeo</div>
+<div class="text-xs text-neutral-400">Categoria</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — Scroll-Driven Video Pipeline -->
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4">
+<svg aria-label="Diagrama futurista do pipeline scroll-driven: vídeo → FFmpeg → canvas → scroll" class="w-full h-auto" role="img" viewbox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="m32-bg" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#1a1230;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0e1b26;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="m32-purple" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#c084fc;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#a855f7;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="m32-cyan" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1"></stop>
+</lineargradient>
+<filter height="140%" id="m32-glow" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<rect fill="url(#m32-bg)" height="240" rx="12" width="400"></rect>
+<!-- Grid lines -->
+<g opacity="0.6" stroke="#2a1f45" stroke-width="0.5">
+<line x1="0" x2="400" y1="60" y2="60"></line>
+<line x1="0" x2="400" y1="120" y2="120"></line>
+<line x1="0" x2="400" y1="180" y2="180"></line>
+<line x1="100" x2="100" y1="0" y2="240"></line>
+<line x1="200" x2="200" y1="0" y2="240"></line>
+<line x1="300" x2="300" y1="0" y2="240"></line>
+</g>
+<!-- Stars background -->
+<circle class="m32-star" cx="30" cy="20" fill="#c084fc" r="1.5"></circle>
+<circle class="m32-star-2" cx="180" cy="15" fill="#38bdf8" r="1"></circle>
+<circle class="m32-star-3" cx="350" cy="30" fill="#c084fc" r="1.5"></circle>
+<circle class="m32-star" cx="70" cy="200" fill="#38bdf8" r="1"></circle>
+<circle class="m32-star-2" cx="310" cy="210" fill="#c084fc" r="1.5"></circle>
+<circle class="m32-star-3" cx="380" cy="190" fill="#38bdf8" r="1"></circle>
+<!-- Node: VIDEO -->
+<rect fill="#1a1230" filter="url(#m32-glow)" height="64" rx="8" stroke="#c084fc" stroke-width="1.5" width="74" x="10" y="88"></rect>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="13" text-anchor="middle" x="47" y="113">🎬</text>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="47" y="128">VIDEO</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="47" y="141">produto.mp4</text>
+<!-- Arrow 1 -->
+<path class="m32-flow" d="M84 120 L116 120" fill="none" stroke="#38bdf8" stroke-dasharray="5,4" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="116,116 124,120 116,124"></polygon>
+<!-- Node: FFmpeg -->
+<rect fill="#1a1230" height="76" rx="8" stroke="#38bdf8" stroke-width="1.5" width="92" x="124" y="82"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="170" y="108">FFmpeg</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="170" y="122">extrai frames</text>
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="170" y="134">frame_001.jpg</text>
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="170" y="146">frame_002.jpg…</text>
+<!-- Arrow 2 -->
+<path class="m32-flow" d="M216 120 L248 120" fill="none" stroke="#38bdf8" stroke-dasharray="5,4" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="248,116 256,120 248,124"></polygon>
+<!-- Node: Canvas -->
+<rect fill="#1a1230" filter="url(#m32-glow)" height="76" rx="8" stroke="#a855f7" stroke-width="1.5" width="92" x="256" y="82"></rect>
+<text fill="#a855f7" font-family="Inter,sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="302" y="107">Canvas</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="302" y="120">drawFrame()</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="302" y="132">devicePixelRatio</text>
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="302" y="144">cover-fit</text>
+<!-- Scroll indicator arrow (animated up-down) -->
+<g class="m32-scroll">
+<rect fill="none" height="96" rx="16" stroke="#38bdf8" stroke-width="1.5" width="32" x="356" y="72"></rect>
+<circle cx="372" cy="100" fill="#a855f7" opacity="0.8" r="7"></circle>
+<text fill="#fff" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="372" y="104">↕</text>
+</g>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="372" y="180">SCROLL</text>
+<!-- Labels de etapas -->
+<text class="m32-pulse" fill="#c084fc" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="47" y="78">① INPUT</text>
+<text class="m32-pulse-2" fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="170" y="72">② EXTRACT</text>
+<text class="m32-pulse-3" fill="#a855f7" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="302" y="72">③ RENDER</text>
+<!-- Bottom label -->
+<text fill="#6b7280" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="200" y="220">scroll progress → frame index → canvas draw</text>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+<!-- TÓPICO 1: O QUE É / O QUE FAZ -->
+<section id="topico-1">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-purple-500/20 text-purple-400 font-bold text-lg">1</span>
+<h2 class="text-2xl font-bold">🧩 O que é / o que faz</h2>
+</div>
+<!-- Box conceito principal -->
+<div class="bg-gradient-to-r from-purple-900/30 to-dark-800 border border-purple-500/30 rounded-xl p-6 mb-6">
+<h3 class="text-lg font-bold text-purple-400 mb-2">Conceito Principal</h3>
+<p class="text-neutral-300 leading-relaxed">O <strong class="text-purple-300">3d-animation-creator</strong> é um skill que pega um arquivo de vídeo (ex.: deconstrução/montagem de produto, transformação antes/depois) e constrói um site <em>production-quality</em> com scroll-driven animation. O vídeo toca para frente e para trás conforme o usuário rola — recriando o efeito "scroll-stop" popularizado pela Apple nos lançamentos do iPhone.</p>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+<h4 class="font-semibold text-purple-400 mb-3">O que entrega</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> Site HTML/CSS/JS completo, zero dependências pesadas</li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> Canvas com renderização frame-a-frame sincronizada ao scroll</li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> Starscape animado como background (canvas fixo ~180 estrelas)</li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> Cards de anotação com snap-stop (efeito "boom boom boom")</li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> Seção specs com count-up animado via IntersectionObserver</li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> Navbar que se transforma em pill com glass-morphism ao rolar</li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> Loader de pré-carregamento dos frames antes de exibir</li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> Responsividade mobile (layout diferente, mesmo vídeo)</li>
+</ul>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+<h4 class="font-semibold text-cyan-400 mb-3">O que NÃO faz</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não usa players de vídeo (`&lt;video&gt;`) — todo controle é via canvas</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não processa o vídeo em runtime — precisa extrair frames com FFmpeg antes</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não gera o vídeo — só consome frames já extraídos</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não serve os arquivos — precisa de servidor local (não funciona via <code class="text-xs">file://</code>)</li>
+</ul>
+</div>
+</div>
+<!-- Mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">Canvas API</div>
+<div class="text-xs text-neutral-400 mt-1">drawImage() com cover-fit</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">FFmpeg</div>
+<div class="text-xs text-neutral-400 mt-1">extração de frames JPEG</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">Scroll-Stop</div>
+<div class="text-xs text-neutral-400 mt-1">efeito Apple-style</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">Vanilla JS</div>
+<div class="text-xs text-neutral-400 mt-1">zero frameworks pesados</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2: QUANDO DISPARA -->
+<section id="topico-2">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-purple-500/20 text-purple-400 font-bold text-lg">2</span>
+<h2 class="text-2xl font-bold">🎣 Quando dispara</h2>
+</div>
+<!-- Box tip -->
+<div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 mb-6">
+<p class="text-sm text-purple-300"><strong>Regra:</strong> o Claude aciona este skill quando detecta intenção de criar um site com vídeo controlado pelo scroll — ou quando o usuário menciona qualquer dos gatilhos abaixo. A detecção é por texto, não por arquivo anexado.</p>
+</div>
+<!-- Timeline de gatilhos -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<h3 class="font-semibold text-neutral-300 mb-5">Gatilhos que ativam o skill</h3>
+<div class="space-y-4">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center text-purple-400 text-xs font-bold">1</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-purple-300">"3D animation"</p>
+<p class="text-sm text-neutral-400 mt-1">O gatilho mais direto. Qualquer menção ao nome do skill ou à técnica de animação 3D controlada por scroll.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center text-purple-400 text-xs font-bold">2</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-purple-300">"scroll-stop build" / "scroll animation website"</p>
+<p class="text-sm text-neutral-400 mt-1">Intenção de construir — não só entender. O usuário quer o site final.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center text-purple-400 text-xs font-bold">3</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-purple-300">"scroll-driven video" / "build the scroll-stop site"</p>
+<p class="text-sm text-neutral-400 mt-1">Variações idiomáticas — todas mapeiam para o mesmo skill.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center text-purple-400 text-xs font-bold">4</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-purple-300">"Apple-style scroll animation" / "video on scroll"</p>
+<p class="text-sm text-neutral-400 mt-1">Referência visual clara ao padrão Apple de lançamento de produto.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/50 flex items-center justify-center text-cyan-400 text-xs font-bold">5</div>
+</div>
+<div>
+<p class="font-semibold text-cyan-300">Arquivo de vídeo + pedido de controle</p>
+<p class="text-sm text-neutral-400 mt-1">Usuário fornece um <code class="text-xs bg-dark-700 px-1 rounded">.mp4</code> e pede para "controlar pelo scroll" ou "fazer scrub interativo".</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 0: The Interview -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mb-6">
+<h4 class="font-semibold text-blue-300 mb-3">📋 Step 0 — The Interview (obrigatório)</h4>
+<p class="text-sm text-neutral-300 mb-3">Antes de construir, o skill faz uma entrevista com o usuário para coletar:</p>
+<div class="grid sm:grid-cols-2 gap-3 text-sm">
+<ul class="space-y-1 text-neutral-400">
+<li>• Caminho do arquivo de vídeo</li>
+<li>• Diretório de output para os frames</li>
+<li>• Número de frames desejados (30–120)</li>
+<li>• Seções de anotação (texto + momento do vídeo)</li>
+</ul>
+<ul class="space-y-1 text-neutral-400">
+<li>• Especificações do produto (para count-up)</li>
+<li>• Paleta de cores preferida</li>
+<li>• Velocidade do scroll (200–800vh)</li>
+<li>• Título e subtítulo do hero</li>
+</ul>
+</div>
+</div>
+<!-- Mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">"3D animation"</div>
+<div class="text-xs text-neutral-400 mt-1">gatilho principal</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">"scroll-stop"</div>
+<div class="text-xs text-neutral-400 mt-1">intenção de construir</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">Apple-style</div>
+<div class="text-xs text-neutral-400 mt-1">referência visual</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">Step 0</div>
+<div class="text-xs text-neutral-400 mt-1">entrevista obrigatória</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3: COMO MELHORA SUAS PÁGINAS -->
+<section id="topico-3">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-purple-500/20 text-purple-400 font-bold text-lg">3</span>
+<h2 class="text-2xl font-bold">🚀 Como melhora suas páginas</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<!-- Fazer -->
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5">
+<h4 class="font-semibold text-emerald-400 mb-4">✓ FAZER — o que o skill resolve</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Transforma um vídeo simples em experiência interativa imersiva</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Entrega site completo com loader, navbar, hero, specs, footer</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Controla a narrativa: o usuário "lê" o produto rolando a página</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Performance: canvas + requestAnimationFrame, sem pop-in</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Retina-ready: usa devicePixelRatio para nitidez em HiDPI</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Mobile: layout compacto, cards em linha única, posição bottom:1.5vh</li>
+</ul>
+</div>
+<!-- Evitar -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5">
+<h4 class="font-semibold text-red-400 mb-4">✗ EVITAR — quando não usar</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> Vídeos longos (&gt;10s) — prefira 3–6s para o efeito scroll funcionar bem</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> Frames em PNG — use JPEG &lt;100KB cada para evitar lentidão</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> Abrir via <code class="text-xs">file://</code> — frames não carregam sem servidor local</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> scroll-behavior: smooth no CSS — interfere no controle frame-a-frame</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> Primeiro frame colorido/escuro — precisa ser branco para o loader funcionar</li>
+</ul>
+</div>
+</div>
+<!-- Box tip -->
+<div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 mb-6">
+<p class="text-sm text-purple-300"><strong>Dica de velocidade:</strong> A altura do container <code class="text-xs bg-dark-700 px-1 rounded">.scroll-animation</code> controla o ritmo: <code>200vh</code> = rápido, <code>500vh</code> = suave, <code>800vh</code> = cinemático. Ajuste conforme a densidade de informação do produto.</p>
+</div>
+<!-- Box dados blue -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mb-6">
+<h4 class="font-semibold text-blue-300 mb-3">📊 Benchmarks realistas</h4>
+<div class="grid sm:grid-cols-3 gap-4 text-sm">
+<div>
+<div class="text-blue-400 font-bold text-lg">60–120</div>
+<div class="text-neutral-400">frames recomendados para 3–6s de vídeo a 20fps</div>
+</div>
+<div>
+<div class="text-blue-400 font-bold text-lg">&lt;100KB</div>
+<div class="text-neutral-400">tamanho máximo por frame JPEG sem travar o scroll</div>
+</div>
+<div>
+<div class="text-blue-400 font-bold text-lg">~180</div>
+<div class="text-neutral-400">estrelas no starscape para background vivo sem custo</div>
+</div>
+</div>
+</div>
+<!-- Mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">Storytelling</div>
+<div class="text-xs text-neutral-400 mt-1">rolar = narrar produto</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">rAF</div>
+<div class="text-xs text-neutral-400 mt-1">requestAnimationFrame</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">IntersectionObserver</div>
+<div class="text-xs text-neutral-400 mt-1">dispara count-up</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">Glass-morphism</div>
+<div class="text-xs text-neutral-400 mt-1">navbar pill on scroll</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4: COMO FUNCIONA POR DENTRO -->
+<section id="topico-4">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-purple-500/20 text-purple-400 font-bold text-lg">4</span>
+<h2 class="text-2xl font-bold">⚙️ Como funciona por dentro</h2>
+</div>
+<!-- Timeline de steps -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<h3 class="font-semibold text-neutral-300 mb-5">Pipeline de 6 passos (SKILL.md)</h3>
+<div class="space-y-5">
+<div class="flex gap-4">
+<div class="flex flex-col items-center shrink-0">
+<div class="w-8 h-8 rounded-full bg-purple-500/30 border border-purple-500/50 flex items-center justify-center text-purple-300 text-xs font-bold">0</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-purple-300">Step 0 — The Interview</p>
+<p class="text-sm text-neutral-400">Coleta caminho do vídeo, output dir, número de frames, seções de anotação, specs para count-up, paleta, velocidade do scroll, título/subtítulo.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center shrink-0">
+<div class="w-8 h-8 rounded-full bg-purple-500/30 border border-purple-500/50 flex items-center justify-center text-purple-300 text-xs font-bold">1</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-purple-300">Step 1 — Analyze the Video</p>
+<p class="text-sm text-neutral-400">Extrai metadados: duração, resolução, fps. Determina quantos frames extrair (recomendado: duração × 20).</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center shrink-0">
+<div class="w-8 h-8 rounded-full bg-cyan-500/30 border border-cyan-500/50 flex items-center justify-center text-cyan-300 text-xs font-bold">2</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-cyan-300">Step 2 — Extract Frames via FFmpeg</p>
+<p class="text-sm text-neutral-400">Roda o comando FFmpeg para gerar frames JPEG numerados no diretório de output.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center shrink-0">
+<div class="w-8 h-8 rounded-full bg-purple-500/30 border border-purple-500/50 flex items-center justify-center text-purple-300 text-xs font-bold">3</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-purple-300">Step 3 — Build the Website</p>
+<p class="text-sm text-neutral-400">Gera o HTML completo com canvas sticky, loader, starscape, navbar, hero, annotation cards, specs, footer.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center shrink-0">
+<div class="w-8 h-8 rounded-full bg-purple-500/30 border border-purple-500/50 flex items-center justify-center text-purple-300 text-xs font-bold">4</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-purple-300">Step 4 — Key Implementation Patterns</p>
+<p class="text-sm text-neutral-400">Canvas com devicePixelRatio. Cover-fit desktop, zoomed contain-fit mobile. Snap-stop com lock de overflow ~600ms. Navbar pill transform. Count-up com easeOutExpo staggerado 200ms.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center shrink-0">
+<div class="w-8 h-8 rounded-full bg-cyan-500/30 border border-cyan-500/50 flex items-center justify-center text-cyan-300 text-xs font-bold">5</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4">
+<p class="font-semibold text-cyan-300">Step 5 — Customize Content</p>
+<p class="text-sm text-neutral-400">Aplica a paleta de cores, textos, número de cards e specs fornecidos na entrevista.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center shrink-0">
+<div class="w-8 h-8 rounded-full bg-cyan-500/30 border border-cyan-500/50 flex items-center justify-center text-cyan-300 text-xs font-bold">6</div>
+</div>
+<div>
+<p class="font-semibold text-cyan-300">Step 6 — Serve &amp; Test</p>
+<p class="text-sm text-neutral-400">Instrui o usuário a rodar um servidor local (ex.: <code class="text-xs bg-dark-700 px-1 rounded">python -m http.server</code>) para testar o site.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Box código — Canvas Retina -->
+<div class="bg-dark-900 rounded-xl border border-purple-500/30 p-5 mb-6 overflow-x-auto">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-semibold text-purple-400 uppercase tracking-wider">Canvas — Retina Support</span>
+<span class="text-xs text-neutral-500">Step 4 — padrão obrigatório</span>
+</div>
+<pre class="text-sm font-mono text-emerald-300"><code>// Canvas com suporte a Retina / HiDPI
+canvas.width  = window.innerWidth  * window.devicePixelRatio;
+canvas.height = window.innerHeight * window.devicePixelRatio;
+canvas.style.width  = window.innerWidth  + 'px';
+canvas.style.height = window.innerHeight + 'px';
+ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+// Mapeamento scroll → frame
+window.addEventListener('scroll', () =&gt; {
+  const scrollTop = window.scrollY;
+  const maxScroll  = scrollContainer.scrollHeight - window.innerHeight;
+  const progress   = Math.min(scrollTop / maxScroll, 1);
+  const frameIdx   = Math.floor(progress * (frames.length - 1));
+  if (frameIdx !== currentFrame) {
+    currentFrame = frameIdx;
+    requestAnimationFrame(() =&gt; drawFrame(frames[frameIdx]));
+  }
+}, { passive: true });</code></pre>
+</div>
+<!-- Box alerta red -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4 mb-6">
+<h4 class="font-semibold text-red-400 mb-2">⚠️ Dependência Obrigatória: FFmpeg</h4>
+<p class="text-sm text-neutral-300">O skill detecta se FFmpeg está instalado. Se não estiver, instrui o usuário: <code class="text-xs bg-dark-700 px-1 rounded">brew install ffmpeg</code> (macOS) ou equivalente. Frames não carregam sem servidor HTTP local — nunca via <code class="text-xs">file://</code>.</p>
+</div>
+<!-- Mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">position: sticky</div>
+<div class="text-xs text-neutral-400 mt-1">canvas fixo no viewport</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">passive: true</div>
+<div class="text-xs text-neutral-400 mt-1">otimização do scroll</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">easeOutExpo</div>
+<div class="text-xs text-neutral-400 mt-1">easing do count-up</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">snap zone</div>
+<div class="text-xs text-neutral-400 mt-1">600ms de lock overflow</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5: EXEMPLO PRÁTICO + PROMPT -->
+<section id="topico-5">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-purple-500/20 text-purple-400 font-bold text-lg">5</span>
+<h2 class="text-2xl font-bold">💬 Exemplo prático + PROMPT pronto</h2>
+</div>
+<!-- Cenário real -->
+<div class="bg-gradient-to-r from-purple-900/20 to-cyan-900/20 border border-purple-500/30 rounded-xl p-6 mb-6">
+<h3 class="font-semibold text-purple-300 mb-3">Cenário: Deconstrução de um smartwatch</h3>
+<p class="text-neutral-300 text-sm leading-relaxed">Você tem um vídeo de 4 segundos mostrando um smartwatch se desmontando peça por peça (deconstrução de produto). Quer um site onde o usuário rola a página e o relógio se desmonta na tela — com anotações aparecendo em cada componente (bateria, tela AMOLED, processador) e uma seção final com as especificações técnicas animadas.</p>
+</div>
+<!-- Prompt pronto -->
+<div class="bg-dark-900 rounded-xl border border-purple-500/30 p-5 mb-6 overflow-x-auto">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-semibold text-purple-400 uppercase tracking-wider">PROMPT — Cole no Claude Code</span>
+<span class="text-xs text-neutral-500">dispara 3d-animation-creator</span>
+</div>
+<pre class="text-sm font-mono text-neutral-200 whitespace-pre-wrap"><code>3D animation
+
+Tenho um vídeo de deconstrução de smartwatch em:
+/Users/eu/videos/watch-deconstruct.mp4
+
+Quero um site scroll-stop Apple-style com:
+- Frames extraídos em: /Users/eu/site/frames/
+- 80 frames totais
+- Velocidade: 600vh (cinemática)
+- Cor dominante: #a855f7 (roxo)
+
+Anotações (3 cards):
+1. "Tela AMOLED 1.4"" — no frame 20
+2. "Bateria 300mAh" — no frame 45
+3. "Chip Snapdragon W5" — no frame 65
+
+Specs (count-up):
+- "1.4"" / tela
+- "300mAh" / bateria
+- "5 dias" / autonomia
+- "IP68" / resistência
+
+Título: "Por dentro do Tempo"
+Subtítulo: "Cada componente, revelado"</code></pre>
+</div>
+<!-- Box tip -->
+<div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 mb-6">
+<p class="text-sm text-purple-300"><strong>O que acontece:</strong> O Claude inicia a entrevista (Step 0), confirma os parâmetros, roda o comando FFmpeg para extrair os 80 frames, e entrega um único arquivo HTML com todo o site — loader, starscape, canvas sticky, 3 annotation cards com snap-stop, seção specs com count-up e navbar pill.</p>
+</div>
+<!-- Comando FFmpeg gerado -->
+<div class="bg-dark-900 rounded-xl border border-cyan-500/30 p-5 mb-6 overflow-x-auto">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Comando FFmpeg gerado pelo skill</span>
+</div>
+<pre class="text-sm font-mono text-cyan-300"><code>ffmpeg -i /Users/eu/videos/watch-deconstruct.mp4 \
+  -vf "fps=20,scale=1920:-1" \
+  -q:v 3 \
+  /Users/eu/site/frames/frame_%03d.jpg</code></pre>
+</div>
+<!-- Mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">-vf fps=20</div>
+<div class="text-xs text-neutral-400 mt-1">extrai 20fps</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">scale=1920:-1</div>
+<div class="text-xs text-neutral-400 mt-1">mantém aspect ratio</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">-q:v 3</div>
+<div class="text-xs text-neutral-400 mt-1">qualidade JPEG alta</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">frame_%03d</div>
+<div class="text-xs text-neutral-400 mt-1">nomes numerados</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6: COMBINA COM / LIMITES -->
+<section id="topico-6">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-purple-500/20 text-purple-400 font-bold text-lg">6</span>
+<h2 class="text-2xl font-bold">🧬 Combina com / limites</h2>
+</div>
+<!-- Grid de combinações -->
+<div class="grid md:grid-cols-3 gap-5 mb-6">
+<!-- animation-designer -->
+<div class="bg-dark-800 border border-purple-500/30 rounded-xl p-5 group hover:border-purple-400/50 transition-colors">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-2xl">🎬</span>
+<div>
+<h4 class="font-bold text-purple-300 group-hover:text-purple-200 transition-colors">animation-designer</h4>
+<span class="text-xs text-purple-500">Módulo 3.1</span>
+</div>
+</div>
+<p class="text-sm text-neutral-400 mb-3">Cria as animações CSS/GSAP/Framer Motion que depois podem ser <em>renderizadas como vídeo</em>. Use animation-designer para fazer o vídeo de entrada do 3d-animation-creator.</p>
+<div class="text-xs bg-purple-500/10 border border-purple-500/20 rounded px-2 py-1 text-purple-300">
+            Fluxo: animation-designer → exporta vídeo → 3d-animation-creator
+          </div>
+</div>
+<!-- remotion -->
+<div class="bg-dark-800 border border-cyan-500/30 rounded-xl p-5 group hover:border-cyan-400/50 transition-colors">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-2xl">⚛️</span>
+<div>
+<h4 class="font-bold text-cyan-300 group-hover:text-cyan-200 transition-colors">remotion</h4>
+<span class="text-xs text-cyan-600">Módulo 3.3</span>
+</div>
+</div>
+<p class="text-sm text-neutral-400 mb-3">Gera vídeos programáticos em React. O output MP4 do Remotion é o input perfeito para o 3d-animation-creator — vídeo com precisão de frame → site scroll-stop.</p>
+<div class="text-xs bg-cyan-500/10 border border-cyan-500/20 rounded px-2 py-1 text-cyan-300">
+            Fluxo: remotion → .mp4 → FFmpeg → canvas scroll-stop
+          </div>
+</div>
+<!-- HyperFrames -->
+<div class="bg-dark-800 border border-blue-500/30 rounded-xl p-5 group hover:border-blue-400/50 transition-colors">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-2xl">🎞️</span>
+<div>
+<h4 class="font-bold text-blue-300 group-hover:text-blue-200 transition-colors">HyperFrames</h4>
+<span class="text-xs text-blue-600">Módulo 3.4</span>
+</div>
+</div>
+<p class="text-sm text-neutral-400 mb-3">O HyperFrames converte HTML animado → MP4 via Chrome headless + FFmpeg. Use para renderizar animações HTML complexas e depois alimentar o 3d-animation-creator com o vídeo gerado.</p>
+<div class="text-xs bg-blue-500/10 border border-blue-500/20 rounded px-2 py-1 text-blue-300">
+            Fluxo: HyperFrames (HTML→MP4) → 3d-animation-creator (MP4→scroll-site)
+          </div>
+</div>
+</div>
+<!-- Grid Fazer/Evitar (segunda instância) -->
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5">
+<h4 class="font-semibold text-emerald-400 mb-4">✓ COMBINE COM</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> <strong>animation-designer</strong> para criar o vídeo-fonte com animações CSS/GSAP</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> <strong>remotion</strong> quando o vídeo precisa ser gerado programaticamente em React</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> <strong>HyperFrames</strong> para converter animações HTML complexas em MP4 de entrada</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> <strong>frontend-design</strong> para refinar o HTML final com mais polimento visual</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> <strong>impeccable</strong> para revisão de qualidade do site entregue</li>
+</ul>
+</div>
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5">
+<h4 class="font-semibold text-red-400 mb-4">✗ NÃO USAR QUANDO</h4>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> O usuário quer apenas uma animação CSS simples — use animation-designer</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> O vídeo não existe ainda e não há plano para criá-lo antes</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> O ambiente não suporta FFmpeg e o usuário não pode instalá-lo</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> O conteúdo é texto/dados — use canvas-design ou algorithmic-art</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> Precisa de autoplay de vídeo normal — use a tag <code class="text-xs">&lt;video&gt;</code> diretamente</li>
+</ul>
+</div>
+</div>
+<!-- Mapa de posicionamento na Trilha 3 -->
+<div class="bg-dark-800 border border-dark-600 rounded-xl p-5 mb-6">
+<h4 class="font-semibold text-neutral-300 mb-4">Posição na Trilha 3 🎞️ Mídia</h4>
+<div class="grid sm:grid-cols-4 gap-3 text-sm">
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600">
+<div class="text-purple-400 font-semibold mb-1">3.1 🎬</div>
+<div class="text-neutral-300">animation-designer</div>
+<div class="text-xs text-neutral-500 mt-1">CSS, GSAP, Framer Motion — cria animações</div>
+</div>
+<div class="bg-purple-500/20 rounded-lg p-3 border border-purple-500/40">
+<div class="text-purple-300 font-bold mb-1">3.2 🖱️ ← VOCÊ ESTÁ AQUI</div>
+<div class="text-purple-200">3d-animation-creator</div>
+<div class="text-xs text-purple-400 mt-1">FFmpeg, Canvas, scroll-stop — site a partir de vídeo</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600">
+<div class="text-cyan-400 font-semibold mb-1">3.3 ⚛️</div>
+<div class="text-neutral-300">remotion</div>
+<div class="text-xs text-neutral-500 mt-1">React, renderização programática de vídeo</div>
+</div>
+<div class="bg-dark-700 rounded-lg p-3 border border-dark-600">
+<div class="text-blue-400 font-semibold mb-1">3.4 🔁</div>
+<div class="text-neutral-300">seedance + HyperFrames</div>
+<div class="text-xs text-neutral-500 mt-1">HTML→MP4 via Chrome headless + FFmpeg</div>
+</div>
+</div>
+</div>
+<!-- Mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">T3 completa</div>
+<div class="text-xs text-neutral-400 mt-1">animation → 3d → remotion → HyperFrames</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">Entrada</div>
+<div class="text-xs text-neutral-400 mt-1">qualquer .mp4 de 3-6s</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">Saída</div>
+<div class="text-xs text-neutral-400 mt-1">site HTML completo</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">Upstream</div>
+<div class="text-xs text-neutral-400 mt-1">remotion / HyperFrames</div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 border border-purple-500/30 rounded-2xl p-8" id="resumo">
+<h2 class="text-2xl font-bold mb-6 text-purple-300">📋 Resumo do Módulo 3.2</h2>
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div>
+<h3 class="font-semibold text-neutral-300 mb-4">O que você aprendeu</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> O 3d-animation-creator constrói sites scroll-stop Apple-style a partir de vídeos</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Usa FFmpeg para extrair frames JPEG e Canvas API para renderizá-los</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> O skill dispara por "3D animation", "scroll-stop build", "Apple-style scroll animation"</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Inclui starscape (~180 estrelas), navbar pill, annotation cards com snap-stop e count-up</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Step 0 (entrevista) é obrigatório — coleta caminho, frames, anotações e specs</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Combina com animation-designer (upstream), remotion e HyperFrames para o vídeo-fonte</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Vanilla JS, zero frameworks pesados, { passive: true }, requestAnimationFrame</li>
+</ul>
+</div>
+<div class="space-y-4">
+<!-- Próximo módulo -->
+<div class="bg-dark-800 border border-cyan-500/30 rounded-xl p-4">
+<h4 class="font-semibold text-cyan-400 mb-2">Próximo módulo:</h4>
+<div class="flex items-center gap-3">
+<span class="text-2xl">⚛️</span>
+<div>
+<p class="font-bold text-neutral-200">3.3 remotion</p>
+<p class="text-sm text-neutral-400">Renderização programática de vídeo com React — frames controlados por código, output MP4.</p>
+</div>
+</div>
+</div>
+<!-- Tip final -->
+<div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4">
+<p class="text-sm text-purple-300"><strong>Dica de estudo:</strong> Tente encadear Módulo 3.1 → 3.2: crie uma animação CSS com animation-designer, exporte como vídeo (via HyperFrames), e alimente o 3d-animation-creator. É o pipeline completo da Trilha 3.</p>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Voltar para Trilha 3</a>
+<a class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors" href="modulo-3-3.html">Próximo Módulo: 3.3 remotion →</a>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Conteúdo do <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Trilha 3: Mídia · Módulo 3.2 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 2.2 — brand-guidelines | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento blue */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,0.18); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(220,38,38,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .bg-cyan-500\/10 { background-color: rgba(8,145,178,0.08); }
+    html:not(.dark) .border-cyan-500\/30 { border-color: rgba(8,145,178,0.25); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* SVG animations */
+    @keyframes m22-flow { 0% { stroke-dashoffset: 120; } 100% { stroke-dashoffset: 0; } }
+    @keyframes m22-pulse { 0%,100% { opacity:.35 } 50% { opacity:1 } }
+    @keyframes m22-float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-4px); } }
+    @media (prefers-reduced-motion: no-preference) {
+      .m22-anim-flow { animation: m22-flow 2.8s linear infinite; }
+      .m22-anim-pulse { animation: m22-pulse 2.5s ease-in-out infinite; }
+      .m22-anim-pulse:nth-child(2) { animation-delay: .5s; }
+      .m22-anim-pulse:nth-child(3) { animation-delay: 1s; }
+      .m22-anim-float { animation: m22-float 3.5s ease-in-out infinite; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha2/modulo-2-2.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha2/modulo-2-2.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha2/modulo-2-2.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-2-2.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha2/modulo-2-2.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha2/modulo-2-2.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Mídia</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Apoio</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-blue-400 transition-colors" href="../../index.html">Início</a>
+<span>/</span>
+<a class="hover:text-blue-400 transition-colors" href="index.html">Trilha 2 — Identidade</a>
+<span>/</span>
+<span class="text-blue-400 font-medium">Módulo 2.2</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🏷️ brand-guidelines</h1>
+<p class="text-lg text-neutral-400 max-w-xl">Aplica as cores e tipografia oficiais da Anthropic — Dark <code class="text-blue-400 bg-dark-700 px-1 rounded text-sm">#141413</code>, Light <code class="text-blue-400 bg-dark-700 px-1 rounded text-sm">#faf9f5</code>, Orange <code class="text-blue-400 bg-dark-700 px-1 rounded text-sm">#d97757</code>, fontes Poppins e Lora — a qualquer artifact que se beneficie de padrão visual de marca.</p>
+<div class="grid grid-cols-4 gap-3 mt-6">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">6</div>
+<div class="text-xs text-neutral-400">Tópicos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">~20</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Interm.</div>
+<div class="text-xs text-neutral-400">Nível</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Marca</div>
+<div class="text-xs text-neutral-400">Categoria</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — Paleta Anthropic Brand -->
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4">
+<svg aria-label="Diagrama futurista da paleta de marca Anthropic com cores e tipografia oficiais" class="w-full h-auto" role="img" viewbox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="m22-bg-grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#0e1622;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0e1b26;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="m22-blue-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="m22-cyan-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1"></stop>
+</lineargradient>
+<filter height="140%" id="m22-glow" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="2.5"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<rect fill="url(#m22-bg-grad)" height="240" rx="12" width="400"></rect>
+<!-- grid lines -->
+<g opacity="0.4" stroke="#1e3a5f" stroke-width="0.5">
+<line x1="0" x2="400" y1="80" y2="80"></line>
+<line x1="0" x2="400" y1="160" y2="160"></line>
+<line x1="133" x2="133" y1="0" y2="240"></line>
+<line x1="266" x2="266" y1="0" y2="240"></line>
+</g>
+<!-- Title -->
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="12" font-weight="800" text-anchor="middle" x="200" y="24">Anthropic Brand System</text>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" letter-spacing="2" text-anchor="middle" x="200" y="38">CORES · TIPOGRAFIA · APLICAÇÃO</text>
+<!-- Color swatches -->
+<!-- Dark #141413 -->
+<rect class="m22-anim-float" fill="#141413" filter="url(#m22-glow)" height="50" rx="6" stroke="#60a5fa" stroke-width="1.5" width="50" x="20" y="55"></rect>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="7" font-weight="700" text-anchor="middle" x="45" y="118">Dark</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="45" y="128">#141413</text>
+<!-- Light #faf9f5 -->
+<rect class="m22-anim-float" fill="#faf9f5" height="50" rx="6" stroke="#38bdf8" stroke-width="1.5" width="50" x="88" y="55"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="7" font-weight="700" text-anchor="middle" x="113" y="118">Light</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="113" y="128">#faf9f5</text>
+<!-- Orange #d97757 -->
+<rect class="m22-anim-float" fill="#d97757" filter="url(#m22-glow)" height="50" rx="6" stroke="#60a5fa" stroke-width="1.5" width="50" x="156" y="55"></rect>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="7" font-weight="700" text-anchor="middle" x="181" y="118">Orange</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="181" y="128">#d97757</text>
+<!-- Blue #6a9bcc -->
+<rect class="m22-anim-float" fill="#6a9bcc" height="50" rx="6" stroke="#38bdf8" stroke-width="1.5" width="50" x="224" y="55"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="7" font-weight="700" text-anchor="middle" x="249" y="118">Blue</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="249" y="128">#6a9bcc</text>
+<!-- Green #788c5d -->
+<rect class="m22-anim-float" fill="#788c5d" filter="url(#m22-glow)" height="50" rx="6" stroke="#60a5fa" stroke-width="1.5" width="50" x="292" y="55"></rect>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="7" font-weight="700" text-anchor="middle" x="317" y="118">Green</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="7" text-anchor="middle" x="317" y="128">#788c5d</text>
+<!-- Mid Gray #b0aea5 -->
+<rect class="m22-anim-float" fill="#b0aea5" height="25" rx="4" stroke="#38bdf8" stroke-width="1" width="25" x="360" y="55"></rect>
+<rect fill="#e8e6dc" height="20" rx="4" stroke="#60a5fa" stroke-width="1" width="25" x="360" y="85"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="6" text-anchor="middle" x="372" y="117">Mid</text>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="6" text-anchor="middle" x="372" y="126">Lite</text>
+<!-- Typography section -->
+<rect fill="#0a1a2e" height="42" opacity="0.9" rx="6" stroke="#38bdf8" stroke-width="1" width="170" x="20" y="143"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" font-weight="700" text-anchor="middle" x="105" y="158">Tipografia</text>
+<text fill="#60a5fa" font-family="Arial,sans-serif" font-size="8" text-anchor="middle" x="105" y="170">Poppins → Headings (24pt+)</text>
+<text fill="#bfe6ff" font-family="Georgia,serif" font-size="8" text-anchor="middle" x="105" y="181">Lora → Body text</text>
+<!-- Application arrow flow -->
+<path class="m22-anim-flow" d="M200 165 L236 165" fill="none" stroke="#38bdf8" stroke-dasharray="5,3" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="236,161 244,165 236,169"></polygon>
+<!-- Target artifact box -->
+<rect fill="#0e1622" height="42" rx="6" stroke="#60a5fa" stroke-width="1.5" width="136" x="244" y="143"></rect>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="8" font-weight="700" text-anchor="middle" x="312" y="158">Artifact de saída</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="312" y="170">Slides · HTML · PPTX</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="312" y="181">PDF · Docs</text>
+<!-- corner dots -->
+<circle class="m22-anim-pulse" cx="20" cy="20" fill="#38bdf8" opacity="0.6" r="2"></circle>
+<circle class="m22-anim-pulse" cx="380" cy="20" fill="#60a5fa" opacity="0.6" r="2"></circle>
+<circle class="m22-anim-pulse" cx="20" cy="220" fill="#60a5fa" opacity="0.6" r="2"></circle>
+<circle class="m22-anim-pulse" cx="380" cy="220" fill="#38bdf8" opacity="0.6" r="2"></circle>
+<!-- bottom label -->
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" opacity="0.7" text-anchor="middle" x="200" y="220">python-pptx · RGBColor · system fonts</text>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+<!-- TÓPICO 1 — O que é / o que faz -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">1</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🧩 O que é / o que faz</h2>
+<p class="text-neutral-400 mt-2">O skill <strong class="text-neutral-200">brand-guidelines</strong> aplica as cores e tipografia <em>oficiais</em> da Anthropic a qualquer artifact que se beneficie de ter o look-and-feel da marca — slides, páginas HTML, PDFs, documentos.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- conceito principal -->
+<div class="rounded-xl bg-gradient-to-br from-blue-900/30 to-dark-700/50 border border-blue-500/30 p-5">
+<div class="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-2">Conceito Principal</div>
+<p class="text-neutral-200 font-medium">brand-guidelines é um pós-processador de identidade visual. Não cria conteúdo — pega um artifact já gerado e aplica sistematicamente as cores e fontes oficiais da Anthropic, garantindo consistência da marca em todos os outputs.</p>
+<p class="text-neutral-400 text-sm mt-3">A distinção fundamental: enquanto outros skills criam visuais, brand-guidelines os <em>uniformiza</em> segundo um padrão corporativo único e não-negociável.</p>
+</div>
+<!-- Paleta oficial -->
+<div class="rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
+<div class="text-blue-400 font-semibold text-sm mb-3">🎨 Paleta oficial Anthropic (do SKILL.md)</div>
+<div class="grid sm:grid-cols-2 gap-4">
+<div>
+<div class="text-xs text-neutral-500 uppercase tracking-wider mb-2">Cores Principais</div>
+<div class="space-y-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md flex-shrink-0 border border-dark-600" style="background:#141413"></div>
+<div><div class="text-sm font-semibold text-neutral-200">Dark</div><div class="text-xs text-neutral-500 font-mono">#141413 — texto e fundos escuros</div></div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md flex-shrink-0 border border-dark-600" style="background:#faf9f5"></div>
+<div><div class="text-sm font-semibold text-neutral-200">Light</div><div class="text-xs text-neutral-500 font-mono">#faf9f5 — fundos claros e texto sobre escuro</div></div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md flex-shrink-0 border border-dark-600" style="background:#b0aea5"></div>
+<div><div class="text-sm font-semibold text-neutral-200">Mid Gray</div><div class="text-xs text-neutral-500 font-mono">#b0aea5 — elementos secundários</div></div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md flex-shrink-0 border border-dark-600" style="background:#e8e6dc"></div>
+<div><div class="text-sm font-semibold text-neutral-200">Light Gray</div><div class="text-xs text-neutral-500 font-mono">#e8e6dc — fundos sutis</div></div>
+</div>
+</div>
+</div>
+<div>
+<div class="text-xs text-neutral-500 uppercase tracking-wider mb-2">Cores de Acento</div>
+<div class="space-y-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md flex-shrink-0 border border-dark-600" style="background:#d97757"></div>
+<div><div class="text-sm font-semibold text-neutral-200">Orange</div><div class="text-xs text-neutral-500 font-mono">#d97757 — acento primário</div></div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md flex-shrink-0 border border-dark-600" style="background:#6a9bcc"></div>
+<div><div class="text-sm font-semibold text-neutral-200">Blue</div><div class="text-xs text-neutral-500 font-mono">#6a9bcc — acento secundário</div></div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md flex-shrink-0 border border-dark-600" style="background:#788c5d"></div>
+<div><div class="text-sm font-semibold text-neutral-200">Green</div><div class="text-xs text-neutral-500 font-mono">#788c5d — acento terciário</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tipografia -->
+<div class="rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+<div class="text-cyan-400 font-semibold text-sm mb-3">✏️ Tipografia oficial Anthropic</div>
+<div class="grid sm:grid-cols-2 gap-4 text-sm">
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="font-bold text-blue-400 mb-1">Headings (24pt+)</div>
+<div class="text-neutral-300">Fonte: <strong>Poppins</strong></div>
+<div class="text-neutral-500 text-xs mt-1">Fallback: Arial, sans-serif</div>
+<div class="text-neutral-500 text-xs">Aplicado automaticamente em todos os títulos ≥24pt</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="font-bold text-blue-400 mb-1">Body text</div>
+<div class="text-neutral-300">Fonte: <strong>Lora</strong></div>
+<div class="text-neutral-500 text-xs mt-1">Fallback: Georgia, serif</div>
+<div class="text-neutral-500 text-xs">Aplicado em textos de corpo, parágrafos e legendas</div>
+</div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🎨</div><div class="text-xs font-semibold text-neutral-200">Paleta oficial</div><div class="text-xs text-neutral-500">5 cores fixas</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">✏️</div><div class="text-xs font-semibold text-neutral-200">Poppins + Lora</div><div class="text-xs text-neutral-500">tipografia dupla</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔄</div><div class="text-xs font-semibold text-neutral-200">Pós-processamento</div><div class="text-xs text-neutral-500">aplica em artifacts</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🏢</div><div class="text-xs font-semibold text-neutral-200">Marca concreta</div><div class="text-xs text-neutral-500">Anthropic, não genérico</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2 — Quando dispara -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">2</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🎣 Quando dispara</h2>
+<p class="text-neutral-400 mt-2">O Claude aciona brand-guidelines quando detecta pedidos relacionados a <strong class="text-neutral-200">brand colors, style guidelines, visual formatting ou company design standards</strong>.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- Timeline de gatilhos -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Gatilhos da description (do SKILL.md)</div>
+<div class="relative pl-8 space-y-0">
+<div class="absolute left-3 top-2 bottom-2 w-0.5 bg-blue-500/30"></div>
+<div class="relative pb-4">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-blue-500 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">1</span></div>
+<div class="bg-dark-700/40 rounded-lg p-4 border border-dark-600">
+<div class="font-semibold text-blue-400 text-sm">Brand colors ou style guidelines</div>
+<p class="text-neutral-400 text-sm mt-1">Pedidos explícitos: "aplique as cores da Anthropic", "use as brand guidelines", "estilo corporativo da Anthropic".</p>
+</div>
+</div>
+<div class="relative pb-4">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-blue-500 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">2</span></div>
+<div class="bg-dark-700/40 rounded-lg p-4 border border-dark-600">
+<div class="font-semibold text-blue-400 text-sm">Visual formatting / company design standards</div>
+<p class="text-neutral-400 text-sm mt-1">Contextos de formatação visual corporativa: "deixe no padrão da empresa", "formatação visual oficial", "design standards aplicados".</p>
+</div>
+</div>
+<div class="relative pb-4">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-cyan-500 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">3</span></div>
+<div class="bg-dark-700/40 rounded-lg p-4 border border-dark-600">
+<div class="font-semibold text-cyan-400 text-sm">Artifacts que "se beneficiam" do look-and-feel</div>
+<p class="text-neutral-400 text-sm mt-1">Quando o artefato (slides, HTML, PDF, documento) claramente poderia ter identidade visual de marca — mesmo sem o usuário citar explicitamente "brand guidelines".</p>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-5 w-4 h-4 rounded-full bg-blue-500 border-2 border-dark-800 flex items-center justify-center"><span class="text-xs text-white font-bold">4</span></div>
+<div class="bg-dark-700/40 rounded-lg p-4 border border-dark-600">
+<div class="font-semibold text-blue-400 text-sm">Keywords explícitas no pedido</div>
+<p class="text-neutral-400 text-sm mt-1">Palavras-chave: <em>branding, corporate identity, visual identity, post-processing, styling, brand colors, typography, Anthropic brand, visual formatting, visual design</em>.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- tip box -->
+<div class="rounded-xl bg-primary/10 border border-primary/40 p-4 flex gap-3">
+<span class="text-2xl flex-shrink-0">💡</span>
+<div>
+<div class="font-semibold text-primary text-sm mb-1">Tip: brand-guidelines é sobre UMA marca concreta</div>
+<p class="text-neutral-400 text-sm">O skill ativa quando há intenção de aplicar <em>o padrão Anthropic especificamente</em>. Para criar temas visuais genéricos (qualquer marca, qualquer cor), o skill correto é <strong class="text-neutral-300">theme-factory</strong>.</p>
+</div>
+</div>
+<!-- grid FAZER / NÃO FAZER -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+<div class="text-emerald-400 font-semibold text-sm mb-3">✓ ACIONAR brand-guidelines quando</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Slides ou PPTX precisam da identidade Anthropic</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Docs HTML internos com marca corporativa</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Usuário menciona "cores da Anthropic" ou "brand guidelines"</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Artifact de apresentação para contexto Anthropic</li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+<div class="text-red-400 font-semibold text-sm mb-3">✗ NÃO ACIONAR quando</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Usuário quer tema personalizado (use theme-factory)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não há artifact visual para estilizar</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Pedido é sobre outra empresa/marca específica</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Contexto é puramente textual sem componente visual</li>
+</ul>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔑</div><div class="text-xs font-semibold text-neutral-200">Gatilho explícito</div><div class="text-xs text-neutral-500">brand/style/visual</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🎯</div><div class="text-xs font-semibold text-neutral-200">Marca única</div><div class="text-xs text-neutral-500">só Anthropic</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">📎</div><div class="text-xs font-semibold text-neutral-200">Artifact presente</div><div class="text-xs text-neutral-500">algo para estilizar</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">⚡</div><div class="text-xs font-semibold text-neutral-200">Pós-processo</div><div class="text-xs text-neutral-500">aplica em saída</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3 — Como melhora suas páginas -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">3</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🚀 Como melhora seus artifacts</h2>
+<p class="text-neutral-400 mt-2">O valor concreto: qualquer saída gerada pelo Claude passa a ter coerência visual de marca, sem o usuário precisar especificar cada cor ou fonte manualmente.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- box dados — impacto mensurável -->
+<div class="rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
+<div class="text-blue-400 font-semibold text-sm mb-3">📊 Impacto por tipo de artifact</div>
+<div class="grid sm:grid-cols-3 gap-3 text-sm">
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-blue-400 font-bold mb-1">Slides / PPTX</div>
+<div class="text-neutral-400">Todas as formas não-texto recebem acento ciclado: orange → blue → green. Headings viram Poppins, corpo vira Lora.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-blue-400 font-bold mb-1">HTML / Web</div>
+<div class="text-neutral-400">Paleta CSS mapeada para as 5 cores oficiais. Gradientes e fundos com Dark/Light Anthropic. Tipografia via Google Fonts.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-blue-400 font-bold mb-1">Documentos</div>
+<div class="text-neutral-400">Hierarquia visual preservada. Seleção de cor inteligente baseada no fundo (claro/escuro). Fallback automático se fontes ausentes.</div>
+</div>
+</div>
+</div>
+<!-- Before/After comparação -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Antes × Depois</div>
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-dark-600 bg-dark-700/30 p-4">
+<div class="text-neutral-500 font-semibold text-sm mb-3">⬜ Sem brand-guidelines</div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li>• Cores arbitrárias sem padrão de marca</li>
+<li>• Fonte padrão do sistema (Arial, Helvetica)</li>
+<li>• Cada output parece feito por pessoas diferentes</li>
+<li>• Revisão manual de identidade necessária</li>
+</ul>
+</div>
+<div class="rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
+<div class="text-blue-400 font-semibold text-sm mb-3">🏷️ Com brand-guidelines</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Paleta Anthropic aplicada automaticamente</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Poppins em headings, Lora em corpo</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Consistência visual em todos os outputs</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Pronto para uso profissional imediato</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- tip box 2 -->
+<div class="rounded-xl bg-primary/10 border border-primary/40 p-4 flex gap-3">
+<span class="text-2xl flex-shrink-0">💡</span>
+<div>
+<div class="font-semibold text-primary text-sm mb-1">Smart Color Selection</div>
+<p class="text-neutral-400 text-sm">O skill seleciona cor de texto automaticamente com base no fundo: texto claro (#faf9f5) sobre fundos escuros (#141413), texto escuro sobre fundos claros. Nenhuma decisão manual necessária.</p>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🎨</div><div class="text-xs font-semibold text-neutral-200">Consistência</div><div class="text-xs text-neutral-500">mesmo padrão sempre</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">⚙️</div><div class="text-xs font-semibold text-neutral-200">Automático</div><div class="text-xs text-neutral-500">zero decisão manual</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🏢</div><div class="text-xs font-semibold text-neutral-200">Profissional</div><div class="text-xs text-neutral-500">pronto para uso</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔄</div><div class="text-xs font-semibold text-neutral-200">Accent cycling</div><div class="text-xs text-neutral-500">orange/blue/green</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4 — Como funciona por dentro -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">4</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">⚙️ Como funciona por dentro</h2>
+<p class="text-neutral-400 mt-2">Stack técnico real: python-pptx para manipulação de apresentações, <code class="text-blue-400 bg-dark-700 px-1 rounded text-sm">RGBColor</code> para precisão de cores, e fontes do sistema com fallback automático.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- grid arquitetura técnica -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+<div class="text-emerald-400 font-semibold text-sm mb-3">⚙️ Módulo de Cores</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Usa <code class="text-emerald-300 bg-dark-700 px-1 rounded">python-pptx RGBColor</code> para precisão exata</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Cores aplicadas via valores RGB (não hex strings)</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Fidelidade de cor preservada em diferentes sistemas</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Accent cycling: formas não-texto recebem orange/blue/green em ciclo</li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+<div class="text-red-400 font-semibold text-sm mb-3">⚠️ Limitações técnicas</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Poppins e Lora precisam estar pré-instaladas no sistema</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Fallback Arial/Georgia se fontes ausentes</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Não instala fontes automaticamente</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Resultado depende do ambiente de execução</li>
+</ul>
+</div>
+</div>
+<!-- Font Management técnico -->
+<div class="rounded-xl border border-blue-500/30 bg-dark-700/30 p-4">
+<div class="text-blue-400 font-semibold text-sm mb-3">🔤 Font Management (do SKILL.md)</div>
+<div class="space-y-3 text-sm">
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-xs">1</div>
+<div><span class="text-neutral-200 font-medium">Sistema primeiro:</span> <span class="text-neutral-400">usa Poppins e Lora instaladas no sistema quando disponíveis.</span></div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-xs">2</div>
+<div><span class="text-neutral-200 font-medium">Fallback automático:</span> <span class="text-neutral-400">Arial para headings, Georgia para body — garante legibilidade sempre.</span></div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center flex-shrink-0 text-cyan-400 font-bold text-xs">3</div>
+<div><span class="text-neutral-200 font-medium">Smart font application:</span> <span class="text-neutral-400">aplica Poppins apenas em headings ≥24pt, Lora em todo texto de corpo.</span></div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-xs">4</div>
+<div><span class="text-neutral-200 font-medium">Hierarquia preservada:</span> <span class="text-neutral-400">formatação de texto (bold, italic, size) é mantida — só a família muda.</span></div>
+</div>
+</div>
+</div>
+<!-- alerta -->
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4 flex gap-3">
+<span class="text-2xl flex-shrink-0">⚠️</span>
+<div>
+<div class="font-semibold text-red-400 text-sm mb-1">Atenção: dependência de fontes do sistema</div>
+<p class="text-neutral-400 text-sm">Para resultados com Poppins e Lora reais, instale as fontes antes de usar o skill. Em ambientes sem essas fontes, o output usa Arial/Georgia — funcionalmente correto, mas visualmente não-idêntico ao padrão Anthropic.</p>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🐍</div><div class="text-xs font-semibold text-neutral-200">python-pptx</div><div class="text-xs text-neutral-500">engine principal</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🎨</div><div class="text-xs font-semibold text-neutral-200">RGBColor</div><div class="text-xs text-neutral-500">precisão de cor</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔤</div><div class="text-xs font-semibold text-neutral-200">Poppins/Lora</div><div class="text-xs text-neutral-500">sistema local</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔁</div><div class="text-xs font-semibold text-neutral-200">Fallback</div><div class="text-xs text-neutral-500">Arial/Georgia</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5 — Exemplo prático + PROMPT -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-5">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">5</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">💬 Exemplo prático + PROMPT pronto</h2>
+<p class="text-neutral-400 mt-2">Cenário real: criar uma página HTML de apresentação de produto com identidade Anthropic aplicada, pronta para uso corporativo.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- Cenário -->
+<div class="rounded-xl bg-gradient-to-br from-blue-900/30 to-dark-700/50 border border-blue-500/30 p-5">
+<div class="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-2">Cenário</div>
+<p class="text-neutral-200 font-medium">Você precisa de uma página HTML de produto (landing, one-pager, apresentação interna) com a identidade visual oficial da Anthropic — sem precisar pesquisar hexcodes, decidir fontes ou montar uma paleta manualmente.</p>
+</div>
+<!-- PROMPT PRONTO -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Prompt pronto para colar no Claude Code</div>
+<div class="rounded-xl bg-dark-900 border border-blue-500/30 p-4 overflow-x-auto">
+<pre class="text-sm text-blue-300 font-mono whitespace-pre-wrap">Crie uma página HTML de apresentação do produto "Claude API"
+para uso interno na Anthropic.
+
+Aplique as brand guidelines oficiais da Anthropic:
+- Paleta de cores: Dark #141413, Light #faf9f5,
+  Orange accent #d97757, Blue accent #6a9bcc, Green accent #788c5d
+- Tipografia: Poppins para headings (24pt+), Lora para body text
+- Formas e shapes com accent cycling: orange → blue → green
+
+A página deve ter: hero section, 3 feature cards,
+CTA e footer. Use o look-and-feel corporativo Anthropic.</pre>
+</div>
+</div>
+<!-- Segundo exemplo — PPTX -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Variante: aplicar em apresentação existente</div>
+<div class="rounded-xl bg-dark-900 border border-cyan-500/30 p-4 overflow-x-auto">
+<pre class="text-sm text-cyan-300 font-mono whitespace-pre-wrap">Tenho um arquivo presentation.pptx de relatório trimestral.
+Aplique as brand guidelines da Anthropic:
+- Cores oficiais via python-pptx RGBColor
+- Headings em Poppins (fallback Arial)
+- Body text em Lora (fallback Georgia)
+- Shapes não-texto em accent cycling: orange (#d97757),
+  blue (#6a9bcc), green (#788c5d)
+Preserve toda a hierarquia e formatação existente.</pre>
+</div>
+</div>
+<!-- tip box -->
+<div class="rounded-xl bg-primary/10 border border-primary/40 p-4 flex gap-3">
+<span class="text-2xl flex-shrink-0">💡</span>
+<div>
+<div class="font-semibold text-primary text-sm mb-1">Pré-instale Poppins e Lora para resultado ideal</div>
+<p class="text-neutral-400 text-sm">No macOS: <code class="text-primary bg-dark-700 px-1 rounded text-xs">brew install --cask font-poppins font-lora</code>. No Linux: baixe do Google Fonts e copie para <code class="text-primary bg-dark-700 px-1 rounded text-xs">~/.fonts/</code>. O skill funciona sem elas (fallback), mas o resultado será Arial/Georgia em vez de Poppins/Lora.</p>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">📝</div><div class="text-xs font-semibold text-neutral-200">Prompt direto</div><div class="text-xs text-neutral-500">cite as cores</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔢</div><div class="text-xs font-semibold text-neutral-200">Hex explícito</div><div class="text-xs text-neutral-500">sem ambiguidade</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🖼️</div><div class="text-xs font-semibold text-neutral-200">Artifact alvo</div><div class="text-xs text-neutral-500">HTML ou PPTX</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🏷️</div><div class="text-xs font-semibold text-neutral-200">Contexto marca</div><div class="text-xs text-neutral-500">Anthropic, corporativo</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6 — Combina com / limites -->
+<section class="bg-dark-800 rounded-2xl border border-blue-500/30 overflow-hidden" id="topico-6">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-lg">6</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🧬 Combina com / limites</h2>
+<p class="text-neutral-400 mt-2">Posição no ecossistema da Trilha 2 — Identidade — e quando brand-guidelines <em>não</em> é a escolha certa.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- Diferença crítica brand-guidelines vs theme-factory -->
+<div class="rounded-xl bg-gradient-to-br from-blue-900/30 to-dark-700/50 border border-blue-500/30 p-5">
+<div class="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-3">brand-guidelines × theme-factory — a diferença fundamental</div>
+<div class="grid sm:grid-cols-2 gap-4 text-sm">
+<div class="bg-dark-800/60 rounded-lg p-4 border border-blue-500/20">
+<div class="text-blue-400 font-bold mb-2">🏷️ brand-guidelines</div>
+<ul class="space-y-1.5 text-neutral-400">
+<li>• UMA marca concreta: Anthropic</li>
+<li>• Paleta fixa e imutável (#141413, #faf9f5, #d97757…)</li>
+<li>• Fontes corporativas: Poppins / Lora</li>
+<li>• Pós-processamento de artifacts existentes</li>
+<li>• Resultado previsível e padronizado</li>
+</ul>
+</div>
+<div class="bg-dark-800/60 rounded-lg p-4 border border-dark-600">
+<div class="text-neutral-300 font-bold mb-2">🎨 theme-factory (módulo 2.1)</div>
+<ul class="space-y-1.5 text-neutral-400">
+<li>• Qualquer marca ou identidade visual</li>
+<li>• Paleta gerada/customizada conforme pedido</li>
+<li>• Fontes flexíveis, sem padrão fixo</li>
+<li>• Cria temas novos do zero</li>
+<li>• Resultado variável por contexto</li>
+</ul>
+</div>
+</div>
+<p class="text-neutral-400 text-sm mt-4">Use <strong class="text-blue-400">brand-guidelines</strong> quando o resultado precisa seguir o padrão oficial da Anthropic. Use <strong class="text-neutral-300">theme-factory</strong> para criar sistemas de design para qualquer outro caso.</p>
+</div>
+<!-- canvas-design relacionamento -->
+<div class="rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+<div class="text-cyan-400 font-semibold text-sm mb-3">🖼️ Relação com canvas-design (próximo: Módulo 2.3)</div>
+<p class="text-neutral-400 text-sm mb-3">canvas-design opera em um nível diferente: cria composições visuais em Canvas/SVG com liberdade criativa. brand-guidelines e canvas-design se complementam:</p>
+<div class="grid sm:grid-cols-2 gap-3 text-sm">
+<div class="bg-dark-800/60 rounded-lg p-3">
+<div class="text-cyan-400 font-semibold mb-1">Fluxo combinado</div>
+<p class="text-neutral-400">canvas-design cria a composição visual → brand-guidelines aplica a paleta Anthropic sobre ela. Resultado: arte criativa com identidade corporativa.</p>
+</div>
+<div class="bg-dark-800/60 rounded-lg p-3">
+<div class="text-cyan-400 font-semibold mb-1">Quando NÃO combinar</div>
+<p class="text-neutral-400">Se a composição do canvas-design usa cores intencionalmente não-Anthropic (arte abstrata, ilustração com identidade própria), brand-guidelines vai distorcer a intenção criativa.</p>
+</div>
+</div>
+</div>
+<!-- Mapa de relacionamentos -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Com quais skills compõe bem</div>
+<div class="space-y-3">
+<div class="flex items-start gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="text-2xl flex-shrink-0">⚛️</div>
+<div><div class="font-semibold text-neutral-200 text-sm">frontend-design (T1.1)</div><div class="text-neutral-500 text-sm">Cria a estrutura HTML → brand-guidelines aplica a identidade Anthropic sobre ela. Fluxo clássico para páginas internas.</div></div>
+</div>
+<div class="flex items-start gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="text-2xl flex-shrink-0">🧱</div>
+<div><div class="font-semibold text-neutral-200 text-sm">web-artifacts-builder (T1.3)</div><div class="text-neutral-500 text-sm">Gera artifacts web completos → brand-guidelines é o pós-processo que garante que os artifacts saiam na identidade Anthropic.</div></div>
+</div>
+<div class="flex items-start gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="text-2xl flex-shrink-0">🖼️</div>
+<div><div class="font-semibold text-neutral-200 text-sm">canvas-design (T2.3)</div><div class="text-neutral-500 text-sm">Composição visual criativa que pode receber brand-guidelines como camada de padronização corporativa.</div></div>
+</div>
+<div class="flex items-start gap-3 bg-dark-700/40 rounded-lg p-3 border border-dark-600">
+<div class="text-2xl flex-shrink-0">🌀</div>
+<div><div class="font-semibold text-neutral-200 text-sm">algorithmic-art (T2.4)</div><div class="text-neutral-500 text-sm">Arte generativa pode ser "brandificada" — mas com cuidado: a estética do algorithmic-art frequentemente conflita com a sobriedad da paleta Anthropic.</div></div>
+</div>
+</div>
+</div>
+<!-- grid quando NÃO usar -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+<div class="text-emerald-400 font-semibold text-sm mb-3">✓ USE brand-guidelines para</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Apresentações internas Anthropic</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Docs e relatórios com identidade corporativa</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Páginas de produto no padrão visual Anthropic</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Uniformizar outputs de múltiplos autores</li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+<div class="text-red-400 font-semibold text-sm mb-3">✗ NÃO USE brand-guidelines para</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Criar temas para outros projetos/marcas</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Pedidos de "tema escuro" genérico (use theme-factory)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Artifacts sem componente visual (texto puro)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Arte criativa com identidade própria intencional</li>
+</ul>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">≠</div><div class="text-xs font-semibold text-neutral-200">≠ theme-factory</div><div class="text-xs text-neutral-500">marca específica</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">+</div><div class="text-xs font-semibold text-neutral-200">+ canvas-design</div><div class="text-xs text-neutral-500">criativo + marca</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🔄</div><div class="text-xs font-semibold text-neutral-200">Pós-processo</div><div class="text-xs text-neutral-500">final do pipeline</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 text-lg mb-1">🚫</div><div class="text-xs font-semibold text-neutral-200">Escopo fixo</div><div class="text-xs text-neutral-500">só Anthropic</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="rounded-2xl bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 border border-blue-500/30 p-8" id="resumo">
+<h2 class="text-2xl font-bold mb-6 text-blue-400">📋 Resumo do Módulo 2.2</h2>
+<!-- checklist -->
+<div class="grid sm:grid-cols-2 gap-3 mb-8">
+<div class="flex items-start gap-3 bg-dark-800/60 rounded-lg p-3 border border-blue-500/20">
+<span class="text-emerald-400 font-bold mt-0.5">✓</span>
+<p class="text-neutral-300 text-sm">brand-guidelines aplica as cores e fontes <em>oficiais</em> da Anthropic — Dark #141413, Light #faf9f5, accents orange/blue/green, Poppins e Lora</p>
+</div>
+<div class="flex items-start gap-3 bg-dark-800/60 rounded-lg p-3 border border-blue-500/20">
+<span class="text-emerald-400 font-bold mt-0.5">✓</span>
+<p class="text-neutral-300 text-sm">Ativa quando o pedido menciona brand colors, style guidelines, visual formatting ou company design standards da Anthropic</p>
+</div>
+<div class="flex items-start gap-3 bg-dark-800/60 rounded-lg p-3 border border-blue-500/20">
+<span class="text-emerald-400 font-bold mt-0.5">✓</span>
+<p class="text-neutral-300 text-sm">Usa python-pptx com RGBColor para precisão; fontes do sistema (Poppins/Lora) com fallback Arial/Georgia</p>
+</div>
+<div class="flex items-start gap-3 bg-dark-800/60 rounded-lg p-3 border border-blue-500/20">
+<span class="text-emerald-400 font-bold mt-0.5">✓</span>
+<p class="text-neutral-300 text-sm">Diferente de theme-factory (temas genéricos) — brand-guidelines é sobre UMA marca concreta com paleta fixa</p>
+</div>
+<div class="flex items-start gap-3 bg-dark-800/60 rounded-lg p-3 border border-blue-500/20">
+<span class="text-emerald-400 font-bold mt-0.5">✓</span>
+<p class="text-neutral-300 text-sm">Accent cycling em formas não-texto: orange → blue → green, mantendo interesse visual com coerência de marca</p>
+</div>
+<div class="flex items-start gap-3 bg-dark-800/60 rounded-lg p-3 border border-blue-500/20">
+<span class="text-emerald-400 font-bold mt-0.5">✓</span>
+<p class="text-neutral-300 text-sm">Compõe bem com frontend-design, web-artifacts-builder e canvas-design como etapa de pós-processamento da pipeline</p>
+</div>
+</div>
+<!-- próximo módulo box -->
+<div class="rounded-xl border border-blue-500/30 bg-dark-800/60 p-4 mb-6">
+<div class="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-2">Próximo módulo:</div>
+<div class="flex items-center gap-3">
+<span class="text-2xl">🖼️</span>
+<div>
+<div class="font-bold text-neutral-100">Módulo 2.3 — canvas-design</div>
+<div class="text-neutral-400 text-sm">Composições visuais em Canvas e SVG — criação de arte generativa e layouts visuais com liberdade criativa total.</div>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Voltar para Trilha 2</a>
+<a class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors" href="modulo-2-3.html">Próximo Módulo: 2.3 canvas-design →</a>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Conteúdo do <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Trilha 2: Identidade · Módulo 2.2 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

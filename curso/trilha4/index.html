@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trilha 4 — Diagramas, navegador &amp; pesquisa | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#F59E0B', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    .modal.hidden { display: none; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento amber */
+    html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(245,158,11,0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(245,158,11,0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(245,158,11,0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(245,158,11,0.18); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #b45309; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(245,158,11,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-amber-400 { color: #b45309; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #92400e; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(146,64,14,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(146,64,14,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.2s} .wf-a:nth-child(3){animation-delay:.4s} .wf-a:nth-child(4){animation-delay:.6s}
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha4/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha4/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha4/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha4/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha4/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Criação</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Publicação</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10" href="index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Apoio</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">TRILHA 4</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🔎 Diagramas, navegador &amp; pesquisa</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">As skills de apoio que potencializam tudo. Visualize fluxos com Mermaid, desenhe diagramas livres com Excalidraw, automatize o navegador com Playwright e extraia inteligência competitiva de qualquer site — tudo dentro do Claude Code.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">4</div><div class="text-xs text-neutral-400">Módulos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">24</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">~1.5h</div><div class="text-xs text-neutral-400">Duração</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+</div>
+<!-- HERO SVG: página central → diagramas/navegador/pesquisa apoiando (amber + ciano) -->
+<div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-3 sm:p-4 mt-8 overflow-hidden">
+<svg aria-label="Uma página central recebe apoio de quatro skills: beautiful-mermaid gera diagramas SVG, excalidraw cria diagramas livres, agent-browser automatiza o navegador e website-intelligence faz pesquisa competitiva" class="w-full h-auto" role="img" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="t4-amber" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f59e0b"></stop><stop offset="1" stop-color="#d97706"></stop></lineargradient>
+<lineargradient id="t4-cyan" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#22d3ee"></stop><stop offset="1" stop-color="#06b6d4"></stop></lineargradient>
+<filter height="180%" id="t4-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="3"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="t4-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#f59e0b" opacity="0.10" r="1.3"></circle></pattern>
+<marker id="t4-ah-amber" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#f59e0b"></path></marker>
+<marker id="t4-ah-cyan" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#22d3ee"></path></marker>
+</defs>
+<rect fill="url(#t4-grid)" height="200" width="1000" x="0" y="0"></rect>
+<!-- central page -->
+<g filter="url(#t4-glow)">
+<rect fill="#1a1a08" height="84" rx="16" stroke="url(#t4-amber)" stroke-width="2.5" width="220" x="390" y="58"></rect>
+</g>
+<text fill="#fcd34d" font-family="Inter,sans-serif" font-size="18" font-weight="700" text-anchor="middle" x="500" y="92">Sua Página</text>
+<text fill="#fde68a" font-family="Inter,sans-serif" font-size="12.5" text-anchor="middle" x="500" y="114">resultado final</text>
+<!-- left skills -->
+<g class="wf-a">
+<rect fill="#0d1a1f" height="38" rx="10" stroke="#22d3ee" stroke-width="2" width="200" x="30" y="18"></rect>
+<text fill="#a5f3fc" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="130" y="42">📊 beautiful-mermaid</text>
+</g>
+<g class="wf-a">
+<rect fill="#0d1a1f" height="38" rx="10" stroke="#22d3ee" stroke-width="2" width="200" x="30" y="80"></rect>
+<text fill="#a5f3fc" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="130" y="104">✏️ excalidraw</text>
+</g>
+<!-- left arrows -->
+<path d="M230,37 L390,85" fill="none" marker-end="url(#t4-ah-cyan)" stroke="#22d3ee" stroke-dasharray="5,3" stroke-width="1.5"></path>
+<path d="M230,99 L390,100" fill="none" marker-end="url(#t4-ah-cyan)" stroke="#22d3ee" stroke-dasharray="5,3" stroke-width="1.5"></path>
+<!-- right skills -->
+<g class="wf-a">
+<rect fill="#0d1a1f" height="38" rx="10" stroke="#f59e0b" stroke-width="2" width="200" x="770" y="18"></rect>
+<text fill="#fde68a" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="870" y="42">🕹️ agent-browser</text>
+</g>
+<g class="wf-a">
+<rect fill="#0d1a1f" height="38" rx="10" stroke="#f59e0b" stroke-width="2" width="200" x="770" y="80"></rect>
+<text fill="#fde68a" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="870" y="104">🔭 website-intelligence</text>
+</g>
+<!-- right arrows -->
+<path d="M770,37 L610,85" fill="none" marker-end="url(#t4-ah-amber)" stroke="#f59e0b" stroke-dasharray="5,3" stroke-width="1.5"></path>
+<path d="M770,99 L610,100" fill="none" marker-end="url(#t4-ah-amber)" stroke="#f59e0b" stroke-dasharray="5,3" stroke-width="1.5"></path>
+<!-- bottom label -->
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="500" y="178">Skills de apoio que ampliam o que você já sabe construir</text>
+</svg>
+<p class="text-center text-xs text-neutral-500 mt-2">Ecossistema da Trilha 4 — skills de apoio em ação</p>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- MAPA DA TRILHA -->
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all" href="#modulo-4-1">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.1</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">📊 beautiful-mermaid</h3>
+<p class="text-xs text-neutral-400">Mermaid → SVG/PNG</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all" href="#modulo-4-2">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.2</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">✏️ excalidraw</h3>
+<p class="text-xs text-neutral-400">Diagramas em linguagem natural</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all" href="#modulo-4-3">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.3</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">🕹️ agent-browser</h3>
+<p class="text-xs text-neutral-400">Testar e screenshotar</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all" href="#modulo-4-4">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.4</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">🔭 website-intelligence</h3>
+<p class="text-xs text-neutral-400">Inteligência competitiva</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+<!-- MÓDULO 4.1 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-4-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.1</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">📊 beautiful-mermaid</h3>
+<p class="text-neutral-400 text-sm">Renderiza código Mermaid como SVG e PNG de alta resolução usando a lib Beautiful Mermaid — ideal para documentar fluxos, arquiteturas e sequências sem sair do Claude Code.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🗺️</span><div><span class="font-medium">O que é a skill</span><span class="text-neutral-500 text-sm ml-2">- propósito e escopo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">beautiful-mermaid é uma skill que recebe código Mermaid (flowchart, sequence, class, ER…) e o renderiza como SVG ou PNG usando a biblioteca mermaid.js num HTML intermediário.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diagramas gerados por texto são versionáveis e editáveis — nada de arrastar caixinhas em ferramentas visuais. Você descreve, o Claude desenha.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mermaid DSL, renderização programática, SVG vetorial, PNG rasterizado.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">📐</span><div><span class="font-medium">Tipos de diagrama suportados</span><span class="text-neutral-500 text-sm ml-2">- flowchart, sequence e mais</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill suporta todos os tipos do Mermaid: flowchart (LR/TD), sequência, classe, ER, Gantt, gitGraph, mindmap e quadrantChart.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cada tipo resolve um problema diferente — escolher o certo comunica melhor e economiza revisões.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">flowchart LR/TD, sequenceDiagram, classDiagram, erDiagram, gantt, mindmap.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🎨</span><div><span class="font-medium">Temas e personalização</span><span class="text-neutral-500 text-sm ml-2">- dark, forest, neutral…</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Mermaid oferece temas prontos (default, dark, forest, neutral, base) e o beautiful-mermaid seleciona o melhor para o contexto ou aceita instrução direta.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Um diagrama com tema correto é publicável direto na documentação ou slide — sem pós-produção.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">%%{init: {"theme": "dark"}}%%, themeVariables, contraste, apresentação vs. desenvolvimento.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Workflow em 5 passos</span><span class="text-neutral-500 text-sm ml-2">- do código ao arquivo final</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill segue 5 etapas: (1) gerar/validar código Mermaid, (2) renderizar SVG via CLI, (3) criar HTML wrapper, (4) capturar PNG em alta resolução com agent-browser, (5) limpar arquivos intermediários.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender o pipeline permite depurar quando algo falha e saber qual etapa customizar.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">mmdc CLI, HTML wrapper, viewport, screenshot, cleanup.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">📤</span><div><span class="font-medium">Saída SVG vs PNG</span><span class="text-neutral-500 text-sm ml-2">- quando usar cada formato</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">SVG é vetorial (escala sem perda, editável) e ideal para web; PNG é rasterizado em alta resolução (2×–3×) e pronto para documentos e slides.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Escolher o formato errado gera diagramas borrados em PDF ou arquivos pesados demais para o repositório.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">SVG vetorial, PNG raster, DPI, resolução 2×/3×, compatibilidade.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🔧</span><div><span class="font-medium">Troubleshooting comum</span><span class="text-neutral-500 text-sm ml-2">- erros e soluções rápidas</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Os erros mais comuns: tema não aplicado (init block mal posicionado), diagrama cortado (viewport muito pequeno) e SVG vazio (sintaxe Mermaid inválida).</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Reconhecer o sintoma economiza depuração — cada erro tem causa e solução previsíveis.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">init block, viewport, sintaxe Mermaid, validação prévia.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-4-1')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors" href="modulo-4-1.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 4.2 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-4-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.2</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">✏️ excalidraw</h3>
+<p class="text-neutral-400 text-sm">Gera diagramas Excalidraw a partir de descrições em texto — flowcharts, arquitetura, mind maps, diagramas de relacionamento — com saída em <code class="text-amber-400">.excalidraw</code> pronto para abrir e editar.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🎯</span><div><span class="font-medium">O que é a skill</span><span class="text-neutral-500 text-sm ml-2">- diagramas de linguagem natural</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill excalidraw converte descrições em texto (ex.: "fluxo de login com 3 etapas") em JSON Excalidraw válido, pronto para abrir no editor visual e continuar editando à mão.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Partir de um rascunho gerado é muito mais rápido do que construir do zero — você refina, não cria do nada.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Excalidraw JSON, linguagem natural → estrutura, arquivo .excalidraw, edição colaborativa.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🔀</span><div><span class="font-medium">Tipos de diagrama</span><span class="text-neutral-500 text-sm ml-2">- flowchart, arq, mind map…</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill reconhece 9 tipos: flowchart, relationship diagram, mind map, architecture, DFD, swimlane (business flow), class diagram, sequence diagram e ER diagram.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cada tipo tem layout e semântica próprios — descrever o contexto correto gera um diagrama muito mais útil.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Intenção do usuário → tipo de diagrama; swimlane, ER, sequence, mind map.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">📐</span><div><span class="font-medium">Layout e coordenadas</span><span class="text-neutral-500 text-sm ml-2">- espaçamento e posicionamento</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill posiciona elementos com espaçamento horizontal de 200–300px e vertical de 100–150px, centralizando elementos importantes e evitando sobreposições.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Coordenadas bem calculadas geram diagramas legíveis sem precisar reorganizar tudo no editor visual.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">x/y coordinates, gap horizontal/vertical, radial layout (mind map), grid layout (relationship).</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🖌️</span><div><span class="font-medium">Cores e tipografia</span><span class="text-neutral-500 text-sm ml-2">- Excalifont e paleta coerente</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Todos os elementos usam fontFamily: 5 (Excalifont) e uma paleta consistente: azul claro para primários, verde claro para secundários, amarelo para central, vermelho claro para alertas.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Consistência visual faz o diagrama parecer intencional — não colagem aleatória de formas.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">fontFamily: 5, strokeColor, backgroundColor, fontSize 16–24px, paleta de 4 cores.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">📦</span><div><span class="font-medium">Formato de saída</span><span class="text-neutral-500 text-sm ml-2">- JSON válido e como abrir</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A saída é um arquivo <code>.excalidraw</code> (JSON com type, version, elements e appState) salvo no diretório corrente e abrível diretamente no app Excalidraw ou VS Code.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender o formato permite inspecionar e corrigir manualmente se algum elemento saiu errado.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">elements array, appState, unique IDs, type: "excalidraw".</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">📚</span><div><span class="font-medium">Bibliotecas de ícones</span><span class="text-neutral-500 text-sm ml-2">- AWS, Azure, diagramas ricos</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill suporta ícones de bibliotecas externas (AWS, Azure, GCP, Kubernetes) instaladas no Excalidraw — quando disponíveis, enriquece os diagramas de arquitetura com ícones oficiais.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diagramas de arquitetura com ícones oficiais comunicam tecnologia instantaneamente, sem ambiguidade.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Excalidraw libraries, .excalidrawlib, imageElement, fallback sem ícone.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-4-2')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors" href="modulo-4-2.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 4.3 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-4-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.3</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🕹️ agent-browser (Playwright)</h3>
+<p class="text-neutral-400 text-sm">Automatiza interações de navegador: navegar, preencher formulários, tirar screenshots, testar apps web e extrair dados — o validador perfeito para confirmar que a página que você construiu funciona de verdade.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🌐</span><div><span class="font-medium">O que é a skill</span><span class="text-neutral-500 text-sm ml-2">- Playwright no Claude Code</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">agent-browser é uma skill que controla um navegador real (via Playwright) por comandos de texto — abrir URLs, interagir com elementos, tirar screenshots e extrair dados da página.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automatizar o navegador é essencial para validar páginas construídas, testar formulários e confirmar comportamento visual antes de entregar.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Playwright, headless browser, automação, validação visual.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">📸</span><div><span class="font-medium">Workflow: navegar → snapshot → agir</span><span class="text-neutral-500 text-sm ml-2">- o ciclo fundamental</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O ciclo básico é sempre: (1) <code>agent-browser open URL</code>, (2) <code>agent-browser snapshot -i</code> para obter refs dos elementos interativos, (3) interagir usando os refs retornados.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O snapshot retorna refs (@e1, @e2…) que são os identificadores estáveis para interação — sem eles, os comandos não sabem onde clicar.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">open, snapshot -i, refs @eN, click, type, fill.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">📷</span><div><span class="font-medium">Screenshots e gravação de vídeo</span><span class="text-neutral-500 text-sm ml-2">- evidência visual</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill captura screenshots (<code>agent-browser screenshot arquivo.png</code>) e pode gravar vídeo completo da sessão para documentar fluxos ou reportar bugs visualmente.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Screenshots são a evidência definitiva de que uma página está correta — mais confiável do que inspecionar HTML.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">screenshot PNG, video record, viewport 1920×1080, fullPage.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🤖</span><div><span class="font-medium">Automação de formulários</span><span class="text-neutral-500 text-sm ml-2">- preencher, submeter, verificar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill preenche campos (<code>fill @ref "valor"</code>), seleciona opções, clica em botões e verifica o resultado — perfeito para testar fluxos de cadastro, login e checkout.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Testar manualmente cada formulário depois de cada mudança é inviável — automatizar garante regressão rápida.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">fill, select, check, submit, assert-text, assert-visible.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">📡</span><div><span class="font-medium">Extração de dados</span><span class="text-neutral-500 text-sm ml-2">- get-text, get-attr, network</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill extrai texto (<code>get-text</code>), atributos (<code>get-attr</code>), cookies, localStorage e até intercepta requisições de rede para inspecionar APIs em tempo real.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Extrair dados do DOM ou da rede é o atalho para validar que a página mostra o que o backend enviou.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">get-text, get-attr, cookies, localStorage, network intercept.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🛠️</span><div><span class="font-medium">Debugging e sessões</span><span class="text-neutral-500 text-sm ml-2">- múltiplos navegadores paralelos</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill suporta múltiplas sessões de navegador em paralelo, modo headed (visível) para debugging, e salvamento de estado de autenticação para reusar sessões logadas.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sessões paralelas permitem testar fluxos multi-usuário; modo headed deixa ver exatamente o que o navegador vê.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">session, headed mode, storage state, parallel browsers, auth reuse.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-4-3')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors" href="modulo-4-3.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 4.4 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-4-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.4</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🔭 website-intelligence</h3>
+<p class="text-neutral-400 text-sm">Faz scraping do site do cliente, analisa os 5 principais concorrentes e gera um relatório de análise competitiva em HTML — depois constrói um site premium scroll-animated baseado em dados reais via Firecrawl MCP.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🕵️</span><div><span class="font-medium">O que é a skill</span><span class="text-neutral-500 text-sm ml-2">- pesquisa competitiva automatizada</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">website-intelligence é uma skill de 6 fases: extração da marca do cliente → análise de nicho → relatório competitivo → brief de construção → build do site → auditoria de qualidade.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Em vez de adivinhar o que o cliente precisa, você parte de dados reais do mercado — o site resultante é fundamentado em evidência, não em opinião.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Firecrawl MCP, scraping, análise competitiva, data-driven design.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🔍</span><div><span class="font-medium">Fase 1 e 2: extração e nicho</span><span class="text-neutral-500 text-sm ml-2">- scraping do cliente e concorrentes</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Fase 1 usa Firecrawl para extrair identidade visual, tom de voz e estrutura do site do cliente. Fase 2 busca os 10 maiores concorrentes e faz scraping profundo dos 5 melhores.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem entender o mercado, o site fica genérico. Com dados reais, cada decisão de design tem justificativa.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">mcp__firecrawl__scrape, mcp__firecrawl__search, identidade visual, top 10%, padrões do mercado.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">📊</span><div><span class="font-medium">Fase 3: relatório competitivo</span><span class="text-neutral-500 text-sm ml-2">- HTML PDF-ready</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill gera um relatório polido em HTML (com @media print) que inclui perfis dos 5 concorrentes, tabela comparativa, landscape de SEO e direção de design recomendada.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Um relatório visual entregue ao cliente justifica as decisões criativas e constrói confiança antes do build.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">competitive-analysis.html, @media print, Instrument Serif, DM Sans, swatches, tabela comparativa.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">✅</span><div><span class="font-medium">Fase 4: brief e aprovação</span><span class="text-neutral-500 text-sm ml-2">- hard stop antes do build</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Antes de construir, a skill para e apresenta um brief com direção de design, arquitetura do site, framework de conteúdo e playbook de conversão — exigindo aprovação explícita.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O hard stop evita construir na direção errada — retrabalhar um site completo é 10× mais caro do que revisar um brief.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Hard stop, aprovação, build brief, direção de design, arquitetura de site.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🏗️</span><div><span class="font-medium">Fase 5: build do site</span><span class="text-neutral-500 text-sm ml-2">- scroll-animated, qualidade Apple</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Com o brief aprovado, a skill constrói o site completo: animações scroll-triggered em todas as transições, parallax, micro-interações premium e ritmo visual dark/light — qualidade Apple/Stripe.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ver o processo completo de "pesquisa → site" desmistifica como sites premium são construídos com dados reais.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Scroll-triggered, parallax, micro-interações, dark/light, placeholder 3D, cinematic feel.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🔬</span><div><span class="font-medium">Fase 6: auditoria de qualidade</span><span class="text-neutral-500 text-sm ml-2">- SEO, acessibilidade, performance</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A última fase audita SEO (H1, meta, schema), acessibilidade (alt text, contraste, ARIA), performance (cache, lazy load) e checa o client-ready checklist antes de declarar o build completo.</p></div>
+<div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Um site bonito que não passa na auditoria não é entregável — a fase 6 garante que forma e função estejam alinhadas.</p></div>
+<div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Auditoria SEO, acessibilidade WCAG, performance, checklist, deploy preview.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-4-4')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors" href="modulo-4-4.html">Ver Completo</a>
+</div>
+</div>
+<!-- NAV TRILHA — última trilha -->
+<div class="flex flex-col sm:flex-row gap-4 mt-10">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../index.html">← Todas as trilhas</a>
+<a class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors" href="../../index.html">Voltar ao início →</a>
+</div>
+</main>
+<!-- MODAIS -->
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-4-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.1</span><span class="font-semibold">beautiful-mermaid</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-4-1.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-4-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.2</span><span class="font-semibold">excalidraw</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-4-2.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-4-3" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.3</span><span class="font-semibold">agent-browser (Playwright)</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-4-3.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-4-4" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.4</span><span class="font-semibold">website-intelligence</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-4-4.html"></iframe>
+</div>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Conteúdo do <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Trilha 4: Diagramas, navegador &amp; pesquisa · 2026</p>
+</div>
+</footer>
+<script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+    const themeToggle=document.getElementById('theme-toggle');
+    const di=document.getElementById('theme-toggle-dark-icon'), li=document.getElementById('theme-toggle-light-icon');
+    const root=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){ di.classList.remove('hidden'); root.classList.remove('dark'); } else { li.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', ()=>{ di.classList.toggle('hidden'); li.classList.toggle('hidden'); root.classList.toggle('dark'); localStorage.setItem('theme', root.classList.contains('dark')?'dark':'light'); });
+  </script>
+</body>
+</html>

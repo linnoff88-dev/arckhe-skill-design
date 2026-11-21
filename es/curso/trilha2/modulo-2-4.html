@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 2.4 — 🌀 algorithmic-art | 🎨 Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#3b82f6', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento blue */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,0.18); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #1d4ed8; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(29,78,216,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(29,78,216,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(220,38,38,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .bg-cyan-500\/10 { background-color: rgba(8,145,178,0.08); }
+    html:not(.dark) .border-cyan-500\/30 { border-color: rgba(8,145,178,0.25); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* SVG animations */
+    @keyframes m24-flow { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+    @keyframes m24-pulse { 0%,100% { opacity:.3 } 50% { opacity:1 } }
+    @keyframes m24-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes m24-drift { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+    @media (prefers-reduced-motion: no-preference) {
+      .m24-flow { animation: m24-flow 3s linear infinite; }
+      .m24-pulse { animation: m24-pulse 2.5s ease-in-out infinite; }
+      .m24-pulse-2 { animation: m24-pulse 2.5s ease-in-out infinite; animation-delay:.5s; }
+      .m24-pulse-3 { animation: m24-pulse 2.5s ease-in-out infinite; animation-delay:1s; }
+      .m24-spin { animation: m24-spin 12s linear infinite; transform-origin: 200px 120px; }
+      .m24-drift { animation: m24-drift 4s ease-in-out infinite; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha2/modulo-2-4.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha2/modulo-2-4.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha2/modulo-2-4.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha2/modulo-2-4.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha2/modulo-2-4.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-2-4.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidad</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Medios</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Soporte</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-blue-400 transition-colors" href="../../index.html">Inicio</a>
+<span>/</span>
+<a class="hover:text-blue-400 transition-colors" href="index.html">Ruta 2 — Identidad</a>
+<span>/</span>
+<span class="text-blue-400 font-medium">Módulo 2.4</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.4 · ÚLTIMO DE LA RUTA</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🌀 algorithmic-art</h1>
+<p class="text-lg text-neutral-400 max-w-xl">Crea arte generativo original con p5.js —flow fields, sistemas de partículas, randomness con seed y exploración interactiva de parámetros— directamente en tus páginas, como fondos animados y secciones dinámicas.</p>
+<div class="grid grid-cols-4 gap-3 mt-6">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">6</div>
+<div class="text-xs text-neutral-400">Temas</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">~30</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Avanzado</div>
+<div class="text-xs text-neutral-400">Nivel</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Generativo</div>
+<div class="text-xs text-neutral-400">Categoría</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — Flow field generativo -->
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4">
+<svg aria-label="Diagrama futurista de arte algorítmico: flow field, partículas y generación por seed" class="w-full h-auto" role="img" viewbox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="m24-bg-grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#0e1622;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0e1b26;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="m24-blue-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="m24-cyan-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1"></stop>
+</lineargradient>
+<filter height="160%" id="m24-glow" width="160%" x="-30%" y="-30%">
+<fegaussianblur result="blur" stddeviation="4"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<rect fill="url(#m24-bg-grad)" height="240" rx="12" width="400"></rect>
+<!-- grid lines suaves -->
+<g opacity="0.4" stroke="#1e3a5f" stroke-width="0.4">
+<line x1="0" x2="400" y1="48" y2="48"></line>
+<line x1="0" x2="400" y1="96" y2="96"></line>
+<line x1="0" x2="400" y1="144" y2="144"></line>
+<line x1="0" x2="400" y1="192" y2="192"></line>
+<line x1="80" x2="80" y1="0" y2="240"></line>
+<line x1="160" x2="160" y1="0" y2="240"></line>
+<line x1="240" x2="240" y1="0" y2="240"></line>
+<line x1="320" x2="320" y1="0" y2="240"></line>
+</g>
+<!-- SEED box -->
+<rect fill="#0e1622" filter="url(#m24-glow)" height="50" rx="8" stroke="#60a5fa" stroke-width="1.5" width="80" x="14" y="90"></rect>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="54" y="111">seed(42)</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="54" y="125">aleatoriedad</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="54" y="135">controlada</text>
+<text class="m24-pulse" fill="#60a5fa" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="54" y="76">① SEED</text>
+<!-- Arrow seed → noise -->
+<path class="m24-flow" d="M94 115 L126 115" fill="none" stroke="#38bdf8" stroke-dasharray="5,4" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="126,111 134,115 126,119"></polygon>
+<!-- Noise field central -->
+<rect fill="#0d1f38" height="100" rx="10" stroke="#38bdf8" stroke-width="1.5" width="132" x="134" y="70"></rect>
+<!-- perlin noise curves (decorativas) -->
+<path d="M144 115 Q162 95 180 115 Q198 135 216 115 Q234 95 252 115 Q256 118 260 115" fill="none" opacity="0.8" stroke="#38bdf8" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M144 100 Q162 80 180 100 Q198 120 216 100 Q234 80 252 100 Q256 103 260 100" fill="none" opacity="0.5" stroke="#60a5fa" stroke-linecap="round" stroke-width="1"></path>
+<path d="M144 130 Q162 110 180 130 Q198 150 216 130 Q234 110 252 130 Q256 133 260 130" fill="none" opacity="0.4" stroke="#93c5fd" stroke-linecap="round" stroke-width="1"></path>
+<!-- particles on field -->
+<circle class="m24-pulse" cx="165" cy="112" fill="#38bdf8" r="2.5"></circle>
+<circle class="m24-pulse-2" cx="195" cy="98" fill="#60a5fa" r="2"></circle>
+<circle class="m24-pulse-3" cx="225" cy="118" fill="#38bdf8" r="2.5"></circle>
+<circle class="m24-pulse" cx="248" cy="103" fill="#93c5fd" r="2"></circle>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="200" y="62">p5.js · Noise Field</text>
+<text fill="#7db8f7" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="200" y="182">② FLOW FIELD + PARTÍCULAS</text>
+<!-- Arrow noise → canvas -->
+<path class="m24-flow" d="M266 115 L300 115" fill="none" stroke="#38bdf8" stroke-dasharray="5,4" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="300,111 308,115 300,119"></polygon>
+<!-- Canvas output -->
+<rect fill="#0e1622" filter="url(#m24-glow)" height="66" rx="8" stroke="#3b82f6" stroke-width="1.5" width="78" x="308" y="82"></rect>
+<text fill="#3b82f6" font-family="Inter,sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="347" y="107">&lt;canvas&gt;</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="347" y="120">fondo hero</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="347" y="132">sección activa</text>
+<text fill="#7db8f7" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="347" y="142">fondo animado</text>
+<text class="m24-pulse" fill="#3b82f6" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="347" y="72">③ RENDER</text>
+<!-- Label inferior -->
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="9" opacity="0.6" text-anchor="middle" x="200" y="228">algorithmic-art · Arte generativo original con p5.js</text>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT -->
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+<!-- TÓPICO 1 — O QUE É -->
+<section id="topico-1">
+<div class="flex items-center space-x-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold">1</span>
+<h2 class="text-2xl font-bold">🧩 Qué es / qué hace</h2>
+</div>
+<!-- Box conceito principal -->
+<div class="bg-gradient-to-r from-blue-900/30 to-cyan-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+<p class="text-sm font-semibold text-blue-400 uppercase tracking-wide mb-2">Concepto central</p>
+<p class="text-lg text-neutral-100 leading-relaxed">
+<strong class="text-blue-400">algorithmic-art</strong> es un skill para crear arte algorítmico/generativo usando <strong class="text-cyan-400">p5.js</strong> con randomness controlada por seed y exploración interactiva de parámetros. La skill parte de una «filosofía algorítmica» —no de plantillas— para generar flujos, campos, partículas y formas emergentes que existen como sistemas vivos, no como imágenes estáticas.
+        </p>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+<h3 class="font-semibold text-blue-400 mb-3">Lo que crea la skill</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">→</span><span><strong>Flow fields</strong> — campos vectoriales guiados por ruido de Perlin que dirigen partículas por trayectorias orgánicas</span></li>
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">→</span><span><strong>Sistemas de partículas</strong> — nubes de partículas con física propia: velocidad, aceleración, vida, color</span></li>
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">→</span><span><strong>Arte con seed</strong> — misma seed = mismo arte. Reproducibilidad total para uso en producción</span></li>
+<li class="flex items-start space-x-2"><span class="text-cyan-400 mt-0.5">→</span><span><strong>Exploración interactiva</strong> — controles deslizantes y controles para variar parámetros en tiempo real en el navegador</span></li>
+</ul>
+</div>
+<div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+<h3 class="font-semibold text-blue-400 mb-3">Lo que NO es</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400 mt-0.5">✗</span><span>No copia estilos de artistas existentes (evita infringir los derechos de autor)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400 mt-0.5">✗</span><span>No usa templates prediseñados: siempre parte de una filosofía original</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400 mt-0.5">✗</span><span>No es una imagen estática: el canvas permanece activo y se anima en bucle</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400 mt-0.5">✗</span><span>No es CSS puro: requiere JavaScript y la biblioteca p5.js</span></li>
+</ul>
+</div>
+</div>
+<!-- Box tip -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6">
+<p class="text-sm text-blue-300"><strong class="text-blue-400">💡 Filosofía algorítmica:</strong> El skill empieza deduciendo una "filosofía algorítmica": no una lista de formas, sino un sistema de comportamiento: cómo se relacionan las partículas, qué fuerzas existen y qué surge de la interacción. Eso es lo que genera arte original.</p>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">p5.js</div><div class="text-xs text-neutral-400 mt-1">Engine de renderizado</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">Ruido de Perlin</div><div class="text-xs text-neutral-400 mt-1">Base de los campos</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">seed()</div><div class="text-xs text-neutral-400 mt-1">Reproducibilidad</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">emergencia</div><div class="text-xs text-neutral-400 mt-1">Sistemas vivos</div></div>
+</div>
+</section>
+<!-- TÓPICO 2 — QUANDO DISPARA -->
+<section id="topico-2">
+<div class="flex items-center space-x-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold">2</span>
+<h2 class="text-2xl font-bold">🎣 Cuándo se activa</h2>
+</div>
+<p class="text-neutral-400 mb-6">Claude Code activa <strong class="text-blue-400">algorithmic-art</strong> cuando detecta en tus solicitudes términos relacionados con el arte computacional o generativo. La descripción de la skill es precisa:</p>
+<!-- Box dados -->
+<div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-5 mb-6">
+<p class="text-xs font-semibold text-blue-400 uppercase tracking-wide mb-3">Disparadores exactos de la description</p>
+<div class="grid sm:grid-cols-2 gap-2">
+<div class="flex items-center space-x-2 text-sm"><span class="w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0"></span><span class="text-neutral-300">"crear arte usando código"</span></div>
+<div class="flex items-center space-x-2 text-sm"><span class="w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0"></span><span class="text-neutral-300">"generative art"</span></div>
+<div class="flex items-center space-x-2 text-sm"><span class="w-2 h-2 rounded-full bg-blue-400 flex-shrink-0"></span><span class="text-neutral-300">"arte algorítmico"</span></div>
+<div class="flex items-center space-x-2 text-sm"><span class="w-2 h-2 rounded-full bg-blue-400 flex-shrink-0"></span><span class="text-neutral-300">"flow fields"</span></div>
+<div class="flex items-center space-x-2 text-sm"><span class="w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0"></span><span class="text-neutral-300">"particle systems"</span></div>
+<div class="flex items-center space-x-2 text-sm"><span class="w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0"></span><span class="text-neutral-300">"seeded randomness"</span></div>
+</div>
+</div>
+<!-- Timeline de quando usar -->
+<div class="mb-6">
+<h3 class="font-semibold text-neutral-300 mb-4">En qué momento del proyecto activas:</h3>
+<div class="space-y-4">
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-xs flex-shrink-0">A</div>
+<div><p class="font-medium text-neutral-100 text-sm">Sección hero diferenciada</p><p class="text-xs text-neutral-400">Cuando la landing page necesita un fondo generativo, no una imagen estática</p></div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold text-xs flex-shrink-0">B</div>
+<div><p class="font-medium text-neutral-100 text-sm">Fondo de sección</p><p class="text-xs text-neutral-400">Secciones de «funciones» o «acerca de» con un canvas animado sutilmente en el fondo</p></div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-xs flex-shrink-0">C</div>
+<div><p class="font-medium text-neutral-100 text-sm">Identidad visual interactiva</p><p class="text-xs text-neutral-400">Cuando la marca necesita un «símbolo vivo»: arte generativo como firma</p></div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold text-xs flex-shrink-0">D</div>
+<div><p class="font-medium text-neutral-100 text-sm">Arte independiente</p><p class="text-xs text-neutral-400">Exploración interactiva con sliders: el usuario ajusta la seed y los parámetros en tiempo real</p></div>
+</div>
+</div>
+</div>
+<!-- Grid FAZER/EVITAR -->
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
+<p class="text-emerald-400 font-semibold text-sm mb-3">✓ PÍDELO cuando:</p>
+<ul class="space-y-1.5 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Quieres un fondo hero que no existe en bancos de imágenes</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Necesitas arte reproducible (misma seed = mismo resultado)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Quieres explorar variaciones en tiempo real con sliders</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Necesitas un canvas ligero que se ejecute en el browser sin servidor</span></li>
+</ul>
+</div>
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+<p class="text-red-400 font-semibold text-sm mb-3">✗ EVITA cuando:</p>
+<ul class="space-y-1.5 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>El cliente exige una ilustración específica (usa imagen)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>El rendimiento es crucial en dispositivos de baja potencia</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>El fondo necesita texto nítido superpuesto (contraste difícil)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Solo quieres una animación CSS: usa animation-designer</span></li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">disparador</div><div class="text-xs text-neutral-400 mt-1">palabras clave en el mensaje</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">fondo hero</div><div class="text-xs text-neutral-400 mt-1">caso de uso #1</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">independiente</div><div class="text-xs text-neutral-400 mt-1">artefacto interactivo</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">identidad</div><div class="text-xs text-neutral-400 mt-1">símbolo de marca vivo</div></div>
+</div>
+</section>
+<!-- TÓPICO 3 — COMO MELHORA SUAS PÁGINAS -->
+<section id="topico-3">
+<div class="flex items-center space-x-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold">3</span>
+<h2 class="text-2xl font-bold">🚀 Cómo mejora tus páginas</h2>
+</div>
+<!-- Tip box -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6">
+<p class="text-sm text-blue-300"><strong class="text-blue-400">🎯 El impacto directo:</strong> El arte algorítmico bien utilizado transforma una página genérica en algo memorable: el canvas está vivo, es único para esa marca y no cuesta nada en licencias de imágenes.</p>
+</div>
+<!-- Cards de valor concreto -->
+<div class="grid sm:grid-cols-3 gap-5 mb-8">
+<div class="bg-dark-800 rounded-xl p-5 border border-blue-500/20">
+<div class="text-3xl mb-3">🖼️</div>
+<h3 class="font-semibold text-blue-400 mb-2">Fondos generativos para hero</h3>
+<p class="text-sm text-neutral-400">Uno <code class="text-cyan-400">&lt;canvas&gt;</code> posicionado como <code class="text-cyan-400">position: absolute</code> detrás del hero. Flow field en bucle suave, colores de la paleta de la marca, seed fijo = siempre el mismo aspecto. Cero imágenes externas.</p>
+</div>
+<div class="bg-dark-800 rounded-xl p-5 border border-cyan-500/20">
+<div class="text-3xl mb-3">✨</div>
+<h3 class="font-semibold text-cyan-400 mb-2">Secciones con animaciones de fondo</h3>
+<p class="text-sm text-neutral-400">Sistemas de partículas discretos detrás de las tarjetas de funcionalidades. Opacidad baja, movimiento suave: la sección «respira» sin distraer. Se pausa en <code class="text-blue-400">prefers-reduced-motion</code>.</p>
+</div>
+<div class="bg-dark-800 rounded-xl p-5 border border-blue-500/20">
+<div class="text-3xl mb-3">🎛️</div>
+<h3 class="font-semibold text-blue-400 mb-2">Exploración interactiva</h3>
+<p class="text-sm text-neutral-400">Sliders de parámetros expuestos al usuario: velocidad del campo, número de partículas, seed. El visitante cocrea el arte: alto engagement en páginas de producto.</p>
+</div>
+</div>
+<!-- Grid FAZER/EVITAR para páginas -->
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
+<p class="text-emerald-400 font-semibold text-sm mb-3">✓ Aplicaciones que funcionan:</p>
+<ul class="space-y-1.5 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Hero con canvas de ancho completo + texto centrado encima (z-index)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Página 404 creativa — arte generativo a pantalla completa</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Pantalla de carga con partículas mientras se cargan los datos</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Sección "sobre" con un fondo de noise field muy opaco</span></li>
+</ul>
+</div>
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+<p class="text-red-400 font-semibold text-sm mb-3">✗ Errores comunes:</p>
+<ul class="space-y-1.5 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Canvas detrás de texto blanco sobre un fondo claro = ilegible</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>p5.js sin carga diferida en una página pesada — bloquea LCP</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Demasiadas partículas en móviles: usa mediaQuery para reducirlas</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Colores aleatorios sin una paleta definida: aspecto caótico</span></li>
+</ul>
+</div>
+</div>
+<!-- SVG secundário — canvas sobre hero -->
+<div class="rounded-xl border border-blue-500/20 bg-dark-900/40 p-4 mb-6">
+<svg class="w-full h-auto" viewbox="0 0 600 140" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="m24-hero-bg" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#0e1622;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0d1f38;stop-opacity:1"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#m24-hero-bg)" height="140" rx="10" width="600"></rect>
+<!-- Camada canvas (fundo) -->
+<rect fill="#0b1624" height="120" opacity="0.8" rx="8" stroke="#1e3a5f" stroke-width="1" width="580" x="10" y="10"></rect>
+<!-- Simulação de flow field -->
+<path d="M30 70 Q80 50 130 70 Q180 90 230 70 Q280 50 330 70 Q380 90 430 70 Q480 50 530 70 Q555 80 570 70" fill="none" opacity="0.4" stroke="#38bdf8" stroke-width="1.2"></path>
+<path d="M30 85 Q80 65 130 85 Q180 105 230 85 Q280 65 330 85 Q380 105 430 85 Q480 65 530 85 Q555 95 570 85" fill="none" opacity="0.3" stroke="#60a5fa" stroke-width="1"></path>
+<path d="M30 55 Q80 35 130 55 Q180 75 230 55 Q280 35 330 55 Q380 75 430 55 Q480 35 530 55 Q555 65 570 55" fill="none" opacity="0.25" stroke="#93c5fd" stroke-width="0.8"></path>
+<!-- Partículas -->
+<circle cx="120" cy="72" fill="#38bdf8" opacity="0.7" r="2"></circle>
+<circle cx="240" cy="68" fill="#60a5fa" opacity="0.6" r="1.5"></circle>
+<circle cx="360" cy="72" fill="#38bdf8" opacity="0.7" r="2"></circle>
+<circle cx="480" cy="68" fill="#93c5fd" opacity="0.5" r="1.5"></circle>
+<!-- Label canvas layer -->
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" opacity="0.6" x="20" y="28">canvas · z-index: 0 · position: absolute · inset: 0</text>
+<!-- Camada texto (frente) -->
+<rect fill="rgba(14,22,34,0.7)" height="50" rx="6" width="240" x="180" y="45"></rect>
+<text fill="#ffffff" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="300" y="65">Título del hero</text>
+<text fill="#94a3b8" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="300" y="82">z-index: 10 · relative</text>
+<!-- Labels laterais -->
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="8" opacity="0.6" x="10" y="135">fondo generativo</text>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="8" opacity="0.6" x="440" y="135">texto encima · legible</text>
+</svg>
+<p class="text-xs text-neutral-500 text-center mt-2">Estructura de capas: canvas generativo (absoluto) + texto (relativo, z-index mayor)</p>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">z-index</div><div class="text-xs text-neutral-400 mt-1">canvas debajo del texto</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">opacidad</div><div class="text-xs text-neutral-400 mt-1">arte discreto</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">paleta</div><div class="text-xs text-neutral-400 mt-1">colores de la marca</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">movimiento reducido</div><div class="text-xs text-neutral-400 mt-1">accesibilidad</div></div>
+</div>
+</section>
+<!-- TÓPICO 4 — COMO FUNCIONA POR DENTRO -->
+<section id="topico-4">
+<div class="flex items-center space-x-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold">4</span>
+<h2 class="text-2xl font-bold">⚙️ Cómo funciona por dentro</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div>
+<h3 class="font-semibold text-neutral-300 mb-4">Stack técnico</h3>
+<div class="space-y-3">
+<div class="flex items-center space-x-3 bg-dark-800 rounded-lg p-3 border border-dark-600">
+<span class="text-2xl">📦</span>
+<div><p class="font-medium text-sm text-blue-400">p5.js</p><p class="text-xs text-neutral-400">Engine de renderizado 2D: API de canvas de alto nivel. CDN o npm.</p></div>
+</div>
+<div class="flex items-center space-x-3 bg-dark-800 rounded-lg p-3 border border-dark-600">
+<span class="text-2xl">🎲</span>
+<div><p class="font-medium text-sm text-cyan-400">randomSeed() / noiseSeed()</p><p class="text-xs text-neutral-400">Funciones nativas de p5.js. Seed entero → resultado determinista.</p></div>
+</div>
+<div class="flex items-center space-x-3 bg-dark-800 rounded-lg p-3 border border-dark-600">
+<span class="text-2xl">🌊</span>
+<div><p class="font-medium text-sm text-blue-400">noise(x, y, z)</p><p class="text-xs text-neutral-400">Ruido de Perlin suave. Base de todos los flow fields y organic shapes.</p></div>
+</div>
+<div class="flex items-center space-x-3 bg-dark-800 rounded-lg p-3 border border-dark-600">
+<span class="text-2xl">🎛️</span>
+<div><p class="font-medium text-sm text-cyan-400">createSlider() / createInput()</p><p class="text-xs text-neutral-400">Controles HTML de p5.dom: controles deslizantes para ajustar parámetros en tiempo real.</p></div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="font-semibold text-neutral-300 mb-4">Proceso de generación</h3>
+<div class="space-y-3">
+<div class="flex items-start space-x-3">
+<div class="w-6 h-6 rounded-full bg-blue-500/30 text-blue-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
+<div><p class="font-medium text-sm text-neutral-100">Deducing the Conceptual Seed</p><p class="text-xs text-neutral-400">Claude lee tu pedido y construye una «filosofía algorítmica» — la metáfora de comportamiento que guía el sistema.</p></div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="w-6 h-6 rounded-full bg-cyan-500/30 text-cyan-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</div>
+<div><p class="font-medium text-sm text-neutral-100">Creación de una filosofía algorítmica</p><p class="text-xs text-neutral-400">Define fuerzas, entidades y comportamientos emergentes, no formas. El arte surge del sistema, no del diseño.</p></div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="w-6 h-6 rounded-full bg-blue-500/30 text-blue-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</div>
+<div><p class="font-medium text-sm text-neutral-100">Implementación con P5.js</p><p class="text-xs text-neutral-400">Código con setup() + draw() + clase Particle + campo de noise. Seed configurable.</p></div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="w-6 h-6 rounded-full bg-cyan-500/30 text-cyan-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">4</div>
+<div><p class="font-medium text-sm text-neutral-100">Interactive Artifact Creation</p><p class="text-xs text-neutral-400">Sliders expuestos. Parámetros fijos vs. variables definidos. Output: HTML standalone o snippet para insertar.</p></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Box alerta -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4 mb-6">
+<p class="text-sm text-red-300"><strong class="text-red-400">⚠️ Contexto fork:</strong> El SKILL.md define <code>context: fork</code>. Esto significa que el skill opera en una instancia de contexto separada: Claude lee una plantilla propia (STEP 0) antes de implementar. No interrumpas el proceso con mensajes adicionales durante la generación.</p>
+</div>
+<!-- Box código: estrutura p5.js típica -->
+<div class="bg-dark-900 rounded-xl border border-dark-600 overflow-hidden mb-6">
+<div class="flex items-center justify-between px-4 py-2 bg-dark-700 border-b border-dark-600">
+<span class="text-xs text-neutral-400 font-mono">estructura típica — sketch.js</span>
+<span class="text-xs text-blue-400">p5.js</span>
+</div>
+<pre class="p-4 text-sm text-neutral-300 font-mono overflow-x-auto"><code><span class="text-blue-400">let</span> particles = [];
+<span class="text-blue-400">const</span> SEED = <span class="text-cyan-400">42</span>;
+<span class="text-blue-400">const</span> NUM_PARTICLES = <span class="text-cyan-400">300</span>;
+
+<span class="text-blue-400">function</span> <span class="text-yellow-400">setup</span>() {
+  createCanvas(windowWidth, windowHeight);
+  <span class="text-neutral-500">// seed determinístico</span>
+  randomSeed(SEED);
+  noiseSeed(SEED);
+  <span class="text-blue-400">for</span> (<span class="text-blue-400">let</span> i = <span class="text-cyan-400">0</span>; i &lt; NUM_PARTICLES; i++) {
+    particles.push(<span class="text-blue-400">new</span> Particle());
+  }
+}
+
+<span class="text-blue-400">function</span> <span class="text-yellow-400">draw</span>() {
+  background(<span class="text-cyan-400">10</span>, <span class="text-cyan-400">22</span>, <span class="text-cyan-400">34</span>, <span class="text-cyan-400">25</span>); <span class="text-neutral-500">// trail</span>
+  particles.forEach(p =&gt; { p.update(); p.display(); });
+}
+
+<span class="text-blue-400">class</span> Particle {
+  <span class="text-yellow-400">constructor</span>() {
+    <span class="text-blue-400">this</span>.pos = createVector(random(width), random(height));
+    <span class="text-blue-400">this</span>.vel = createVector(<span class="text-cyan-400">0</span>, <span class="text-cyan-400">0</span>);
+  }
+  <span class="text-yellow-400">update</span>() {
+    <span class="text-blue-400">let</span> angle = noise(<span class="text-blue-400">this</span>.pos.x * <span class="text-cyan-400">0.003</span>, <span class="text-blue-400">this</span>.pos.y * <span class="text-cyan-400">0.003</span>) * TWO_PI * <span class="text-cyan-400">2</span>;
+    <span class="text-blue-400">this</span>.vel = p5.Vector.fromAngle(angle).mult(<span class="text-cyan-400">1.5</span>);
+    <span class="text-blue-400">this</span>.pos.add(<span class="text-blue-400">this</span>.vel);
+    <span class="text-blue-400">if</span> (<span class="text-blue-400">this</span>.pos.x &lt; <span class="text-cyan-400">0</span> || <span class="text-blue-400">this</span>.pos.x &gt; width) <span class="text-blue-400">this</span>.pos.x = random(width);
+    <span class="text-blue-400">if</span> (<span class="text-blue-400">this</span>.pos.y &lt; <span class="text-cyan-400">0</span> || <span class="text-blue-400">this</span>.pos.y &gt; height) <span class="text-blue-400">this</span>.pos.y = random(height);
+  }
+  <span class="text-yellow-400">display</span>() {
+    stroke(<span class="text-cyan-400">56</span>, <span class="text-cyan-400">189</span>, <span class="text-cyan-400">248</span>, <span class="text-cyan-400">80</span>); strokeWeight(<span class="text-cyan-400">1.2</span>); point(<span class="text-blue-400">this</span>.pos.x, <span class="text-blue-400">this</span>.pos.y);
+  }
+}</code></pre>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">setup()</div><div class="text-xs text-neutral-400 mt-1">inicialización</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">draw()</div><div class="text-xs text-neutral-400 mt-1">bucle a 60fps</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">noise()</div><div class="text-xs text-neutral-400 mt-1">Campo de Perlin</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">context: fork</div><div class="text-xs text-neutral-400 mt-1">plantilla propia</div></div>
+</div>
+</section>
+<!-- TÓPICO 5 — EXEMPLO PRÁTICO + PROMPT -->
+<section id="topico-5">
+<div class="flex items-center space-x-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold">5</span>
+<h2 class="text-2xl font-bold">💬 Ejemplo práctico + PROMPT listo</h2>
+</div>
+<!-- Cenário -->
+<div class="bg-dark-800 rounded-xl p-5 border border-blue-500/20 mb-6">
+<p class="text-xs font-semibold text-blue-400 uppercase tracking-wide mb-2">Escenario</p>
+<p class="text-sm text-neutral-300">Estás creando la landing page de una fintech. La hero section se ve plana: un gradiente azul con texto. Quieres un fondo generativo que transmita "flujo de datos", dinámico y controlado, con los colores de la marca (#1e40af, #38bdf8). Debe funcionar con una seed fija para que el visual siempre sea el mismo.</p>
+</div>
+<!-- Prompt pronto -->
+<div class="bg-dark-900 rounded-xl border border-cyan-500/30 overflow-hidden mb-6">
+<div class="flex items-center justify-between px-4 py-2 bg-dark-700 border-b border-dark-600">
+<span class="text-xs text-cyan-400 font-semibold">PROMPT — pégalo en Claude Code</span>
+<span class="text-xs text-neutral-500">algorithmic-art</span>
+</div>
+<div class="p-4 font-mono text-sm text-neutral-300 leading-relaxed">
+<p>Crea un fondo generativo con p5.js para la hero section de mi landing page de fintech.</p>
+<br/>
+<p>Filosofía: flujo de datos financieros — partículas que se mueven como datos en una red y convergen en nodos de procesamiento. Sensación de orden que emerge del caos.</p>
+<br/>
+<p>Requisitos técnicos:</p>
+<p>- seed: 1847 (fijo, reproducible)</p>
+<p>- colores: #1e40af (azul), #38bdf8 (cian), fondo #0a0f1e</p>
+<p>- ~200 partículas, flow field con noise(x*0.003, y*0.003)</p>
+<p>- canvas absoluto detrás del texto (z-index: 0)</p>
+<p>- respetar prefers-reduced-motion</p>
+<p>- sliders: velocidad y cantidad de partículas</p>
+<p>- HTML independiente que puedo insertar como &lt;section&gt;</p>
+</div>
+</div>
+<!-- O que você recebe -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mb-6">
+<p class="text-sm font-semibold text-blue-400 mb-3">Lo que entrega la skill:</p>
+<div class="grid sm:grid-cols-2 gap-3 text-sm text-neutral-300">
+<div class="flex items-start space-x-2"><span class="text-blue-400 mt-0.5">→</span><span>Archivo HTML con p5.js vía CDN, listo para insertar</span></div>
+<div class="flex items-start space-x-2"><span class="text-blue-400 mt-0.5">→</span><span>Clase Particle con update()/display() limpios y comentados</span></div>
+<div class="flex items-start space-x-2"><span class="text-blue-400 mt-0.5">→</span><span>Seed configurable en la parte superior del archivo como constante</span></div>
+<div class="flex items-start space-x-2"><span class="text-blue-400 mt-0.5">→</span><span>Sliders de parámetros funcionando en tiempo real</span></div>
+<div class="flex items-start space-x-2"><span class="text-blue-400 mt-0.5">→</span><span>Media query para prefers-reduced-motion (pausa el canvas)</span></div>
+<div class="flex items-start space-x-2"><span class="text-blue-400 mt-0.5">→</span><span>Arte 100 % original — sin referencias a artistas existentes</span></div>
+</div>
+</div>
+<!-- Variações possíveis -->
+<div class="mb-6">
+<h3 class="font-semibold text-neutral-300 mb-3">Variaciones para explorar</h3>
+<div class="grid sm:grid-cols-3 gap-3">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+<p class="text-blue-400 font-semibold text-sm mb-1">🌊 Campo de flujo clásico</p>
+<p class="text-xs text-neutral-400">Las partículas siguen un campo vectorial de Perlin. Visual fluido y orgánico.</p>
+</div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+<p class="text-cyan-400 font-semibold text-sm mb-1">🕸️ Red conectada</p>
+<p class="text-xs text-neutral-400">Puntos unidos por líneas cuando están cerca. Sensación de grafo vivo.</p>
+</div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+<p class="text-blue-400 font-semibold text-sm mb-1">🌀 Orbital</p>
+<p class="text-xs text-neutral-400">Partículas orbitando atractores. Sistema de fuerzas gravitacionales.</p>
+</div>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">seed fijo</div><div class="text-xs text-neutral-400 mt-1">prod-ready</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">controles deslizantes</div><div class="text-xs text-neutral-400 mt-1">exploración en vivo</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">independiente</div><div class="text-xs text-neutral-400 mt-1">fragmento integrable</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">filosofía</div><div class="text-xs text-neutral-400 mt-1">arte original</div></div>
+</div>
+</section>
+<!-- TÓPICO 6 — COMBINA COM / LIMITES -->
+<section id="topico-6">
+<div class="flex items-center space-x-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold">6</span>
+<h2 class="text-2xl font-bold">🧬 Combina con / límites</h2>
+</div>
+<p class="text-neutral-400 mb-6">Como último módulo de la Ruta 2, <strong class="text-blue-400">algorithmic-art</strong> cierra el ciclo de identidad visual. Se posiciona en relación con las demás skills del curso de una forma muy específica:</p>
+<!-- Grid de relações -->
+<div class="grid md:grid-cols-3 gap-5 mb-8">
+<!-- canvas-design -->
+<div class="bg-dark-800 rounded-xl p-5 border border-blue-500/30">
+<div class="flex items-center space-x-3 mb-3">
+<span class="text-2xl">🖼️</span>
+<div>
+<p class="font-semibold text-blue-400 text-sm">canvas-design</p>
+<p class="text-xs text-neutral-500">Módulo 2.3 · Ruta 2</p>
+</div>
+</div>
+<p class="text-xs text-neutral-400 mb-3">canvas-design trabaja con <strong class="text-neutral-300">Canvas API puro</strong> para composiciones estáticas o semiestáticas: logos, banners, imágenes exportables. El arte algorítmico complementa con <strong class="text-neutral-300">sistemas vivos y animados</strong>.</p>
+<div class="bg-blue-500/10 rounded-lg p-2">
+<p class="text-xs text-blue-300"><strong>Usa juntos:</strong> canvas-design para assets de marca exportables → algorithmic-art para el fondo animado que los envuelve en la página.</p>
+</div>
+</div>
+<!-- animation-designer -->
+<div class="bg-dark-800 rounded-xl p-5 border border-purple-500/30">
+<div class="flex items-center space-x-3 mb-3">
+<span class="text-2xl">🎬</span>
+<div>
+<p class="font-semibold text-purple-400 text-sm">animation-designer</p>
+<p class="text-xs text-neutral-500">Módulo 3.1 · Ruta 3</p>
+</div>
+</div>
+<p class="text-xs text-neutral-400 mb-3">animation-designer usa <strong class="text-neutral-300">Framer Motion</strong> y CSS para animar elementos de UI con movimiento predefinido y orquestado. algorithmic-art genera <strong class="text-neutral-300">movimiento emergente</strong> sin coreografía explícita.</p>
+<div class="bg-purple-500/10 rounded-lg p-2">
+<p class="text-xs text-purple-300"><strong>Usa juntos:</strong> canvas generativo como fondo → animation-designer para los elementos de UI que aparecen encima con spring animations.</p>
+</div>
+</div>
+<!-- theme-factory + brand-guidelines -->
+<div class="bg-dark-800 rounded-xl p-5 border border-cyan-500/30">
+<div class="flex items-center space-x-3 mb-3">
+<span class="text-2xl">🎨</span>
+<div>
+<p class="font-semibold text-cyan-400 text-sm">theme-factory + brand-guidelines</p>
+<p class="text-xs text-neutral-500">Módulos 2.1 y 2.2</p>
+</div>
+</div>
+<p class="text-xs text-neutral-400 mb-3">theme-factory define la paleta de la marca. brand-guidelines codifica los patrones visuales. algorithmic-art <strong class="text-neutral-300">usa esta paleta</strong> como entrada: los colores del flow field son los colores de la marca.</p>
+<div class="bg-cyan-500/10 rounded-lg p-2">
+<p class="text-xs text-cyan-300"><strong>Flujo ideal:</strong> theme-factory → brand-guidelines → algorithmic-art. El arte generativo expresa la identidad de la marca en movimiento.</p>
+</div>
+</div>
+</div>
+<!-- Mapa de posição no ecossistema -->
+<div class="bg-gradient-to-r from-blue-900/20 to-dark-800 border border-blue-500/20 rounded-xl p-6 mb-6">
+<h3 class="font-semibold text-blue-400 mb-4">Posición en el ecosistema de skills</h3>
+<div class="grid sm:grid-cols-2 gap-6 text-sm">
+<div>
+<p class="text-xs text-neutral-500 uppercase tracking-wide mb-2">algorithmic-art HACE</p>
+<ul class="space-y-1.5 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Arte generativo original, basado en sistemas</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Fondos animados para páginas</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Canvas interactivo con parámetros expuestos</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Seed determinístico para producción</span></li>
+</ul>
+</div>
+<div>
+<p class="text-xs text-neutral-500 uppercase tracking-wide mb-2">NO sustituye</p>
+<ul class="space-y-1.5 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>canvas-design (assets exportables, composiciones)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>animation-designer (movimiento de UI con Framer Motion)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>remotion (video renderizado fotograma a fotograma)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>3d-animation-creator (Three.js, WebGL 3D)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Tip box -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6">
+<p class="text-sm text-blue-300"><strong class="text-blue-400">🔗 Combinación poderosa:</strong> brand-guidelines → algorithmic-art → animation-designer. La marca define los colores, el arte generativo crea el fondo dinámico y Framer Motion anima los elementos de UI sobre el canvas. Resultado: una página con identidad visual coherente en movimiento.</p>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">canvas-design</div><div class="text-xs text-neutral-400 mt-1">estático → generativo</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-purple-400 font-bold text-sm">animation-designer</div><div class="text-xs text-neutral-400 mt-1">UI sobre el canvas</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-blue-400 font-bold text-sm">brand-guidelines</div><div class="text-xs text-neutral-400 mt-1">paleta como entrada</div></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 font-bold text-sm">Ruta 3</div><div class="text-xs text-neutral-400 mt-1">próximo: Medios</div></div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-2xl p-8 border border-blue-500/30" id="resumo">
+<h2 class="text-2xl font-bold mb-6 text-blue-400">📋 Resumen del Módulo 2.4</h2>
+<div class="grid md:grid-cols-2 gap-8 mb-8">
+<div>
+<h3 class="font-semibold text-neutral-200 mb-4">Qué aprendiste</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-blue-400 font-bold">✓</span><span>algorithmic-art usa <strong class="text-neutral-100">p5.js</strong> con randomness controlada por <strong class="text-neutral-100">seed</strong> para arte original y reproducible</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 font-bold">✓</span><span>El skill parte de una <strong class="text-neutral-100">filosofía algorítmica</strong> — sistema de comportamiento, no plantilla</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 font-bold">✓</span><span><strong class="text-neutral-100">Flow fields</strong> y los sistemas de partículas crean fondos generativos para hero sections y secciones</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 font-bold">✓</span><span><strong class="text-neutral-100">Sliders interactivos</strong> exponen parámetros para exploración en tiempo real</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 font-bold">✓</span><span>El canvas queda en <strong class="text-neutral-100">z-index: 0</strong>, el texto encima — estructura de capas esencial</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 font-bold">✓</span><span><strong class="text-neutral-100">canvas-design</strong> (estático) y <strong class="text-neutral-100">animation-designer</strong> (UI motion) completan el ecosistema</span></li>
+</ul>
+</div>
+<div class="space-y-4">
+<!-- Box próxima trilha -->
+<div class="bg-purple-900/30 border border-purple-500/40 rounded-xl p-5">
+<p class="text-xs font-semibold text-purple-400 uppercase tracking-wide mb-2">Ruta 3 — Siguiente</p>
+<p class="font-bold text-purple-300 text-lg mb-1">🎞️ Medios</p>
+<p class="text-sm text-neutral-400">Dominaste la Ruta 2: identidad visual, paletas, brand guidelines, canvas estático y arte generativo. Ahora avanza a la <strong class="text-purple-300">Ruta 3 — Medios</strong>: animation-designer, 3d-animation-creator, Remotion y seedance+HyperFrames/FFmpeg para transformar tus páginas en videos y animaciones profesionales.</p>
+</div>
+<!-- Stats da trilha concluída -->
+<div class="bg-dark-900/50 rounded-xl p-4 border border-dark-600">
+<p class="text-xs text-neutral-500 uppercase tracking-wide mb-3">Ruta 2 completada</p>
+<div class="grid grid-cols-2 gap-3 text-center">
+<div><div class="text-xl font-bold text-blue-400">4</div><div class="text-xs text-neutral-400">Skills dominados</div></div>
+<div><div class="text-xl font-bold text-blue-400">24</div><div class="text-xs text-neutral-400">Temas cubiertos</div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-blue-500/20">
+<a class="flex items-center justify-center space-x-2 px-6 py-3 bg-dark-700 hover:bg-dark-600 border border-dark-600 rounded-xl font-semibold transition-colors text-sm" href="index.html">
+<span>←</span><span>Volver a la Ruta 2</span>
+</a>
+<a class="flex items-center justify-center space-x-2 px-6 py-3 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 rounded-xl font-semibold transition-colors text-sm" href="../trilha3/index.html">
+<span>🎞️ Ruta 3: Medios</span><span>→</span>
+</a>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="border-t border-dark-600 mt-16 py-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center space-x-3">
+<span class="text-2xl">🎨</span>
+<div>
+<p class="font-bold text-sm">Skill Design</p>
+<p class="text-xs text-neutral-500">Módulo 2.4 — 🌀 algorithmic-art</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 text-xs text-neutral-500">
+<a class="hover:text-blue-400 transition-colors" href="../../index.html">Inicio</a>
+<a class="hover:text-blue-400 transition-colors" href="index.html">Ruta 2</a>
+<a class="hover:text-purple-400 transition-colors" href="../trilha3/index.html">Ruta 3</a>
+<a class="hover:text-sky-400 transition-colors" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<p class="text-xs text-neutral-600">Último módulo de la Trilha 2 · 🎨 Identidad</p>
+</div>
+</div>
+</footer>
+<!-- SCRIPTS -->
+<script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    function applyTheme(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        lightIcon.classList.add('hidden');
+        darkIcon.classList.remove('hidden');
+      }
+    }
+
+    const stored = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initDark = stored ? stored === 'dark' : prefersDark;
+    applyTheme(initDark);
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      applyTheme(!isDark);
+      localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

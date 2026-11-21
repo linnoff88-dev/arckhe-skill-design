@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 4.1 — beautiful-mermaid | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode - base */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - acento amber (T4) */
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217,119,6,0.18); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) .from-amber-900\/30 { background-color: rgba(217,119,6,0.06); }
+
+    /* outras trilhas (nav hover) */
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+
+    /* Light mode - remove gradientes */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .text-cyan-400 { color: #0e7490; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    /* Dark mode - bordas suaves */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* SVG light mode suavização */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha4/modulo-4-1.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha4/modulo-4-1.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha4/modulo-4-1.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-4-1.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha4/modulo-4-1.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha4/modulo-4-1.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300 transition-colors" href="../../index.html">
+<span class="text-2xl">🎨</span>
+<span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Mídia</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10 transition-colors" href="index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Apoio</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20">
+<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+</svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-amber-400 transition-colors" href="../../index.html">Início</a>
+<span>/</span>
+<a class="hover:text-amber-400 transition-colors" href="index.html">Trilha 4 — Apoio</a>
+<span>/</span>
+<span class="text-amber-400 font-medium">Módulo 4.1</span>
+</nav>
+</div>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+<!-- HEADER DO MÓDULO -->
+<header class="bg-dark-800 rounded-2xl border border-dark-600 p-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="flex-1">
+<div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/30 rounded-full px-4 py-1.5 text-amber-400 text-sm font-semibold mb-4">
+            MÓDULO 4.1
+          </div>
+<h1 class="text-3xl sm:text-4xl font-bold text-neutral-100 mb-3">📊 beautiful-mermaid</h1>
+<p class="text-neutral-400 text-lg leading-relaxed mb-6">
+            Renderiza diagramas Mermaid como SVG e PNG usando a biblioteca Beautiful Mermaid — com temas visuais ricos, saída em alta resolução (4K) e integração com <code class="text-amber-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">agent-browser</code> para captura de screenshot.
+          </p>
+<!-- Stats -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="bg-dark-700 rounded-xl p-3 text-center">
+<div class="text-2xl font-bold text-amber-400">6</div>
+<div class="text-xs text-neutral-500 mt-1">Tópicos</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-3 text-center">
+<div class="text-2xl font-bold text-amber-400">25</div>
+<div class="text-xs text-neutral-500 mt-1">Minutos</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-3 text-center">
+<div class="text-2xl font-bold text-amber-400">Prático</div>
+<div class="text-xs text-neutral-500 mt-1">Nível</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-3 text-center">
+<div class="text-2xl font-bold text-amber-400">Apoio</div>
+<div class="text-xs text-neutral-500 mt-1">Categoria</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA: pipeline de renderização Mermaid -->
+<div class="lg:w-80 rounded-2xl border border-amber-500/30 bg-dark-900/40 p-4 flex-shrink-0">
+<svg aria-label="Pipeline de renderização: código Mermaid → SVG → PNG" class="w-full h-auto" font-family="Inter,sans-serif" role="img" viewbox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="m41-grad-amber" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#fbbf24" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#f59e0b" stop-opacity="0.7"></stop>
+</lineargradient>
+<lineargradient id="m41-grad-cyan" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.7"></stop>
+</lineargradient>
+<filter id="m41-glow-amber">
+<fegaussianblur result="blur" stddeviation="1.8"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+<filter id="m41-glow-cyan">
+<fegaussianblur result="blur" stddeviation="1.8"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<!-- Background grid -->
+<rect fill="#1f1604" height="260" opacity="0.6" rx="12" width="320"></rect>
+<pattern height="20" id="m41-grid" patternunits="userSpaceOnUse" width="20">
+<circle cx="10" cy="10" fill="#fbbf24" opacity="0.15" r="0.8"></circle>
+</pattern>
+<rect fill="url(#m41-grid)" height="260" rx="12" width="320"></rect>
+<!-- Título -->
+<text fill="#fbbf24" font-size="11" font-weight="600" opacity="0.9" text-anchor="middle" x="160" y="22">Pipeline beautiful-mermaid</text>
+<!-- Caixa 1: Código .mmd -->
+<rect fill="#1f1604" filter="url(#m41-glow-amber)" height="48" rx="8" stroke="#fbbf24" stroke-width="2" width="90" x="20" y="36"></rect>
+<text fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" x="65" y="57">Código</text>
+<text fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" x="65" y="70">.mmd</text>
+<text fill="#fbbf24" font-size="7.5" opacity="0.7" text-anchor="middle" x="65" y="80">graph TD / sequenceDiagram</text>
+<!-- Caixa 2: render.ts -->
+<rect fill="#0e1b26" filter="url(#m41-glow-cyan)" height="48" rx="8" stroke="#38bdf8" stroke-width="2" width="90" x="115" y="36"></rect>
+<text fill="#38bdf8" font-size="9" font-weight="600" text-anchor="middle" x="160" y="55">render.ts</text>
+<text fill="#38bdf8" font-size="8" opacity="0.8" text-anchor="middle" x="160" y="67">bun / tsx / deno</text>
+<text fill="#38bdf8" font-size="7.5" opacity="0.6" text-anchor="middle" x="160" y="79">--theme tokyo-night</text>
+<!-- Caixa 3: SVG -->
+<rect fill="#1f1604" filter="url(#m41-glow-amber)" height="48" rx="8" stroke="#fbbf24" stroke-width="2" width="90" x="210" y="36"></rect>
+<text fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" x="255" y="57">SVG</text>
+<text fill="#fbbf24" font-size="8" opacity="0.8" text-anchor="middle" x="255" y="70">Vetorial</text>
+<text fill="#fbbf24" font-size="7.5" opacity="0.6" text-anchor="middle" x="255" y="80">infinitamente escalável</text>
+<!-- Setas linha 1 -->
+<line stroke="#fbbf24" stroke-width="1.5" x1="110" x2="115" y1="60" y2="60"></line>
+<polygon fill="#fbbf24" points="115,57 121,60 115,63"></polygon>
+<line stroke="#38bdf8" stroke-width="1.5" x1="205" x2="210" y1="60" y2="60"></line>
+<polygon fill="#38bdf8" points="210,57 216,60 210,63"></polygon>
+<!-- Linha divisória -->
+<line stroke="#374151" stroke-dasharray="4,4" stroke-width="1" x1="20" x2="300" y1="104" y2="104"></line>
+<!-- Caixa create-html.ts -->
+<rect fill="#0e1b26" height="48" rx="8" stroke="#38bdf8" stroke-width="2" width="130" x="20" y="114"></rect>
+<text fill="#38bdf8" font-size="9" font-weight="600" text-anchor="middle" x="85" y="133">create-html.ts</text>
+<text fill="#38bdf8" font-size="8" opacity="0.8" text-anchor="middle" x="85" y="146">wrapper HTML para screenshot</text>
+<text fill="#38bdf8" font-size="7.5" opacity="0.6" text-anchor="middle" x="85" y="157">padding + background</text>
+<!-- Caixa agent-browser -->
+<rect fill="#1f1604" filter="url(#m41-glow-amber)" height="48" rx="8" stroke="#fbbf24" stroke-width="2" width="130" x="170" y="114"></rect>
+<text fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" x="235" y="133">agent-browser</text>
+<text fill="#fbbf24" font-size="8" opacity="0.8" text-anchor="middle" x="235" y="146">Playwright / screenshot</text>
+<text fill="#fbbf24" font-size="7.5" opacity="0.6" text-anchor="middle" x="235" y="157">4K — 3840×2160</text>
+<!-- Seta entre as caixas linha 2 -->
+<line stroke="#38bdf8" stroke-width="1.5" x1="150" x2="170" y1="138" y2="138"></line>
+<polygon fill="#38bdf8" points="170,135 176,138 170,141"></polygon>
+<!-- Linha divisória 2 -->
+<line stroke="#374151" stroke-dasharray="4,4" stroke-width="1" x1="20" x2="300" y1="172" y2="172"></line>
+<!-- Outputs -->
+<rect fill="#1f1604" height="40" rx="8" stroke="#fbbf24" stroke-width="1.5" width="100" x="30" y="182"></rect>
+<text fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" x="80" y="198">diagram.svg</text>
+<text fill="#fbbf24" font-size="7.5" opacity="0.7" text-anchor="middle" x="80" y="212">Vector · pequeno</text>
+<rect fill="#0e1b26" height="40" rx="8" stroke="#38bdf8" stroke-width="1.5" width="100" x="190" y="182"></rect>
+<text fill="#38bdf8" font-size="9" font-weight="600" text-anchor="middle" x="240" y="198">diagram.png</text>
+<text fill="#38bdf8" font-size="7.5" opacity="0.7" text-anchor="middle" x="240" y="212">Raster · alta res</text>
+<!-- Seta SVG → create-html -->
+<line stroke="#fbbf24" stroke-dasharray="3,2" stroke-width="1.5" x1="255" x2="255" y1="84" y2="108"></line>
+<line stroke="#fbbf24" stroke-dasharray="3,2" stroke-width="1.5" x1="255" x2="85" y1="108" y2="108"></line>
+<line stroke="#fbbf24" stroke-width="1.5" x1="85" x2="85" y1="108" y2="114"></line>
+<polygon fill="#fbbf24" points="82,114 85,120 88,114"></polygon>
+<!-- Setas para outputs -->
+<line stroke="#38bdf8" stroke-dasharray="3,2" stroke-width="1.5" x1="85" x2="85" y1="162" y2="175"></line>
+<line stroke="#38bdf8" stroke-width="1.5" x1="85" x2="80" y1="175" y2="175"></line>
+<line stroke="#38bdf8" stroke-width="1.5" x1="80" x2="80" y1="175" y2="182"></line>
+<polygon fill="#38bdf8" points="77,182 80,188 83,182"></polygon>
+<line stroke="#fbbf24" stroke-dasharray="3,2" stroke-width="1.5" x1="235" x2="235" y1="162" y2="175"></line>
+<line stroke="#fbbf24" stroke-width="1.5" x1="235" x2="240" y1="175" y2="175"></line>
+<line stroke="#fbbf24" stroke-width="1.5" x1="240" x2="240" y1="175" y2="182"></line>
+<polygon fill="#fbbf24" points="237,182 240,188 243,182"></polygon>
+<!-- Label rodapé -->
+<text fill="#fbbf24" font-size="9" opacity="0.6" text-anchor="middle" x="160" y="248">Outputs sempre em par: SVG + PNG</text>
+<style>
+              @media (prefers-reduced-motion: no-preference) {
+                #m41-glow-amber feGaussianBlur { animation: m41pulse 3s ease-in-out infinite alternate; }
+                @keyframes m41pulse { from { stdDeviation: 1.8; } to { stdDeviation: 2.8; } }
+              }
+            </style>
+</svg>
+</div>
+</div>
+</header>
+<!-- TÓPICO 1: O que é / o que faz -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 p-8" id="topico-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">1</span>
+<h2 class="text-2xl font-bold text-neutral-100">🧩 O que é / o que faz</h2>
+</div>
+<!-- Box conceito principal -->
+<div class="bg-gradient-to-r from-amber-900/30 to-dark-800 border border-amber-500/30 rounded-xl p-6 mb-6">
+<h3 class="text-amber-400 font-semibold text-lg mb-2">Definição precisa</h3>
+<p class="text-neutral-300 leading-relaxed">
+<strong class="text-amber-400">beautiful-mermaid</strong> é um skill do Claude Code que <strong>renderiza diagramas Mermaid como SVG e PNG</strong> usando a biblioteca Beautiful Mermaid. A operação é bidirecional: recebe código <code class="text-amber-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">.mmd</code> (ou uma descrição em linguagem natural) e produz <strong>sempre os dois formatos</strong> — SVG vetorial e PNG em alta resolução (4K, viewport 3840×2160, largura mínima 1200px do diagrama).
+        </p>
+</div>
+<!-- Tipos suportados -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="text-amber-400 font-semibold text-sm mb-2">Flowchart</div>
+<div class="text-neutral-400 text-sm">Fluxos de processo, árvores de decisão, pipelines CI/CD</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="text-amber-400 font-semibold text-sm mb-2">Sequence</div>
+<div class="text-neutral-400 text-sm">Chamadas de API, fluxos OAuth, transações de banco de dados</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="text-amber-400 font-semibold text-sm mb-2">State</div>
+<div class="text-neutral-400 text-sm">Máquinas de estado, ciclos de vida de conexão</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="text-amber-400 font-semibold text-sm mb-2">Class (UML)</div>
+<div class="text-neutral-400 text-sm">Diagramas de classe, padrões de design</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="text-amber-400 font-semibold text-sm mb-2">Entity-Relationship</div>
+<div class="text-neutral-400 text-sm">Esquemas de banco de dados, modelos de dados</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="text-cyan-400 font-semibold text-sm mb-2">Saída dupla sempre</div>
+<div class="text-neutral-400 text-sm">SVG + PNG produzidos em cada execução, sem exceção</div>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="border-t border-dark-600 pt-4">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">Beautiful Mermaid</div><div class="text-neutral-500 text-xs mt-1">biblioteca de renderização</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">SVG + PNG</div><div class="text-neutral-500 text-xs mt-1">sempre os dois formatos</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">render.ts</div><div class="text-neutral-500 text-xs mt-1">script principal</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">4K output</div><div class="text-neutral-500 text-xs mt-1">3840×2160 viewport</div></div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2: Quando dispara -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 p-8" id="topico-2">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">2</span>
+<h2 class="text-2xl font-bold text-neutral-100">🎣 Quando dispara</h2>
+</div>
+<p class="text-neutral-400 mb-6">O gatilho oficial do skill (campo <code class="text-amber-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">description</code>) é preciso:</p>
+<!-- Box dados -->
+<div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-5 mb-6">
+<div class="flex items-start gap-3">
+<div class="text-blue-400 text-xl mt-0.5">📋</div>
+<div>
+<div class="text-blue-400 font-semibold mb-2">Gatilho oficial (description)</div>
+<p class="text-neutral-300 font-mono text-sm bg-dark-900 px-3 py-2 rounded border border-dark-600">
+              "Render Mermaid diagrams as SVG and PNG using the Beautiful Mermaid library. Use when the user asks to render a Mermaid diagram."
+            </p>
+</div>
+</div>
+</div>
+<!-- Timeline dos gatilhos -->
+<div class="mb-6">
+<h3 class="text-neutral-300 font-semibold mb-4">Situações que acionam o skill</h3>
+<div class="space-y-3">
+<div class="flex gap-4 items-start">
+<div class="w-3 h-3 rounded-full bg-amber-400 mt-1.5 flex-shrink-0"></div>
+<div class="border-l-2 border-dark-600 pl-4 pb-3 flex-1">
+<div class="text-neutral-300 font-medium text-sm">"Renderize este diagrama Mermaid para mim"</div>
+<div class="text-neutral-500 text-xs mt-1">Gatilho mais direto — código .mmd já presente</div>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-3 h-3 rounded-full bg-amber-400 mt-1.5 flex-shrink-0"></div>
+<div class="border-l-2 border-dark-600 pl-4 pb-3 flex-1">
+<div class="text-neutral-300 font-medium text-sm">"Gere um diagrama de fluxo do meu processo de autenticação"</div>
+<div class="text-neutral-500 text-xs mt-1">Claude gera o código Mermaid e já renderiza em seguida</div>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-3 h-3 rounded-full bg-cyan-400 mt-1.5 flex-shrink-0"></div>
+<div class="border-l-2 border-dark-600 pl-4 pb-3 flex-1">
+<div class="text-neutral-300 font-medium text-sm">"Converta este arquivo .mmd em imagem"</div>
+<div class="text-neutral-500 text-xs mt-1">Lê o arquivo e executa render.ts com --input</div>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-3 h-3 rounded-full bg-cyan-400 mt-1.5 flex-shrink-0"></div>
+<div class="border-l-2 border-dark-600 pl-4 pb-3 flex-1">
+<div class="text-neutral-300 font-medium text-sm">"Visualize a arquitetura do sistema como sequência"</div>
+<div class="text-neutral-500 text-xs mt-1">Gera sequenceDiagram e produz SVG + PNG</div>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-3 h-3 rounded-full bg-amber-400 mt-1.5 flex-shrink-0"></div>
+<div class="border-l-2 border-dark-600 pl-4 pb-4 flex-1">
+<div class="text-neutral-300 font-medium text-sm">"Quero um diagrama ER do banco de dados"</div>
+<div class="text-neutral-500 text-xs mt-1">Gera erDiagram Mermaid e renderiza</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dica -->
+<div class="bg-primary/10 border border-primary/40 rounded-xl p-4 mb-6">
+<div class="flex items-start gap-3">
+<span class="text-primary text-lg">💡</span>
+<div>
+<div class="text-primary font-semibold text-sm mb-1">A palavra-chave é "Mermaid"</div>
+<p class="text-neutral-400 text-sm">Se o usuário mencionar "diagrama Mermaid", "código mermaid", "arquivo .mmd" ou pedir explicitamente para renderizar, o Claude ativa este skill. Não é necessário citar "beautiful-mermaid" — o gatilho é o tipo de diagrama.</p>
+</div>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="border-t border-dark-600 pt-4">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">Render Mermaid</div><div class="text-neutral-500 text-xs mt-1">gatilho principal</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">Gerar + Renderizar</div><div class="text-neutral-500 text-xs mt-1">Claude gera o código</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">--input .mmd</div><div class="text-neutral-500 text-xs mt-1">arquivo existente</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">Qualquer tipo</div><div class="text-neutral-500 text-xs mt-1">flow / seq / state / ER</div></div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3: Como melhora suas páginas -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 p-8" id="topico-3">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">3</span>
+<h2 class="text-2xl font-bold text-neutral-100">🚀 Como melhora suas páginas</h2>
+</div>
+<p class="text-neutral-400 mb-6">Diagramas técnicos elevam significativamente a qualidade de páginas de documentação, cursos e dashboards. O beautiful-mermaid entrega isso com um único comando.</p>
+<!-- Grid FAZER vs EVITAR -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+<div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+<div class="text-emerald-400 font-semibold mb-3 flex items-center gap-2"><span>✓</span> FAZER com beautiful-mermaid</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Embutir SVG direto na página HTML (vetorial, sem perda)</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Usar PNG de alta resolução em apresentações e slides</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Documentar fluxos de API com sequenceDiagram</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Visualizar arquitetura de banco de dados com erDiagram</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Escolher tema adequado ao contexto (dark/light/tokyo-night)</li>
+</ul>
+</div>
+<div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+<div class="text-red-400 font-semibold mb-3 flex items-center gap-2"><span>✗</span> EVITAR ao usar diagramas</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Usar `-- label --&gt;` (espaço-traço) — prefira `--&gt;|label|`</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Reutilizar IDs de nós — cada node ID deve ser único</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Deixar colchetes abertos em labels de nós</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Usar para diagramas que exigem interatividade complexa</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Inserir caracteres especiais sem aspas nos labels</li>
+</ul>
+</div>
+</div>
+<!-- Box dica -->
+<div class="bg-primary/10 border border-primary/40 rounded-xl p-4 mb-6">
+<div class="flex items-start gap-3">
+<span class="text-primary text-lg">💡</span>
+<div>
+<div class="text-primary font-semibold text-sm mb-1">SVG embutido direto na página</div>
+<p class="text-neutral-400 text-sm">O SVG gerado pelo beautiful-mermaid pode ser copiado e embutido diretamente no HTML de módulos como o que você está lendo agora. É a mesma técnica usada nos SVGs futuristas deste curso — vetorial, leve, sem dependência externa.</p>
+</div>
+</div>
+</div>
+<!-- Valor concreto -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+<div class="bg-dark-700 rounded-xl p-4 text-center">
+<div class="text-3xl mb-2">📐</div>
+<div class="text-amber-400 font-semibold text-sm">Escalabilidade infinita</div>
+<div class="text-neutral-500 text-xs mt-1">SVG vetorial — nenhuma perda de qualidade em qualquer zoom</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 text-center">
+<div class="text-3xl mb-2">🖼️</div>
+<div class="text-amber-400 font-semibold text-sm">PNG 4K pronto</div>
+<div class="text-neutral-500 text-xs mt-1">Sem trabalho manual — captura automática via agent-browser</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 text-center">
+<div class="text-3xl mb-2">🎨</div>
+<div class="text-amber-400 font-semibold text-sm">Temas visuais ricos</div>
+<div class="text-neutral-500 text-xs mt-1">default, dark, forest, neutral, base, tokyo-night e mais</div>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="border-t border-dark-600 pt-4">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">SVG embutível</div><div class="text-neutral-500 text-xs mt-1">inline no HTML</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">PNG 4K</div><div class="text-neutral-500 text-xs mt-1">apresentações</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">Sintaxe limpa</div><div class="text-neutral-500 text-xs mt-1">pipe `--&gt;|label|`</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">Temas variados</div><div class="text-neutral-500 text-xs mt-1">dark/light/tokyo-night</div></div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4: Como funciona por dentro -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 p-8" id="topico-4">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">4</span>
+<h2 class="text-2xl font-bold text-neutral-100">⚙️ Como funciona por dentro</h2>
+</div>
+<p class="text-neutral-400 mb-6">5 passos sequenciais, sempre nessa ordem — do código Mermaid aos dois arquivos finais.</p>
+<!-- Timeline do workflow -->
+<div class="space-y-4 mb-6">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-xs flex-shrink-0">1</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4 flex-1">
+<div class="text-neutral-300 font-semibold text-sm mb-1">Gerar ou validar código Mermaid</div>
+<div class="text-neutral-500 text-sm">Se o usuário descrever o diagrama em linguagem natural, Claude gera o código Mermaid válido consultando a referência <code class="text-amber-400 bg-dark-700 px-1 py-0.5 rounded text-xs">references/mermaid-syntax.md</code>. Se o código já existe, valida a sintaxe.</div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-xs flex-shrink-0">2</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4 flex-1">
+<div class="text-neutral-300 font-semibold text-sm mb-1">Renderizar SVG com render.ts</div>
+<div class="text-neutral-500 text-sm mb-2">Executa o script de renderização com bun, tsx ou deno. Produz <code class="text-amber-400 bg-dark-700 px-1 py-0.5 rounded text-xs">&lt;output&gt;.svg</code> no diretório atual.</div>
+<pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto border border-dark-600"><code>bun run scripts/render.ts --code "graph TD; A--&gt;B" --output diagram --theme default
+# ou via arquivo:
+bun run scripts/render.ts --input diagram.mmd --output diagram --theme tokyo-night
+# runtimes alternativos:
+npx tsx scripts/render.ts --code "..." --output diagram
+deno run --allow-read --allow-write --allow-net scripts/render.ts --code "..."</code></pre>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xs flex-shrink-0">3</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4 flex-1">
+<div class="text-neutral-300 font-semibold text-sm mb-1">Criar HTML wrapper com create-html.ts</div>
+<div class="text-neutral-500 text-sm mb-2">Prepara um arquivo HTML mínimo com o SVG, padding adequado e background — pronto para screenshot.</div>
+<pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto border border-dark-600"><code>bun run scripts/create-html.ts --svg diagram.svg --output diagram.html</code></pre>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xs flex-shrink-0">4</div>
+<div class="w-0.5 bg-dark-600 flex-1 mt-2"></div>
+</div>
+<div class="pb-4 flex-1">
+<div class="text-neutral-300 font-semibold text-sm mb-1">Capturar PNG com agent-browser (Playwright)</div>
+<div class="text-neutral-500 text-sm">O skill <strong class="text-cyan-400">agent-browser</strong> abre o HTML wrapper no Playwright, configura viewport 4K (3840×2160) com largura mínima de 1200px no diagrama e captura o screenshot em PNG de alta resolução.</div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-xs flex-shrink-0">5</div>
+</div>
+<div class="pb-2 flex-1">
+<div class="text-neutral-300 font-semibold text-sm mb-1">Limpar arquivos intermediários</div>
+<div class="text-neutral-500 text-sm">Remove o HTML wrapper temporário, mantendo apenas <code class="text-amber-400 bg-dark-700 px-1 py-0.5 rounded text-xs">diagram.svg</code> e <code class="text-amber-400 bg-dark-700 px-1 py-0.5 rounded text-xs">diagram.png</code> no diretório de trabalho.</div>
+</div>
+</div>
+</div>
+<!-- Dependências e temas -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="text-amber-400 font-semibold text-sm mb-3">Dependências reais</div>
+<ul class="space-y-1.5 text-sm text-neutral-400">
+<li><code class="text-amber-400">Beautiful Mermaid library</code> — núcleo de renderização</li>
+<li><code class="text-cyan-400">scripts/render.ts</code> — renderização SVG</li>
+<li><code class="text-cyan-400">scripts/create-html.ts</code> — wrapper HTML</li>
+<li><code class="text-amber-400">agent-browser</code> — Playwright / screenshot 4K</li>
+<li><code class="text-neutral-400">bun / tsx / deno</code> — runtimes TypeScript</li>
+</ul>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="text-cyan-400 font-semibold text-sm mb-3">Temas disponíveis</div>
+<ul class="space-y-1.5 text-sm text-neutral-400">
+<li><code class="text-neutral-300">default</code> — claro padrão Mermaid</li>
+<li><code class="text-neutral-300">dark</code> — escuro nativo</li>
+<li><code class="text-neutral-300">forest</code> — tons verdes</li>
+<li><code class="text-neutral-300">neutral</code> — sem cor forte</li>
+<li><code class="text-cyan-400">tokyo-night</code> — neon escuro moderno</li>
+<li><code class="text-neutral-300">base</code> — minimalista</li>
+</ul>
+</div>
+</div>
+<!-- Alerta de troubleshooting -->
+<div class="bg-red-900/20 border border-red-500/30 rounded-xl p-4 mb-6">
+<div class="flex items-start gap-3">
+<span class="text-red-400 text-lg">⚠️</span>
+<div>
+<div class="text-red-400 font-semibold text-sm mb-2">Problemas comuns e soluções</div>
+<ul class="space-y-1.5 text-sm text-neutral-400">
+<li><strong class="text-red-300">Tema não aplicado:</strong> verifique <code class="text-red-300 bg-dark-700 px-1 py-0.5 rounded text-xs">--bg</code> e <code class="text-red-300 bg-dark-700 px-1 py-0.5 rounded text-xs">--fg</code> CSS no SVG de saída</li>
+<li><strong class="text-red-300">Diagrama cortado:</strong> use <code class="text-red-300 bg-dark-700 px-1 py-0.5 rounded text-xs">--&gt;|label|</code> — nunca <code class="text-red-300 bg-dark-700 px-1 py-0.5 rounded text-xs">-- label --&gt;</code></li>
+<li><strong class="text-red-300">SVG vazio/malformado:</strong> verifique IDs de nós únicos e colchetes fechados nos labels</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="border-t border-dark-600 pt-4">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">render.ts</div><div class="text-neutral-500 text-xs mt-1">script de renderização</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">create-html.ts</div><div class="text-neutral-500 text-xs mt-1">wrapper screenshot</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-cyan-400 font-semibold text-sm">agent-browser</div><div class="text-neutral-500 text-xs mt-1">Playwright 4K</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">bun/tsx/deno</div><div class="text-neutral-500 text-xs mt-1">runtimes suportados</div></div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5: Exemplo prático + PROMPT pronto -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 p-8" id="topico-5">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">5</span>
+<h2 class="text-2xl font-bold text-neutral-100">💬 Exemplo prático + PROMPT pronto</h2>
+</div>
+<p class="text-neutral-400 mb-6">Dois cenários concretos: renderizar código existente e gerar do zero a partir de uma descrição.</p>
+<!-- Exemplos de sintaxe Mermaid -->
+<div class="mb-6">
+<h3 class="text-neutral-300 font-semibold mb-4">Sintaxe Mermaid — exemplos diretos</h3>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+<!-- Flowchart -->
+<div>
+<div class="text-amber-400 font-semibold text-sm mb-2">Flowchart (processo com decisão)</div>
+<pre class="bg-dark-900 rounded-xl p-4 text-xs text-neutral-300 overflow-x-auto border border-dark-600 font-mono"><code>flowchart TD
+    A([Início]) --&gt; B[/Receber input/]
+    B --&gt; C{Válido?}
+    C --&gt;|Sim| D[Processar]
+    C --&gt;|Não| E[Retornar erro]
+    D --&gt; F[(Salvar no DB)]
+    F --&gt; G([Fim])
+    E --&gt; G</code></pre>
+</div>
+<!-- Sequence -->
+<div>
+<div class="text-cyan-400 font-semibold text-sm mb-2">Sequence (fluxo de autenticação)</div>
+<pre class="bg-dark-900 rounded-xl p-4 text-xs text-neutral-300 overflow-x-auto border border-dark-600 font-mono"><code>sequenceDiagram
+    participant U as Usuário
+    participant A as App
+    participant S as Servidor
+    U-&gt;&gt;A: Login (email/senha)
+    A-&gt;&gt;S: POST /auth/login
+    S--&gt;&gt;A: JWT token
+    A--&gt;&gt;U: Acesso liberado
+    Note over S: Valida credenciais</code></pre>
+</div>
+</div>
+<!-- Box dica pipe notation -->
+<div class="bg-primary/10 border border-primary/40 rounded-xl p-4 mb-4">
+<div class="flex items-start gap-3">
+<span class="text-primary text-lg">💡</span>
+<div>
+<div class="text-primary font-semibold text-sm mb-1">Regra de ouro nos labels de aresta</div>
+<p class="text-neutral-400 text-sm">Sempre use <code class="text-amber-400 bg-dark-700 px-1.5 py-0.5 rounded">C --&gt;|Sim| D</code> com pipe. Nunca <code class="text-red-400 bg-dark-700 px-1.5 py-0.5 rounded">C -- Sim --&gt; D</code> (espaço-traço pode causar render incompleto, conforme o SKILL.md).</p></div>
+</div>
+</div>
+</div>
+
+<!-- PROMPT 1 -->
+<div class="mb-6">
+<div class="text-neutral-300 font-semibold mb-3">📋 PROMPT 1 — Renderizar código existente</div>
+<div class="bg-dark-900 rounded-xl border border-amber-500/30 overflow-hidden">
+<div class="bg-amber-500/10 px-4 py-2 border-b border-amber-500/20">
+<span class="text-amber-400 text-xs font-mono font-semibold">Cole no Claude Code</span>
+</div>
+<pre class="p-4 text-sm text-neutral-300 overflow-x-auto font-mono"><code>Renderize o diagrama Mermaid abaixo como SVG e PNG.
+Use o tema tokyo-night. Salve como auth-flow.
+
+```mermaid
+sequenceDiagram
+    participant U as Usuário
+    participant A as App
+    participant S as Servidor
+    U-&gt;&gt;A: Login (email/senha)
+    A-&gt;&gt;S: POST /auth/login
+    S--&gt;&gt;A: JWT token
+    A--&gt;&gt;U: Acesso liberado
+```</code></pre>
+</div>
+</div>
+<!-- PROMPT 2 -->
+<div class="mb-6">
+<div class="text-neutral-300 font-semibold mb-3">📋 PROMPT 2 — Gerar e renderizar do zero</div>
+<div class="bg-dark-900 rounded-xl border border-cyan-500/30 overflow-hidden">
+<div class="bg-cyan-500/10 px-4 py-2 border-b border-cyan-500/20">
+<span class="text-cyan-400 text-xs font-mono font-semibold">Cole no Claude Code</span>
+</div>
+<pre class="p-4 text-sm text-neutral-300 overflow-x-auto font-mono"><code>Gere e renderize um flowchart Mermaid do pipeline CI/CD:
+push → build → testes unitários → testes e2e →
+deploy staging → aprovação manual → deploy produção.
+Use o tema dark. Salve como cicd-pipeline.</code></pre>
+</div>
+</div>
+<!-- PROMPT 3 — embutir SVG na página -->
+<div class="mb-6">
+<div class="text-neutral-300 font-semibold mb-3">📋 PROMPT 3 — Embutir diagrama em página HTML</div>
+<div class="bg-dark-900 rounded-xl border border-amber-500/30 overflow-hidden">
+<div class="bg-amber-500/10 px-4 py-2 border-b border-amber-500/20">
+<span class="text-amber-400 text-xs font-mono font-semibold">Cole no Claude Code</span>
+</div>
+<pre class="p-4 text-sm text-neutral-300 overflow-x-auto font-mono"><code>Gere um erDiagram Mermaid para um sistema de e-commerce
+com entidades: Customer, Order, Product, OrderItem, Payment.
+Renderize com tema forest e depois copie o SVG
+inline para o arquivo docs/schema.html.</code></pre>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="border-t border-dark-600 pt-4">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">flowchart TD</div><div class="text-neutral-500 text-xs mt-1">fluxo top-down</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">sequenceDiagram</div><div class="text-neutral-500 text-xs mt-1">interações sequenciais</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">--&gt;|label|</div><div class="text-neutral-500 text-xs mt-1">rótulo de aresta seguro</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">--theme</div><div class="text-neutral-500 text-xs mt-1">parâmetro de tema</div></div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6: Combina com / limites — inclui relação com excalidraw e skills de construção -->
+<section class="bg-dark-800 rounded-2xl border border-dark-600 p-8" id="topico-6">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">6</span>
+<h2 class="text-2xl font-bold text-neutral-100">🧬 Combina com / limites</h2>
+</div>
+<p class="text-neutral-400 mb-6">O beautiful-mermaid se encaixa num ecossistema de skills de visualização e apoio. Entender onde começa e termina cada ferramenta evita escolhas erradas.</p>
+<!-- Comparativo Mermaid vs Excalidraw -->
+<div class="bg-gradient-to-r from-amber-900/30 to-dark-800 border border-amber-500/30 rounded-xl p-6 mb-6">
+<h3 class="text-amber-400 font-semibold text-lg mb-4">📊 beautiful-mermaid vs ✏️ excalidraw</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div>
+<div class="text-amber-400 font-semibold text-sm mb-3 flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-xs">M</span>
+              beautiful-mermaid
+            </div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li>→ Diagramas técnicos <strong class="text-amber-400">precisos</strong> e estruturados</li>
+<li>→ Sintaxe declarativa — você define a lógica, a lib organiza o layout</li>
+<li>→ Estilo <strong class="text-amber-400">polido, profissional</strong>, temas curados</li>
+<li>→ SVG + PNG exportáveis para documentação</li>
+<li>→ Ideal para: arquitetura, fluxos de código, BD, CI/CD</li>
+</ul>
+</div>
+<div>
+<div class="text-cyan-400 font-semibold text-sm mb-3 flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-xs">E</span>
+              excalidraw (próximo módulo 4.2)
+            </div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li>→ Diagramas <strong class="text-cyan-400">"à mão"</strong>, sketchy, exploratorios</li>
+<li>→ Estilo hand-drawn — comunica "trabalho em progresso"</li>
+<li>→ Ótimo para wireframes, rascunhos de arquitetura inicial</li>
+<li>→ Interativo — o usuário pode editar no browser</li>
+<li>→ Ideal para: UX wireframes, brainstorm visual, sketches de UI</li>
+</ul>
+</div>
+</div>
+<div class="mt-4 p-3 bg-dark-900/50 rounded-lg border border-dark-600">
+<div class="text-neutral-400 text-sm"><strong class="text-amber-400">Regra prática:</strong> use Mermaid quando precisar de precisão técnica e outputs profissionais. Use Excalidraw quando o visual "polished" pode inibir a iteração — rascunhos informam que a ideia ainda está aberta.</div>
+</div>
+</div>
+<!-- Combina com outros skills -->
+<div class="mb-6">
+<h3 class="text-neutral-300 font-semibold mb-4">Combina com outros skills do curso</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-amber-400 text-lg">🕹️</span>
+<div class="text-amber-400 font-semibold text-sm">agent-browser (Módulo 4.3)</div>
+</div>
+<div class="text-neutral-400 text-sm">Dependência direta — o agent-browser (Playwright) é quem captura o PNG 4K no Passo 4 do workflow. Sem ele, a saída é apenas SVG.</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-cyan-400 text-lg">🔭</span>
+<div class="text-cyan-400 font-semibold text-sm">website-intelligence (Módulo 4.4)</div>
+</div>
+<div class="text-neutral-400 text-sm">Combine: renderize diagramas de arquitetura de sites analisados pelo website-intelligence — arquiteturas de layout, fluxos de navegação.</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-emerald-400 text-lg">⚛️</span>
+<div class="text-emerald-400 font-semibold text-sm">frontend-design (Módulo 1.1)</div>
+</div>
+<div class="text-neutral-400 text-sm">Embutir o SVG gerado pelo beautiful-mermaid diretamente em páginas React/Tailwind criadas pelo frontend-design — diagramas técnicos inline.</div>
+</div>
+<div class="bg-dark-700 rounded-xl p-4 border border-dark-600">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-blue-400 text-lg">🏷️</span>
+<div class="text-blue-400 font-semibold text-sm">brand-guidelines (Módulo 2.2)</div>
+</div>
+<div class="text-neutral-400 text-sm">Gere diagramas de arquitetura de marca ou fluxos de identidade visual, exportando SVG com as cores certas para apresentações de guideline.</div>
+</div>
+</div>
+</div>
+<!-- Grid FAZER vs NÃO USAR -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+<div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+<div class="text-emerald-400 font-semibold mb-3 flex items-center gap-2"><span>✓</span> USE quando</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Precisa de diagramas técnicos em documentação</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Quer SVG embutível em HTML ou PNG para slide</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> O diagrama tem estrutura lógica clara (fluxo, sequência, estado)</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Necessita de múltiplos temas visuais</li>
+</ul>
+</div>
+<div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+<div class="text-red-400 font-semibold mb-3 flex items-center gap-2"><span>✗</span> NÃO USE quando</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> O diagrama é um wireframe ou rascunho conceitual (→ excalidraw)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Precisa de diagramas interativos editáveis no browser</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> O conteúdo é uma animação ou diagrama 3D (→ 3d-animation-creator)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Precisa de controle total do layout visual de cada elemento</li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="border-t border-dark-600 pt-4">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">Conceitos-chave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">Mermaid = técnico</div><div class="text-neutral-500 text-xs mt-1">precisão e estrutura</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-cyan-400 font-semibold text-sm">Excalidraw = sketch</div><div class="text-neutral-500 text-xs mt-1">rascunho e wireframe</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">agent-browser</div><div class="text-neutral-500 text-xs mt-1">dependência direta</div></div>
+<div class="bg-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-semibold text-sm">SVG embutível</div><div class="text-neutral-500 text-xs mt-1">integra com T1/T2</div></div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="bg-gradient-to-r from-amber-900/30 via-dark-800 to-dark-800 rounded-2xl border border-amber-500/30 p-8" id="resumo">
+<h2 class="text-2xl font-bold text-neutral-100 mb-6">📋 Resumo do Módulo 4.1</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+<!-- Checklist do que aprendeu -->
+<div>
+<h3 class="text-amber-400 font-semibold mb-4">O que você aprendeu</h3>
+<ul class="space-y-3">
+<li class="flex items-start gap-3"><span class="text-emerald-400 mt-0.5 font-bold">✓</span><span class="text-neutral-300 text-sm">beautiful-mermaid renderiza Mermaid como SVG + PNG usando a biblioteca Beautiful Mermaid</span></li>
+<li class="flex items-start gap-3"><span class="text-emerald-400 mt-0.5 font-bold">✓</span><span class="text-neutral-300 text-sm">O gatilho é o usuário pedir para renderizar um diagrama Mermaid — qualquer tipo</span></li>
+<li class="flex items-start gap-3"><span class="text-emerald-400 mt-0.5 font-bold">✓</span><span class="text-neutral-300 text-sm">O pipeline tem 5 passos: validar → render.ts → create-html.ts → agent-browser (Playwright) → limpar</span></li>
+<li class="flex items-start gap-3"><span class="text-emerald-400 mt-0.5 font-bold">✓</span><span class="text-neutral-300 text-sm">PNG é capturado em 4K (3840×2160) com largura mínima de 1200px no diagrama</span></li>
+<li class="flex items-start gap-3"><span class="text-emerald-400 mt-0.5 font-bold">✓</span><span class="text-neutral-300 text-sm">Use sempre <code class="text-amber-400 bg-dark-700 px-1 py-0.5 rounded text-xs">--&gt;|label|</code> para rótulos de aresta — nunca espaço-traço</span></li>
+<li class="flex items-start gap-3"><span class="text-emerald-400 mt-0.5 font-bold">✓</span><span class="text-neutral-300 text-sm">Mermaid = diagramas técnicos precisos; Excalidraw = rascunhos sketchy e wireframes</span></li>
+<li class="flex items-start gap-3"><span class="text-emerald-400 mt-0.5 font-bold">✓</span><span class="text-neutral-300 text-sm">O SVG gerado é embutível inline em HTML — mesma técnica dos SVGs deste curso</span></li>
+</ul>
+</div>
+<!-- Próximo módulo -->
+<div>
+<div class="bg-dark-900/60 rounded-xl border border-dark-600 p-5">
+<div class="text-amber-400 font-semibold text-sm mb-1">Próximo módulo:</div>
+<div class="text-neutral-100 text-xl font-bold mb-2">4.2 ✏️ excalidraw</div>
+<p class="text-neutral-400 text-sm">O skill que gera diagramas no estilo "à mão" do Excalidraw — wireframes, rascunhos de arquitetura e sketches de UI com visual informal que comunica "em construção".</p>
+</div>
+<div class="mt-4 bg-dark-900/40 rounded-xl border border-dark-600 p-5">
+<div class="text-neutral-500 text-xs font-semibold uppercase tracking-wider mb-3">Trilha 4 — Apoio</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-sm"><span class="text-emerald-400">✓</span><span class="text-neutral-400 line-through">4.1 📊 beautiful-mermaid</span></div>
+<div class="flex items-center gap-2 text-sm"><span class="text-amber-400">→</span><span class="text-neutral-300 font-medium">4.2 ✏️ excalidraw</span></div>
+<div class="flex items-center gap-2 text-sm"><span class="text-neutral-600">○</span><span class="text-neutral-500">4.3 🕹️ agent-browser</span></div>
+<div class="flex items-center gap-2 text-sm"><span class="text-neutral-600">○</span><span class="text-neutral-500">4.4 🔭 website-intelligence</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors justify-start flex items-center justify-center" href="index.html">← Voltar para Trilha 4</a>
+<a class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors flex items-center justify-center" href="modulo-4-2.html">Próximo Módulo: 4.2 ✏️ excalidraw →</a>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Conteúdo do <a class="text-sky-400 hover:text-sky-300 font-medium transition-colors" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Trilha 4: Apoio · Módulo 4.1 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

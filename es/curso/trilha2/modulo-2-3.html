@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 2.3 — canvas-design | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento blue */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,0.18); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-sky-300 { color: #0284c7; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    /* dark mode border suavizado */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    .dark .border-blue-500\/30 { border-color: rgba(96,165,250,0.25); }
+    .dark .border-emerald-500\/30 { border-color: rgba(52,211,153,0.25); }
+    .dark .border-red-500\/30 { border-color: rgba(239,68,68,0.25); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(239,68,68,0.2); }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(239,68,68,0.06); }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha2/modulo-2-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha2/modulo-2-3.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha2/modulo-2-3.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha2/modulo-2-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha2/modulo-2-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-2-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300 transition-colors" href="../../index.html">
+<span class="text-xl">🎨</span>
+<span class="font-bold text-sm hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600 hidden sm:inline">·</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium hidden sm:inline transition-colors" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10 transition-colors" href="index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidad</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Medios</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Soporte</span></a>
+<button aria-label="Cambiar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.413 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-blue-400 transition-colors" href="../../index.html">Inicio</a>
+<span>/</span>
+<a class="hover:text-blue-400 transition-colors" href="index.html">Ruta 2 — Identidad</a>
+<span>/</span>
+<span class="text-blue-400 font-medium">Módulo 2.3</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4 tracking-wider">MÓDULO 2.3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🖼️ canvas-design</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Arte visual original en .png y .pdf — pósteres, imágenes OG, heroes y material de difusión creados a partir de una filosofía de diseño. Nunca copia a artistas; crea movimientos estéticos propios.</p>
+<!-- Stats -->
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">6</div>
+<div class="text-xs text-neutral-400">Temas</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">25</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Intermed.</div>
+<div class="text-xs text-neutral-400">Nivel</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Identidad</div>
+<div class="text-xs text-neutral-400">Categoría</div>
+</div>
+</div>
+</div>
+</header>
+<!-- SVG FUTURISTA -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="rounded-2xl overflow-hidden border border-blue-500/30 bg-dark-800">
+<svg aria-label="Diagrama futurista de canvas-design: la filosofía de diseño se convierte en arte estático en PNG y PDF" class="w-full h-auto" role="img" viewbox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="bg-grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#0e1622;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0d1b2a;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="blue-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#38bdf8;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="cyan-grad" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0.9"></stop>
+<stop offset="100%" style="stop-color:#60a5fa;stop-opacity:0.3"></stop>
+</lineargradient>
+<filter id="glow-blue">
+<fegaussianblur result="coloredBlur" stddeviation="3"></fegaussianblur>
+<femerge><femergenode in="coloredBlur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<rect fill="url(#bg-grad)" height="320" width="900"></rect>
+<!-- Grid lines background -->
+<g opacity="0.5" stroke="#1e3a5f" stroke-width="0.5">
+<line x1="0" x2="900" y1="80" y2="80"></line>
+<line x1="0" x2="900" y1="160" y2="160"></line>
+<line x1="0" x2="900" y1="240" y2="240"></line>
+<line x1="150" x2="150" y1="0" y2="320"></line>
+<line x1="300" x2="300" y1="0" y2="320"></line>
+<line x1="450" x2="450" y1="0" y2="320"></line>
+<line x1="600" x2="600" y1="0" y2="320"></line>
+<line x1="750" x2="750" y1="0" y2="320"></line>
+</g>
+<!-- Left: input block — "Filosofia" -->
+<rect fill="#0e1b26" height="140" rx="8" stroke="#38bdf8" stroke-width="1.5" width="160" x="30" y="90"></rect>
+<text fill="#38bdf8" font-family="monospace" font-size="11" letter-spacing="1" text-anchor="middle" x="110" y="120">FILOSOFÍA</text>
+<text fill="#bfe6ff" font-family="monospace" font-size="9" text-anchor="middle" x="110" y="138">DE DISEÑO</text>
+<!-- mini canvas mockup inside -->
+<rect fill="#0d1e30" height="68" rx="4" stroke="#3b82f6" stroke-width="1" width="120" x="50" y="148"></rect>
+<rect fill="#1a3a5c" height="56" rx="2" width="50" x="56" y="154"></rect>
+<rect fill="#0f2640" height="26" rx="2" width="52" x="112" y="154"></rect>
+<rect fill="#3b82f6" height="26" opacity="0.3" rx="2" width="52" x="112" y="186"></rect>
+<text fill="#60a5fa" font-family="monospace" font-size="8" text-anchor="middle" x="81" y="186">Chromatic</text>
+<text fill="#38bdf8" font-family="monospace" font-size="7" text-anchor="middle" x="138" y="170">Movimiento</text>
+<!-- Arrow 1 -->
+<line stroke="url(#blue-grad)" stroke-width="2" x1="190" x2="240" y1="160" y2="160"></line>
+<polygon fill="#3b82f6" points="238,154 250,160 238,166"></polygon>
+<!-- Center pipeline block -->
+<rect fill="#0e1b26" height="200" rx="12" stroke="#60a5fa" stroke-width="1.5" width="200" x="250" y="60"></rect>
+<text fill="#60a5fa" font-family="monospace" font-size="11" letter-spacing="1" text-anchor="middle" x="350" y="88">canvas-design</text>
+<line stroke="#1e3a5f" stroke-width="1" x1="270" x2="430" y1="96" y2="96"></line>
+<!-- Pipeline steps inside center block -->
+<g fill="#bfe6ff" font-family="monospace" font-size="9">
+<rect fill="#1a3a5c" height="20" rx="3" width="164" x="268" y="106"></rect>
+<text text-anchor="middle" x="350" y="120">1. Inferir una referencia sutil</text>
+<rect fill="#0f2a4a" height="20" rx="3" width="164" x="268" y="132"></rect>
+<text text-anchor="middle" x="350" y="146">2. Crear la filosofía .md</text>
+<rect fill="#1a3a5c" height="20" rx="3" width="164" x="268" y="158"></rect>
+<text text-anchor="middle" x="350" y="172">3. Expresar en el canvas</text>
+<rect fill="#0f2a4a" height="20" rx="3" width="164" x="268" y="184"></rect>
+<text text-anchor="middle" x="350" y="198">4. Exportar .pdf / .png</text>
+<rect fill="#1a3a5c" height="20" opacity="0.6" rx="3" width="164" x="268" y="210"></rect>
+<text fill="#38bdf8" text-anchor="middle" x="350" y="224">Diseño original · sin copias</text>
+</g>
+<!-- Arrow 2 -->
+<line stroke="url(#blue-grad)" stroke-width="2" x1="450" x2="500" y1="160" y2="160"></line>
+<polygon fill="#38bdf8" points="498,154 510,160 498,166"></polygon>
+<!-- Right outputs column -->
+<!-- .PNG box -->
+<rect fill="#0e1b26" height="70" rx="8" stroke="#3b82f6" stroke-width="1.5" width="130" x="514" y="60"></rect>
+<text fill="#3b82f6" font-family="monospace" font-size="10" text-anchor="middle" x="579" y="83">.PNG</text>
+<text fill="#bfe6ff" font-family="monospace" font-size="8" text-anchor="middle" x="579" y="99">Póster · OG Image</text>
+<text fill="#bfe6ff" font-family="monospace" font-size="8" text-anchor="middle" x="579" y="113">Hero · Miniatura</text>
+<!-- .PDF box -->
+<rect fill="#0e1b26" height="70" rx="8" stroke="#38bdf8" stroke-width="1.5" width="130" x="514" y="148"></rect>
+<text fill="#38bdf8" font-family="monospace" font-size="10" text-anchor="middle" x="579" y="171">.PDF</text>
+<text fill="#bfe6ff" font-family="monospace" font-size="8" text-anchor="middle" x="579" y="187">Arte impreso · Pieza</text>
+<text fill="#bfe6ff" font-family="monospace" font-size="8" text-anchor="middle" x="579" y="201">Editorial · Material</text>
+<!-- Connector lines to outputs -->
+<line stroke="#3b82f6" stroke-dasharray="3,2" stroke-width="1" x1="510" x2="514" y1="120" y2="95"></line>
+<line stroke="#38bdf8" stroke-dasharray="3,2" stroke-width="1" x1="510" x2="514" y1="185" y2="183"></line>
+<!-- Far right: downstream -->
+<rect fill="#0a1520" height="120" rx="10" stroke="#1e3a5f" stroke-width="1" width="180" x="680" y="100"></rect>
+<text fill="#60a5fa" font-family="monospace" font-size="10" text-anchor="middle" x="770" y="125">USO FINAL</text>
+<g fill="#7cb9e8" font-family="monospace" font-size="9">
+<text x="700" y="148">📱 Redes sociales</text>
+<text x="700" y="164">🌐 Imagen OG / meta</text>
+<text x="700" y="180">🖨️ Impresión / difusión</text>
+<text x="700" y="196">🎨 Recurso de marca</text>
+</g>
+<line stroke="#1e3a5f" stroke-dasharray="4,3" stroke-width="1.5" x1="644" x2="680" y1="160" y2="160"></line>
+<polygon fill="#1e3a5f" points="678,154 690,160 678,166"></polygon>
+<!-- Top label -->
+<text fill="#38bdf8" filter="url(#glow-blue)" font-family="monospace" font-size="13" letter-spacing="2" text-anchor="middle" x="450" y="30">FLUJO DE ARTE VISUAL</text>
+<line opacity="0.4" stroke="#38bdf8" stroke-width="0.5" x1="180" x2="720" y1="38" y2="38"></line>
+<!-- Bottom label -->
+<text fill="#3b82f6" font-family="monospace" font-size="9" opacity="0.6" text-anchor="middle" x="450" y="308">FILOSOFÍA → EXPRESIÓN VISUAL → ARCHIVO FINAL</text>
+</svg>
+</div>
+</div>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-16">
+<!-- TÓPICO 1: O que é / o que faz -->
+<section id="topico-1">
+<div class="flex items-start gap-6 mb-6">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-lg flex-shrink-0">1</div>
+<div>
+<h2 class="text-2xl font-bold mb-1">🧩 Qué es / qué hace</h2>
+<p class="text-neutral-400">Definición precisa a partir del SKILL.md de canvas-design.</p>
+</div>
+</div>
+<!-- Conceito principal -->
+<div class="bg-gradient-to-br from-blue-900/30 to-dark-800 border border-blue-500/30 rounded-xl p-6 mb-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="text-blue-400 text-sm font-semibold uppercase tracking-wider">Concepto central</span>
+</div>
+<p class="text-lg font-semibold text-neutral-100 mb-2">Arte visual original en .png y .pdf según una filosofía de diseño.</p>
+<p class="text-neutral-300">O <code class="text-blue-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">canvas-design</code> crea imágenes estáticas de calidad museística. El proceso tiene dos etapas: primero genera una <strong>filosofía de diseño</strong> (manifiesto de un movimiento estético, en un archivo .md), después <strong>expresa esa filosofía visualmente</strong> — 90% imágenes, 10% texto esencial — y produce el archivo final .pdf o .png. Nunca copia artistas existentes, para evitar infringir los derechos de autor.</p>
+</div>
+<p class="text-neutral-400 mb-6">La distinción clave: la skill no crea documentos decorados. Crea <em>objetos de arte</em> que comunican mediante formas, espacio, color y composición, no con párrafos explicativos. El texto aparece como un elemento visual poco frecuente y poderoso, nunca como un bloque corrido.</p>
+<!-- Grid Fazer vs Evitar -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5">
+<h3 class="text-emerald-400 font-semibold mb-3 flex items-center gap-2"><span>✓</span> canvas-design produce</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Pósteres de eventos / campañas visuales</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Imágenes OG y miniaturas meta</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Imágenes estáticas para el hero de landing pages</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Material de difusión impreso (.pdf)</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Piezas de arte conceptual y editorial</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Assets de identidad visual estáticos</li>
+</ul>
+</div>
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5">
+<h3 class="text-red-400 font-semibold mb-3 flex items-center gap-2"><span>✗</span> canvas-design no hace</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Animaciones o videos (→ usa remotion)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Páginas HTML interactivas (→ usa frontend-design)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Arte generado con código/algoritmo (→ usa algorithmic-art)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Sistemas de tokens o paletas (→ usa theme-factory)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Copia del estilo de artistas específicos</li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Filosofía .md</div>
+<div class="text-neutral-500 text-xs">Manifiesto del movimiento estético</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Canvas .png/.pdf</div>
+<div class="text-neutral-500 text-xs">Expresión visual final</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">90% visual</div>
+<div class="text-neutral-500 text-xs">La forma, el color y el espacio comunican</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Original</div>
+<div class="text-neutral-500 text-xs">Nunca copia a artistas</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2: Quando dispara -->
+<section id="topico-2">
+<div class="flex items-start gap-6 mb-6">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-lg flex-shrink-0">2</div>
+<div>
+<h2 class="text-2xl font-bold mb-1">🎣 Cuándo se activa</h2>
+<p class="text-neutral-400">Los desencadenantes exactos que hacen que Claude active canvas-design.</p>
+</div>
+</div>
+<!-- Box dados/pesquisa -->
+<div class="bg-dark-800 border border-blue-500/30 rounded-xl p-6 mb-6">
+<div class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-3">Descripción oficial de la skill</div>
+<blockquote class="text-neutral-300 italic border-l-2 border-blue-500 pl-4">
+          "Crea arte visual hermoso en documentos .png y .pdf usando principios de diseño. Debes usar esta skill cuando el usuario pida crear un <strong class="text-neutral-100">poster, piece of art, design, or other static piece</strong>. Create original visual designs, never copying existing artists' work to avoid copyright violations."
+        </blockquote>
+</div>
+<!-- Timeline de gatilhos -->
+<h3 class="text-lg font-semibold mb-4 text-neutral-200">Palabras y contextos que activan el skill</h3>
+<div class="space-y-3 mb-6">
+<div class="flex items-start gap-4">
+<div class="w-2 h-2 rounded-full bg-blue-400 mt-2 flex-shrink-0"></div>
+<div class="flex-1 bg-dark-800 rounded-lg p-4 border border-dark-700">
+<div class="font-semibold text-blue-400 text-sm mb-1">Póster / Poster</div>
+<p class="text-neutral-400 text-sm">"Crea un póster para el evento X", "quiero un póster promocional", "haz un póster de estilo futurista"</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-2 h-2 rounded-full bg-cyan-400 mt-2 flex-shrink-0"></div>
+<div class="flex-1 bg-dark-800 rounded-lg p-4 border border-dark-700">
+<div class="font-semibold text-cyan-400 text-sm mb-1">Pieza artística / Piece of art / Diseño</div>
+<p class="text-neutral-400 text-sm">"Crea una pieza de arte para mi marca", "quiero un diseño estático", "haz una obra visual"</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-2 h-2 rounded-full bg-blue-400 mt-2 flex-shrink-0"></div>
+<div class="flex-1 bg-dark-800 rounded-lg p-4 border border-dark-700">
+<div class="font-semibold text-blue-400 text-sm mb-1">Imagen OG / miniatura / imagen principal</div>
+<p class="text-neutral-400 text-sm">"Necesito una imagen OG para el sitio", "crea una miniatura estática", "quiero una imagen hero"</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-2 h-2 rounded-full bg-cyan-400 mt-2 flex-shrink-0"></div>
+<div class="flex-1 bg-dark-800 rounded-lg p-4 border border-dark-700">
+<div class="font-semibold text-cyan-400 text-sm mb-1">Material de difusión</div>
+<p class="text-neutral-400 text-sm">"Necesito material visual para una campaña", "crea assets promocionales", "quiero un flyer / banner estático"</p>
+</div>
+</div>
+</div>
+<!-- Tip box -->
+<div class="bg-primary/10 border border-primary/40 rounded-xl p-5 mb-6">
+<div class="text-yellow-400 font-semibold text-sm mb-2">💡 Consejo práctico</div>
+<p class="text-neutral-300 text-sm">El disparador es semántico: cualquier solicitud de <strong>imagen estática final</strong> (no animada, no HTML) con intención visual/artística activa el skill. Si dudas entre canvas-design y algorithmic-art, la diferencia está en la ejecución — canvas usa una filosofía estética manual; algorithmic usa código (p5.js, etc.).</p>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">póster</div>
+<div class="text-neutral-500 text-xs">Disparador primario</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">pieza estática</div>
+<div class="text-neutral-500 text-xs">Cualquier archivo estático final</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">diseño</div>
+<div class="text-neutral-500 text-xs">Arte, no UI/HTML</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">piece of art</div>
+<div class="text-neutral-500 text-xs">Arte visual de autor</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3: Como melhora suas páginas -->
+<section id="topico-3">
+<div class="flex items-start gap-6 mb-6">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-lg flex-shrink-0">3</div>
+<div>
+<h2 class="text-2xl font-bold mb-1">🚀 Cómo mejora tus páginas</h2>
+<p class="text-neutral-400">Valor concreto que canvas-design aporta a proyectos web y de identidad.</p>
+</div>
+</div>
+<p class="text-neutral-400 mb-6">Las páginas HTML se construyen con código, pero lo que ve el usuario a primera vista suele ser una <em>imagen estática</em>: la imagen OG en la vista previa de WhatsApp/Slack, la sección hero, la miniatura del curso. canvas-design eleva exactamente esta capa.</p>
+<!-- Grid de impactos -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="bg-dark-800 border border-blue-500/30 rounded-xl p-5">
+<div class="text-3xl mb-3">🌐</div>
+<h3 class="font-semibold text-neutral-100 mb-2">Imágenes OG y metadatos</h3>
+<p class="text-neutral-400 text-sm">Cuando compartes tu enlace por WhatsApp, Twitter, Slack o LinkedIn, lo que aparece es la OG image. Un póster generado por canvas-design reemplaza la captura de pantalla automática y genérica por una pieza visual intencional y profesional.</p>
+</div>
+<div class="bg-dark-800 border border-blue-500/30 rounded-xl p-5">
+<div class="text-3xl mb-3">🖼️</div>
+<h3 class="font-semibold text-neutral-100 mb-2">Heros estáticos</h3>
+<p class="text-neutral-400 text-sm">Cuando la hero section no necesita animación, un .png generado con una filosofía de diseño es más ligero, más controlado y puede tener calidad editorial, algo que HTML/CSS rara vez alcanza sin mucho esfuerzo.</p>
+</div>
+<div class="bg-dark-800 border border-blue-500/30 rounded-xl p-5">
+<div class="text-3xl mb-3">📢</div>
+<h3 class="font-semibold text-neutral-100 mb-2">Material de difusión</h3>
+<p class="text-neutral-400 text-sm">Publicaciones para Instagram, banners de lanzamiento, portadas de cursos: recursos que deben funcionar fuera del contexto web. canvas-design genera estos recursos en el mismo flujo que el desarrollo de la página.</p>
+</div>
+</div>
+<!-- Tip box 2 -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mb-6">
+<div class="text-blue-400 font-semibold text-sm mb-2">📐 Flujo integrado con el proyecto web</div>
+<p class="text-neutral-300 text-sm">En un proyecto de landing page, el workflow ideal es: <strong>brand-guidelines</strong> define la identidad → <strong>theme-factory</strong> genera los tokens de color → <strong>canvas-design</strong> crea el póster y la OG image → <strong>frontend-design</strong> construye la página usando los assets generados. canvas-design es el vínculo entre la identidad visual y la presencia web.</p>
+</div>
+<!-- Grid Fazer vs Evitar 2 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5">
+<h3 class="text-emerald-400 font-semibold mb-3">✓ Casos de alto impacto</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li>✓ Imagen OG del curso — aparece en cada contenido compartido</li>
+<li>✓ Miniatura del módulo — identidad visual coherente</li>
+<li>✓ Póster de lanzamiento — difusión integrada al desarrollo</li>
+<li>✓ Portada de e-book / PDF — calidad editorial directamente desde Claude</li>
+</ul>
+</div>
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5">
+<h3 class="text-red-400 font-semibold mb-3">✗ Cuándo no lo resuelve</h3>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li>✗ Necesitas interactividad → usa frontend-design</li>
+<li>✗ Necesitas movimiento → usa animation-designer o remotion</li>
+<li>✗ Necesitas variaciones sistemáticas → usa algorithmic-art</li>
+<li>✗ Necesitas editar una foto existente (retocar, eliminar el fondo) → herramienta específica</li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Imagen OG</div>
+<div class="text-neutral-500 text-xs">Vista previa en redes sociales</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Hero estático</div>
+<div class="text-neutral-500 text-xs">Imagen de apertura de la página</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Difusión</div>
+<div class="text-neutral-500 text-xs">Assets fuera del contexto web</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Imprimir</div>
+<div class="text-neutral-500 text-xs">PDF para imprimir</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4: Como funciona por dentro -->
+<section id="topico-4">
+<div class="flex items-start gap-6 mb-6">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-lg flex-shrink-0">4</div>
+<div>
+<h2 class="text-2xl font-bold mb-1">⚙️ Cómo funciona por dentro</h2>
+<p class="text-neutral-400">Stack, enfoque, archivos y etapas reales de canvas-design.</p>
+</div>
+</div>
+<!-- Box conceito -->
+<div class="bg-gradient-to-br from-blue-900/30 to-dark-800 border border-blue-500/30 rounded-xl p-6 mb-6">
+<div class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-3">Arquitectura en 2 fases</div>
+<p class="text-neutral-300">canvas-design es un proceso de dos fases: <strong>Fase 1</strong> genera el manifiesto filosófico; <strong>Fase 2</strong> interpreta y expresa este manifiesto visualmente. La misma instancia de Claude recibe la filosofía y la ejecuta: es como escribir un manifiesto artístico y luego pintar siguiendo sus principios.</p>
+</div>
+<!-- Timeline do processo -->
+<h3 class="text-lg font-semibold mb-4 text-neutral-200">Pipeline interno, paso a paso</h3>
+<div class="space-y-4 mb-6">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-sm flex-shrink-0">1</div>
+<div class="w-0.5 h-full bg-dark-600 mt-2"></div>
+</div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex-1 mb-4">
+<div class="font-semibold text-neutral-100 mb-1">Deduce la referencia sutil</div>
+<p class="text-neutral-400 text-sm">El SKILL.md indica a Claude que tome la entrada del usuario no como una restricción literal, sino como <em>punto de partida</em> para deducir una referencia cultural/estética implícita. Ej.: «póster para un festival de jazz nocturno» → referencia: minimalismo gráfico de los años 60.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-sm flex-shrink-0">2</div>
+<div class="w-0.5 h-full bg-dark-600 mt-2"></div>
+</div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex-1 mb-4">
+<div class="font-semibold text-neutral-100 mb-1">Crear la filosofía de diseño (.md)</div>
+<p class="text-neutral-400 text-sm">Genera un manifiesto de 4-6 párrafos: nombra el movimiento estético ("Chromatic Silence", "Brutalist Joy"), articula cómo se expresa en el espacio, el color, la escala, la composición y la jerarquía. Enfatiza la artesanía: el resultado debe parecer hecho por alguien del más alto nivel del área, tras incontables horas de trabajo.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-cyan-400/20 border border-cyan-400/30 flex items-center justify-center text-cyan-400 font-bold text-sm flex-shrink-0">3</div>
+<div class="w-0.5 h-full bg-dark-600 mt-2"></div>
+</div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex-1 mb-4">
+<div class="font-semibold text-neutral-100 mb-1">Expresarse en canvas (CANVAS CREATION)</div>
+<p class="text-neutral-400 text-sm">La segunda fase usa la filosofía como biblia científica. Crea una composición única: patrones repetidos, formas perfectas, capas superpuestas. Prioridad absoluta a la calidad — composición, espaciado, elección de colores, tipografía — todo transmite un nivel de experiencia excepcional.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-cyan-400/20 border border-cyan-400/30 flex items-center justify-center text-cyan-400 font-bold text-sm flex-shrink-0">4</div>
+</div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex-1">
+<div class="font-semibold text-neutral-100 mb-1">Resultado final: .pdf o .png + .md</div>
+<p class="text-neutral-400 text-sm">Entrega dos archivos: la filosofía en .md y el archivo visual en .pdf o .png. La opción multipágina (.pdf con varias páginas) está disponible cuando el contexto lo requiere; por defecto, es una sola página.</p>
+</div>
+</div>
+</div>
+<!-- Box alerta -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5 mb-6">
+<div class="text-red-400 font-semibold text-sm mb-2">⚠️ Restricción crítica: derechos de autor</div>
+<p class="text-neutral-300 text-sm">El SKILL.md es explícito: <strong>nunca copies el estilo de artistas existentes</strong>. El skill crea movimientos estéticos originales. Si el usuario pide "al estilo de Mondrian" o "igual que Saul Bass", canvas-design debe interpretar la <em>esencia</em> filosófica (grid, geometría primaria; contraste tipográfico limpio) y crear algo nuevo — no una reproducción.</p>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Bifásico</div>
+<div class="text-neutral-500 text-xs">Filosofía → Expresión</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">.md + .png/.pdf</div>
+<div class="text-neutral-500 text-xs">Dos archivos de salida</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Artesanía</div>
+<div class="text-neutral-500 text-xs">Calidad de museo</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">context: fork</div>
+<div class="text-neutral-500 text-xs">Ejecución en un contexto separado</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5: Exemplo prático + PROMPT -->
+<section id="topico-5">
+<div class="flex items-start gap-6 mb-6">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-lg flex-shrink-0">5</div>
+<div>
+<h2 class="text-2xl font-bold mb-1">💬 Ejemplo práctico + PROMPT listo</h2>
+<p class="text-neutral-400">Prompts reales para pegar en Claude Code y activar canvas-design.</p>
+</div>
+</div>
+<!-- Cenário 1 -->
+<div class="bg-dark-800 border border-blue-500/30 rounded-xl p-6 mb-6">
+<h3 class="font-semibold text-neutral-100 mb-3">Escenario A — Imagen OG para un curso en línea</h3>
+<p class="text-neutral-400 text-sm mb-4">Creaste una landing page para un curso de diseño y necesitas una imagen OG que aparezca cuando se comparta el enlace (1200×630px).</p>
+<div class="bg-dark-900 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-dark-600">
+<div class="text-neutral-500 mb-2 text-xs">// pega en Claude Code</div>
+<div class="text-cyan-400">Crea una imagen OG para mi curso "Skill Design — Identidad visual con IA".</div>
+<div class="text-neutral-300 mt-2">Formato: 1200×630px, archivo .png.</div>
+<div class="text-neutral-300">Tema: aprendizaje de diseño con IA, tecnología y creatividad.</div>
+<div class="text-neutral-300">Paleta: tonos de azul profundo + cian eléctrico.</div>
+<div class="text-neutral-300">Texto mínimo: el título del curso es el único texto obligatorio.</div>
+<div class="text-neutral-300">Filosofía: movimiento estético geométrico futurista, nunca copia a artistas.</div>
+<div class="text-blue-400 mt-2">Usa la skill canvas-design.</div>
+</div>
+</div>
+<!-- Cenário 2 -->
+<div class="bg-dark-800 border border-cyan-400/20 rounded-xl p-6 mb-6">
+<h3 class="font-semibold text-neutral-100 mb-3">Escenario B — Póster de lanzamiento de producto</h3>
+<p class="text-neutral-400 text-sm mb-4">Estás lanzando un SaaS de automatización y quieres un póster para redes sociales (formato cuadrado 1080×1080px).</p>
+<div class="bg-dark-900 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-dark-600">
+<div class="text-neutral-500 mb-2 text-xs">// pega en Claude Code</div>
+<div class="text-cyan-400">Crea un póster de lanzamiento para el producto "FlowAI — automatización inteligente".</div>
+<div class="text-neutral-300 mt-2">Formato: 1080×1080px PNG (feed de Instagram/LinkedIn).</div>
+<div class="text-neutral-300">Sensación: tecnología de vanguardia, confianza, modernidad.</div>
+<div class="text-neutral-300">Texto: solo el nombre del producto y el eslogan "Automatiza con inteligencia".</div>
+<div class="text-neutral-300">Crea un movimiento estético original; no copies a Dieter Rams ni a ningún otro diseñador.</div>
+<div class="text-blue-400 mt-2">Activa canvas-design, entrega el .md de la filosofía + el .png final.</div>
+</div>
+</div>
+<!-- Cenário 3 -->
+<div class="bg-dark-800 border border-blue-500/30 rounded-xl p-6 mb-6">
+<h3 class="font-semibold text-neutral-100 mb-3">Escenario C — Imagen hero estática para una landing page</h3>
+<div class="bg-dark-900 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-dark-600">
+<div class="text-neutral-500 mb-2 text-xs">// pega en Claude Code</div>
+<div class="text-cyan-400">Necesito una imagen hero estática para la sección above the fold de mi sitio.</div>
+<div class="text-neutral-300 mt-2">Dimensión: 1440×720px, PNG.</div>
+<div class="text-neutral-300">Contexto: agencia boutique de branding, público ejecutivo, tono sofisticado.</div>
+<div class="text-neutral-300">SIN texto — imagen puramente visual, composición abstracta.</div>
+<div class="text-neutral-300">Paleta: negro + blanco roto + un acento dorado sutil.</div>
+<div class="text-blue-400 mt-2">Usa canvas-design. Crea un movimiento estético propio para esto.</div>
+</div>
+</div>
+<!-- Tip box -->
+<div class="bg-primary/10 border border-primary/40 rounded-xl p-5 mb-6">
+<div class="text-yellow-400 font-semibold text-sm mb-2">💡 Cómo guiar el canvas-design</div>
+<ul class="text-neutral-300 text-sm space-y-1">
+<li>• Especifica las dimensiones y el formato (.png o .pdf)</li>
+<li>• Da contexto emocional o temático (no instrucciones de diseño)</li>
+<li>• Limita el texto que debe aparecer — cuanto menos, mejor para la skill</li>
+<li>• Nunca pidas «copiar el estilo de X»; pide «inspiración en la filosofía de X»</li>
+<li>• Para varias páginas, menciona explícitamente: «quiero 3 páginas con diseños diferentes»</li>
+</ul>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Dimensión</div>
+<div class="text-neutral-500 text-xs">Especifica siempre (px)</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Contexto</div>
+<div class="text-neutral-500 text-xs">Tema y emoción, no diseño</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Texto mínimo</div>
+<div class="text-neutral-500 text-xs">Menos texto = más calidad</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">Original</div>
+<div class="text-neutral-500 text-xs">Nunca «al estilo de X»</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6: Combina com / limites -->
+<section id="topico-6">
+<div class="flex items-start gap-6 mb-6">
+<div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-lg flex-shrink-0">6</div>
+<div>
+<h2 class="text-2xl font-bold mb-1">🧬 Combina con / límites</h2>
+<p class="text-neutral-400">Composiciones potentes con otros skills y cuándo no usar canvas-design.</p>
+</div>
+</div>
+<!-- Box conceito: relação com algorithmic-art e brand-guidelines -->
+<div class="bg-gradient-to-br from-blue-900/30 to-dark-800 border border-blue-500/30 rounded-xl p-6 mb-6">
+<div class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-3">Posición en la Trilha 2 — Identidad</div>
+<p class="text-neutral-300 mb-4">canvas-design está en el centro de la Trilha 2, entre la identidad de marca (<strong>brand-guidelines</strong>, módulo 2.2) y el arte generado por código (<strong>algorithmic-art</strong>, módulo 2.4). Entender los tres juntos revela cuándo usar cada uno:</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+<div class="text-blue-400 font-semibold text-sm mb-2">🏷️ brand-guidelines (2.2)</div>
+<p class="text-neutral-400 text-xs">Define las reglas, la paleta y la voz de la marca. Es el <em>conjunto de restricciones</em> dentro de los cuales canvas-design va a crear. Alimenta la filosofía de diseño con los colores y el tono correctos.</p>
+</div>
+<div class="bg-blue-500/10 rounded-lg p-4 border border-blue-500/30">
+<div class="text-blue-400 font-semibold text-sm mb-2">🖼️ canvas-design (2.3) — ESTÁS AQUÍ</div>
+<p class="text-neutral-400 text-xs">Crea piezas de arte estáticas usando la filosofía. Recibe las restricciones de brand-guidelines y las transforma en imágenes de calidad editorial. Salida: .png y .pdf.</p>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+<div class="text-blue-400 font-semibold text-sm mb-2">🌀 algorithmic-art (2.4)</div>
+<p class="text-neutral-400 text-xs">Genera arte mediante código (p5.js, scripts). Mientras canvas-design crea piezas únicas hechas a mano, algorithmic-art crea <em>sistemas</em> y variaciones infinitas. Para fondos de pantalla generativos, patrones procedurales y arte interactivo.</p>
+</div>
+</div>
+</div>
+<!-- Relação com o resto do curso -->
+<h3 class="text-lg font-semibold mb-4 text-neutral-200">Composiciones con otros skills</h3>
+<div class="space-y-3 mb-6">
+<div class="flex items-start gap-3 bg-dark-800 rounded-lg p-4 border border-dark-700">
+<span class="text-2xl">🎨</span>
+<div>
+<div class="font-semibold text-neutral-100 text-sm">canvas-design + theme-factory</div>
+<p class="text-neutral-400 text-sm">Usa theme-factory para generar los tokens de color de la marca (primary, secondary, accent) → pásalos a canvas-design como paleta → garantiza que el póster y la OG image usen exactamente los mismos colores que el sistema de diseño del sitio.</p>
+</div>
+</div>
+<div class="flex items-start gap-3 bg-dark-800 rounded-lg p-4 border border-dark-700">
+<span class="text-2xl">🏷️</span>
+<div>
+<div class="font-semibold text-neutral-100 text-sm">canvas-design + brand-guidelines</div>
+<p class="text-neutral-400 text-sm">brand-guidelines define el tono de voz y las restricciones visuales → canvas-design recibe ese briefing y crea dentro de las reglas → resultado: coherencia total entre la identidad documental y la expresión visual de las piezas.</p>
+</div>
+</div>
+<div class="flex items-start gap-3 bg-dark-800 rounded-lg p-4 border border-dark-700">
+<span class="text-2xl">🌀</span>
+<div>
+<div class="font-semibold text-neutral-100 text-sm">canvas-design + algorithmic-art</div>
+<p class="text-neutral-400 text-sm">canvas-design crea el <em>póster principal</em> de la campaña (pieza única, alto impacto) → algorithmic-art genera las <em>variaciones y patrones</em> procedurales basados en la misma estética (fondos de pantalla, texturas, fondos). Juntos cubren piezas únicas y sistemas visuales.</p>
+</div>
+</div>
+<div class="flex items-start gap-3 bg-dark-800 rounded-lg p-4 border border-dark-700">
+<span class="text-2xl">⚛️</span>
+<div>
+<div class="font-semibold text-neutral-100 text-sm">canvas-design + frontend-design</div>
+<p class="text-neutral-400 text-sm">canvas-design entrega la hero image y la OG image como .png → frontend-design usa esos assets al crear la página HTML. Separación clara de responsabilidades: arte visual ≠ código web.</p>
+</div>
+</div>
+</div>
+<!-- Box alerta: quando NÃO usar -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5 mb-6">
+<div class="text-red-400 font-semibold text-sm mb-3">⚠️ Cuándo NO usar canvas-design</div>
+<ul class="text-neutral-300 text-sm space-y-2">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> <strong>Necesitas animación</strong> — cualquier movimiento o transición → usa animation-designer, remotion o seedance.</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> <strong>Variaciones en masa</strong> — decenas de versiones de una pieza → usa algorithmic-art (los sistemas de código generan variaciones infinitas).</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> <strong>Edición de una foto existente</strong> — quitar el fondo, retocar, cambiar el tamaño → usa herramientas de edición específicas (no es el ámbito de la skill).</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> <strong>Contenido interactivo</strong> — formulario, botón, componente de UI → usa frontend-design o web-artifacts-builder.</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> <strong>Diagramas técnicos</strong> — diagramas de flujo, arquitectura de sistemas → usa beautiful-mermaid o excalidraw.</li>
+</ul>
+</div>
+<!-- Conceitos-chave -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">brand-guidelines</div>
+<div class="text-neutral-500 text-xs">Alimenta con reglas</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">algorithmic-art</div>
+<div class="text-neutral-500 text-xs">Para variaciones + código</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">theme-factory</div>
+<div class="text-neutral-500 text-xs">Tokens de color para la paleta</div>
+</div>
+<div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+<div class="text-blue-400 font-bold text-sm mb-1">frontend-design</div>
+<div class="text-neutral-500 text-xs">Usa los assets en el HTML</div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 border border-blue-500/30 rounded-2xl p-8" id="resumo">
+<h2 class="text-2xl font-bold mb-6 text-blue-400">📋 Resumen del Módulo 2.3</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+<div>
+<h3 class="font-semibold text-neutral-100 mb-4">Qué aprendiste</h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span> canvas-design crea arte visual en .png y .pdf según una filosofía de diseño</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span> Proceso en dos fases: manifiesto .md → expresión visual en el canvas</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span> Se activa con pedidos de póster, pieza artística, diseño estático, OG image</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span> Ideal para imágenes OG, heroes estáticos y material promocional</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span> Nunca copia a artistas: crea movimientos estéticos originales</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span> Complementa brand-guidelines (alimentación) y algorithmic-art (variaciones)</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span> No hace animaciones, variaciones en masa ni UI interactiva</li>
+</ul>
+</div>
+<div>
+<h3 class="font-semibold text-neutral-100 mb-4">Referencia rápida</h3>
+<div class="space-y-3">
+<div class="bg-dark-800/60 rounded-lg p-3 border border-dark-600">
+<div class="text-xs text-neutral-500 mb-1">Disparador</div>
+<div class="text-sm text-neutral-200 font-mono">poster · piece of art · design · static</div>
+</div>
+<div class="bg-dark-800/60 rounded-lg p-3 border border-dark-600">
+<div class="text-xs text-neutral-500 mb-1">Salida</div>
+<div class="text-sm text-neutral-200 font-mono">.md (filosofía) + .png o .pdf (visual)</div>
+</div>
+<div class="bg-dark-800/60 rounded-lg p-3 border border-dark-600">
+<div class="text-xs text-neutral-500 mb-1">No hace</div>
+<div class="text-sm text-neutral-200 font-mono">animaciones · código · edición de fotos · UI</div>
+</div>
+<div class="bg-dark-800/60 rounded-lg p-3 border border-dark-600">
+<div class="text-xs text-neutral-500 mb-1">Par ideal</div>
+<div class="text-sm text-neutral-200 font-mono">brand-guidelines + canvas-design + algorithmic-art</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Próximo módulo -->
+<div class="bg-dark-800/60 border border-blue-500/20 rounded-xl p-5 mb-6">
+<div class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-2">Próximo módulo</div>
+<div class="flex items-center justify-between">
+<div>
+<div class="font-semibold text-neutral-100">2.4 🌀 algorithmic-art</div>
+<p class="text-neutral-400 text-sm mt-1">Arte generado con código — sistemas visuales procedurales con p5.js, variaciones infinitas y patrones algorítmicos. El complemento perfecto para canvas-design.</p>
+</div>
+<span class="text-3xl ml-4">🌀</span>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Volver a la ruta 2</a>
+<a class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors" href="modulo-2-4.html">Próximo módulo: 2.4 algorithmic-art →</a>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Contenido de <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Ruta 2: Identidad · Módulo 2.3 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

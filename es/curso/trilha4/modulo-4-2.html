@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 4.2 — ✏️ excalidraw | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#F59E0B', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento amber */
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217,119,6,0.18); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #92400e; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(217,119,6,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(220,38,38,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .bg-cyan-500\/10 { background-color: rgba(8,145,178,0.08); }
+    html:not(.dark) .border-cyan-500\/30 { border-color: rgba(8,145,178,0.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    @keyframes m42-flow { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+    @keyframes m42-pulse { 0%,100% { opacity:.35 } 50% { opacity:1 } }
+    @keyframes m42-sketch { 0% { stroke-dashoffset: 300; } 100% { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: no-preference) {
+      .m42-anim-flow { animation: m42-flow 3s linear infinite; stroke-dasharray: 200; }
+      .m42-anim-pulse { animation: m42-pulse 2.5s ease-in-out infinite; }
+      .m42-anim-pulse:nth-child(2) { animation-delay: .5s; }
+      .m42-anim-pulse:nth-child(3) { animation-delay: 1s; }
+      .m42-anim-sketch { animation: m42-sketch 2.2s ease-out forwards; stroke-dasharray: 300; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha4/modulo-4-2.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha4/modulo-4-2.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha4/modulo-4-2.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha4/modulo-4-2.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha4/modulo-4-2.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-4-2.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-amber-400 hover:text-amber-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidad</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Medios</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10" href="index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Soporte</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-amber-400 transition-colors" href="../../index.html">Inicio</a>
+<span>/</span>
+<a class="hover:text-amber-400 transition-colors" href="index.html">Ruta 4 — Apoyo</a>
+<span>/</span>
+<span class="text-amber-400 font-medium">Módulo 4.2</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.2</span>
+<h1 class="text-3xl sm:text-4xl font-extrabold mb-3">✏️ excalidraw</h1>
+<p class="text-neutral-400 text-lg mb-6">Diagramas de estilo a mano alzada generados a partir de lenguaje natural. Flowcharts, mapas mentales, arquitecturas de sistemas y diagramas de relaciones entregados como archivos <code class="text-amber-400">.excalidraw</code> listos para abrir.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/60 rounded-lg p-3 text-center">
+<div class="text-amber-400 font-bold text-xl">6</div>
+<div class="text-xs text-neutral-500 mt-1">Temas</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3 text-center">
+<div class="text-amber-400 font-bold text-xl">25</div>
+<div class="text-xs text-neutral-500 mt-1">Minutos</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3 text-center">
+<div class="text-amber-400 font-bold text-xl">Práctico</div>
+<div class="text-xs text-neutral-500 mt-1">Nivel</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3 text-center">
+<div class="text-amber-400 font-bold text-xl">Soporte</div>
+<div class="text-xs text-neutral-500 mt-1">Categoría</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — mão esquematizando um diagrama (amber + ciano) -->
+<div class="flex justify-center">
+<svg aria-label="Excalidraw: una descripción en lenguaje natural se convierte en un diagrama editable" class="w-full max-w-sm h-auto" role="img" viewbox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="m42-glow">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<!-- fundo -->
+<rect fill="#1f1604" height="260" rx="16" width="400"></rect>
+<!-- grid pontilhado suave -->
+<g opacity="0.15" stroke="#fbbf24" stroke-width="0.5">
+<line x1="0" x2="400" y1="52" y2="52"></line><line x1="0" x2="400" y1="104" y2="104"></line>
+<line x1="0" x2="400" y1="156" y2="156"></line><line x1="0" x2="400" y1="208" y2="208"></line>
+<line x1="80" x2="80" y1="0" y2="260"></line><line x1="160" x2="160" y1="0" y2="260"></line>
+<line x1="240" x2="240" y1="0" y2="260"></line><line x1="320" x2="320" y1="0" y2="260"></line>
+</g>
+<!-- nó início -->
+<rect fill="#1f1604" height="38" rx="19" stroke="#fbbf24" stroke-width="2" width="80" x="30" y="30"></rect>
+<text fill="#fbbf24" font-family="Inter,sans-serif" font-size="12" font-weight="700" text-anchor="middle" x="70" y="54">INICIO</text>
+<!-- nó decisão -->
+<polygon class="m42-anim-pulse" fill="#0e1b26" points="200,20 245,55 200,90 155,55" stroke="#38bdf8" stroke-width="2"></polygon>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle" x="200" y="59">¿Decisión?</text>
+<!-- nó processo 1 -->
+<rect class="m42-anim-pulse" fill="#1f1604" height="38" rx="8" stroke="#fbbf24" stroke-width="1.5" width="90" x="280" y="110"></rect>
+<text fill="#fbbf24" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="325" y="134">Proceso A</text>
+<!-- nó processo 2 -->
+<rect class="m42-anim-pulse" fill="#1f1604" height="38" rx="8" stroke="#38bdf8" stroke-width="1.5" width="90" x="30" y="110"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="75" y="134">Proceso B</text>
+<!-- nó fim -->
+<rect fill="#1f1604" height="38" rx="19" stroke="#f59e0b" stroke-width="2" width="90" x="155" y="190"></rect>
+<text fill="#f59e0b" font-family="Inter,sans-serif" font-size="12" font-weight="700" text-anchor="middle" x="200" y="214">FIN</text>
+<!-- setas animadas -->
+<line class="m42-anim-flow" filter="url(#m42-glow)" stroke="#fbbf24" stroke-dasharray="6 3" stroke-width="1.5" x1="110" x2="155" y1="49" y2="49"></line>
+<polygon fill="#fbbf24" points="155,49 147,44 147,54"></polygon>
+<line class="m42-anim-flow" stroke="#fbbf24" stroke-dasharray="6 3" stroke-width="1.5" x1="245" x2="280" y1="55" y2="129"></line>
+<polygon fill="#fbbf24" points="280,129 274,121 284,121"></polygon>
+<line class="m42-anim-flow" filter="url(#m42-glow)" stroke="#38bdf8" stroke-dasharray="6 3" stroke-width="1.5" x1="155" x2="120" y1="55" y2="110"></line>
+<polygon fill="#38bdf8" points="120,110 112,103 122,103"></polygon>
+<line class="m42-anim-flow" stroke="#fbbf24" stroke-dasharray="6 3" stroke-width="1.5" x1="325" x2="245" y1="148" y2="190"></line>
+<polygon fill="#fbbf24" points="245,190 248,180 238,183"></polygon>
+<line class="m42-anim-flow" filter="url(#m42-glow)" stroke="#38bdf8" stroke-dasharray="6 3" stroke-width="1.5" x1="75" x2="155" y1="148" y2="200"></line>
+<polygon fill="#38bdf8" points="155,200 150,190 160,190"></polygon>
+<!-- label arquivo -->
+<text fill="#6b7280" font-family="Inter,sans-serif" font-size="10" text-anchor="middle" x="200" y="248">salida: diagram.excalidraw</text>
+<!-- label SIM/NÃO -->
+<text fill="#fbbf24" font-family="Inter,sans-serif" font-size="9" x="264" y="72">Sí</text>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="9" x="130" y="90">No</text>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+<!-- TÓPICO 1 -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">1</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🧩 Qué es / qué hace</h2>
+<p class="text-neutral-400 mt-2">El skill <strong class="text-amber-400">excalidraw-diagram-generator</strong> convierte descripciones en lenguaje natural en archivos <code class="text-amber-400">.excalidraw</code> (JSON) que puedes abrir directamente en Excalidraw — sin ninguna configuración adicional.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- box conceito principal -->
+<div class="rounded-xl p-5 bg-gradient-to-r from-amber-900/40 to-dark-700 border border-amber-500/30">
+<div class="text-amber-400 font-semibold text-sm mb-2">💡 Concepto principal</div>
+<p class="text-neutral-300 text-sm leading-relaxed">Excalidraw es una herramienta de diagramación con estilo a mano alzada (hand-drawn look). La skill transforma texto en <strong>JSON estructurado</strong> compatible con el esquema de Excalidraw: elementos como rectángulos, elipses, diamantes, flechas y texto, cada uno con posición, tamaño, color y propiedades de estilo.</p>
+</div>
+<!-- tipos suportados -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Tipos de diagramas compatibles</div>
+<div class="grid sm:grid-cols-2 gap-3 text-sm">
+<div class="bg-dark-700/60 rounded-lg p-4 border border-amber-500/20">
+<div class="text-amber-400 font-bold mb-1">🔀 Diagramas de flujo</div>
+<div class="text-neutral-400">Flujos de proceso con nodos de decisión (rombo), inicio/fin (elipse) y etapas (rectángulo).</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-4 border border-amber-500/20">
+<div class="text-amber-400 font-bold mb-1">🕸️ Diagramas de relaciones</div>
+<div class="text-neutral-400">Entidades y sus conexiones; útil para modelar datos y mapear dependencias.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-4 border border-cyan-500/20">
+<div class="text-cyan-400 font-bold mb-1">🧠 Mapas mentales</div>
+<div class="text-neutral-400">Diseño radial con un nodo central y ramas que se expanden en círculo, generados automáticamente.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-4 border border-cyan-500/20">
+<div class="text-cyan-400 font-bold mb-1">🏗️ Arquitectura de sistemas</div>
+<div class="text-neutral-400">Componentes de sistema (servicios, bases de datos, APIs) con flechas que muestran el flujo de datos.</div>
+</div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">📄</div><div class="text-xs font-semibold text-neutral-200">.excalidraw</div><div class="text-xs text-neutral-500">Formato JSON</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">✋</div><div class="text-xs font-semibold text-neutral-200">Dibujado a mano</div><div class="text-xs text-neutral-500">Estilo visual</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">🗣️</div><div class="text-xs font-semibold text-neutral-200">Lenguaje natural</div><div class="text-xs text-neutral-500">Entrada</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🖱️</div><div class="text-xs font-semibold text-neutral-200">Cero configuración</div><div class="text-xs text-neutral-500">Abre directamente</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2 -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">2</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🎣 Cuándo se activa</h2>
+<p class="text-neutral-400 mt-2">Claude activa el <strong class="text-amber-400">excalidraw-diagram-generator</strong> cuando reconoce una de las frases desencadenantes enumeradas en la <code class="text-amber-400">description</code> de la skill.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- gatilhos exatos do SKILL.md -->
+<div class="rounded-xl border border-blue-500/30 bg-blue-500/10 p-5">
+<div class="text-blue-400 font-semibold text-sm mb-3">🎯 Disparadores exactos (de la descripción del skill)</div>
+<div class="grid sm:grid-cols-2 gap-2 text-sm">
+<div class="flex items-center gap-2 text-neutral-300"><span class="text-amber-400 font-bold">→</span> "crear un diagrama"</div>
+<div class="flex items-center gap-2 text-neutral-300"><span class="text-amber-400 font-bold">→</span> "make a flowchart"</div>
+<div class="flex items-center gap-2 text-neutral-300"><span class="text-amber-400 font-bold">→</span> "visualize a process"</div>
+<div class="flex items-center gap-2 text-neutral-300"><span class="text-amber-400 font-bold">→</span> "dibuja una arquitectura del sistema"</div>
+<div class="flex items-center gap-2 text-neutral-300"><span class="text-amber-400 font-bold">→</span> "crear un mapa mental"</div>
+<div class="flex items-center gap-2 text-neutral-300"><span class="text-amber-400 font-bold">→</span> "generate an Excalidraw file"</div>
+</div>
+</div>
+<!-- timeline de disparo -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Línea de tiempo: del pedido al archivo</div>
+<div class="space-y-3">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold text-xs flex-shrink-0">1</div>
+<div class="bg-dark-700/50 rounded-lg p-3 flex-1 border border-dark-600">
+<div class="text-sm font-semibold text-neutral-200">El usuario pide el diagrama en lenguaje natural</div>
+<div class="text-xs text-neutral-500 mt-1">Ej.: "Crea un diagrama de flujo del proceso de deploy"</div>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold text-xs flex-shrink-0">2</div>
+<div class="bg-dark-700/50 rounded-lg p-3 flex-1 border border-dark-600">
+<div class="text-sm font-semibold text-neutral-200">Skill activada — Claude elige el tipo de diagrama</div>
+<div class="text-xs text-neutral-500 mt-1">Flowchart, relationship, mind map o system architecture</div>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold text-xs flex-shrink-0">3</div>
+<div class="bg-dark-700/50 rounded-lg p-3 flex-1 border border-dark-600">
+<div class="text-sm font-semibold text-neutral-200">Generación del JSON con elementos y coordenadas</div>
+<div class="text-xs text-neutral-500 mt-1">Cada elemento recibe x, y, width, height, strokeColor, backgroundColor, type</div>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold text-xs flex-shrink-0">4</div>
+<div class="bg-dark-700/50 rounded-lg p-3 flex-1 border border-dark-600">
+<div class="text-sm font-semibold text-neutral-200">Archivo .excalidraw guardado e instrucciones entregadas</div>
+<div class="text-xs text-neutral-500 mt-1">El usuario abre en excalidraw.com o en la aplicación local; no se necesita ninguna conversión</div>
+</div>
+</div>
+</div>
+</div>
+<!-- tip box -->
+<div class="rounded-xl border border-primary/40 bg-primary/10 p-4 text-sm text-neutral-300">
+<span class="text-amber-400 font-semibold">💡 Consejo:</span> El skill acepta solicitudes en portugués. Basta con describir el proceso: Claude deduce las etapas, conexiones y jerarquía sin que tengas que enumerar cada elemento.
+        </div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">🔍</div><div class="text-xs font-semibold text-neutral-200">Detección automática</div><div class="text-xs text-neutral-500">Tipo de diagrama</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🗂️</div><div class="text-xs font-semibold text-neutral-200">Extracción</div><div class="text-xs text-neutral-500">De entidades</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">📐</div><div class="text-xs font-semibold text-neutral-200">Diseño</div><div class="text-xs text-neutral-500">Posicionamiento</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">💾</div><div class="text-xs font-semibold text-neutral-200">Archivo final</div><div class="text-xs text-neutral-500">.excalidraw</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3 -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">3</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🚀 Cómo mejora tus páginas</h2>
+<p class="text-neutral-400 mt-2">Los diagramas entregados ya editables eliminan el ciclo de «crear en Figma, exportar PNG, repetir con cada cambio».</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- grid FAZER / EVITAR -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+<div class="text-emerald-400 font-semibold text-sm mb-3">✓ HACER con la skill</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Generar un diagrama de arquitectura de sistema desde la primera conversación</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Crear un flujo de onboarding para incluir en documentos o presentaciones</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Mapear dependencias entre módulos de código en un mapa mental</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Usar el archivo entregado como borrador editable en Excalidraw</li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+<div class="text-red-400 font-semibold text-sm mb-3">✗ EVITAR</div>
+<ul class="space-y-2 text-sm text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Esperar una renderización perfecta a nivel de píxel: el estilo es intencionalmente "sketch"</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Pedir diagramas UML formales con notación estricta (usa Mermaid para eso)</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Generar más de ~40 nodos en una sola llamada: la calidad se degrada</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Usar como sustituto de herramientas vectoriales precisas (Illustrator, Figma)</li>
+</ul>
+</div>
+</div>
+<!-- valores concretos -->
+<div class="rounded-xl border border-blue-500/30 bg-blue-500/10 p-5">
+<div class="text-blue-400 font-semibold text-sm mb-3">📊 Valor concreto en el resultado final</div>
+<div class="grid sm:grid-cols-3 gap-3 text-sm">
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-amber-400 font-bold mb-1">Editable</div>
+<div class="text-neutral-400">Entrégalo como JSON; puedes mover, recolorear o eliminar cualquier elemento en Excalidraw sin tener que recrearlo todo.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-cyan-400 font-bold mb-1">Iterativo</div>
+<div class="text-neutral-400">Las solicitudes de ajuste («agrega un nodo de caché entre el servidor y la base de datos») generan un nuevo archivo en segundos.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-amber-400 font-bold mb-1">Exportable</div>
+<div class="text-neutral-400">Excalidraw exporta a PNG/SVG con fondo transparente; encaja en cualquier doc o diapositiva.</div>
+</div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">🔄</div><div class="text-xs font-semibold text-neutral-200">Iteración rápida</div><div class="text-xs text-neutral-500">Segundos/ajuste</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🖊️</div><div class="text-xs font-semibold text-neutral-200">Editable</div><div class="text-xs text-neutral-500">JSON abierto</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">📤</div><div class="text-xs font-semibold text-neutral-200">Exportar PNG/SVG</div><div class="text-xs text-neutral-500">Para documentación</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">⏱️</div><div class="text-xs font-semibold text-neutral-200">Cero herramientas</div><div class="text-xs text-neutral-500">extra</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4 -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">4</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">⚙️ Cómo funciona por dentro</h2>
+<p class="text-neutral-400 mt-2">Pipeline de 6 pasos definidos en SKILL.md: entender → elegir el tipo → extraer la estructura → generar JSON → dar formato a la salida → guardar e indicar los pasos.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- stack técnico -->
+<div class="rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
+<div class="text-blue-400 font-semibold text-sm mb-3">📦 Stack técnico de la skill</div>
+<div class="grid sm:grid-cols-3 gap-3 text-sm">
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-amber-400 font-bold mb-1">excalidraw-schema.md</div>
+<div class="text-neutral-400">Esquema JSON completo de Excalidraw: tipos de elementos, propiedades obligatorias, valores válidos.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-cyan-400 font-bold mb-1">element-types.md</div>
+<div class="text-neutral-400">Especificaciones detalladas de rectangle, ellipse, diamond, arrow, line y text, con ejemplos JSON.</div>
+</div>
+<div class="bg-dark-700/60 rounded-lg p-3">
+<div class="text-amber-400 font-bold mb-1">split-excalidraw-library.py</div>
+<div class="text-neutral-400">Script Python que descompone un <code>.excalidrawlib</code> en íconos individuales para usar en diagramas con bibliotecas externas (AWS, Material, etc.).</div>
+</div>
+</div>
+</div>
+<!-- templates -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Plantillas iniciales</div>
+<div class="grid sm:grid-cols-3 gap-3 text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-amber-500/20">
+<div class="text-amber-400 font-semibold mb-1">flowchart-template.json</div>
+<div class="text-neutral-500">Estructura base para diagramas de flujo: nodos conectados en secuencia lineal con soporte para ramificaciones.</div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-cyan-500/20">
+<div class="text-cyan-400 font-semibold mb-1">relationship-template.json</div>
+<div class="text-neutral-500">Diseño de cuadrícula para diagramas de relaciones: entidades en una matriz con flechas bidireccionales.</div>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-amber-500/20">
+<div class="text-amber-400 font-semibold mb-1">mindmap-template.json</div>
+<div class="text-neutral-500">Diseño radial — nodo central con ramas que se expanden en arco, generado mediante el cálculo trigonométrico de ángulos.</div>
+</div>
+</div>
+</div>
+<!-- tip box técnica -->
+<div class="rounded-xl border border-primary/40 bg-primary/10 p-4 text-sm text-neutral-300">
+<span class="text-amber-400 font-semibold">⚙️ Detalle técnico:</span> Los IDs de los elementos se generan automáticamente (cadenas aleatorias de 20 caracteres) para garantizar la unicidad dentro del JSON. Las flechas hacen referencia a los IDs de los nodos de origen y destino en los campos <code class="text-amber-400">startBinding</code> e <code class="text-amber-400">endBinding</code>.
+        </div>
+<!-- guidelines de complexidade -->
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+<div class="text-emerald-400 font-semibold text-sm mb-2">✓ Diagramas simples (recomendado)</div>
+<ul class="text-sm text-neutral-300 space-y-1">
+<li>• Diagrama de flujo: 5–15 nodos</li>
+<li>• Mapa mental: 1 centro + hasta 8 ramas</li>
+<li>• Relación: hasta 10 entidades</li>
+<li>• Arquitectura: 6–12 componentes</li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+<div class="text-red-400 font-semibold text-sm mb-2">✗ Evitar — reduce la calidad</div>
+<ul class="text-sm text-neutral-300 space-y-1">
+<li>• Más de 40 elementos en una llamada</li>
+<li>• Diagramas con superposición densa</li>
+<li>• Etiquetas con más de 3–4 palabras</li>
+<li>• Jerarquías con más de 4 niveles</li>
+</ul>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">🗺️</div><div class="text-xs font-semibold text-neutral-200">Esquema JSON</div><div class="text-xs text-neutral-500">Excalidraw</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🔗</div><div class="text-xs font-semibold text-neutral-200">Bindings</div><div class="text-xs text-neutral-500">Start/End IDs</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">🐍</div><div class="text-xs font-semibold text-neutral-200">split-library.py</div><div class="text-xs text-neutral-500">Íconos externos</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">📐</div><div class="text-xs font-semibold text-neutral-200">Diseño radial</div><div class="text-xs text-neutral-500">Trigonometría</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5 -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-5">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">5</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">💬 Ejemplo práctico + PROMPT listo</h2>
+<p class="text-neutral-400 mt-2">Tres escenarios reales: diagrama de flujo de proceso, arquitectura de sistema con íconos y mapa mental de estrategia.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- cenário 1 -->
+<div class="rounded-xl border border-amber-500/30 p-4">
+<div class="text-amber-400 font-semibold text-sm mb-3">📋 Escenario 1 — Diagrama de flujo del proceso de deploy</div>
+<p class="text-neutral-400 text-sm mb-3">Quieres documentar visualmente el pipeline de CI/CD de tu equipo para el README.</p>
+<div class="bg-dark-900 rounded-lg p-4 font-mono text-sm text-neutral-300 border border-dark-600 leading-relaxed whitespace-pre-wrap">Crea un diagrama de flujo de nuestro proceso de deploy:
+1. El developer hace push en el branch
+2. CI ejecuta las pruebas (si falla → notifica a Slack y termina)
+3. Build de la imagen Docker
+4. Deploy en staging
+5. Smoke tests (si fallan → rollback automático)
+6. Aprobación manual del tech lead
+7. Deploy en producción
+8. Monitoreo durante 10 minutos
+Guárdalo como deploy-flow.excalidraw</div>
+</div>
+<!-- cenário 2 -->
+<div class="rounded-xl border border-cyan-500/30 p-4">
+<div class="text-cyan-400 font-semibold text-sm mb-3">🏗️ Escenario 2 — Arquitectura de microservicios</div>
+<p class="text-neutral-400 text-sm mb-3">Diagrama de arquitectura para una presentación técnica al equipo.</p>
+<div class="bg-dark-900 rounded-lg p-4 font-mono text-sm text-neutral-300 border border-dark-600 leading-relaxed whitespace-pre-wrap">Draw a system architecture diagram with these components:
+- React frontend (browser)
+- API Gateway
+- Auth Service (JWT)
+- Product Service
+- Order Service
+- PostgreSQL (shared)
+- Redis cache (between API Gateway and services)
+- Notification Service (async via message queue)
+Show data flow arrows. Output: microservices-arch.excalidraw</div>
+</div>
+<!-- cenário 3 — mind map -->
+<div class="rounded-xl border border-amber-500/30 p-4">
+<div class="text-amber-400 font-semibold text-sm mb-3">🧠 Escenario 3 — Mapa mental del producto</div>
+<div class="bg-dark-900 rounded-lg p-4 font-mono text-sm text-neutral-300 border border-dark-600 leading-relaxed whitespace-pre-wrap">Create a mind map for "Lanzamiento de producto":
+Centro: Lanzamiento Q3
+Ramas principales: Marketing, Producto, Ing, Datos, Soporte
+- Marketing → campaña de email, anuncios en redes sociales, landing page
+- Producto → feature flags, onboarding, changelog
+- Ing → deploy gradual, monitoreo, plan de rollback
+- Datos → métricas de activación, embudo, cohorts
+- Soporte → preguntas frecuentes, capacitación, escalamiento
+Guárdalo como: lancamento-q3.excalidraw</div>
+</div>
+<!-- tip box resultado -->
+<div class="rounded-xl border border-primary/40 bg-primary/10 p-4 text-sm text-neutral-300">
+<span class="text-amber-400 font-semibold">🎯 Resultado esperado:</span> Un archivo <code class="text-amber-400">.excalidraw</code> con todos los elementos posicionados. Ábrelo en <a class="text-cyan-400 hover:text-cyan-300 underline" href="https://excalidraw.com" target="_blank">excalidraw.com</a> o en la app de escritorio; no hace falta instalar nada más. Ajusta los colores y las posiciones libremente después de la generación.
+        </div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">🔀</div><div class="text-xs font-semibold text-neutral-200">Flowchart</div><div class="text-xs text-neutral-500">Proceso lineal</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🏗️</div><div class="text-xs font-semibold text-neutral-200">Arquitectura del sistema</div><div class="text-xs text-neutral-500">Componentes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">🧠</div><div class="text-xs font-semibold text-neutral-200">Mapa mental</div><div class="text-xs text-neutral-500">Radial</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">📎</div><div class="text-xs font-semibold text-neutral-200">Nombra el archivo</div><div class="text-xs text-neutral-500">En el prompt</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6 -->
+<section class="bg-dark-800 rounded-2xl border border-amber-500/30 overflow-hidden" id="topico-6">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-start space-x-4">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold text-lg">6</div>
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">🧬 Combina con / límites — y el contraste con beautiful-mermaid</h2>
+<p class="text-neutral-400 mt-2">Excalidraw y beautiful-mermaid son complementarios: uno para bocetos visuales y el otro para diagramas técnicos precisos.</p>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- comparação excalidraw vs mermaid -->
+<div class="rounded-xl border border-amber-500/30 bg-gradient-to-r from-amber-900/20 to-dark-700 p-5">
+<div class="text-amber-400 font-semibold text-sm mb-4">🔬 Excalidraw vs beautiful-mermaid — ¿cuál usar y cuándo?</div>
+<div class="grid sm:grid-cols-2 gap-4 text-sm">
+<div>
+<div class="text-amber-400 font-bold mb-2 flex items-center gap-2"><span class="text-xl">✏️</span> Excalidraw</div>
+<ul class="space-y-2 text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-amber-400">•</span> Estilo <strong>manos libres</strong> — aspecto desenfadado, ideal para presentaciones y wireframes</li>
+<li class="flex items-start gap-2"><span class="text-amber-400">•</span> Archivo <strong>editable</strong> — abres y ajustas cada elemento en el canvas</li>
+<li class="flex items-start gap-2"><span class="text-amber-400">•</span> Sin notación formal: libertad total de diseño</li>
+<li class="flex items-start gap-2"><span class="text-amber-400">•</span> Ideal para: onboarding, documentación técnica informal, lluvia de ideas visual</li>
+</ul>
+</div>
+<div>
+<div class="text-cyan-400 font-bold mb-2 flex items-center gap-2"><span class="text-xl">📊</span> beautiful-mermaid</div>
+<ul class="space-y-2 text-neutral-300">
+<li class="flex items-start gap-2"><span class="text-cyan-400">•</span> Estilo <strong>técnico limpio</strong> — renderizado preciso basado en texto con Mermaid</li>
+<li class="flex items-start gap-2"><span class="text-cyan-400">•</span> Código como fuente — diagramas versionables en Git</li>
+<li class="flex items-start gap-2"><span class="text-cyan-400">•</span> Notación formal: Sequence, Class, Gantt, ER, C4, Git graph</li>
+<li class="flex items-start gap-2"><span class="text-cyan-400">•</span> Ideal para: PRs, READMEs técnicos, documentación de API, informes</li>
+</ul>
+</div>
+</div>
+<div class="mt-4 p-3 bg-dark-700/60 rounded-lg border border-dark-600 text-sm text-neutral-400">
+<span class="text-amber-400 font-semibold">Regla práctica:</span> si el diagrama va a un <strong class="text-neutral-300">deck o presentación</strong> → Excalidraw. Si va al <strong class="text-neutral-300">README o PR</strong> → beautiful-mermaid.
+          </div>
+</div>
+<!-- combina com outros skills -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Combina con estos skills del curso</div>
+<div class="grid sm:grid-cols-2 gap-3 text-sm">
+<div class="bg-dark-700/50 rounded-lg p-4 border border-amber-500/20">
+<div class="flex items-center gap-2 mb-2"><span class="text-amber-400 font-bold">📊 beautiful-mermaid</span><span class="text-xs text-neutral-500">(T4 • 4.1)</span></div>
+<p class="text-neutral-400">Usa Excalidraw para el borrador inicial y luego conviértelo a Mermaid cuando necesites un diagrama preciso y versionable en el repo.</p>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-4 border border-amber-500/20">
+<div class="flex items-center gap-2 mb-2"><span class="text-amber-400 font-bold">🔭 website-intelligence</span><span class="text-xs text-neutral-500">(T4 • 4.4)</span></div>
+<p class="text-neutral-400">Extrae la estructura de un sitio con website-intelligence y luego visualiza la arquitectura de información en un diagrama de Excalidraw.</p>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-4 border border-cyan-500/20">
+<div class="flex items-center gap-2 mb-2"><span class="text-cyan-400 font-bold">🧱 web-artifacts-builder</span><span class="text-xs text-neutral-500">(T1 • 1.3)</span></div>
+<p class="text-neutral-400">Mapea la arquitectura de componentes con Excalidraw antes de construir con web-artifacts-builder: el diagrama se convierte en una especificación visual.</p>
+</div>
+<div class="bg-dark-700/50 rounded-lg p-4 border border-cyan-500/20">
+<div class="flex items-center gap-2 mb-2"><span class="text-cyan-400 font-bold">🕹️ agent-browser</span><span class="text-xs text-neutral-500">(T4 • 4.3)</span></div>
+<p class="text-neutral-400">Automatiza la apertura y la captura de pantalla del archivo .excalidraw en el navegador con agent-browser para integrar el diagrama en pipelines de documentación.</p>
+</div>
+</div>
+</div>
+<!-- alerta limites -->
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+<div class="text-red-400 font-semibold text-sm mb-2">⚠️ Límites de la skill</div>
+<ul class="text-sm text-neutral-300 space-y-1.5">
+<li class="flex items-start gap-2"><span class="text-red-400">•</span> No admite diagramas UML formales (usa Mermaid classDiagram o sequenceDiagram)</li>
+<li class="flex items-start gap-2"><span class="text-red-400">•</span> Los íconos de bibliotecas externas (AWS, Material) requieren configuración manual con <code class="text-red-300">split-excalidraw-library.py</code></li>
+<li class="flex items-start gap-2"><span class="text-red-400">•</span> El posicionamiento de los nodos es aproximado: los diseños muy complejos pueden necesitar ajustes manuales</li>
+<li class="flex items-start gap-2"><span class="text-red-400">•</span> No sustituye las herramientas vectoriales para el diseño preciso de UI</li>
+</ul>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Conceptos clave</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">✏️</div><div class="text-xs font-semibold text-neutral-200">Manos libres</div><div class="text-xs text-neutral-500">vs técnico</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🔗</div><div class="text-xs font-semibold text-neutral-200">Complementario</div><div class="text-xs text-neutral-500">con Mermaid</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-amber-400 text-lg mb-1">🚫</div><div class="text-xs font-semibold text-neutral-200">Sin UML formal</div><div class="text-xs text-neutral-500">Limitación</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-cyan-400 text-lg mb-1">🏆</div><div class="text-xs font-semibold text-neutral-200">Presentaciones</div><div class="text-xs text-neutral-500">Caso ideal</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="rounded-2xl overflow-hidden border border-amber-500/30" id="resumo">
+<div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 p-8">
+<h2 class="text-2xl font-bold mb-6 text-amber-400">✅ Resumen del Módulo 4.2</h2>
+<!-- checklist -->
+<div class="grid sm:grid-cols-2 gap-2 mb-8 text-sm">
+<div class="flex items-start gap-2 text-neutral-300"><span class="text-emerald-400 font-bold mt-0.5">✓</span> El skill <strong>excalidraw-diagram-generator</strong> genera archivos <code>.excalidraw</code> a partir de descripciones en lenguaje natural</div>
+<div class="flex items-start gap-2 text-neutral-300"><span class="text-emerald-400 font-bold mt-0.5">✓</span> Admite diagramas de flujo, diagramas de relaciones, mapas mentales y arquitectura de sistemas</div>
+<div class="flex items-start gap-2 text-neutral-300"><span class="text-emerald-400 font-bold mt-0.5">✓</span> El resultado es JSON puro compatible con Excalidraw: sin conversión, se abre directamente</div>
+<div class="flex items-start gap-2 text-neutral-300"><span class="text-emerald-400 font-bold mt-0.5">✓</span> Internamente usa un schema JSON + templates (flowchart, relationship, mindmap)</div>
+<div class="flex items-start gap-2 text-neutral-300"><span class="text-emerald-400 font-bold mt-0.5">✓</span> Íconos externos (AWS, Material) vía <code>split-excalidraw-library.py</code> con configuración manual</div>
+<div class="flex items-start gap-2 text-neutral-300"><span class="text-emerald-400 font-bold mt-0.5">✓</span> Complementario a beautiful-mermaid: estilo a mano alzada para presentaciones frente a estilo técnico para repos</div>
+<div class="flex items-start gap-2 text-neutral-300"><span class="text-emerald-400 font-bold mt-0.5">✓</span> Complejidad ideal: 5–15 nodos; evita más de 40 elementos por llamada</div>
+<div class="flex items-start gap-2 text-neutral-300"><span class="text-emerald-400 font-bold mt-0.5">✓</span> Combina con website-intelligence, web-artifacts-builder y agent-browser</div>
+</div>
+<!-- próximo módulo -->
+<div class="rounded-xl border border-amber-500/30 bg-dark-700/50 p-4 mb-6">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-2">Próximo módulo</div>
+<div class="flex items-center gap-3">
+<span class="text-2xl">🕹️</span>
+<div>
+<div class="text-amber-400 font-bold">4.3 — agent-browser</div>
+<div class="text-neutral-400 text-sm">Automatización del navegador con Playwright: navegación, capturas de pantalla, extracción de datos y pruebas web directamente desde Claude Code.</div>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Volver a la ruta 4</a>
+<a class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors" href="modulo-4-3.html">Próximo módulo: 4.3 agent-browser →</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Contenido de <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Ruta 4: Apoyo · Módulo 4.2 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

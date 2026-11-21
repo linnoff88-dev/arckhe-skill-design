@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trilha 1 — Construir interfaces | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    .modal.hidden { display: none; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento emerald */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5,150,105,0.18); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    @keyframes sd-pulse { 0%,100% { opacity:.45 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .sd-a { animation: sd-pulse 2.8s ease-in-out infinite; }
+      .sd-a:nth-child(2){animation-delay:.3s} .sd-a:nth-child(3){animation-delay:.6s} .sd-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha1/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha1/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha1/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha1/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha1/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidade</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Mídia</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Apoio</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">TRILHA 1</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🏗️ Construir interfaces</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Quatro skills que transformam texto em interfaces de alta qualidade. De páginas estáticas a artifacts React complexos, passando por auditoria e geração de prompts para o Claude Design.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">4</div><div class="text-xs text-neutral-400">Skills</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">24</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~1.5h</div><div class="text-xs text-neutral-400">Duração</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Inter</div><div class="text-xs text-neutral-400">Nível</div></div>
+</div>
+<!-- SVG HERO: página em branco → skills → UI polida -->
+<div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mt-8 overflow-hidden">
+<svg aria-label="Página em branco passa pelos skills frontend-design, impeccable, web-artifacts-builder e design-designer e resulta em uma UI polida em verde esmeralda" class="w-full h-auto" role="img" viewbox="0 0 1000 220">
+<defs>
+<lineargradient id="sd1-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#34d399"></stop><stop offset="1" stop-color="#10b981"></stop></lineargradient>
+<lineargradient id="sd1-cyan" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#38bdf8"></stop><stop offset="1" stop-color="#0ea5e9"></stop></lineargradient>
+<filter height="180%" id="sd1-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="3"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="28" id="sd1-grid" patternunits="userSpaceOnUse" width="28"><circle cx="1.2" cy="1.2" fill="#10b981" opacity="0.10" r="1.2"></circle></pattern>
+<marker id="sd1-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"></path></marker>
+<marker id="sd1-ah2" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#sd1-grid)" height="220" width="1000" x="0" y="0"></rect>
+<!-- Página em branco -->
+<g filter="url(#sd1-glow)">
+<rect fill="#0e2018" height="100" rx="10" stroke="url(#sd1-grad)" stroke-width="2" width="110" x="30" y="60"></rect>
+</g>
+<rect fill="#1f3a2c" height="8" opacity="0.8" rx="3" width="78" x="46" y="76"></rect>
+<rect fill="#1f3a2c" height="6" opacity="0.5" rx="2" width="60" x="46" y="92"></rect>
+<rect fill="#1f3a2c" height="6" opacity="0.3" rx="2" width="70" x="46" y="105"></rect>
+<text fill="#6ee7b7" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="85" y="152">página em branco</text>
+<!-- Arrow 1 -->
+<path d="M142,110 L178,110" fill="none" marker-end="url(#sd1-ah)" stroke="#34d399" stroke-width="2"></path>
+<!-- Skills coluna vertical -->
+<g class="sd1-skills" font-family="Inter,sans-serif" font-size="11" font-weight="600">
+<g class="sd-a">
+<rect fill="#0e1b26" height="30" rx="8" stroke="#38bdf8" stroke-width="1.8" width="150" x="180" y="36"></rect>
+<text fill="#bfe6ff" text-anchor="middle" x="255" y="56">⚛️ frontend-design</text>
+</g>
+<g class="sd-a">
+<rect fill="#0e1b26" height="30" rx="8" stroke="#38bdf8" stroke-width="1.8" width="150" x="180" y="76"></rect>
+<text fill="#bfe6ff" text-anchor="middle" x="255" y="96">✨ impeccable</text>
+</g>
+<g class="sd-a">
+<rect fill="#0e1b26" height="30" rx="8" stroke="#38bdf8" stroke-width="1.8" width="150" x="180" y="116"></rect>
+<text fill="#bfe6ff" text-anchor="middle" x="255" y="136">🧱 web-artifacts-builder</text>
+</g>
+<g class="sd-a">
+<rect fill="#0e1b26" height="30" rx="8" stroke="#38bdf8" stroke-width="1.8" width="150" x="180" y="156"></rect>
+<text fill="#bfe6ff" text-anchor="middle" x="255" y="176">🎯 design-designer</text>
+</g>
+</g>
+<!-- Arrow 2 -->
+<path d="M332,110 L368,110" fill="none" marker-end="url(#sd1-ah)" stroke="#34d399" stroke-width="2"></path>
+<!-- UI polida (resultado) -->
+<g filter="url(#sd1-glow)">
+<rect fill="#0e2018" height="132" rx="14" stroke="url(#sd1-grad)" stroke-width="2.5" width="280" x="370" y="44"></rect>
+</g>
+<!-- Nav bar simulada -->
+<rect fill="#14532d" height="26" opacity="0.7" rx="14" width="280" x="370" y="44"></rect>
+<rect fill="#14532d" height="14" opacity="0.7" rx="0" width="280" x="370" y="56"></rect>
+<circle cx="390" cy="57" fill="#34d399" opacity="0.8" r="5"></circle>
+<circle cx="406" cy="57" fill="#6ee7b7" opacity="0.5" r="5"></circle>
+<circle cx="422" cy="57" fill="#a7f3d0" opacity="0.3" r="5"></circle>
+<!-- Hero texto -->
+<rect fill="#34d399" height="10" opacity="0.9" rx="3" width="120" x="386" y="80"></rect>
+<rect fill="#6ee7b7" height="7" opacity="0.5" rx="2" width="90" x="386" y="96"></rect>
+<!-- Botão CTA -->
+<rect fill="#10b981" height="20" rx="6" width="70" x="386" y="110"></rect>
+<text fill="#ffffff" font-family="Inter,sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="421" y="124">Ver demo</text>
+<!-- Card right -->
+<rect fill="#0e2a1c" height="68" opacity="0.9" rx="8" stroke="#34d399" stroke-width="1.2" width="158" x="474" y="80"></rect>
+<rect fill="#34d399" height="8" opacity="0.7" rx="2" width="80" x="484" y="92"></rect>
+<rect fill="#6ee7b7" height="6" opacity="0.4" rx="2" width="100" x="484" y="106"></rect>
+<rect fill="#6ee7b7" height="6" opacity="0.3" rx="2" width="60" x="484" y="118"></rect>
+<text fill="#6ee7b7" font-family="Inter,sans-serif" font-size="11" font-weight="700" text-anchor="middle" x="510" y="160">UI production-grade</text>
+<!-- Seta final emerald para a direita com label -->
+<text fill="#a7f3d0" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="start" x="690" y="95">resultado</text>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="start" x="690" y="113">polido</text>
+<path d="M690,105 L750,105" fill="none" marker-end="url(#sd1-ah)" stroke="#34d399" stroke-width="2.5"></path>
+<g filter="url(#sd1-glow)">
+<rect fill="#0e2018" height="66" rx="12" stroke="url(#sd1-grad)" stroke-width="2.5" width="200" x="752" y="72"></rect>
+</g>
+<rect fill="#34d399" height="8" opacity="0.85" rx="3" width="100" x="764" y="84"></rect>
+<rect fill="#6ee7b7" height="6" opacity="0.55" rx="2" width="76" x="764" y="98"></rect>
+<rect fill="#10b981" height="14" rx="5" width="60" x="764" y="110"></rect>
+<text fill="#fff" font-family="Inter,sans-serif" font-size="8" font-weight="700" text-anchor="middle" x="794" y="121">Deploy</text>
+<rect fill="#0e2a1c" height="42" opacity="0.8" rx="6" stroke="#10b981" stroke-width="1.2" width="100" x="834" y="84"></rect>
+<rect fill="#34d399" height="6" opacity="0.7" rx="2" width="60" x="842" y="92"></rect>
+<rect fill="#6ee7b7" height="6" opacity="0.4" rx="2" width="80" x="842" y="104"></rect>
+<rect fill="#6ee7b7" height="6" opacity="0.3" rx="2" width="50" x="842" y="116"></rect>
+</svg>
+<p class="text-center text-xs text-neutral-500 mt-2">Da tela em branco à UI polida — 4 skills da Trilha 1</p>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- MAPA DA TRILHA -->
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all" href="#modulo-1-1">
+<div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.1</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">⚛️ frontend-design</h3>
+<p class="text-xs text-neutral-400">Interfaces production-grade</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all" href="#modulo-1-2">
+<div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.2</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">✨ impeccable</h3>
+<p class="text-xs text-neutral-400">Auditar, polir, redesenhar</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all" href="#modulo-1-3">
+<div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.3</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">🧱 web-artifacts-builder</h3>
+<p class="text-xs text-neutral-400">Artifacts React/shadcn</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all" href="#modulo-1-4">
+<div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.4</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">🎯 design-designer</h3>
+<p class="text-xs text-neutral-400">Prompt pro Claude Design</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+<!-- MÓDULO 1.1 — frontend-design -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-1-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.1</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">⚛️ frontend-design</h3>
+<p class="text-neutral-400 text-sm">Skill que cria interfaces frontend distintas e de alta qualidade, evitando o visual "AI genérico". Para sites, landing pages, dashboards e componentes React/HTML — código real, não mockup.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span><div><span class="font-medium">O que é / o que faz</span><span class="text-neutral-500 text-sm ml-2">- definição da skill</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O frontend-design guia a criação de interfaces production-grade com atenção excepcional a detalhes estéticos e escolhas criativas. Produz código funcional (React, HTML/CSS, Tailwind) que foge do padrão "AI genérico".</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem essa skill, o Claude tende a criar interfaces visualmente genéricas — grade de ícone+título+texto, cards idênticos, botões azuis. Com ela, o resultado tem identidade e hierarquia visual real.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Production-grade, anti-AI-slop, código funcional, estética intencional.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Quando dispara</span><span class="text-neutral-500 text-sm ml-2">- gatilhos de ativação</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dispara quando o usuário pede: componente frontend, site, landing page, dashboard, interface React, UI de aplicativo, página HTML com estilo. A skill monitora termos como "crie uma interface", "faça um site", "componente React".</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber os gatilhos ajuda a formular pedidos que disparam a skill certa — e a evitar formulações vagas que deixam o Claude no modo genérico.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Gatilhos semânticos, pedido explícito de UI/frontend/componente.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🚀</span><div><span class="font-medium">Como melhora suas páginas</span><span class="text-neutral-500 text-sm ml-2">- valor concreto</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill aplica Design Thinking e Frontend Aesthetics Guidelines: tipografia com intenção, espaçamento proporcional, hierarquia visual clara, paleta coesa, micro-interações e motion com propósito. O resultado passa no "AI slop test" — não parece gerado genericamente.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Interfaces production-grade convertem mais, comunicam melhor e não envergonham quando mostradas a clientes ou recrutadores.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Design Thinking, Frontend Aesthetics Guidelines, AI slop test.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Como funciona por dentro</span><span class="text-neutral-500 text-sm ml-2">- stack e abordagem</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O SKILL.md do frontend-design contém duas seções principais: "Design Thinking" (processo de análise do pedido antes de codar) e "Frontend Aesthetics Guidelines" (regras concretas de tipografia, cor, espaçamento, motion). O Claude lê ambas antes de escrever uma linha de HTML/React.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender que há um processo de análise antes do código explica por que a skill demora um pouco mais — e entrega muito mais.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Design Thinking, Frontend Aesthetics Guidelines, React/Tailwind, HTML/CSS.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">💬</span><div><span class="font-medium">Exemplo prático + prompt</span><span class="text-neutral-500 text-sm ml-2">- pronto para usar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Use pedidos específicos: descreva o produto, o público e o tom. A skill cuida da estética — você só precisa dar contexto suficiente.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Prompts específicos geram interfaces específicas. Prompts vagos geram interfaces genéricas mesmo com a skill ativa.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Contexto de produto, público-alvo, tom visual, especificidade.</p></div>
+<pre class="mt-3 bg-dark-900 rounded-lg p-3 text-xs text-emerald-300 overflow-x-auto font-mono">Crie uma landing page para um SaaS B2B de análise de contratos jurídicos.
+Público: advogados corporativos. Tom: sóbrio, confiável, premium.
+Stack: HTML + Tailwind (sem framework). Inclua: hero com headline forte,
+3 features com ícone SVG, seção de preços 3 planos, footer com newsletter.</pre>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧬</span><div><span class="font-medium">Combina com / limites</span><span class="text-neutral-500 text-sm ml-2">- quando usar e evitar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Combina com <strong>impeccable</strong> (para polir o que gerou), <strong>web-artifacts-builder</strong> (para adicionar estado/rotas React) e <strong>design-designer</strong> (para gerar prompt pro Claude Design antes de codar). Limite: não substitui prototipagem interativa com Figma nem lida com APIs de backend.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber os limites evita expectativas erradas e ajuda a montar o fluxo certo: frontend-design → impeccable → web-artifacts-builder quando a UI precisar de estado.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Composição de skills, fluxo iterativo, limite de escopo.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-1-1')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors" href="modulo-1-1.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 1.2 — impeccable -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-1-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.2</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">✨ impeccable</h3>
+<p class="text-neutral-400 text-sm">Skill para melhorar uma interface existente: design/redesign, crítica, auditoria de UX, hierarquia visual, acessibilidade, tipografia, espaçamento, cor, motion e micro-interações.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span><div><span class="font-medium">O que é / o que faz</span><span class="text-neutral-500 text-sm ml-2">- definição da skill</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O impeccable é um sistema de auditoria e redesign de interfaces. Ele avalia o que existe, aplica leis de design compartilhadas (cor, tema, tipografia, layout, motion) e reescreve ou critica com precisão cirúrgica — sem opiniões vagas.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Criar é fácil; polir é onde a maioria trava. O impeccable resolve o gap entre "funciona" e "impressiona".</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Auditoria de UX, redesign, leis de design, crítica acionável.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Quando dispara</span><span class="text-neutral-500 text-sm ml-2">- gatilhos de ativação</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dispara com: "melhore este design", "critique esta UI", "redesenhe este componente", "auditoria de UX", "corrija tipografia/espaçamento/cor", "faça ficar bonito", "polir a interface". Qualquer pedido de melhoria em algo existente.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A distinction crítica: frontend-design cria do zero; impeccable melhora o que existe. Usar a skill errada gera trabalho dobrado.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Melhoria, crítica, auditoria, redesign de existente.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🚀</span><div><span class="font-medium">Como melhora suas páginas</span><span class="text-neutral-500 text-sm ml-2">- valor concreto</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill aplica "Absolute bans" (proíbe border-left decorativo, gradient text, glassmorphism padrão, hero-metric template, cards idênticos) e "Shared design laws" (cor, tema, tipografia, layout, motion). O resultado passa no "AI slop test" e tem coerência visual real.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber o que está proibido protege você de antipadrões que destroem credibilidade visual — mesmo quando parecem bonitos isolados.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Absolute bans, shared design laws, AI slop test, coerência visual.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Como funciona por dentro</span><span class="text-neutral-500 text-sm ml-2">- estrutura interna</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O SKILL.md tem: Setup (context gathering + register do estado atual), Shared design laws (Color, Theme, Typography, Layout, Motion, Absolute bans, Copy), Commands com routing rules (que acionam redesign, critique, ou polish), e Pin/Unpin para fixar estilos já aprovados.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O routing interno determina se o Claude vai redesenhar, criticar ou só polir. Entender isso ajuda a formular o pedido certo.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Setup, routing rules, commands, Pin/Unpin, context gathering.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">💬</span><div><span class="font-medium">Exemplo prático + prompt</span><span class="text-neutral-500 text-sm ml-2">- pronto para usar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cole o HTML existente e peça auditoria completa. A skill analisa e entrega crítica + versão melhorada.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Uma auditoria estruturada entrega mais valor que pedir "melhore" sem critério — você recebe diagnóstico e solução juntos.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Auditoria estruturada, diagnóstico + solução, crítica acionável.</p></div>
+<pre class="mt-3 bg-dark-900 rounded-lg p-3 text-xs text-emerald-300 overflow-x-auto font-mono">Aqui está o HTML da minha landing page: [cole o código].
+Faça uma auditoria completa de UX e design: hierarquia visual,
+tipografia, espaçamento, cor e acessibilidade.
+Depois entregue a versão corrigida com comentários inline explicando
+cada mudança.</pre>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧬</span><div><span class="font-medium">Combina com / limites</span><span class="text-neutral-500 text-sm ml-2">- quando usar e evitar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Fluxo clássico: frontend-design gera → impeccable audita → web-artifacts-builder adiciona estado. Limite: precisa de HTML/código existente como input — não cria do zero. Também não substitui testes com usuários reais; avalia estrutura e estética, não comportamento de uso.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Posicionar o impeccable como etapa 2 (não 1) do fluxo maximiza o valor — ele refina, não inventa.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Etapa de refinamento, input obrigatório, fluxo iterativo.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-1-2')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors" href="modulo-1-2.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 1.3 — web-artifacts-builder -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-1-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.3</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🧱 web-artifacts-builder</h3>
+<p class="text-neutral-400 text-sm">Suite para criar artifacts HTML elaborados e multi-componente com React, Tailwind e shadcn/ui — com estado, rotas e bundling para arquivo único. Não para HTML simples.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span><div><span class="font-medium">O que é / o que faz</span><span class="text-neutral-500 text-sm ml-2">- definição da skill</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O web-artifacts-builder é uma suite completa para inicializar, desenvolver e empacotar artifacts React em um único arquivo HTML autocontido. Suporta React, Tailwind, shadcn/ui, estado gerenciado, roteamento e múltiplos componentes — entregando um <code>bundle.html</code> compartilhável.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Quando a UI precisa de estado, tabs, modais com lógica ou roteamento, HTML simples não basta. Esta skill resolve a complexidade do bundling sem configuração manual.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">React, Tailwind, shadcn/ui, bundle.html, artifact autocontido.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Quando dispara</span><span class="text-neutral-500 text-sm ml-2">- gatilhos de ativação</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dispara com: "crie um artifact React", "quero um dashboard interativo", "componente shadcn/ui", "app com tabs e estado", "artifact para colar no Claude", "bundle HTML com React". Palavras-chave: artifact, React, shadcn, estado, interativo, multi-componente.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diferenciar quando usar web-artifacts-builder (React + estado) versus frontend-design (HTML/CSS estático) economiza retrabalho.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Artifact interativo, React, estado, multi-componente.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🚀</span><div><span class="font-medium">Como melhora suas páginas</span><span class="text-neutral-500 text-sm ml-2">- valor concreto</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Transforma um pedido de UI complexa em um <code>bundle.html</code> que roda em qualquer browser sem servidor — tudo inlinado: JS, CSS, fontes. Você compartilha um único arquivo e o cliente abre direto. Componentes shadcn/ui garantem qualidade visual consistente sem esforço de design.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entregar um arquivo HTML que funciona offline é mais profissional que mandar um link que depende de servidor. E shadcn/ui poupa horas de estilização manual.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">bundle.html, zero-dependency, shadcn/ui, entrega profissional.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Como funciona por dentro</span><span class="text-neutral-500 text-sm ml-2">- scripts e dependências</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Fluxo em 5 passos: (1) Initialize Project — cria estrutura com <code>index.html</code> na raiz. (2) Develop — escreve componentes React/shadcn. (3) Bundle — roda <code>bash scripts/bundle-artifact.sh</code> que usa Parcel + @parcel/config-default + parcel-resolver-tspaths + html-inline para criar <code>bundle.html</code>. (4) Share. (5) Test (opcional com preview).</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber o script de bundling permite depurar quando o build falha ou personalizar o processo.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">bundle-artifact.sh, Parcel, html-inline, @parcel/config-default, index.html obrigatório.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">💬</span><div><span class="font-medium">Exemplo prático + prompt</span><span class="text-neutral-500 text-sm ml-2">- pronto para usar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Descreva o artifact com estado e componentes. A skill inicializa o projeto, desenvolve e bundla automaticamente.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Detalhar os componentes e interações no prompt evita idas e vindas — o artifact sai certo na primeira iteração.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Especificação de componentes, interações, shadcn/ui components.</p></div>
+<pre class="mt-3 bg-dark-900 rounded-lg p-3 text-xs text-emerald-300 overflow-x-auto font-mono">Crie um artifact React com shadcn/ui para um painel de gestão de tarefas.
+Componentes: sidebar com navegação, lista de tarefas com filtros
+(status, prioridade), modal de criação/edição, badge de status colorido.
+Estado: useState para tarefas e filtros. Entregue bundle.html completo.</pre>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧬</span><div><span class="font-medium">Combina com / limites</span><span class="text-neutral-500 text-sm ml-2">- quando usar e evitar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Combina com frontend-design (para o visual base) e impeccable (para polir os componentes gerados). Limite crítico: não use para HTML simples sem estado — o overhead de Parcel não compensa. Também não conecta a APIs reais ou banco de dados.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Usar web-artifacts-builder para um HTML de 3 parágrafos é como usar Webpack para servir um arquivo estático — desperdício de complexidade.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Quando NÃO usar, overhead de bundling, fronteira estático vs interativo.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-1-3')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors" href="modulo-1-3.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 1.4 — design-designer -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-1-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.4</span><span class="text-xs text-neutral-500">~25 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🎯 design-designer</h3>
+<p class="text-neutral-400 text-sm">Entrevista rápida e monta um prompt otimizado para o Claude Design (claude.ai/design) gerar landing page, deck, protótipo ou app clicável — sem a necessidade de conhecer os vieses do modelo.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧩</span><div><span class="font-medium">O que é / o que faz</span><span class="text-neutral-500 text-sm ml-2">- definição da skill</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O design-designer é um gerador de prompts otimizados para o Claude Design. Ele conduz uma entrevista rápida (8 perguntas), sintetiza as respostas e entrega um prompt preciso que instrui o Claude Design a criar landing pages, decks, protótipos ou apps clicáveis com alta qualidade visual.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O Claude Design tem vieses e limitações específicos. Prompts genéricos geram resultados mediocres. Esta skill sabe exatamente o que o modelo quer — e entrega isso.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Prompt engineering para Claude Design, entrevista estruturada, geração otimizada.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🎣</span><div><span class="font-medium">Quando dispara</span><span class="text-neutral-500 text-sm ml-2">- gatilhos de ativação</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dispara com: "quero usar o Claude Design", "gere um prompt para claude.ai/design", "crie uma landing page no Claude Design", "prompt para protótipo/deck/app clicável", "otimizar prompt para o Design". Também ativa com "preciso de um design visual" quando o contexto indica claude.ai.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Este skill é o único da trilha que não entrega código — entrega um prompt. Saber o gatilho correto evita confundir com frontend-design.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">claude.ai/design, prompt como output, não código.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🚀</span><div><span class="font-medium">Como melhora suas páginas</span><span class="text-neutral-500 text-sm ml-2">- valor concreto</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Elimina os antipadrões do Claude Design (lorem ipsum, hero images desnecessários, labels estilo "Our Portfolio", generic AI startup tropes com blobs e orbs flutuantes). O prompt gerado inclui instruções negativas explícitas — o que NÃO colocar — que a maioria dos usuários nunca pensa em especificar.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Instruções negativas são tão importantes quanto positivas no Claude Design. Esta skill já sabe quais incluir — você não precisa descobrir na tentativa e erro.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Instruções negativas, anti-tropes, prompt completo, Claude Design biases.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">⚙️</span><div><span class="font-medium">Como funciona por dentro</span><span class="text-neutral-500 text-sm ml-2">- as 4 fases</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">4 fases: (1) Interview — 8 perguntas sobre produto, público, tom, seções, estilo visual, referências visuais, o que NÃO colocar e complexidade. (2) Synthesize — cruza respostas e detecta contradições. (3) Generate — monta prompt otimizado com seções positivas e negativas. (4) Deliver — apresenta o prompt pronto para colar no Claude Design. Quick Path disponível se o usuário quiser pular a entrevista.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender as 4 fases ajuda a responder as perguntas da entrevista com mais precisão — o que gera um prompt mais eficaz.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Interview (8 perguntas), Synthesize, Generate, Deliver, Quick Path.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">💬</span><div><span class="font-medium">Exemplo prático + prompt</span><span class="text-neutral-500 text-sm ml-2">- pronto para usar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Ative a skill e ela conduz a entrevista. Alternativamente, use o Quick Path para ir direto ao prompt sem entrevista.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A entrevista completa gera prompts mais precisos. O Quick Path é útil quando você já tem clareza total do que quer.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Entrevista vs Quick Path, nível de clareza, trade-off velocidade/precisão.</p></div>
+<pre class="mt-3 bg-dark-900 rounded-lg p-3 text-xs text-emerald-300 overflow-x-auto font-mono">Quero usar o Claude Design para criar uma landing page.
+Me faça a entrevista completa para eu ter um prompt otimizado.
+Produto: app de meditação para profissionais. Tom: calmo, minimalista.</pre>
+</div></div>
+</div>
+<div class="topic-item">
+<button class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧬</span><div><span class="font-medium">Combina com / limites</span><span class="text-neutral-500 text-sm ml-2">- quando usar e evitar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uso típico: design-designer gera o prompt → Claude Design produz o visual → impeccable audita o resultado. Limites: o Claude Design não faz bem listas longas, tabelas complexas, mapas interativos ou gráficos de dados. A skill avisa sobre essas limitações antes de você investir tempo no prompt.</p></div>
+<div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber o que o Claude Design não resolve evita frustração. A skill tem uma seção "What Claude Design Will NOT Do Well" — leia antes de começar.</p></div>
+<div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Limitações do Claude Design, fluxo design-designer→Design→impeccable, expectativas corretas.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-1-4')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors" href="modulo-1-4.html">Ver Completo</a>
+</div>
+</div>
+<!-- NAV TRILHA -->
+<div class="flex flex-col sm:flex-row gap-4 mt-10">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../index.html">← Todas as trilhas</a>
+<a class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors" href="../trilha2/index.html">Trilha 2: Identidade →</a>
+</div>
+</main>
+<!-- MODAIS -->
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-1-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-emerald-400 font-bold">1.1</span><span class="font-semibold">⚛️ frontend-design</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-1-1.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-1-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-emerald-400 font-bold">1.2</span><span class="font-semibold">✨ impeccable</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-1-2.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-1-3" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-emerald-400 font-bold">1.3</span><span class="font-semibold">🧱 web-artifacts-builder</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-1-3.html"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-1-4" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-emerald-400 font-bold">1.4</span><span class="font-semibold">🎯 design-designer</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" src="modulo-1-4.html"></iframe>
+</div>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Conteúdo do <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Trilha 1: Construir interfaces · 2026</p>
+</div>
+</footer>
+<script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+    const themeToggle=document.getElementById('theme-toggle');
+    const di=document.getElementById('theme-toggle-dark-icon'), li=document.getElementById('theme-toggle-light-icon');
+    const root=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){ di.classList.remove('hidden'); root.classList.remove('dark'); } else { li.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', ()=>{ di.classList.toggle('hidden'); li.classList.toggle('hidden'); root.classList.toggle('dark'); localStorage.setItem('theme', root.classList.contains('dark')?'dark':'light'); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 1.3 — web-artifacts-builder | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#34d399', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* acento emerald */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .text-emerald-300 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5,150,105,0.18); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+    /* outras trilhas (nav) */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #059669; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .bg-cyan-500\/10 { background-color: rgba(8,145,178,0.08); }
+    html:not(.dark) .border-cyan-500\/30 { border-color: rgba(8,145,178,0.25); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(220,38,38,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    @keyframes m13-flow { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+    @keyframes m13-pulse { 0%,100% { opacity:.3 } 50% { opacity:1 } }
+    @keyframes m13-float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-4px); } }
+    @media (prefers-reduced-motion: no-preference) {
+      .m13-anim-flow { animation: m13-flow 3s linear infinite; }
+      .m13-anim-pulse { animation: m13-pulse 2.5s ease-in-out infinite; }
+      .m13-anim-pulse-2 { animation: m13-pulse 2.5s ease-in-out infinite; animation-delay: .6s; }
+      .m13-anim-pulse-3 { animation: m13-pulse 2.5s ease-in-out infinite; animation-delay: 1.2s; }
+      .m13-anim-float { animation: m13-float 3.5s ease-in-out infinite; }
+    }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha1/modulo-1-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha1/modulo-1-3.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha1/modulo-1-3.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha1/modulo-1-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha1/modulo-1-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-1-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-emerald-400 hover:text-emerald-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidad</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Medios</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Soporte</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-emerald-400 transition-colors" href="../../index.html">Inicio</a>
+<span>/</span>
+<a class="hover:text-emerald-400 transition-colors" href="index.html">Ruta 1 — Construir</a>
+<span>/</span>
+<span class="text-emerald-400 font-medium">Módulo 1.3</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🧱 web-artifacts-builder</h1>
+<p class="text-lg text-neutral-400 max-w-xl">Suite para crear artifacts de claude.ai elaborados y con múltiples componentes — React 18 + TypeScript + Tailwind CSS + shadcn/ui — para interfaces complejas que necesitan estado, rutas y componentes Radix UI.</p>
+<div class="grid grid-cols-4 gap-3 mt-6">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">6</div>
+<div class="text-xs text-neutral-400">Temas</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">~25</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Interm.</div>
+<div class="text-xs text-neutral-400">Nivel</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Build</div>
+<div class="text-xs text-neutral-400">Categoría</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — Pipeline React→Bundle→Artifact -->
+<div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4">
+<svg aria-label="Diagrama futurista del pipeline web-artifacts-builder: React + shadcn/ui → bundle → artifact claude.ai" class="w-full h-auto" role="img" viewbox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="m13-bg-grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#0e2018;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0e1b26;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="m13-em-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#34d399;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#10b981;stop-opacity:1"></stop>
+</lineargradient>
+<lineargradient id="m13-cy-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1"></stop>
+</lineargradient>
+<filter height="150%" id="m13-glow" width="150%" x="-25%" y="-25%">
+<fegaussianblur result="blur" stddeviation="2.5"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<rect fill="url(#m13-bg-grad)" height="240" rx="12" width="400"></rect>
+<!-- grid -->
+<g opacity="0.4" stroke="#14532d" stroke-width="0.5">
+<line x1="0" x2="400" y1="60" y2="60"></line>
+<line x1="0" x2="400" y1="120" y2="120"></line>
+<line x1="0" x2="400" y1="180" y2="180"></line>
+<line x1="100" x2="100" y1="0" y2="240"></line>
+<line x1="200" x2="200" y1="0" y2="240"></line>
+<line x1="300" x2="300" y1="0" y2="240"></line>
+</g>
+<!-- Node: React + shadcn -->
+<rect fill="#0e2018" filter="url(#m13-glow)" height="80" rx="8" stroke="#34d399" stroke-width="1.5" width="86" x="14" y="80"></rect>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="57" y="106">React 18</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="57" y="121">TypeScript</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="57" y="134">shadcn/ui</text>
+<text fill="#6ee7b7" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="57" y="147">Tailwind</text>
+<!-- Arrow 1 -->
+<path class="m13-anim-flow" d="M100 120 L130 120" fill="none" stroke="#34d399" stroke-dasharray="6 3" stroke-width="1.5"></path>
+<polygon fill="#34d399" points="130,115 140,120 130,125"></polygon>
+<!-- Node: bundle-artifact.sh -->
+<rect fill="#0e2018" filter="url(#m13-glow)" height="70" rx="8" stroke="#38bdf8" stroke-width="1.5" width="112" x="144" y="85"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="200" y="112">bundle-artifact.sh</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="200" y="127">Parcel + html-inline</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="200" y="142">→ bundle.html</text>
+<!-- Arrow 2 -->
+<path class="m13-anim-flow" d="M256 120 L286 120" fill="none" stroke="#38bdf8" stroke-dasharray="6 3" stroke-width="1.5"></path>
+<polygon fill="#38bdf8" points="286,115 296,120 286,125"></polygon>
+<!-- Node: Artifact claude.ai -->
+<rect class="m13-anim-float" fill="#0e1b26" filter="url(#m13-glow)" height="80" rx="8" stroke="#38bdf8" stroke-width="1.5" width="84" x="300" y="80"></rect>
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="342" y="108">claude.ai</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="342" y="122">Artifact</text>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="22" text-anchor="middle" x="342" y="136">📦</text>
+<text fill="#6ee7b7" font-family="Inter,sans-serif" font-size="8" text-anchor="middle" x="342" y="153">self-contained</text>
+<!-- Label top -->
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="12" font-weight="700" text-anchor="middle" x="200" y="28">web-artifacts-builder</text>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="200" y="44">pipeline multicompontente</text>
+<!-- Indicators bottom -->
+<circle class="m13-anim-pulse" cx="90" cy="210" fill="#34d399" r="5"></circle>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" x="100" y="214">40+ componentes</text>
+<circle class="m13-anim-pulse-2" cx="200" cy="210" fill="#38bdf8" r="5"></circle>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" x="210" y="214">Radix UI</text>
+<circle class="m13-anim-pulse-3" cx="280" cy="210" fill="#6ee7b7" r="5"></circle>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="8" x="290" y="214">Vite + Parcel</text>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+<!-- TÓPICO 1: O que é / o que faz -->
+<section id="topico-1">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-sm border border-emerald-500/30">1</span>
+<h2 class="text-2xl font-bold">🧩 Qué es / qué hace</h2>
+</div>
+<!-- Box conceito principal -->
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-2xl border border-emerald-500/30 p-6 mb-6">
+<p class="text-lg font-semibold text-emerald-400 mb-2">Definición precisa</p>
+<p class="text-neutral-300 leading-relaxed">O <strong class="text-emerald-400">web-artifacts-builder</strong> es una suite de herramientas para crear artifacts de claude.ai <strong class="text-white">elaborados y con varios componentes</strong> usando tecnologías modernas de frontend: <strong class="text-emerald-300">React 18 + TypeScript + Tailwind CSS + shadcn/ui</strong>. No es para HTML simple: es para cuando necesitas estado, rutas, modales, tabs, sliders y toda la variedad de componentes Radix UI.</p>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<!-- O que FAZ -->
+<div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5">
+<p class="text-emerald-400 font-semibold mb-3">✓ Qué hace</p>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Inicializa un proyecto React+TS mediante <code class="bg-dark-700 px-1 rounded text-emerald-300">init-artifact.sh</code></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Ofrece más de 40 componentes shadcn/ui preinstalados</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Configura alias de rutas (<code class="bg-dark-700 px-1 rounded text-emerald-300">@/</code>) automáticamente</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Empaqueta todo en un único <code class="bg-dark-700 px-1 rounded text-emerald-300">bundle.html</code> vía Parcel + html-inline</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Genera un artifact autocontenido, listo para pegar en claude.ai</li>
+</ul>
+</div>
+<!-- O que NÃO faz -->
+<div class="bg-dark-800 rounded-xl border border-red-500/30 p-5">
+<p class="text-red-400 font-semibold mb-3">✗ Lo que NO es</p>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> No es para HTML/JSX simple de un solo archivo</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> No es para artifacts estáticos sin interactividad</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> No sustituye la skill <code class="bg-dark-700 px-1 rounded text-red-300">frontend-design</code> para páginas HTML/Tailwind directas</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> No es para deploy en servidor: genera un artifact para claude.ai</li>
+</ul>
+</div>
+</div>
+<!-- Box dados -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5">
+<p class="text-blue-400 font-semibold mb-2">Stack completo</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+<div class="bg-dark-800 rounded-lg p-3 text-center"><span class="text-blue-300 font-bold block">React 18</span><span class="text-neutral-500 text-xs">Motor de UI</span></div>
+<div class="bg-dark-800 rounded-lg p-3 text-center"><span class="text-blue-300 font-bold block">TypeScript</span><span class="text-neutral-500 text-xs">vía Vite</span></div>
+<div class="bg-dark-800 rounded-lg p-3 text-center"><span class="text-blue-300 font-bold block">Tailwind 3.4.1</span><span class="text-neutral-500 text-xs">+ shadcn theming</span></div>
+<div class="bg-dark-800 rounded-lg p-3 text-center"><span class="text-blue-300 font-bold block">Parcel</span><span class="text-neutral-500 text-xs">bundling</span></div>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">artifact</span><p class="text-neutral-400 text-xs mt-1">HTML autocontenido</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">multicomponente</span><p class="text-neutral-400 text-xs mt-1">shadcn/ui + Radix</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">bundle.html</span><p class="text-neutral-400 text-xs mt-1">todo inline</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">context: fork</span><p class="text-neutral-400 text-xs mt-1">skill local</p></div>
+</div>
+</section>
+<!-- TÓPICO 2: Quando dispara -->
+<section id="topico-2">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-sm border border-emerald-500/30">2</span>
+<h2 class="text-2xl font-bold">🎣 Cuándo se activa</h2>
+</div>
+<!-- Tip box -->
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5 mb-6">
+<p class="text-emerald-400 font-semibold mb-1">Regla de oro</p>
+<p class="text-neutral-300 text-sm">Usa web-artifacts-builder siempre que el artifact necesite <strong class="text-white">estado (useState/useReducer), rutas o componentes shadcn/ui</strong>. Para HTML simple con Tailwind integrado, usa directamente el skill <code class="bg-dark-800 px-1 rounded text-emerald-300">frontend-design</code>.</p>
+</div>
+<!-- Timeline de decisão -->
+<div class="bg-dark-800 rounded-2xl border border-dark-600 p-6 mb-6">
+<p class="text-neutral-300 font-semibold mb-5">Flujo de decisión: ¿necesito web-artifacts-builder?</p>
+<div class="space-y-4">
+<div class="flex gap-4">
+<div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xs font-bold flex-shrink-0">1</div><div class="w-px flex-1 bg-dark-600 mt-1"></div></div>
+<div class="pb-4"><p class="text-white font-medium text-sm">¿El artifact tiene varias pantallas o pestañas con estado propio?</p><p class="text-emerald-400 text-xs mt-1">→ SÍ: usa web-artifacts-builder</p></div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xs font-bold flex-shrink-0">2</div><div class="w-px flex-1 bg-dark-600 mt-1"></div></div>
+<div class="pb-4"><p class="text-white font-medium text-sm">¿Necesitas componentes shadcn/ui (Dialogs, Tooltips, Selects, Toasts)?</p><p class="text-emerald-400 text-xs mt-1">→ SÍ: usa web-artifacts-builder</p></div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xs font-bold flex-shrink-0">3</div><div class="w-px flex-1 bg-dark-600 mt-1"></div></div>
+<div class="pb-4"><p class="text-white font-medium text-sm">¿Es una visualización interactiva con datos (dashboards, gráficos, formularios complejos)?</p><p class="text-cyan-400 text-xs mt-1">→ Probablemente SÍ</p></div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-dark-700 border border-dark-600 flex items-center justify-center text-neutral-400 text-xs font-bold flex-shrink-0">4</div></div>
+<div><p class="text-white font-medium text-sm">¿Es una landing page, una tarjeta, un modal simple o HTML estático?</p><p class="text-neutral-500 text-xs mt-1">→ NO: usa frontend-design o HTML directamente</p></div>
+</div>
+</div>
+</div>
+<div class="grid md:grid-cols-2 gap-4">
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
+<p class="text-emerald-400 font-semibold text-sm mb-2">✓ Usar cuando...</p>
+<ul class="space-y-1.5 text-neutral-300 text-sm">
+<li>• La solicitud menciona "dashboard", "app", "wizard", "stepper"</li>
+<li>• El artifact tendrá autenticación simulada o varios pasos</li>
+<li>• El cliente quiere componentes Radix (Accordion, Command, etc.)</li>
+<li>• Proyecto complejo con muchos archivos <code class="bg-dark-700 px-1 rounded text-xs">.tsx</code></li>
+</ul>
+</div>
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+<p class="text-red-400 font-semibold text-sm mb-2">✗ No usar cuando...</p>
+<ul class="space-y-1.5 text-neutral-300 text-sm">
+<li>• El artifact es un único bloque JSX sin estado</li>
+<li>• La solicitud es "crea una tarjeta bonita" o "dale estilo a este HTML"</li>
+<li>• No hay manipulación de estado ni eventos complejos</li>
+<li>• El plazo es corto y HTML/Tailwind simple resuelve el problema</li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">disparador</span><p class="text-neutral-400 text-xs mt-1">estado + shadcn</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">mult pantalla</span><p class="text-neutral-400 text-xs mt-1">rutas / pasos</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">elaborado</span><p class="text-neutral-400 text-xs mt-1">no es de un solo archivo</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">complejidad</span><p class="text-neutral-400 text-xs mt-1">criterio central</p></div>
+</div>
+</section>
+<!-- TÓPICO 3: Como melhora suas páginas -->
+<section id="topico-3">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-sm border border-emerald-500/30">3</span>
+<h2 class="text-2xl font-bold">🚀 Cómo mejora tus artifacts</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-5 mb-6">
+<div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5 group hover:border-emerald-500/60 transition-colors">
+<div class="text-3xl mb-3">🏗️</div>
+<p class="text-emerald-400 font-semibold mb-2">Estructura real de una app</p>
+<p class="text-neutral-400 text-sm">En lugar de JSX en un solo archivo, tienes <strong class="text-neutral-300">componentes separados</strong>, hooks personalizados y una arquitectura escalable — Claude Code gestiona cada archivo individualmente.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-cyan-500/30 p-5 group hover:border-cyan-500/60 transition-colors">
+<div class="text-3xl mb-3">🎨</div>
+<p class="text-cyan-400 font-semibold mb-2">UI de producción</p>
+<p class="text-neutral-400 text-sm">Los más de 40 componentes de shadcn/ui garantizan <strong class="text-neutral-300">coherencia visual y accesibilidad</strong> sin esfuerzo. Radix UI se encarga de focus trap, ARIA y keyboard navigation.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5 group hover:border-emerald-500/60 transition-colors">
+<div class="text-3xl mb-3">📦</div>
+<p class="text-emerald-400 font-semibold mb-2">Entrega limpia</p>
+<p class="text-neutral-400 text-sm">O <code class="bg-dark-700 px-1 rounded text-emerald-300">bundle.html</code> generado por Parcel + html-inline es <strong class="text-neutral-300">completamente self-contained</strong> — cero dependencias externas para quien usa el artifact.</p>
+</div>
+</div>
+<!-- Tip box 2 -->
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5 mb-6">
+<p class="text-emerald-400 font-semibold mb-2">Incluye lineamientos de diseño</p>
+<p class="text-neutral-300 text-sm">El SKILL.md incluye una directriz fundamental: <em class="text-white">"Para evitar lo que suele llamarse 'AI slop', evita usar demasiados diseños centrados, degradados morados, esquinas redondeadas uniformes y la fuente Inter."</em> El resultado son artifacts con una identidad visual más sólida y menos genérica.</p>
+</div>
+<!-- Grid FAZER / EVITAR -->
+<div class="grid md:grid-cols-2 gap-6">
+<div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5">
+<p class="text-emerald-400 font-semibold mb-3">✓ Resultados que obtienes</p>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Dashboards con charts, filtros y estado persistente</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Wizards de varios pasos con validación por etapa</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Tablas de datos con sorting, pagination, search</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Paletas de comandos, drawers y sheets de shadcn</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Modo dark/light con tokens CSS correctos</li>
+</ul>
+</div>
+<div class="bg-dark-800 rounded-xl border border-red-500/30 p-5">
+<p class="text-red-400 font-semibold mb-3">✗ Sin el skill tendrías</p>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> Archivo JSX único de 800+ líneas imposible de editar</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> React desde CDN sin bundling — sin tree shaking</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> Componentes Radix implementados desde cero</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> Diseño genérico de «AI slop» sin identidad</li>
+</ul>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">shadcn/ui</span><p class="text-neutral-400 text-xs mt-1">40+ componentes</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">Radix UI</span><p class="text-neutral-400 text-xs mt-1">accesibilidad</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">anti-slop</span><p class="text-neutral-400 text-xs mt-1">guía de diseño</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">tree shaking</span><p class="text-neutral-400 text-xs mt-1">Parcel optimiza</p></div>
+</div>
+</section>
+<!-- TÓPICO 4: Como funciona por dentro -->
+<section id="topico-4">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-sm border border-emerald-500/30">4</span>
+<h2 class="text-2xl font-bold">⚙️ Cómo funciona por dentro</h2>
+</div>
+<!-- Timeline de pipeline -->
+<div class="bg-dark-800 rounded-2xl border border-dark-600 p-6 mb-6">
+<p class="text-neutral-300 font-semibold mb-6">Pipeline completo en 5 pasos</p>
+<div class="space-y-5">
+<div class="flex gap-4">
+<div class="flex flex-col items-center"><div class="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold flex-shrink-0">1</div><div class="w-px flex-1 bg-dark-600 mt-1 mb-1"></div></div>
+<div class="pb-5">
+<p class="text-white font-semibold">init-artifact.sh &lt;project-name&gt;</p>
+<p class="text-neutral-400 text-sm mt-1">Crea un proyecto React+TS con Vite, instala Tailwind 3.4.1 con el sistema de theming de shadcn, configura <code class="bg-dark-700 px-1 rounded text-xs">@/</code> como path alias, preinstala más de 40 componentes shadcn y todas las dependencias de Radix UI. Detecta automáticamente Node 18+ y fija la versión de Vite si es necesario.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center"><div class="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold flex-shrink-0">2</div><div class="w-px flex-1 bg-dark-600 mt-1 mb-1"></div></div>
+<div class="pb-5">
+<p class="text-white font-semibold">Desarrollo de los componentes</p>
+<p class="text-neutral-400 text-sm mt-1">Claude Code edita los archivos <code class="bg-dark-700 px-1 rounded text-xs">.tsx</code> normalmente. Cada componente está en su propio archivo. Las importaciones usan <code class="bg-dark-700 px-1 rounded text-xs">@/components/ui/...</code>. Tailwind y los tokens CSS de shadcn están disponibles globalmente.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center"><div class="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold flex-shrink-0">3</div><div class="w-px flex-1 bg-dark-600 mt-1 mb-1"></div></div>
+<div class="pb-5">
+<p class="text-white font-semibold">bundle-artifact.sh</p>
+<p class="text-neutral-400 text-sm mt-1">Instala dependencias de bundling (parcel, @parcel/config-default, parcel-resolver-tspaths, html-inline). Crea <code class="bg-dark-700 px-1 rounded text-xs">.parcelrc</code> con soporte para path aliases. Compila con Parcel sin source maps. Usa <strong class="text-neutral-300">html-inline</strong> para integrar todo el JS/CSS en el HTML final.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center"><div class="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold flex-shrink-0">4</div><div class="w-px flex-1 bg-dark-600 mt-1 mb-1"></div></div>
+<div class="pb-5">
+<p class="text-white font-semibold">bundle.html → Claude.ai artifact</p>
+<p class="text-neutral-400 text-sm mt-1">El archivo resultante <code class="bg-dark-700 px-1 rounded text-xs">bundle.html</code> es completamente autocontenido — ninguna solicitud externa. Claude Code presenta el artifact directamente al usuario.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center"><div class="w-10 h-10 rounded-full bg-dark-700 border border-dark-600 flex items-center justify-center text-neutral-400 font-bold flex-shrink-0">5</div></div>
+<div>
+<p class="text-white font-semibold">(Opcional) Probar con Playwright/Puppeteer</p>
+<p class="text-neutral-400 text-sm mt-1">Paso opcional: ejecútalo solo si hay problemas o si el usuario lo pide. Evítalo de entrada porque añade latencia innecesaria antes de la entrega.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Box dados: dependências reais -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5">
+<p class="text-blue-400 font-semibold mb-3">Dependencias reales del proyecto generado</p>
+<div class="grid sm:grid-cols-3 gap-3 text-sm">
+<div>
+<p class="text-neutral-400 text-xs font-semibold mb-1 uppercase tracking-wide">Build</p>
+<ul class="space-y-1 text-neutral-300">
+<li><code class="bg-dark-800 px-1 rounded text-emerald-300 text-xs">vite</code> (auto-version)</li>
+<li><code class="bg-dark-800 px-1 rounded text-cyan-300 text-xs">parcel</code></li>
+<li><code class="bg-dark-800 px-1 rounded text-cyan-300 text-xs">html-inline</code></li>
+<li><code class="bg-dark-800 px-1 rounded text-cyan-300 text-xs">parcel-resolver-tspaths</code></li>
+</ul>
+</div>
+<div>
+<p class="text-neutral-400 text-xs font-semibold mb-1 uppercase tracking-wide">UI</p>
+<ul class="space-y-1 text-neutral-300">
+<li><code class="bg-dark-800 px-1 rounded text-emerald-300 text-xs">react@18</code></li>
+<li><code class="bg-dark-800 px-1 rounded text-emerald-300 text-xs">tailwindcss@3.4.1</code></li>
+<li><code class="bg-dark-800 px-1 rounded text-emerald-300 text-xs">shadcn/ui</code> (40+)</li>
+<li><code class="bg-dark-800 px-1 rounded text-emerald-300 text-xs">@radix-ui/*</code></li>
+</ul>
+</div>
+<div>
+<p class="text-neutral-400 text-xs font-semibold mb-1 uppercase tracking-wide">Config</p>
+<ul class="space-y-1 text-neutral-300">
+<li><code class="bg-dark-800 px-1 rounded text-blue-300 text-xs">.parcelrc</code></li>
+<li><code class="bg-dark-800 px-1 rounded text-blue-300 text-xs">tsconfig.json</code> (paths)</li>
+<li><code class="bg-dark-800 px-1 rounded text-blue-300 text-xs">tailwind.config.js</code></li>
+<li><code class="bg-dark-800 px-1 rounded text-blue-300 text-xs">components.json</code></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Conceitos-chave -->
+<div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">Vite</span><p class="text-neutral-400 text-xs mt-1">dev server TS</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">Parcel</span><p class="text-neutral-400 text-xs mt-1">bundling final</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">html-inline</span><p class="text-neutral-400 text-xs mt-1">embed assets</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">.parcelrc</span><p class="text-neutral-400 text-xs mt-1">alias de rutas</p></div>
+</div>
+</section>
+<!-- TÓPICO 5: Exemplo prático + PROMPT -->
+<section id="topico-5">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-sm border border-emerald-500/30">5</span>
+<h2 class="text-2xl font-bold">💬 Ejemplo práctico + PROMPT listo</h2>
+</div>
+<!-- Cenário -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<p class="text-neutral-300 font-semibold mb-2">Escenario: dashboard de métricas con filtros y gráfico</p>
+<p class="text-neutral-400 text-sm">Quieres un artifact con: barra lateral de filtros, línea de tiempo interactiva, tarjetas KPI y un modal de detalles. Estado compartido entre componentes y modo oscuro nativo. Claramente, es un caso para web-artifacts-builder.</p>
+</div>
+<!-- Box mono: PROMPT -->
+<div class="rounded-xl border border-emerald-500/30 overflow-hidden mb-6">
+<div class="bg-emerald-500/10 px-4 py-2 flex items-center justify-between">
+<span class="text-emerald-400 text-xs font-semibold uppercase tracking-wide">PROMPT — pégalo en Claude Code</span>
+<span class="text-neutral-500 text-xs">web-artifacts-builder</span>
+</div>
+<pre class="bg-dark-900 p-5 text-sm text-neutral-300 overflow-x-auto leading-relaxed"><code>Crie um artifact claude.ai com dashboard de métricas de produto.
+
+Requisitos:
+- Sidebar com filtros de período (7d / 30d / 90d)
+- 4 cards de KPI (usuários, sessões, conversão, receita)
+- Gráfico de linha de tendência (simulado com dados mock)
+- Modal de detalhes ao clicar num KPI
+- Dark mode nativo com tokens shadcn/ui
+
+Use o skill web-artifacts-builder:
+1. Inicialize com scripts/init-artifact.sh dashboard-metricas
+2. Crie os componentes em src/components/
+3. Use shadcn/ui: Card, Dialog, Button, Select, Badge
+4. Gere o bundle final com scripts/bundle-artifact.sh
+5. Apresente o bundle.html como artifact</code></pre>
+</div>
+<!-- Tip box -->
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5 mb-6">
+<p class="text-emerald-400 font-semibold mb-2">Consejo: estructura del proyecto generado</p>
+<pre class="text-sm text-neutral-300 leading-relaxed"><code>dashboard-metricas/
+├── src/
+│   ├── App.tsx
+│   ├── components/
+│   │   ├── ui/           ← shadcn/ui (40+ componentes)
+│   │   ├── Sidebar.tsx
+│   │   ├── KPICard.tsx
+│   │   └── DetailModal.tsx
+│   └── main.tsx
+├── index.html            ← obrigatório para bundle
+├── tailwind.config.js
+└── .parcelrc             ← gerado pelo bundle-artifact.sh</code></pre>
+</div>
+<!-- Alerta -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+<p class="text-red-400 font-semibold mb-1">Atención: index.html obligatorio</p>
+<p class="text-neutral-300 text-sm">O <code class="bg-dark-800 px-1 rounded text-red-300">bundle-artifact.sh</code> requiere que exista un <code class="bg-dark-800 px-1 rounded text-red-300">index.html</code> en la raíz del proyecto. El <code class="bg-dark-800 px-1 rounded text-red-300">init-artifact.sh</code> se crea automáticamente — no lo elimines.</p>
+</div>
+<!-- Conceitos-chave -->
+<div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">prompt claro</span><p class="text-neutral-400 text-xs mt-1">lista componentes</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">datos de prueba</span><p class="text-neutral-400 text-xs mt-1">sin API real</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">shadcn list</span><p class="text-neutral-400 text-xs mt-1">indica los componentes</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">bundle final</span><p class="text-neutral-400 text-xs mt-1">siempre al final</p></div>
+</div>
+</section>
+<!-- TÓPICO 6: Combina com / limites -->
+<section id="topico-6">
+<div class="flex items-center space-x-3 mb-6">
+<span class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-sm border border-emerald-500/30">6</span>
+<h2 class="text-2xl font-bold">🧬 Combina con / límites</h2>
+</div>
+<!-- Combos -->
+<div class="grid md:grid-cols-2 gap-5 mb-6">
+<div class="bg-gradient-to-br from-emerald-900/20 to-dark-800 rounded-xl border border-emerald-500/30 p-5">
+<p class="text-emerald-400 font-semibold mb-3">🎨 + frontend-design</p>
+<p class="text-neutral-400 text-sm mb-3">El combo más poderoso de la Ruta 1. Usa <strong class="text-white">frontend-design</strong> para definir el lenguaje visual —grid, tipografía, espaciado, paleta— y web-artifacts-builder para ejecutar esa visión en React. El design-designer puede especificar el sistema de diseño antes del build.</p>
+<div class="bg-dark-900/50 rounded-lg p-3 text-xs text-neutral-400">
+<span class="text-emerald-300">frontend-design</span> → sistema visual<br/>
+<span class="text-cyan-300">web-artifacts-builder</span> → implementación React
+          </div>
+</div>
+<div class="bg-gradient-to-br from-blue-900/20 to-dark-800 rounded-xl border border-blue-500/30 p-5">
+<p class="text-blue-400 font-semibold mb-3">🎨 + theme-factory</p>
+<p class="text-neutral-400 text-sm mb-3">O <strong class="text-white">theme-factory</strong> (Ruta 2) genera tokens coherentes de color, tipografía y shadow. Puedes importar estos tokens directamente en <code class="bg-dark-700 px-1 rounded text-xs">tailwind.config.js</code> del proyecto generado por web-artifacts-builder, garantizando la identidad de marca en el artifact.</p>
+<div class="bg-dark-900/50 rounded-lg p-3 text-xs text-neutral-400">
+<span class="text-blue-300">theme-factory</span> → tokens de marca<br/>
+<span class="text-cyan-300">web-artifacts-builder</span> → se aplica en la configuración de Tailwind
+          </div>
+</div>
+</div>
+<!-- Mapa de relações -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<p class="text-neutral-300 font-semibold mb-4">Posición en el ecosistema de skills</p>
+<div class="grid sm:grid-cols-3 gap-3">
+<div class="bg-dark-900 rounded-lg p-3 border border-emerald-500/20">
+<p class="text-emerald-400 text-xs font-semibold mb-1">ANTES (Ruta 1)</p>
+<p class="text-neutral-300 text-xs"><code class="bg-dark-700 px-1 rounded">frontend-design</code> — define la estética</p>
+<p class="text-neutral-300 text-xs mt-1"><code class="bg-dark-700 px-1 rounded">impeccable</code> — refina la calidad visual</p>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-emerald-500/40 ring-1 ring-emerald-500/30">
+<p class="text-emerald-400 text-xs font-semibold mb-1">ESTÁS AQUÍ</p>
+<p class="text-white text-xs font-bold">web-artifacts-builder</p>
+<p class="text-neutral-400 text-xs mt-1">implementación de varios componentes React</p>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-blue-500/20">
+<p class="text-blue-400 text-xs font-semibold mb-1">COMBINA CON (Ruta 2)</p>
+<p class="text-neutral-300 text-xs"><code class="bg-dark-700 px-1 rounded">theme-factory</code> — tokens de color</p>
+<p class="text-neutral-300 text-xs mt-1"><code class="bg-dark-700 px-1 rounded">brand-guidelines</code> — identidad</p>
+</div>
+</div>
+</div>
+<!-- Limites -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5 mb-6">
+<p class="text-red-400 font-semibold mb-3">Límites reales de la skill</p>
+<div class="grid md:grid-cols-2 gap-4">
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> No genera un deploy; solo un artifact local</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> El bundle puede ser pesado para artifacts muy grandes</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> Requiere Node 18+ en la máquina del usuario</li>
+</ul>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> No admite llamadas reales a la API (artifact en sandbox)</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> context: fork — skill local, no cloud</li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> No es adecuado para artifacts simples (sobrecarga innecesaria)</li>
+</ul>
+</div>
+</div>
+<!-- Quando prefer design-designer -->
+<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5">
+<p class="text-emerald-400 font-semibold mb-2">Design-designer como especificador</p>
+<p class="text-neutral-300 text-sm">El skill <strong class="text-white">design-designer</strong> (Módulo 1.4 de esta ruta) define la especificación visual antes de la implementación. Flujo recomendado para artifacts de alta calidad: <code class="bg-dark-800 px-1 rounded text-emerald-300">design-designer</code> (moodboard + spec) → <code class="bg-dark-800 px-1 rounded text-emerald-300">frontend-design</code> (revisión) → <code class="bg-dark-800 px-1 rounded text-emerald-300">web-artifacts-builder</code> (build React).</p>
+</div>
+<!-- Conceitos-chave -->
+<div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">frontend-design</span><p class="text-neutral-400 text-xs mt-1">T1 complementaria</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">theme-factory</span><p class="text-neutral-400 text-xs mt-1">tokens Tailwind</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">design-designer</span><p class="text-neutral-400 text-xs mt-1">especificación antes de la construcción</p></div>
+<div class="bg-dark-800 rounded-lg p-3 border border-dark-600 text-center"><span class="text-emerald-400 text-xs font-semibold">context: fork</span><p class="text-neutral-400 text-xs mt-1">solo local</p></div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 rounded-2xl border border-emerald-500/30 p-8" id="resumo">
+<h2 class="text-2xl font-bold mb-6">📋 Resumen del Módulo 1.3</h2>
+<div class="grid md:grid-cols-2 gap-8 mb-8">
+<div>
+<p class="text-emerald-400 font-semibold mb-4">Qué aprendiste</p>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> web-artifacts-builder es una suite para artifacts React multicomponente en claude.ai</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Stack: React 18 + TypeScript + Vite + Tailwind 3.4.1 + shadcn/ui + Parcel</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Pipeline: init-artifact.sh → dev → bundle-artifact.sh → bundle.html</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Más de 40 componentes shadcn/ui y todas las dependencias de Radix UI preinstaladas</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Úsalo solo para artifacts complejos — el HTML simple no justifica el overhead</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Combina con frontend-design (estética), theme-factory (tokens) y design-designer (spec)</li>
+</ul>
+</div>
+<div>
+<!-- Próximo módulo box -->
+<div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5">
+<p class="text-neutral-500 text-xs font-semibold uppercase tracking-wide mb-3">Próximo módulo</p>
+<div class="flex items-center gap-3 mb-3">
+<span class="text-3xl">🎯</span>
+<div>
+<p class="text-white font-bold">1.4 — design-designer</p>
+<p class="text-neutral-400 text-sm">Especifica sistemas de diseño completos antes de construir</p>
+</div>
+</div>
+<p class="text-neutral-400 text-sm">Aprende a usar design-designer para crear moodboards, definir grids, tipografía y paletas — la base visual que potencia todas las demás skills de la Trilha 1.</p>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Volver a la ruta 1</a>
+<a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="modulo-1-4.html">Próximo módulo: 1.4 design-designer →</a>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Contenido de <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Skill Design — Ruta 1: Crear · Módulo 1.3 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

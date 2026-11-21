@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Module 1.2 — ✨ impeccable · Design Skill · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: { 600: '#374151', 700: '#1f2937', 800: '#111827', 900: '#0a0f1a' }
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    };
+  </script>
+<style>
+    /* === LIGHT MODE BASE === */
+    html:not(.dark) body { background-color: #f9fafb; color: #111827; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-700 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-300 { color: #374151; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #d1d5db; }
+    /* emerald accent light */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .text-emerald-300 { color: #047857; }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.3); }
+    html:not(.dark) .from-emerald-900\/30 { --tw-gradient-from: rgba(6,78,59,0.12); }
+    html:not(.dark) .bg-cyan-500\/10 { background-color: rgba(6,182,212,0.08); }
+    html:not(.dark) .border-cyan-500\/30 { border-color: rgba(6,182,212,0.3); }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(59,130,246,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(59,130,246,0.3); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(239,68,68,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(239,68,68,0.3); }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    html:not(.dark) .dark\:border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) pre, html:not(.dark) code { background-color: #1f2937; color: #d1fae5; }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha1/modulo-1-2.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha1/modulo-1-2.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha1/modulo-1-2.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-300 font-sans min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha1/modulo-1-2.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-1-2.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha1/modulo-1-2.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-emerald-400 font-bold text-lg hover:text-emerald-300 transition-colors" href="../../index.html">
+<span>🎨</span><span class="hidden sm:inline">Design Skill</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html">
+<span class="sm:hidden">T1</span><span class="hidden sm:inline">Build</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html">
+<span class="sm:hidden">T2</span><span class="hidden sm:inline">Identity</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html">
+<span class="sm:hidden">T3</span><span class="hidden sm:inline">Media</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html">
+<span class="sm:hidden">T4</span><span class="hidden sm:inline">Support</span>
+</a>
+<button aria-label="Switch theme" class="ml-2 p-2 rounded-lg hover:bg-dark-700 transition-colors" id="theme-toggle">
+<svg class="hidden w-4 h-4" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20">
+<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+</svg>
+<svg class="hidden w-4 h-4" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-emerald-400 transition-colors" href="../../index.html">Start</a>
+<span>/</span>
+<a class="hover:text-emerald-400 transition-colors" href="index.html">Track 1 — Build</a>
+<span>/</span>
+<span class="text-emerald-400 font-medium">Module 1.2</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4 tracking-widest">MODULE 1.2</span>
+<h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">✨ impeccable</h1>
+<p class="text-neutral-400 text-lg leading-relaxed mb-6">The skill that takes what already exists and makes it <em>impeccable</em>. Redesign, critique, audit, polish, animate — all to elevate interfaces that are already running.</p>
+<div class="grid grid-cols-4 gap-3">
+<div class="bg-dark-800 rounded-xl p-3 text-center border border-dark-600">
+<div class="text-2xl font-bold text-emerald-400">6</div>
+<div class="text-xs text-neutral-500 mt-0.5">Topics</div>
+</div>
+<div class="bg-dark-800 rounded-xl p-3 text-center border border-dark-600">
+<div class="text-2xl font-bold text-emerald-400">30</div>
+<div class="text-xs text-neutral-500 mt-0.5">Minutes</div>
+</div>
+<div class="bg-dark-800 rounded-xl p-3 text-center border border-dark-600">
+<div class="text-2xl font-bold text-emerald-400">Int</div>
+<div class="text-xs text-neutral-500 mt-0.5">Level</div>
+</div>
+<div class="bg-dark-800 rounded-xl p-3 text-center border border-dark-600">
+<div class="text-2xl font-bold text-emerald-400">UI</div>
+<div class="text-xs text-neutral-500 mt-0.5">Category</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — Interface sendo refinada -->
+<div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-4 overflow-hidden">
+<svg aria-label="Futuristic diagram showing an interface being refined by impeccable" class="w-full h-auto" font-family="Inter,sans-serif" role="img" viewbox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="m12-bg" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#0e2018"></stop>
+<stop offset="100%" stop-color="#0e1b26"></stop>
+</lineargradient>
+<lineargradient id="m12-em" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#34d399"></stop>
+<stop offset="100%" stop-color="#10b981"></stop>
+</lineargradient>
+<lineargradient id="m12-cy" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#38bdf8"></stop>
+<stop offset="100%" stop-color="#06b6d4"></stop>
+</lineargradient>
+<filter id="m12-glow">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+</defs>
+<!-- bg -->
+<rect fill="url(#m12-bg)" height="260" rx="14" width="420"></rect>
+<!-- grid lines -->
+<g opacity="0.6" stroke="#1a2f24" stroke-width="0.5">
+<line x1="70" x2="70" y1="0" y2="260"></line>
+<line x1="140" x2="140" y1="0" y2="260"></line>
+<line x1="210" x2="210" y1="0" y2="260"></line>
+<line x1="280" x2="280" y1="0" y2="260"></line>
+<line x1="350" x2="350" y1="0" y2="260"></line>
+<line x1="0" x2="420" y1="65" y2="65"></line>
+<line x1="0" x2="420" y1="130" y2="130"></line>
+<line x1="0" x2="420" y1="195" y2="195"></line>
+</g>
+<!-- BEFORE panel (left) -->
+<rect fill="#111827" height="120" rx="8" stroke="#374151" stroke-width="1" width="170" x="18" y="20"></rect>
+<text fill="#6b7280" font-size="8" font-weight="600" letter-spacing="1" text-anchor="middle" x="103" y="36">BEFORE</text>
+<!-- bland header bar -->
+<rect fill="#1f2937" height="18" rx="3" width="154" x="26" y="42"></rect>
+<rect fill="#374151" height="6" rx="2" width="40" x="30" y="48"></rect>
+<!-- bland body blocks -->
+<rect fill="#1f2937" height="10" rx="2" width="154" x="26" y="66"></rect>
+<rect fill="#1f2937" height="10" rx="2" width="120" x="26" y="80"></rect>
+<rect fill="#1f2937" height="10" rx="2" width="154" x="26" y="94"></rect>
+<!-- bland button -->
+<rect fill="#374151" height="20" rx="3" width="60" x="26" y="110"></rect>
+<text fill="#6b7280" font-size="7" text-anchor="middle" x="56" y="124">Button</text>
+<!-- X label -->
+<circle cx="159" cy="28" fill="#ef4444" opacity="0.2" r="7"></circle>
+<text fill="#ef4444" font-size="9" font-weight="700" text-anchor="middle" x="159" y="32">✗</text>
+<!-- ARROW in the middle -->
+<g filter="url(#m12-glow)">
+<line stroke="url(#m12-cy)" stroke-width="2.5" x1="198" x2="222" y1="80" y2="80"></line>
+<polygon fill="#38bdf8" points="222,75 232,80 222,85"></polygon>
+</g>
+<text fill="#38bdf8" font-size="7" font-weight="600" text-anchor="middle" x="215" y="72">impeccable</text>
+<!-- AFTER panel (right) -->
+<rect fill="#0a1a12" height="120" rx="8" stroke="#34d399" stroke-width="1.2" width="170" x="240" y="20"></rect>
+<text fill="#34d399" font-size="8" font-weight="600" letter-spacing="1" text-anchor="middle" x="325" y="36">AFTER</text>
+<!-- refined header -->
+<rect fill="#0e2018" height="18" rx="3" stroke="#10b981" stroke-width="0.5" width="154" x="248" y="42"></rect>
+<rect fill="#34d399" height="7" opacity="0.7" rx="2" width="36" x="252" y="47"></rect>
+<rect fill="#10b981" height="7" opacity="0.4" rx="2" width="40" x="352" y="47"></rect>
+<!-- refined body -->
+<rect fill="#1a2f24" height="8" opacity="0.8" rx="2" width="154" x="248" y="66"></rect>
+<rect fill="#1a2f24" height="8" opacity="0.6" rx="2" width="110" x="248" y="78"></rect>
+<rect fill="#1a2f24" height="8" opacity="0.8" rx="2" width="154" x="248" y="90"></rect>
+<!-- refined button -->
+<rect fill="url(#m12-em)" height="22" rx="5" width="68" x="248" y="104"></rect>
+<text fill="#0a1a12" font-size="7" font-weight="700" text-anchor="middle" x="282" y="118">Enter →</text>
+<!-- check -->
+<circle cx="401" cy="28" fill="#10b981" opacity="0.3" r="7"></circle>
+<text fill="#34d399" font-size="9" font-weight="700" text-anchor="middle" x="401" y="32">✓</text>
+<!-- Bottom — command categories -->
+<rect fill="#0a1218" height="82" rx="8" stroke="#0e4030" stroke-width="0.8" width="384" x="18" y="158"></rect>
+<text fill="#34d399" font-size="8" font-weight="700" letter-spacing="2" text-anchor="middle" x="210" y="173">24 COMMANDS</text>
+<!-- category boxes -->
+<rect fill="#0e2018" height="48" rx="5" stroke="#10b981" stroke-width="0.6" width="78" x="28" y="180"></rect>
+<text fill="#10b981" font-size="7" font-weight="600" text-anchor="middle" x="67" y="195">Build</text>
+<text fill="#6b7280" font-size="6" text-anchor="middle" x="67" y="207">craft · shape</text>
+<text fill="#6b7280" font-size="6" text-anchor="middle" x="67" y="218">extract · teach</text>
+<rect fill="#0e1622" height="48" rx="5" stroke="#38bdf8" stroke-width="0.6" width="78" x="114" y="180"></rect>
+<text fill="#38bdf8" font-size="7" font-weight="600" text-anchor="middle" x="153" y="195">Evaluate</text>
+<text fill="#6b7280" font-size="6" text-anchor="middle" x="153" y="207">critique · audit</text>
+<text fill="#6b7280" font-size="6" text-anchor="middle" x="153" y="218">heuristics</text>
+<rect fill="#1a1230" height="48" rx="5" stroke="#a855f7" stroke-width="0.6" width="78" x="200" y="180"></rect>
+<text fill="#a855f7" font-size="7" font-weight="600" text-anchor="middle" x="239" y="195">Refine</text>
+<text fill="#6b7280" font-size="6" text-anchor="middle" x="239" y="207">polish · bolder</text>
+<text fill="#6b7280" font-size="6" text-anchor="middle" x="239" y="218">quieter · harden</text>
+<rect fill="#1f1604" height="48" rx="5" stroke="#fbbf24" stroke-width="0.6" width="98" x="286" y="180"></rect>
+<text fill="#fbbf24" font-size="7" font-weight="600" text-anchor="middle" x="335" y="195">Enhance</text>
+<text fill="#6b7280" font-size="6" text-anchor="middle" x="335" y="207">animate · colorize</text>
+<text fill="#6b7280" font-size="6" text-anchor="middle" x="335" y="218">typeset · overdrive</text>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+<!-- ===== TÓPICO 1 — O QUE É / O QUE FAZ ===== -->
+<section class="bg-dark-800 rounded-2xl border border-emerald-500/30 overflow-hidden" id="topico-1">
+<div class="p-6 pb-4">
+<div class="flex items-start gap-4 mb-5">
+<div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 text-emerald-400 font-bold text-lg">1</div>
+<div>
+<h2 class="text-xl font-bold text-white">🧩 What it is / what it does</h2>
+<p class="text-neutral-500 text-sm mt-0.5">Precise definition and actual scope of the skill</p>
+</div>
+</div>
+<!-- conceito principal box -->
+<div class="rounded-xl bg-gradient-to-br from-emerald-900/30 to-dark-700/50 border border-emerald-500/30 p-5 mb-5">
+<p class="text-emerald-300 font-semibold text-lg leading-snug">"The skill that improves what already exists—never what starts from scratch."</p>
+<p class="text-neutral-400 mt-2 text-sm leading-relaxed">
+<strong class="text-white">impeccable v3.1.1</strong> is a Claude Code skill with an Apache 2.0 license, derived from Anthropic's frontend-design, specialized in <em>redesign, critique, audit, and polish</em> of existing frontend interfaces. It organizes 24 commands into 5 categories (Build, Evaluate, Refine, Enhance, Fix) and acts as both a design reviewer and implementer.
+          </p>
+</div>
+<!-- grid do / não do -->
+<div class="grid sm:grid-cols-2 gap-4 mb-5">
+<div class="bg-dark-900 rounded-xl border border-emerald-500/20 p-4">
+<div class="text-emerald-400 font-bold text-sm mb-3 flex items-center gap-2">✓ IN SCOPE</div>
+<ul class="space-y-1.5 text-sm text-neutral-400">
+<li class="flex gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Redesign and critique of existing pages</li>
+<li class="flex gap-2"><span class="text-emerald-400 mt-0.5">✓</span> UX review with heuristics and scoring</li>
+<li class="flex gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Technical audit (a11y, performance, responsive design)</li>
+<li class="flex gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Final polish before deploy</li>
+<li class="flex gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Animations and micro-interactions</li>
+<li class="flex gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Reusable design systems and tokens</li>
+<li class="flex gap-2"><span class="text-emerald-400 mt-0.5">✓</span> i18n, error/empty states, edge cases</li>
+</ul>
+</div>
+<div class="bg-dark-900 rounded-xl border border-red-500/20 p-4">
+<div class="text-red-400 font-bold text-sm mb-3 flex items-center gap-2">✗ OUT OF SCOPE</div>
+<ul class="space-y-1.5 text-sm text-neutral-400">
+<li class="flex gap-2"><span class="text-red-400 mt-0.5">✗</span> Backend — APIs, databases, servers</li>
+<li class="flex gap-2"><span class="text-red-400 mt-0.5">✗</span> Create an interface from scratch (→ frontend-design)</li>
+<li class="flex gap-2"><span class="text-red-400 mt-0.5">✗</span> Brand identity and logo (→ brand-guidelines)</li>
+<li class="flex gap-2"><span class="text-red-400 mt-0.5">✗</span> Pure business logic without UI</li>
+<li class="flex gap-2"><span class="text-red-400 mt-0.5">✗</span> Infrastructure and DevOps</li>
+<li class="flex gap-2"><span class="text-red-400 mt-0.5">✗</span> Non-UI tasks (unit tests, CI/CD)</li>
+</ul>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-xl mb-1">24</div>
+<div class="text-xs text-neutral-500">commands</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-xl mb-1">v3.1.1</div>
+<div class="text-xs text-neutral-500">current version</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-xl mb-1">5</div>
+<div class="text-xs text-neutral-500">categories</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-emerald-400 text-xl mb-1">Apache</div>
+<div class="text-xs text-neutral-500">license 2.0</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== TÓPICO 2 — QUANDO DISPARA ===== -->
+<section class="bg-dark-800 rounded-2xl border border-emerald-500/30 overflow-hidden" id="topico-2">
+<div class="p-6 pb-4">
+<div class="flex items-start gap-4 mb-5">
+<div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 text-emerald-400 font-bold text-lg">2</div>
+<div>
+<h2 class="text-xl font-bold text-white">🎣 When it triggers</h2>
+<p class="text-neutral-500 text-sm mt-0.5">Exact description triggers — which request Claude acts on</p>
+</div>
+</div>
+<!-- tip box -->
+<div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 mb-5 flex gap-3">
+<span class="text-emerald-400 text-lg flex-shrink-0">💡</span>
+<p class="text-sm text-neutral-300">Claude evaluates each user request against the <code class="text-emerald-300 bg-dark-900 px-1 rounded text-xs">description</code> from the skill. If there’s a match, the skill is invoked automatically — without the user typing <code class="text-xs bg-dark-900 px-1 rounded">/impeccable</code>.</p>
+</div>
+<!-- timeline de gatilhos -->
+<div class="space-y-3 mb-5">
+<p class="text-xs font-semibold text-emerald-400 uppercase tracking-widest">Verbs that activate impeccable</p>
+<div class="flex gap-3 items-start">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></div>
+<div>
+<span class="text-white font-semibold text-sm">design / redesign</span>
+<span class="text-neutral-500 text-sm"> — redesign the look of an existing page</span>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></div>
+<div>
+<span class="text-white font-semibold text-sm">critique / audit</span>
+<span class="text-neutral-500 text-sm"> — UX review or technical audit (a11y, performance, responsive design)</span>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></div>
+<div>
+<span class="text-white font-semibold text-sm">polish / harden / optimize</span>
+<span class="text-neutral-500 text-sm"> — refinement and hardening of an existing interface</span>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<div class="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0"></div>
+<div>
+<span class="text-white font-semibold text-sm">animate / colorize</span>
+<span class="text-neutral-500 text-sm"> — add motion or strategic color</span>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<div class="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0"></div>
+<div>
+<span class="text-white font-semibold text-sm">bolder / quieter / distill</span>
+<span class="text-neutral-500 text-sm"> — amplify, soften, or simplify the design</span>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-300 mt-2 flex-shrink-0"></div>
+<div>
+<span class="text-white font-semibold text-sm">clarify / adapt / typeset / layout</span>
+<span class="text-neutral-500 text-sm"> — fixes to copy, responsiveness, typography, and spacing</span>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-300 mt-2 flex-shrink-0"></div>
+<div>
+<span class="text-white font-semibold text-sm">shape / extract / teach / document</span>
+<span class="text-neutral-500 text-sm"> — UX planning, token extraction, context setup</span>
+</div>
+</div>
+</div>
+<!-- alerta box -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4 mb-5 flex gap-3">
+<span class="text-red-400 text-lg flex-shrink-0">⚠️</span>
+<div class="text-sm text-neutral-300">
+<strong class="text-red-300">Doesn't trigger</strong> when the request is to create something from scratch without mentioning anything existing. In these cases, Claude uses <strong>frontend-design</strong>. The distinction is: impeccable = "the polish", frontend-design = "the beginning".
+          </div>
+</div>
+<!-- conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">🎯</div>
+<div class="text-xs text-neutral-400">Match by verb</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">🔄</div>
+<div class="text-xs text-neutral-400">Auto-invoked</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">📝</div>
+<div class="text-xs text-neutral-400">Or /impeccable</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">🧭</div>
+<div class="text-xs text-neutral-400">Internal routing</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== TÓPICO 3 — COMO MELHORA SUAS PÁGINAS ===== -->
+<section class="bg-dark-800 rounded-2xl border border-emerald-500/30 overflow-hidden" id="topico-3">
+<div class="p-6 pb-4">
+<div class="flex items-start gap-4 mb-5">
+<div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 text-emerald-400 font-bold text-lg">3</div>
+<div>
+<h2 class="text-xl font-bold text-white">🚀 How it improves your pages</h2>
+<p class="text-neutral-500 text-sm mt-0.5">Concrete value for the final result</p>
+</div>
+</div>
+<!-- 5 dimensões de melhoria -->
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
+<div class="bg-dark-900 rounded-xl p-4 border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-2">👁️ Visuals &amp; Hierarchy</div>
+<p class="text-xs text-neutral-400 leading-relaxed">Typographic scale, weight, contrast, rhythmic spacing (≥1.25 ratio between steps). Eliminates flat scales and visual blandness.</p>
+</div>
+<div class="bg-dark-900 rounded-xl p-4 border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-2">♿ Accessibility</div>
+<p class="text-xs text-neutral-400 leading-relaxed">WCAG audit, contrast, ARIA labels, visible focus, keyboard navigation—what Lighthouse misses.</p>
+</div>
+<div class="bg-dark-900 rounded-xl p-4 border border-dark-600">
+<div class="text-emerald-400 font-bold text-sm mb-2">⚡ UI Performance</div>
+<p class="text-xs text-neutral-400 leading-relaxed">Diagnose and fix slow rendering, reflows, animations with CLS, and blocking fonts.</p>
+</div>
+<div class="bg-dark-900 rounded-xl p-4 border border-dark-600">
+<div class="text-cyan-400 font-bold text-sm mb-2">🎬 Motion &amp; Microinteractions</div>
+<p class="text-xs text-neutral-400 leading-relaxed">Purposeful animations, smooth transitions, state feedback, delight without excess—while respecting prefers-reduced-motion.</p>
+</div>
+<div class="bg-dark-900 rounded-xl p-4 border border-dark-600">
+<div class="text-cyan-400 font-bold text-sm mb-2">📱 Responsive &amp; Adapt</div>
+<p class="text-xs text-neutral-400 leading-relaxed">Breakpoints, fluid containers, scalable typography, correct touch targets, dark/light mode.</p>
+</div>
+<div class="bg-dark-900 rounded-xl p-4 border border-dark-600">
+<div class="text-emerald-300 font-bold text-sm mb-2">🔩 Design Systems</div>
+<p class="text-xs text-neutral-400 leading-relaxed">Extract CSS/Tailwind tokens, create a documented DESIGN.md, and make components reusable and consistent.</p>
+</div>
+</div>
+<!-- tip box 2 -->
+<div class="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4 mb-5 flex gap-3">
+<span class="text-cyan-400 text-lg flex-shrink-0">💡</span>
+<div class="text-sm text-neutral-300">
+<strong class="text-cyan-300">Shared Design Laws</strong> embedded: the skill automatically blocks side-stripe borders, gradient text, decorative glassmorphism, cliché hero metrics, and identical card grids — enforcing quality standards before any command is run.
+          </div>
+</div>
+<!-- conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-sm font-bold text-emerald-400 mb-1">UX copy</div>
+<div class="text-xs text-neutral-500">labels and errors</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-sm font-bold text-emerald-400 mb-1">i18n</div>
+<div class="text-xs text-neutral-500">internationalization</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-sm font-bold text-emerald-400 mb-1">Edge cases</div>
+<div class="text-xs text-neutral-500">empty · error · loading</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-sm font-bold text-emerald-400 mb-1">Tokens</div>
+<div class="text-xs text-neutral-500">design system</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== TÓPICO 4 — COMO FUNCIONA POR DENTRO ===== -->
+<section class="bg-dark-800 rounded-2xl border border-emerald-500/30 overflow-hidden" id="topico-4">
+<div class="p-6 pb-4">
+<div class="flex items-start gap-4 mb-5">
+<div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 text-emerald-400 font-bold text-lg">4</div>
+<div>
+<h2 class="text-xl font-bold text-white">⚙️ How it works under the hood</h2>
+<p class="text-neutral-500 text-sm mt-0.5">Actual stack, files, scripts, and approach</p>
+</div>
+</div>
+<!-- data box -->
+<div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mb-5">
+<div class="text-blue-400 font-bold text-sm mb-3">📦 Skill structure</div>
+<div class="grid sm:grid-cols-2 gap-4 text-sm">
+<div>
+<p class="text-neutral-500 text-xs font-semibold uppercase mb-1.5">Main files</p>
+<ul class="space-y-1 text-neutral-400">
+<li><code class="text-cyan-300 text-xs">SKILL.md</code> — manifest (name, description, commands, version)</li>
+<li><code class="text-cyan-300 text-xs">reference/critique.md</code> — UX heuristic review</li>
+<li><code class="text-cyan-300 text-xs">reference/audit.md</code> — accessibility + performance + responsive design</li>
+<li><code class="text-cyan-300 text-xs">reference/polish.md</code> — pre-ship quality pass</li>
+<li><code class="text-cyan-300 text-xs">reference/animate.md</code> — purposeful motion</li>
+<li><code class="text-cyan-300 text-xs">reference/extract.md</code> — tokens and design system</li>
+<li><code class="text-cyan-300 text-xs">scripts/pin.mjs</code> — create command shortcuts</li>
+</ul>
+</div>
+<div>
+<p class="text-neutral-500 text-xs font-semibold uppercase mb-1.5">Setup (context gathering)</p>
+<ul class="space-y-1 text-neutral-400">
+<li>1. Read the project's PRODUCT.md and DESIGN.md</li>
+<li>2. Records the codebase's design context</li>
+<li>3. Apply Shared Design Laws (absolute bans)</li>
+<li>4. Route to the correct command</li>
+<li>5. Run the command's reference file</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- timeline fluxo de execução -->
+<p class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-3">Execution workflow</p>
+<div class="space-y-0 mb-5">
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-xs flex-shrink-0">1</div>
+<div class="w-0.5 h-8 bg-dark-600 mx-auto"></div>
+</div>
+<div class="pb-6">
+<p class="text-white text-sm font-semibold">User request</p>
+<p class="text-neutral-500 text-xs">Claude detects an improvement verb → activates impeccable</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-xs flex-shrink-0">2</div>
+<div class="w-0.5 h-8 bg-dark-600 mx-auto"></div>
+</div>
+<div class="pb-6">
+<p class="text-white text-sm font-semibold">Setup &amp; Context Gathering</p>
+<p class="text-neutral-500 text-xs">Read PRODUCT.md and DESIGN.md, and record the current UI state</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xs flex-shrink-0">3</div>
+<div class="w-0.5 h-8 bg-dark-600 mx-auto"></div>
+</div>
+<div class="pb-6">
+<p class="text-white text-sm font-semibold">Routing Rules</p>
+<p class="text-neutral-500 text-xs">First word = command → loads reference file; no argument → menu; general → applies setup + register</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xs flex-shrink-0">4</div>
+</div>
+<div class="pb-2">
+<p class="text-white text-sm font-semibold">Execution + Delivery</p>
+<p class="text-neutral-500 text-xs">Implements changes in the codebase, applies shared design laws, delivers code or analysis</p>
+</div>
+</div>
+</div>
+<!-- pin command -->
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-5">
+<p class="text-xs text-emerald-400 font-semibold mb-2">🔧 Create a command shortcut (pin)</p>
+<pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code>node .claude/skills/impeccable/scripts/pin.mjs pin polish</code></pre>
+<p class="text-xs text-neutral-500 mt-2">Create shortcut <code>/polish</code> that directly invokes <code>/impeccable polish</code>. Applies to any of the 24 commands.</p>
+</div>
+<!-- conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-xs font-bold text-emerald-400 mb-1">SKILL.md</div>
+<div class="text-xs text-neutral-500">manifest</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-xs font-bold text-emerald-400 mb-1">reference/</div>
+<div class="text-xs text-neutral-500">24 files</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-xs font-bold text-emerald-400 mb-1">pin.mjs</div>
+<div class="text-xs text-neutral-500">shortcuts</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-xs font-bold text-emerald-400 mb-1">allowed-tools</div>
+<div class="text-xs text-neutral-500">npx impeccable *</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== TÓPICO 5 — EXEMPLO PRÁTICO + PROMPT ===== -->
+<section class="bg-dark-800 rounded-2xl border border-emerald-500/30 overflow-hidden" id="topico-5">
+<div class="p-6 pb-4">
+<div class="flex items-start gap-4 mb-5">
+<div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 text-emerald-400 font-bold text-lg">5</div>
+<div>
+<h2 class="text-xl font-bold text-white">💬 Practical example + Ready-to-use PROMPT</h2>
+<p class="text-neutral-500 text-sm mt-0.5">Copy and paste directly into Claude Code</p>
+</div>
+</div>
+<!-- cenário -->
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-5">
+<p class="text-xs text-emerald-400 font-semibold uppercase tracking-widest mb-2">Scenario</p>
+<p class="text-sm text-neutral-300 leading-relaxed">You have a functional React/Tailwind dashboard that's visually tedious: flat typography, identical cards, no animation, a form with no error states, and no mobile responsiveness. That's where impeccable comes in.</p>
+</div>
+<!-- prompt mono -->
+<div class="rounded-xl border border-emerald-500/30 bg-dark-900 overflow-hidden mb-5">
+<div class="flex items-center justify-between px-4 py-2 bg-emerald-500/10 border-b border-emerald-500/20">
+<span class="text-emerald-400 text-xs font-semibold font-mono">PROMPT — Paste into Claude Code</span>
+<span class="text-neutral-600 text-xs">Prompt 1 — Full audit</span>
+</div>
+<pre class="p-4 text-sm font-mono text-emerald-300 overflow-x-auto leading-relaxed"><code>/impeccable critique src/components/Dashboard.tsx
+
+Quero um UX review completo com heuristic scoring.
+Foque em: hierarquia visual, carga cognitiva,
+estados de erro e empty state, acessibilidade,
+e responsividade mobile. Me entregue um relatório
+priorizado com as 5 issues mais críticas primeiro.</code></pre>
+</div>
+<div class="rounded-xl border border-cyan-500/30 bg-dark-900 overflow-hidden mb-5">
+<div class="flex items-center justify-between px-4 py-2 bg-cyan-500/10 border-b border-cyan-500/20">
+<span class="text-cyan-400 text-xs font-semibold font-mono">PROMPT — Paste into Claude Code</span>
+<span class="text-neutral-600 text-xs">Prompt 2 — Pre-deploy polish</span>
+</div>
+<pre class="p-4 text-sm font-mono text-cyan-300 overflow-x-auto leading-relaxed"><code>/impeccable polish src/pages/Landing.tsx
+
+Final quality pass antes de ir para produção.
+Verifique: contraste WCAG AA, focus visible,
+tipografia (65-75ch body), touch targets ≥44px,
+i18n hardcoded strings, e aplique animate com
+prefers-reduced-motion.</code></pre>
+</div>
+<div class="rounded-xl border border-emerald-500/30 bg-dark-900 overflow-hidden mb-5">
+<div class="flex items-center justify-between px-4 py-2 bg-emerald-500/10 border-b border-emerald-500/20">
+<span class="text-emerald-400 text-xs font-semibold font-mono">PROMPT — Paste into Claude Code</span>
+<span class="text-neutral-600 text-xs">Prompt 3 — Extract a design system</span>
+</div>
+<pre class="p-4 text-sm font-mono text-emerald-300 overflow-x-auto leading-relaxed"><code>/impeccable extract src/
+
+Extraia todos os tokens de design existentes
+(cores, espaçamento, tipografia, shadows) e
+crie um DESIGN.md documentado + tokens.css
+com custom properties. Identifique componentes
+duplicados que podem virar um único reutilizável.</code></pre>
+</div>
+<!-- grid do / não do uso de comandos -->
+<div class="grid sm:grid-cols-2 gap-4 mb-5">
+<div class="bg-dark-900 rounded-xl border border-emerald-500/20 p-4">
+<div class="text-emerald-400 font-bold text-sm mb-3">✓ USE WHEN</div>
+<ul class="space-y-1.5 text-xs text-neutral-400">
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Interface works but looks ugly/bland</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Need UX QA before shipping</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Want to animate but don't know where to start</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Inconsistent design system</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Form without edge case handling</li>
+</ul>
+</div>
+<div class="bg-dark-900 rounded-xl border border-red-500/20 p-4">
+<div class="text-red-400 font-bold text-sm mb-3">✗ DO NOT USE WHEN</div>
+<ul class="space-y-1.5 text-xs text-neutral-400">
+<li class="flex gap-2"><span class="text-red-400">✗</span> No interface exists yet</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Need to create an API or backend</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Want to create a visual identity from scratch</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Task involves CI/CD, testing, infrastructure</li>
+</ul>
+</div>
+</div>
+<!-- conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">🔍</div>
+<div class="text-xs text-neutral-400">critique</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">✨</div>
+<div class="text-xs text-neutral-400">polish</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">📦</div>
+<div class="text-xs text-neutral-400">extract</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">🎬</div>
+<div class="text-xs text-neutral-400">animate</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== TÓPICO 6 — COMBINA COM / LIMITES ===== -->
+<section class="bg-dark-800 rounded-2xl border border-emerald-500/30 overflow-hidden" id="topico-6">
+<div class="p-6 pb-4">
+<div class="flex items-start gap-4 mb-5">
+<div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 text-emerald-400 font-bold text-lg">6</div>
+<div>
+<h2 class="text-xl font-bold text-white">🧬 Works well with / limitations</h2>
+<p class="text-neutral-500 text-sm mt-0.5">Skills ecosystem and when not to use impeccable</p>
+</div>
+</div>
+<!-- relação com frontend-design — destaque especial -->
+<div class="rounded-xl bg-gradient-to-br from-emerald-900/30 to-dark-700/50 border border-emerald-500/30 p-5 mb-5">
+<p class="text-emerald-300 font-bold mb-2">⚛️ frontend-design ↔ ✨ impeccable — the fundamental duo</p>
+<div class="grid sm:grid-cols-2 gap-4 text-sm">
+<div>
+<p class="text-white font-semibold mb-1">frontend-design (Module 1.1)</p>
+<p class="text-neutral-400 leading-relaxed">Create interface <strong>from scratch</strong>. Decide on the architecture, stack (React/Tailwind/shadcn), component structure, and initial UX flow. It's the <strong>"before"</strong>.</p>
+</div>
+<div>
+<p class="text-white font-semibold mb-1">impeccable (this module)</p>
+<p class="text-neutral-400 leading-relaxed">Takes the existing interface and makes it <strong>impeccable</strong>. It doesn't decide on the stack — it improves what's there. It's the <strong>"after"</strong>. Natural workflow: frontend-design → impeccable polish.</p>
+</div>
+</div>
+</div>
+<!-- combina com -->
+<p class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-3">Works with other course skills</p>
+<div class="space-y-3 mb-5">
+<div class="flex gap-4 items-start bg-dark-900 rounded-xl p-3 border border-dark-600">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-lg flex-shrink-0">⚛️</div>
+<div>
+<p class="text-white font-semibold text-sm">frontend-design (1.1)</p>
+<p class="text-neutral-500 text-xs">Creates the scaffold; impeccable refines it. Use in sequence: 1.1 → 1.2.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start bg-dark-900 rounded-xl p-3 border border-dark-600">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-lg flex-shrink-0">🧱</div>
+<div>
+<p class="text-white font-semibold text-sm">web-artifacts-builder (1.3)</p>
+<p class="text-neutral-500 text-xs">Generates standalone HTML artifacts; impeccable improves them after they're created.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start bg-dark-900 rounded-xl p-3 border border-dark-600">
+<div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg flex-shrink-0">🏷️</div>
+<div>
+<p class="text-white font-semibold text-sm">brand-guidelines (2.2)</p>
+<p class="text-neutral-500 text-xs">Define brand identity and tokens; impeccable apply colorize uses these tokens in the interface.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start bg-dark-900 rounded-xl p-3 border border-dark-600">
+<div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-lg flex-shrink-0">🎬</div>
+<div>
+<p class="text-white font-semibold text-sm">animation-designer (3.1)</p>
+<p class="text-neutral-500 text-xs">For complex, cinematic animations; impeccable animate covers everyday UI/UX motion.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start bg-dark-900 rounded-xl p-3 border border-dark-600">
+<div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-lg flex-shrink-0">🕹️</div>
+<div>
+<p class="text-white font-semibold text-sm">agent-browser (4.3)</p>
+<p class="text-neutral-500 text-xs">Validate impeccable's result in a real browser via Playwright—check whether the improvements render correctly.</p>
+</div>
+</div>
+</div>
+<!-- alerta limites -->
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4 mb-5">
+<p class="text-red-300 font-bold text-sm mb-2">⚠️ Limitations the user should know about</p>
+<ul class="space-y-1.5 text-xs text-neutral-400">
+<li class="flex gap-2"><span class="text-red-400">→</span> Doesn't create from scratch. If no interface exists, start with frontend-design (1.1).</li>
+<li class="flex gap-2"><span class="text-red-400">→</span> Doesn't decide the architecture or stack — it works with what it finds in the project.</li>
+<li class="flex gap-2"><span class="text-red-400">→</span> Not for branding or logos (use brand-guidelines T2.2).</li>
+<li class="flex gap-2"><span class="text-red-400">→</span> For complex 3D animations or video, use the Media skills (Track 3).</li>
+</ul>
+</div>
+<!-- conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">⚛️→✨</div>
+<div class="text-xs text-neutral-400">create→refine</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">🏷️+✨</div>
+<div class="text-xs text-neutral-400">brand+polish</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">🕹️✓✨</div>
+<div class="text-xs text-neutral-400">validate in the browser</div>
+</div>
+<div class="bg-dark-900 rounded-lg p-3 border border-dark-600 text-center">
+<div class="text-lg mb-1">🎬≠✨</div>
+<div class="text-xs text-neutral-400">3D→Track 3</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== RESUMO DO MÓDULO ===== -->
+<section class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 rounded-2xl border border-emerald-500/30 p-6">
+<h2 class="text-2xl font-bold text-white mb-5">📋 Module 1.2 Summary</h2>
+<p class="text-neutral-400 text-sm leading-relaxed mb-5">In this module, you learned what makes impeccable unique in the skills ecosystem: it is the skill for <strong class="text-white">"after"</strong> — comes in when an interface already exists and elevates it to the highest level.</p>
+<div class="grid sm:grid-cols-2 gap-6 mb-6">
+<div>
+<p class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-3">✓ What you learned</p>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li class="flex gap-2 items-start"><span class="text-emerald-400 mt-0.5">✓</span> Precise definition and scope of impeccable v3.1.1</li>
+<li class="flex gap-2 items-start"><span class="text-emerald-400 mt-0.5">✓</span> The 24 commands across 5 categories</li>
+<li class="flex gap-2 items-start"><span class="text-emerald-400 mt-0.5">✓</span> Verbs that trigger the skill automatically</li>
+<li class="flex gap-2 items-start"><span class="text-emerald-400 mt-0.5">✓</span> How Shared Design Laws protect quality</li>
+<li class="flex gap-2 items-start"><span class="text-emerald-400 mt-0.5">✓</span> Setup, routing rules, and internal execution flow</li>
+<li class="flex gap-2 items-start"><span class="text-emerald-400 mt-0.5">✓</span> Critical distinction: impeccable vs frontend-design</li>
+<li class="flex gap-2 items-start"><span class="text-emerald-400 mt-0.5">✓</span> 3 ready-to-use prompts</li>
+<li class="flex gap-2 items-start"><span class="text-emerald-400 mt-0.5">✓</span> How it works with brand-guidelines and agent-browser</li>
+</ul>
+</div>
+<div>
+<div class="bg-dark-900 rounded-xl border border-emerald-500/20 p-4">
+<p class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-3">Next module</p>
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-lg">🧱</div>
+<div>
+<p class="text-white font-bold text-sm">Module 1.3 — web-artifacts-builder</p>
+<p class="text-neutral-500 text-xs">Generate standalone HTML/SVG/Mermaid artifacts directly from Claude Code.</p>
+</div>
+</div>
+<p class="text-xs text-neutral-500">While impeccable refines existing interfaces, web-artifacts-builder <em>generates</em> new reusable visual assets.</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-3">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors border border-dark-600" href="index.html">← Back to Track</a>
+<a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="modulo-1-3.html">Next Module: 1.3 🧱 →</a>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p class="mb-1">Content of the <a class="text-sky-400 hover:text-sky-300 font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>Design Skill — Track 1: Build · Module 1.2 · 2026</p>
+</div>
+</footer>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const di = document.getElementById('theme-toggle-dark-icon');
+    const li = document.getElementById('theme-toggle-light-icon');
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      di.classList.remove('hidden');
+      root.classList.remove('dark');
+    } else {
+      li.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      di.classList.toggle('hidden');
+      li.classList.toggle('hidden');
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 3.3 — remotion | Skill Design · INEMA.CLUB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#a855f7',
+      dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+    } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .text-purple-300 { color: #8b5cf6; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(168,85,247,0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(168,85,247,0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(168,85,247,0.25); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(168,85,247,0.08); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(168,85,247,0.18); }
+    html:not(.dark) .text-cyan-400 { color: #0891b2; }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #7c3aed; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(168,85,247,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(168,85,247,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-sky-300 { color: #0369a1; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0369a1; }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(239,68,68,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(239,68,68,0.25); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    pre { overflow-x: auto; }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+  </style>
+<link href="https://inematds.github.io/skill-design/curso/trilha3/modulo-3-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/skill-design/en/curso/trilha3/modulo-3-3.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/skill-design/es/curso/trilha3/modulo-3-3.html" hreflang="es" rel="alternate"/></head>
+<body class="text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha3/modulo-3-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha3/modulo-3-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-3-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-purple-400 hover:text-purple-300" href="../../index.html">
+<span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Skill Design</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Construir</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Identidad</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Medios</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Soporte</span></a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<nav class="flex items-center space-x-2 text-sm text-neutral-500">
+<a class="hover:text-purple-400 transition-colors" href="../../index.html">Inicio</a>
+<span>/</span>
+<a class="hover:text-purple-400 transition-colors" href="index.html">Ruta 3 — Medios</a>
+<span>/</span>
+<span class="text-purple-400 font-medium">Módulo 3.3</span>
+</nav>
+</div>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-10 border-b border-dark-600 mt-4">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">⚛️ remotion</h1>
+<p class="text-lg text-neutral-400 max-w-xl">Crea videos mediante programación en React: composición frame a frame, interpolaciones suaves, Sequences, física de spring y render a un archivo MP4 real.</p>
+<div class="grid grid-cols-4 gap-3 mt-6">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-purple-400">6</div>
+<div class="text-xs text-neutral-400">Temas</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-purple-400">~30</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-purple-400">Avanzado</div>
+<div class="text-xs text-neutral-400">Nivel</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-purple-400">Video/React</div>
+<div class="text-xs text-neutral-400">Tipo</div>
+</div>
+</div>
+</div>
+<!-- SVG FUTURISTA — timeline de frames Remotion -->
+<div class="flex justify-center lg:justify-end">
+<svg aria-label="Diagrama de timeline de Remotion: React se convierte en frames y luego en MP4" class="w-full h-auto" fill="none" role="img" viewbox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
+<!-- fundo -->
+<rect fill="#1a1040" height="220" opacity="0.7" rx="16" width="340"></rect>
+<!-- grade de frames -->
+<line opacity="0.4" stroke="#7c3aed" stroke-dasharray="4,4" stroke-width="1" x1="20" x2="320" y1="60" y2="60"></line>
+<line opacity="0.4" stroke="#7c3aed" stroke-dasharray="4,4" stroke-width="1" x1="20" x2="320" y1="110" y2="110"></line>
+<line opacity="0.4" stroke="#7c3aed" stroke-dasharray="4,4" stroke-width="1" x1="20" x2="320" y1="160" y2="160"></line>
+<!-- blocos de Sequence -->
+<rect fill="#7c3aed" height="30" opacity="0.8" rx="5" width="80" x="20" y="40"></rect>
+<text fill="white" font-family="monospace" font-size="10" text-anchor="middle" x="60" y="60">Introducción</text>
+<rect fill="#6d28d9" height="30" opacity="0.8" rx="5" width="120" x="108" y="40"></rect>
+<text fill="white" font-family="monospace" font-size="10" text-anchor="middle" x="168" y="60">MainContent</text>
+<rect fill="#7c3aed" height="30" opacity="0.8" rx="5" width="70" x="236" y="40"></rect>
+<text fill="white" font-family="monospace" font-size="10" text-anchor="middle" x="271" y="60">Otro</text>
+<!-- curva interpolate -->
+<path d="M20 160 C60 160 80 90 110 90 C140 90 160 90 190 90 C220 90 260 90 320 90" fill="none" stroke="#22d3ee" stroke-width="2.5"></path>
+<text fill="#22d3ee" font-family="monospace" font-size="9" text-anchor="middle" x="170" y="82">interpolate(frame)</text>
+<!-- spring bounce -->
+<path d="M20 130 C30 130 35 95 50 100 C65 105 70 125 85 118 C100 111 105 122 120 120" fill="none" stroke="#a78bfa" stroke-width="2"></path>
+<text fill="#a78bfa" font-family="monospace" font-size="9" text-anchor="middle" x="80" y="142">spring(fps)</text>
+<!-- labels eixo -->
+<text fill="#9ca3af" font-family="monospace" font-size="9" x="20" y="185">frame 0</text>
+<text fill="#9ca3af" font-family="monospace" font-size="9" x="280" y="185">frame N</text>
+<line stroke="#4b5563" stroke-width="1" x1="20" x2="320" y1="178" y2="178"></line>
+<!-- marcadores -->
+<circle cx="20" cy="178" fill="#7c3aed" r="3"></circle>
+<circle cx="108" cy="178" fill="#22d3ee" r="3"></circle>
+<circle cx="236" cy="178" fill="#7c3aed" r="3"></circle>
+<circle cx="306" cy="178" fill="#22d3ee" r="3"></circle>
+<!-- label React → MP4 -->
+<text fill="#c4b5fd" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" x="170" y="15">React → Frames → MP4</text>
+<!-- fps label -->
+<rect fill="#7c3aed" height="18" opacity="0.3" rx="4" width="60" x="260" y="190"></rect>
+<text fill="#c4b5fd" font-family="monospace" font-size="9" text-anchor="middle" x="290" y="203">fps: 30</text>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT -->
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+<!-- TÓPICO 1: O que é / o que faz -->
+<section id="topico-1">
+<div class="flex items-center space-x-3 mb-6">
+<span class="text-2xl">🧩</span>
+<h2 class="text-2xl font-bold">Qué es / qué hace</h2>
+<span class="px-2 py-0.5 bg-purple-500/20 text-purple-400 text-xs rounded-full font-semibold">TEMA 1</span>
+</div>
+<!-- conceito principal -->
+<div class="rounded-xl bg-gradient-to-r from-purple-900/40 to-dark-800 border border-purple-500/30 p-6 mb-6">
+<div class="text-purple-300 text-xs font-semibold uppercase tracking-widest mb-2">Concepto principal</div>
+<p class="text-lg font-semibold text-neutral-100 mb-3">Remotion es un framework que trata cada frame de video como un componente React.</p>
+<p class="text-neutral-400">En lugar de editar en la línea de tiempo de un editor de video, escribes TypeScript/JSX. El framework controla qué "frame" se está renderizando mediante <code class="text-cyan-400 bg-dark-700 px-1 rounded">useCurrentFrame()</code>, y asignas ese número a cualquier propiedad visual: opacidad, escala, posición, color. El resultado se exporta frame por frame a un MP4 real, sin nube ni costo por render.</p>
+</div>
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div class="rounded-xl border border-dark-600 bg-dark-800 p-5">
+<div class="text-purple-400 font-semibold text-sm mb-3">Lo que entrega Remotion</div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> <span>Composiciones definidas en <code class="text-cyan-400">src/Root.tsx</code> con <code class="text-cyan-400">&lt;Composition&gt;</code></span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> <span>Animaciones deterministas mediante <code class="text-cyan-400">useCurrentFrame()</code> + <code class="text-cyan-400">interpolate()</code></span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> <span>Física del movimiento con <code class="text-cyan-400">spring()</code></span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> <span>Secuenciación con <code class="text-cyan-400">&lt;Sequence&gt;</code> e <code class="text-cyan-400">&lt;Series&gt;</code></span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">▸</span> <span>Render mediante CLI: <code class="text-cyan-400">npx remotion render</code></span></li>
+</ul>
+</div>
+<div class="rounded-xl border border-dark-600 bg-dark-800 p-5">
+<div class="text-cyan-400 font-semibold text-sm mb-3">Stack real del skill</div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li class="flex items-start gap-2"><span class="text-cyan-400 mt-0.5">▸</span> <span><strong class="text-neutral-200">React + TypeScript</strong> — el componente es el frame</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 mt-0.5">▸</span> <span><strong class="text-neutral-200">remotion</strong> — paquete principal + hooks</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 mt-0.5">▸</span> <span><strong class="text-neutral-200">@remotion/renderer</strong> — CLI de renderizado sin interfaz gráfica</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 mt-0.5">▸</span> <span><strong class="text-neutral-200">@remotion/captions</strong> — subtítulos sincronizados</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 mt-0.5">▸</span> <span><strong class="text-neutral-200">@remotion/three</strong> — integración con React Three Fiber</span></li>
+</ul>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">useCurrentFrame</div>
+<div class="text-xs text-neutral-500 mt-1">hook central — devuelve el nº del frame</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">interpolate()</div>
+<div class="text-xs text-neutral-500 mt-1">mapea frames → valores CSS</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">spring()</div>
+<div class="text-xs text-neutral-500 mt-1">física de resorte, rebote natural</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">&lt;Composition&gt;</div>
+<div class="text-xs text-neutral-500 mt-1">define fps, dimensiones, duración</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 2: Quando dispara -->
+<section id="topico-2">
+<div class="flex items-center space-x-3 mb-6">
+<span class="text-2xl">🎣</span>
+<h2 class="text-2xl font-bold">Cuándo se activa</h2>
+<span class="px-2 py-0.5 bg-purple-500/20 text-purple-400 text-xs rounded-full font-semibold">TEMA 2</span>
+</div>
+<!-- tip box -->
+<div class="rounded-xl border border-purple-500/30 bg-purple-500/10 p-4 mb-6">
+<div class="text-purple-300 font-semibold text-sm mb-1">💡 Disparador del skill</div>
+<p class="text-sm text-neutral-400">El skill <strong class="text-neutral-200">remotion</strong> se activa siempre que el código importa <code class="text-cyan-400">remotion</code> o le pides a Claude Code que cree o edite videos programáticos en React. El trigger de la descripción: <em>"Usa esta skill siempre que trabajes con código Remotion para obtener conocimientos específicos del dominio."</em></p>
+</div>
+<!-- timeline de quando usar -->
+<div class="mb-6">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-4">Línea de tiempo de activación</div>
+<div class="relative pl-6 space-y-4">
+<div class="absolute left-0 top-2 bottom-2 w-0.5 bg-purple-500/30"></div>
+<div class="relative">
+<div class="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-purple-500"></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+<div class="text-purple-400 font-semibold text-sm">El código importa <code>remotion</code></div>
+<div class="text-xs text-neutral-500 mt-1">Cualquier archivo .tsx/.ts con <code class="text-cyan-400">import ... from 'remotion'</code></div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-purple-400"></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+<div class="text-purple-400 font-semibold text-sm">Solicitud de video programático en React</div>
+<div class="text-xs text-neutral-500 mt-1">"Crea un video de presentación", "Anima este gráfico para un video", "Genera un reel con texto animado"</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-cyan-400"></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+<div class="text-cyan-400 font-semibold text-sm">Ajuste de una animación existente</div>
+<div class="text-xs text-neutral-500 mt-1">Corregir el rebote de spring, ajustar los fps, cambiar durationInFrames, crear una Sequence con delay</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[22px] top-1 w-3 h-3 rounded-full bg-purple-500"></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+<div class="text-purple-400 font-semibold text-sm">Render / exportación</div>
+<div class="text-xs text-neutral-500 mt-1">Comandos CLI, bundling, salida MP4/WebM, parámetros de calidad</div>
+</div>
+</div>
+</div>
+</div>
+<!-- grid fazer/evitar -->
+<div class="grid md:grid-cols-2 gap-4">
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-5">
+<div class="text-emerald-400 font-semibold text-sm mb-3">✓ Usa la skill remotion cuando...</div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Exportar video MP4/WebM real desde React</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Animar datos, gráficos y textos frame a frame</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Crear motion graphics controlados por código</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Integrar Three.js 3D directamente en el video</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Sincronizar subtítulos (.srt) con audio</li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-red-500/5 p-5">
+<div class="text-red-400 font-semibold text-sm mb-3">✗ No lo confundas con...</div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> <span><strong class="text-neutral-300">animation-designer</strong> — anima la página HTML en el navegador, no exporta video</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> <span><strong class="text-neutral-300">HyperFrames</strong> — convierte HTML estático en MP4 mediante Puppeteer+FFmpeg, sin React</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> <span><strong class="text-neutral-300">3d-animation-creator</strong> — anima objetos 3D en un canvas, no exporta MP4 directamente</span></li>
+</ul>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">import 'remotion'</div>
+<div class="text-xs text-neutral-500 mt-1">disparador automático</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">vídeo React</div>
+<div class="text-xs text-neutral-500 mt-1">solicitud explícita</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">spring/timing</div>
+<div class="text-xs text-neutral-500 mt-1">ajuste de animación</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">CLI de renderizado</div>
+<div class="text-xs text-neutral-500 mt-1">exportación MP4</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 3: Como melhora seus vídeos -->
+<section id="topico-3">
+<div class="flex items-center space-x-3 mb-6">
+<span class="text-2xl">🚀</span>
+<h2 class="text-2xl font-bold">Cómo mejora tus videos</h2>
+<span class="px-2 py-0.5 bg-purple-500/20 text-purple-400 text-xs rounded-full font-semibold">TEMA 3</span>
+</div>
+<!-- box dados -->
+<div class="rounded-xl border border-blue-500/30 bg-blue-500/10 p-5 mb-6">
+<div class="text-blue-400 font-semibold text-sm mb-3">📊 Por qué Remotion cambia las reglas del juego</div>
+<div class="grid sm:grid-cols-3 gap-4 text-sm">
+<div>
+<div class="text-neutral-200 font-semibold">Determinismo total</div>
+<div class="text-neutral-500 mt-1">El mismo frame siempre produce el mismo píxel. Sin fallas en la línea de tiempo ni renders inconsistentes.</div>
+</div>
+<div>
+<div class="text-neutral-200 font-semibold">Control de versiones con Git</div>
+<div class="text-neutral-500 mt-1">Los videos son código: diff, branch, merge, CI/CD. Imposible en los editores tradicionales.</div>
+</div>
+<div>
+<div class="text-neutral-200 font-semibold">Componentización</div>
+<div class="text-neutral-500 mt-1">Reutiliza <code class="text-cyan-400">Intro</code>, <code class="text-cyan-400">Lower Third</code>, <code class="text-cyan-400">Outro</code> como componentes React en varios proyectos.</div>
+</div>
+</div>
+</div>
+<!-- tip box -->
+<div class="rounded-xl border border-purple-500/30 bg-purple-500/10 p-4 mb-6">
+<div class="text-purple-300 font-semibold text-sm mb-1">💡 Buenas prácticas reales (del SKILL.md)</div>
+<ul class="text-sm text-neutral-400 space-y-1 mt-2">
+<li>• Escribe animaciones <strong class="text-neutral-200">en segundos × fps</strong>, nunca en fotogramas fijos: <code class="text-cyan-400">2 * fps</code> en lugar de <code class="text-cyan-400">60</code></li>
+<li>• CSS transitions / Tailwind animation classes son <strong class="text-red-400">prohibidos</strong> — no se renderizan correctamente</li>
+<li>• Usa siempre <code class="text-cyan-400">extrapolateRight: 'clamp'</code> para que no se filtren valores fuera del intervalo</li>
+<li>• Usa <code class="text-cyan-400">premountFor</code> en toda <code class="text-cyan-400">&lt;Sequence&gt;</code> para evitar la aparición repentina de elementos visuales</li>
+</ul>
+</div>
+<!-- grid comparativo -->
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div class="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-5">
+<div class="text-emerald-400 font-semibold text-sm mb-3">✓ Con la skill activa</div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> spring() con damping correcto → sin rebote excesivo</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> interpolate() con clamp → sin artefactos en los extremos</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Sequences con premount → transiciones suaves</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span> Animaciones escritas en segundos → portables entre fps</li>
+</ul>
+</div>
+<div class="rounded-xl border border-red-500/30 bg-red-500/5 p-5">
+<div class="text-red-400 font-semibold text-sm mb-3">✗ Sin el skill</div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li class="flex gap-2"><span class="text-red-400">✗</span> CSS transition en JSX → el frame se renderiza estático</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> interpolate sin clamp → valores negativos de opacidad</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> Sequence sin premount → los elementos parpadean al entrar</li>
+<li class="flex gap-2"><span class="text-red-400">✗</span> spring sin el delay correcto → animaciones superpuestas</li>
+</ul>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">determinismo</div>
+<div class="text-xs text-neutral-500 mt-1">mismo frame = mismo píxel</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">Compatible con Git</div>
+<div class="text-xs text-neutral-500 mt-1">vídeo como código</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">extrapolate clamp</div>
+<div class="text-xs text-neutral-500 mt-1">los valores nunca se filtran</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">fps × segundos</div>
+<div class="text-xs text-neutral-500 mt-1">portabilidad del timing</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 4: Como funciona por dentro -->
+<section id="topico-4">
+<div class="flex items-center space-x-3 mb-6">
+<span class="text-2xl">⚙️</span>
+<h2 class="text-2xl font-bold">Cómo funciona por dentro</h2>
+<span class="px-2 py-0.5 bg-purple-500/20 text-purple-400 text-xs rounded-full font-semibold">TEMA 4</span>
+</div>
+<!-- conceito principal — composição -->
+<div class="rounded-xl bg-gradient-to-r from-purple-900/40 to-dark-800 border border-purple-500/30 p-6 mb-6">
+<div class="text-purple-300 text-xs font-semibold uppercase tracking-widest mb-3">Anatomía de una composición de Remotion</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2">// src/Root.tsx — define la composición</div>
+<div><span class="text-purple-400">import</span> <span class="text-neutral-200">{ Composition }</span> <span class="text-purple-400">from</span> <span class="text-yellow-300">'remotion'</span>;</div>
+<div><span class="text-purple-400">import</span> <span class="text-neutral-200">{ MyVideo }</span> <span class="text-purple-400">from</span> <span class="text-yellow-300">'./MyVideo'</span>;</div>
+<br/>
+<div><span class="text-purple-400">export const</span> <span class="text-cyan-400">RemotionRoot</span> = () =&gt; (</div>
+<div class="ml-4"><span class="text-emerald-400">&lt;Composition</span></div>
+<div class="ml-8"><span class="text-blue-400">id</span>=<span class="text-yellow-300">"MyVideo"</span></div>
+<div class="ml-8"><span class="text-blue-400">component</span>={'{'}<span class="text-cyan-400">MyVideo</span>{'}'}</div>
+<div class="ml-8"><span class="text-blue-400">durationInFrames</span>={'{'}<span class="text-purple-300">150</span>{'}'}</div>
+<div class="ml-8"><span class="text-blue-400">fps</span>={'{'}<span class="text-purple-300">30</span>{'}'}</div>
+<div class="ml-8"><span class="text-blue-400">width</span>={'{'}<span class="text-purple-300">1920</span>{'}'}</div>
+<div class="ml-8"><span class="text-blue-400">height</span>={'{'}<span class="text-purple-300">1080</span>{'}'}</div>
+<div class="ml-4"><span class="text-emerald-400">/&gt;</span></div>
+<div>);</div>
+</div>
+</div>
+<!-- animações: interpolate + spring side by side -->
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">interpolate() — lineal con easing</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2">// FadeIn determinista</div>
+<div><span class="text-purple-400">import</span> {'{'} <span class="text-cyan-400">useCurrentFrame</span>, <span class="text-cyan-400">interpolate</span>, <span class="text-cyan-400">Easing</span> {'}'} <span class="text-purple-400">from</span> <span class="text-yellow-300">'remotion'</span>;</div>
+<br/>
+<div><span class="text-purple-400">const</span> <span class="text-cyan-400">FadeIn</span> = () =&gt; {'{'}</div>
+<div class="ml-4"><span class="text-purple-400">const</span> frame = <span class="text-cyan-400">useCurrentFrame</span>();</div>
+<div class="ml-4"><span class="text-purple-400">const</span> { fps } = <span class="text-cyan-400">useVideoConfig</span>();</div>
+<br/>
+<div class="ml-4"><span class="text-purple-400">const</span> opacity = <span class="text-cyan-400">interpolate</span>(</div>
+<div class="ml-8">frame, [<span class="text-purple-300">0</span>, <span class="text-purple-300">2</span> * fps], [<span class="text-purple-300">0</span>, <span class="text-purple-300">1</span>],</div>
+<div class="ml-8">{ extrapolateRight: <span class="text-yellow-300">'clamp'</span> {'}'}</div>
+<div class="ml-4">);</div>
+<br/>
+<div class="ml-4"><span class="text-purple-400">return</span> &lt;<span class="text-emerald-400">div</span> style={'{'}{'{'}opacity{'}'}{'}'}}&gt;¡Hola!&lt;/<span class="text-emerald-400">div</span>&gt;;</div>
+<div>{'}'}</div>
+</div>
+</div>
+<div>
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">spring() — física de resorte</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2">// Configuraciones recomendadas</div>
+<div><span class="text-purple-400">import</span> {'{'} <span class="text-cyan-400">spring</span>, <span class="text-cyan-400">useVideoConfig</span> {'}'} <span class="text-purple-400">from</span> <span class="text-yellow-300">'remotion'</span>;</div>
+<br/>
+<div class="text-neutral-500 text-xs">// suave, sin bounce</div>
+<div><span class="text-purple-400">const</span> smooth = {'{'} damping: <span class="text-purple-300">200</span> {'}'};</div>
+<br/>
+<div class="text-neutral-500 text-xs">// ágil con un ligero bounce</div>
+<div><span class="text-purple-400">const</span> snappy = {'{'} damping: <span class="text-purple-300">20</span>, stiffness: <span class="text-purple-300">200</span> {'}'};</div>
+<br/>
+<div class="text-neutral-500 text-xs">// pesado, lento</div>
+<div><span class="text-purple-400">const</span> heavy = {'{'} damping: <span class="text-purple-300">15</span>, stiffness: <span class="text-purple-300">80</span>, mass: <span class="text-purple-300">2</span> {'}'};</div>
+<br/>
+<div><span class="text-purple-400">const</span> scale = <span class="text-cyan-400">spring</span>({'{'} frame, fps, config: smooth {'}'});</div>
+</div>
+</div>
+</div>
+<!-- Sequences -->
+<div class="mb-6">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">Sequence + Series — secuenciación</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2">// ¡Usa siempre premountFor en Sequence!</div>
+<div><span class="text-purple-400">import</span> {'{'} <span class="text-cyan-400">Sequence</span>, <span class="text-cyan-400">Series</span> {'}'} <span class="text-purple-400">from</span> <span class="text-yellow-300">'remotion'</span>;</div>
+<br/>
+<div><span class="text-neutral-500 text-xs">// Sequence manual con delay</span></div>
+<div>&lt;<span class="text-emerald-400">Sequence</span> from={'{'}<span class="text-purple-300">1</span> * fps{'}'} durationInFrames={'{'}<span class="text-purple-300">2</span> * fps{'}'} premountFor={'{'}<span class="text-purple-300">1</span> * fps{'}'}&gt;</div>
+<div class="ml-4">&lt;<span class="text-cyan-400">Title</span> /&gt;</div>
+<div>&lt;/<span class="text-emerald-400">Sequence</span>&gt;</div>
+<br/>
+<div><span class="text-neutral-500 text-xs">// Series — uno tras otro, sin overlap</span></div>
+<div>&lt;<span class="text-emerald-400">Series</span>&gt;</div>
+<div class="ml-4">&lt;<span class="text-emerald-400">Series.Sequence</span> durationInFrames={'{'}<span class="text-purple-300">45</span>{'}'}&gt;&lt;<span class="text-cyan-400">Introducción</span> /&gt;&lt;/<span class="text-emerald-400">Series.Sequence</span>&gt;</div>
+<div class="ml-4">&lt;<span class="text-emerald-400">Series.Sequence</span> durationInFrames={'{'}<span class="text-purple-300">60</span>{'}'}&gt;&lt;<span class="text-cyan-400">Main</span> /&gt;&lt;/<span class="text-emerald-400">Series.Sequence</span>&gt;</div>
+<div class="ml-4">&lt;<span class="text-emerald-400">Series.Sequence</span> offset={'{'}-<span class="text-purple-300">15</span>} durationInFrames={<span class="text-purple-300">30</span>{'}'}&gt;&lt;<span class="text-cyan-400">Otro</span> /&gt;&lt;/<span class="text-emerald-400">Series.Sequence</span>&gt;</div>
+<div>&lt;/<span class="text-emerald-400">Series</span>&gt;</div>
+</div>
+</div>
+<!-- render CLI -->
+<div class="rounded-xl border border-purple-500/30 bg-purple-500/10 p-4 mb-6">
+<div class="text-purple-300 font-semibold text-sm mb-2">💡 Renderizar mediante CLI</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2"># Renderizar a MP4</div>
+<div><span class="text-cyan-400">npx remotion render</span> <span class="text-yellow-300">MyVideo</span> <span class="text-blue-400">out/video.mp4</span></div>
+<br/>
+<div class="text-neutral-500 text-xs"># Renderizar solo frames específicos (vista previa)</div>
+<div><span class="text-cyan-400">npx remotion render</span> <span class="text-yellow-300">MyVideo</span> <span class="text-blue-400">out/video.mp4</span> <span class="text-purple-300">--frames=0-30</span></div>
+<br/>
+<div class="text-neutral-500 text-xs"># Studio (vista previa interactiva en el navegador)</div>
+<div><span class="text-cyan-400">npx remotion studio</span></div>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">src/Root.tsx</div>
+<div class="text-xs text-neutral-500 mt-1">punto de entrada de las composiciones</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">AbsoluteFill</div>
+<div class="text-xs text-neutral-500 mt-1">capa de fondo predeterminada</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">premountFor</div>
+<div class="text-xs text-neutral-500 mt-1">carga antes de mostrar</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">desplazamiento negativo</div>
+<div class="text-xs text-neutral-500 mt-1">superposición entre escenas</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 5: Exemplo prático + PROMPT -->
+<section id="topico-5">
+<div class="flex items-center space-x-3 mb-6">
+<span class="text-2xl">💬</span>
+<h2 class="text-2xl font-bold">Ejemplo práctico + PROMPT listo</h2>
+<span class="px-2 py-0.5 bg-purple-500/20 text-purple-400 text-xs rounded-full font-semibold">TEMA 5</span>
+</div>
+<!-- cenário -->
+<div class="rounded-xl border border-dark-600 bg-dark-800 p-5 mb-6">
+<div class="text-purple-400 font-semibold text-sm mb-2">Escenario: video de presentación de producto (30s, 30fps = 900 frames)</div>
+<p class="text-sm text-neutral-400">Un video 1920×1080 con tres escenas encadenadas mediante Series: <em>Introducción</em> con el logo apareciendo con fade in + spring scale, <em>Features</em> listando 3 elementos con stagger, <em>CTA</em> con texto pulsante. Exportado a MP4 mediante CLI.</p>
+</div>
+<!-- código exemplo completo -->
+<div class="mb-6">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-3">MyVideo.tsx — composición completa</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto">
+<div class="text-neutral-500 text-xs mb-2">// src/MyVideo.tsx</div>
+<div><span class="text-purple-400">import</span> {'{'} <span class="text-cyan-400">AbsoluteFill</span>, <span class="text-cyan-400">Series</span>, <span class="text-cyan-400">useCurrentFrame</span>, <span class="text-cyan-400">useVideoConfig</span>, <span class="text-cyan-400">interpolate</span>, <span class="text-cyan-400">spring</span> {'}'} <span class="text-purple-400">from</span> <span class="text-yellow-300">'remotion'</span>;</div>
+<br/>
+<div><span class="text-purple-400">const</span> <span class="text-cyan-400">Introducción</span>: React.FC = () =&gt; {'{'}</div>
+<div class="ml-4"><span class="text-purple-400">const</span> frame = <span class="text-cyan-400">useCurrentFrame</span>();</div>
+<div class="ml-4"><span class="text-purple-400">const</span> { fps } = <span class="text-cyan-400">useVideoConfig</span>();</div>
+<div class="ml-4"><span class="text-purple-400">const</span> opacity = <span class="text-cyan-400">interpolate</span>(frame, [<span class="text-purple-300">0</span>, <span class="text-purple-300">1</span> * fps], [<span class="text-purple-300">0</span>, <span class="text-purple-300">1</span>], {'{'} extrapolateRight: <span class="text-yellow-300">'clamp'</span> {'}'});</div>
+<div class="ml-4"><span class="text-purple-400">const</span> scale = <span class="text-cyan-400">spring</span>({'{'} frame, fps, config: {'{'} damping: <span class="text-purple-300">200</span> {'}'} {'}'});</div>
+<div class="ml-4"><span class="text-purple-400">return</span> (</div>
+<div class="ml-8">&lt;<span class="text-emerald-400">AbsoluteFill</span> style={'{'}{'{'}display:<span class="text-yellow-300">'flex'</span>, alignItems:<span class="text-yellow-300">'center'</span>, justifyContent:<span class="text-yellow-300">'center'</span>, backgroundColor:<span class="text-yellow-300">'#0a0a1a'</span>{'}'}{'}'}&gt;</div>
+<div class="ml-12">&lt;<span class="text-emerald-400">h1</span> style={'{'}{'{'}opacity, transform:`scale(${'{'} scale {'}'})`, color:<span class="text-yellow-300">'#a855f7'</span>, fontSize:<span class="text-purple-300">80</span>}&gt;MiProducto&lt;/<span class="text-emerald-400">h1</span>&gt;</div>
+<div class="ml-8">&lt;/<span class="text-emerald-400">AbsoluteFill</span>&gt;</div>
+<div class="ml-4">);</div>
+<div>{'}'}</div>
+<br/>
+<div><span class="text-purple-400">export const</span> <span class="text-cyan-400">MyVideo</span>: React.FC = () =&gt; (</div>
+<div class="ml-4">&lt;<span class="text-emerald-400">Series</span>&gt;</div>
+<div class="ml-8">&lt;<span class="text-emerald-400">Series.Sequence</span> durationInFrames={'{'}<span class="text-purple-300">3</span> * <span class="text-cyan-400">fps</span>{'}'}&gt;&lt;<span class="text-cyan-400">Introducción</span> /&gt;&lt;/<span class="text-emerald-400">Series.Sequence</span>&gt;</div>
+<div class="ml-8">&lt;<span class="text-emerald-400">Series.Sequence</span> durationInFrames={'{'}<span class="text-purple-300">5</span> * <span class="text-cyan-400">fps</span>{'}'}&gt;&lt;<span class="text-cyan-400">Features</span> /&gt;&lt;/<span class="text-emerald-400">Series.Sequence</span>&gt;</div>
+<div class="ml-8">&lt;<span class="text-emerald-400">Series.Sequence</span> durationInFrames={'{'}<span class="text-purple-300">2</span> * <span class="text-cyan-400">fps</span>{'}'}&gt;&lt;<span class="text-cyan-400">CTA</span> /&gt;&lt;/<span class="text-emerald-400">Series.Sequence</span>&gt;</div>
+<div class="ml-4">&lt;/<span class="text-emerald-400">Series</span>&gt;</div>
+<div>);</div>
+</div>
+</div>
+<!-- PROMPT pronto -->
+<div class="rounded-xl border border-purple-500/40 bg-purple-500/10 p-5 mb-6">
+<div class="text-purple-300 font-semibold text-sm mb-3">📋 PROMPT listo — pégalo en Claude Code</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-4 font-mono text-sm overflow-x-auto whitespace-pre-wrap text-neutral-300">Crea un proyecto Remotion completo en TypeScript con las siguientes especificaciones:
+- Composición "PromoVideo": 1920×1080, 30fps, 300 frames (10s)
+- Escena 1 (frames 0-90): logo con fade-in y spring scale (damping: 200), sin rebote
+- Escena 2 (frames 90-240): 3 características en una lista, cada una con un stagger de 20 frames; interpolate opacity+translateY
+- Escena 3 (frames 240-300): CTA con texto pulsante mediante spring in-out
+- NUNCA usar CSS transitions: solo useCurrentFrame + interpolate/spring
+- SIEMPRE usar extrapolateRight/Left: 'clamp' en todos los interpolate()
+- SIEMPRE usar premountFor={fps} en cada Sequence
+- Comando de exportación: npx remotion render PromoVideo out/promo.mp4</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">escenas en Series</div>
+<div class="text-xs text-neutral-500 mt-1">encadenamiento limpio</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">stagger manual</div>
+<div class="text-xs text-neutral-500 mt-1">frame offset por item</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">in-out spring</div>
+<div class="text-xs text-neutral-500 mt-1">transiciones suaves de entrada y salida</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">CLI render</div>
+<div class="text-xs text-neutral-500 mt-1">npx remotion render</div>
+</div>
+</div>
+</section>
+<!-- TÓPICO 6: Combina com / limites -->
+<section id="topico-6">
+<div class="flex items-center space-x-3 mb-6">
+<span class="text-2xl">🧬</span>
+<h2 class="text-2xl font-bold">Combina con / límites</h2>
+<span class="px-2 py-0.5 bg-purple-500/20 text-purple-400 text-xs rounded-full font-semibold">TEMA 6</span>
+</div>
+<!-- box alerta -->
+<div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4 mb-6">
+<div class="text-red-400 font-semibold text-sm mb-2">⚠️ Diferencia crítica: tres herramientas distintas</div>
+<div class="grid md:grid-cols-3 gap-4 text-sm">
+<div>
+<div class="text-neutral-200 font-semibold mb-1">⚛️ remotion (este módulo)</div>
+<div class="text-neutral-500">React → frames → MP4. <strong class="text-neutral-300">Exporta video real.</strong> Requiere Node.js, TypeScript. Animaciones mediante useCurrentFrame, determinísticas.</div>
+</div>
+<div>
+<div class="text-neutral-200 font-semibold mb-1">🎬 HyperFrames (3.4)</div>
+<div class="text-neutral-500">HTML+CSS → Puppeteer → FFmpeg → MP4. <strong class="text-neutral-300">Sin React.</strong> Anima HTML estático. Más simple, menos control por frame.</div>
+</div>
+<div>
+<div class="text-neutral-200 font-semibold mb-1">🎬 animation-designer (3.1)</div>
+<div class="text-neutral-500">Framer Motion / CSS / GSAP en la página HTML. <strong class="text-neutral-300">No exporta video</strong> — anima solo en el navegador.</div>
+</div>
+</div>
+</div>
+<!-- combinações positivas -->
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div class="rounded-xl border border-dark-600 bg-dark-800 p-5">
+<div class="text-purple-400 font-semibold text-sm mb-3">🔗 Combina bien con</div>
+<ul class="space-y-3 text-sm text-neutral-400">
+<li>
+<div class="flex items-start gap-2">
+<span class="text-purple-400 text-xs mt-1">▸</span>
+<div>
+<span class="text-neutral-200 font-semibold">3d-animation-creator (3.2)</span>
+<p class="text-xs text-neutral-500 mt-0.5">Usa <code class="text-cyan-400">@remotion/three</code> para integrar escenas React Three Fiber directamente en la composición Remotion —3D renderizado cuadro por cuadro, exportado como MP4.</p>
+</div>
+</div>
+</li>
+<li>
+<div class="flex items-start gap-2">
+<span class="text-purple-400 text-xs mt-1">▸</span>
+<div>
+<span class="text-neutral-200 font-semibold">HyperFrames / seedance (3.4)</span>
+<p class="text-xs text-neutral-500 mt-0.5">Usa Remotion para generar clips complejos e HyperFrames/FFmpeg para montar la edición final: concatenar, agregar música y overlays sencillos sin reconstruir React.</p>
+</div>
+</div>
+</li>
+<li>
+<div class="flex items-start gap-2">
+<span class="text-cyan-400 text-xs mt-1">▸</span>
+<div>
+<span class="text-neutral-200 font-semibold">canvas-design (2.3)</span>
+<p class="text-xs text-neutral-500 mt-0.5">Exporta assets de canvas-design como imágenes estáticas e impórtalas en Remotion con <code class="text-cyan-400">&lt;Img&gt;</code> o <code class="text-cyan-400">staticFile()</code>.</p>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="rounded-xl border border-dark-600 bg-dark-800 p-5">
+<div class="text-red-400 font-semibold text-sm mb-3">🚫 Cuándo NO usar Remotion</div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> <span>Solo quieres animar la landing page — usa <strong class="text-neutral-300">animation-designer</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> <span>Ya tienes el HTML listo y quieres un MP4 rápido sin React — usa <strong class="text-neutral-300">HyperFrames</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> <span>Solo quieres visualizar 3D en un canvas: usa <strong class="text-neutral-300">3d-animation-creator</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> <span>Necesitas renderizado en la nube sin Node.js local: considera Remotion Lambda</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span> <span>Proyecto que no es de React (Vue, Angular, HTML puro): usa HyperFrames/FFmpeg</span></li>
+</ul>
+</div>
+</div>
+<!-- tabela comparativa -->
+<div class="rounded-xl border border-dark-600 bg-dark-800 overflow-hidden mb-6">
+<div class="bg-dark-700 px-5 py-3 text-xs font-semibold text-neutral-500 uppercase tracking-widest">Comparativa rápida — Medios T3</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm">
+<thead>
+<tr class="border-b border-dark-600">
+<th class="px-4 py-3 text-left text-neutral-400 font-semibold">Skill</th>
+<th class="px-4 py-3 text-left text-neutral-400 font-semibold">¿Exporta MP4?</th>
+<th class="px-4 py-3 text-left text-neutral-400 font-semibold">Stack</th>
+<th class="px-4 py-3 text-left text-neutral-400 font-semibold">¿Control por fotograma?</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-dark-600">
+<tr>
+<td class="px-4 py-3 text-purple-400 font-semibold">⚛️ remotion</td>
+<td class="px-4 py-3 text-emerald-400">✓ Sí</td>
+<td class="px-4 py-3 text-neutral-400">React + TypeScript</td>
+<td class="px-4 py-3 text-emerald-400">✓ Total</td>
+</tr>
+<tr>
+<td class="px-4 py-3 text-neutral-300 font-semibold">🔁 HyperFrames</td>
+<td class="px-4 py-3 text-emerald-400">✓ Sí</td>
+<td class="px-4 py-3 text-neutral-400">HTML + Puppeteer + FFmpeg</td>
+<td class="px-4 py-3 text-yellow-400">~ Parcial (CSS)</td>
+</tr>
+<tr>
+<td class="px-4 py-3 text-neutral-300 font-semibold">🎬 animation-designer</td>
+<td class="px-4 py-3 text-red-400">✗ No</td>
+<td class="px-4 py-3 text-neutral-400">Framer Motion / CSS</td>
+<td class="px-4 py-3 text-red-400">✗ Solo navegador</td>
+</tr>
+<tr>
+<td class="px-4 py-3 text-neutral-300 font-semibold">🖱️ 3d-animation-creator</td>
+<td class="px-4 py-3 text-red-400">✗ No directamente</td>
+<td class="px-4 py-3 text-neutral-400">Three.js / p5.js / Canvas</td>
+<td class="px-4 py-3 text-yellow-400">~ Vía @remotion/three</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- mini-grid conceitos-chave -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">@remotion/three</div>
+<div class="text-xs text-neutral-500 mt-1">3D directamente en el video</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">staticFile()</div>
+<div class="text-xs text-neutral-500 mt-1">assets del proyecto</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-purple-400 font-bold text-sm">Remotion Lambda</div>
+<div class="text-xs text-neutral-500 mt-1">renderizado en la nube de AWS</div>
+</div>
+<div class="bg-dark-800 border border-purple-500/20 rounded-lg p-3 text-center">
+<div class="text-cyan-400 font-bold text-sm">calculateMetadata</div>
+<div class="text-xs text-neutral-500 mt-1">duración dinámica según los datos</div>
+</div>
+</div>
+</section>
+<!-- RESUMO DO MÓDULO -->
+<section id="resumo">
+<div class="rounded-xl bg-gradient-to-br from-purple-900/50 via-dark-800 to-dark-800 border border-purple-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6">📋 Resumen del Módulo 3.3</h2>
+<div class="grid md:grid-cols-2 gap-6 mb-8">
+<div>
+<div class="text-purple-300 font-semibold text-sm mb-3">Qué aprendiste</div>
+<ul class="space-y-2 text-sm text-neutral-400">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Remotion = video programático en React, frame = componente</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> <code class="text-cyan-400">useCurrentFrame()</code> + <code class="text-cyan-400">interpolate()</code> controlan toda la animación</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> <code class="text-cyan-400">spring()</code> entrega física de resorte con configuraciones precisas</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> CSS transitions están prohibidas — rompen el render</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> <code class="text-cyan-400">&lt;Sequence&gt;</code> / <code class="text-cyan-400">&lt;Series&gt;</code> secuencian escenas con premount</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Render mediante <code class="text-cyan-400">npx remotion render</code> → MP4 local</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Diferencia clara frente a HyperFrames y animation-designer</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> <code class="text-cyan-400">@remotion/three</code> se conecta con 3d-animation-creator</li>
+</ul>
+</div>
+<div>
+<!-- próximo módulo -->
+<div class="rounded-xl border border-purple-500/30 bg-purple-500/10 p-5">
+<div class="text-purple-300 text-xs font-semibold uppercase tracking-widest mb-2">Próximo módulo</div>
+<div class="text-neutral-200 font-bold text-lg mb-1">3.4 🔁 seedance + HyperFrames/FFmpeg</div>
+<p class="text-sm text-neutral-500">Ciclo de video con seedance, edición no lineal con HyperFrames y montaje final mediante FFmpeg: el flujo completo de producción sin React.</p>
+<a class="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 rounded-lg text-sm font-semibold transition-colors" href="modulo-3-4.html">
+                Ir a 3.4 →
+              </a>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-purple-500/20">
+<a class="flex items-center justify-center gap-2 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-xl font-semibold transition-colors" href="index.html">
+            ← Volver a la ruta 3
+          </a>
+<a class="flex items-center justify-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-semibold transition-colors" href="modulo-3-4.html">
+            Próximo módulo → 3.4 🔁 seedance
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="border-t border-dark-600 mt-16 py-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+<div class="flex items-center space-x-3 text-neutral-500 text-sm">
+<span class="text-2xl">🎨</span>
+<span>Skill Design · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></span>
+</div>
+<div class="flex items-center space-x-4 text-sm text-neutral-600">
+<span>Ruta 3 — Medios</span>
+<span>·</span>
+<span>Módulo 3.3 — remotion</span>
+<span>·</span>
+<a class="hover:text-purple-400 transition-colors" href="modulo-3-2.html">← 3.2</a>
+<a class="hover:text-purple-400 transition-colors" href="modulo-3-4.html">3.4 →</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- SCRIPTS -->
+<script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    function updateIcons() {
+      const isDark = document.documentElement.classList.contains('dark');
+      darkIcon.classList.toggle('hidden', isDark);
+      lightIcon.classList.toggle('hidden', !isDark);
+    }
+    updateIcons();
+
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      updateIcons();
+    });
+
+    // Restore saved theme
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.documentElement.classList.remove('dark');
+      updateIcons();
+    }
+  </script>
+</body>
+</html>
