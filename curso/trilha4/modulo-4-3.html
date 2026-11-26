@@ -168,7 +168,7 @@
 </div>
 </div>
 </header>
-<!-- SEÇÃO 1: O que é -->
+<!-- SEÇêO 1: O que é -->
 <section class="mb-10" id="topico-1">
 <div class="flex items-center gap-3 mb-6">
 <span class="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">1</span>
@@ -179,26 +179,26 @@
 <div class="flex items-start gap-3">
 <span class="text-2xl">🕹️</span>
 <div>
-<h3 class="font-bold text-amber-400 mb-2">Definição precisa</h3>
-<p class="text-neutral-300 leading-relaxed"><strong class="text-neutral-100">agent-browser</strong> é um skill do Claude Code que automatiza interações de navegador via <strong class="text-amber-400">Playwright</strong>. Ele expõe a ferramenta <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm">Bash(agent-browser:*)</code> permitindo ao Claude navegar em URLs, tirar screenshots, preencher formulários, testar apps web e extrair dados de páginas — tudo a partir do terminal, sem intervenção humana.</p>
+<h3 class="font-bold text-amber-400 mb-2">Definiçêo precisa</h3>
+<p class="text-neutral-300 leading-relaxed"><strong class="text-neutral-100">agent-browser</strong> é um skill do Claude Code que automatiza interações de navegador via <strong class="text-amber-400">Playwright</strong>. Ele expõe a ferramenta <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm">Bash(agent-browser:*)</code> permitindo ao Claude navegar em URLs, tirar screenshots, preencher formulários, testar apps web e extrair dados de páginas — tudo a partir do terminal, sem intervençêo humana.</p>
 </div>
 </div>
 </div>
-<p class="text-neutral-300 leading-relaxed mb-6">O skill funciona como uma CLI completa de automação. Cada subcomando (<code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">open</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">snapshot</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">screenshot</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">fill</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">click</code>…) mapeia para uma ação real no browser. O fluxo central é: <strong>navegar → snapshot → interagir → re-snapshot</strong>. Referências de elementos (<code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">@e1</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">@e2</code>…) são extraídas do snapshot e usadas nos comandos seguintes.</p>
+<p class="text-neutral-300 leading-relaxed mb-6">O skill funciona como uma CLI completa de automaçêo. Cada subcomando (<code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">open</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">snapshot</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">screenshot</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">fill</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">click</code>…) mapeia para uma açêo real no browser. O fluxo central é: <strong>navegar → snapshot → interagir → re-snapshot</strong>. Referências de elementos (<code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">@e1</code>, <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-300 text-sm font-mono">@e2</code>…) sêo extraídas do snapshot e usadas nos comandos seguintes.</p>
 <!-- grid fazer/evitar -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
 <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
 <h4 class="text-emerald-400 font-semibold mb-3 flex items-center gap-2"><span>✓</span> USAR QUANDO</h4>
 <ul class="space-y-2 text-sm text-neutral-300">
 <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Validar visualmente uma página recém-criada</li>
-<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Testar formulários e fluxos de autenticação</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Testar formulários e fluxos de autenticaçêo</li>
 <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Extrair dados de sites sem API</li>
-<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Tirar screenshots para documentação ou review</li>
-<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Gravar vídeo de interações para demonstração</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Tirar screenshots para documentaçêo ou review</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Gravar vídeo de interações para demonstraçêo</li>
 </ul>
 </div>
 <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
-<h4 class="text-red-400 font-semibold mb-3 flex items-center gap-2"><span>✗</span> NÃO USAR QUANDO</h4>
+<h4 class="text-red-400 font-semibold mb-3 flex items-center gap-2"><span>✗</span> NêO USAR QUANDO</h4>
 <ul class="space-y-2 text-sm text-neutral-300">
 <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> A tarefa é só análise de código estático</li>
 <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Há uma API REST disponível para o mesmo dado</li>
@@ -209,13 +209,13 @@
 </div>
 <!-- conceitos-chave -->
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Playwright</div><div class="text-xs text-neutral-500">Engine de automação</div></div>
+<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Playwright</div><div class="text-xs text-neutral-500">Engine de automaçêo</div></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Snapshot</div><div class="text-xs text-neutral-500">Árvore de acessibilidade</div></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">@refs</div><div class="text-xs text-neutral-500">Refs de elementos</div></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Headless</div><div class="text-xs text-neutral-500">Sem interface visual</div></div>
 </div>
 </section>
-<!-- SEÇÃO 2: Quando dispara -->
+<!-- SEÇêO 2: Quando dispara -->
 <section class="mb-10" id="topico-2">
 <div class="flex items-center gap-3 mb-6">
 <span class="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">2</span>
@@ -234,7 +234,7 @@
 <div class="relative mb-5">
 <div class="absolute -left-5 w-4 h-4 rounded-full bg-amber-500 border-2 border-dark-900 flex items-center justify-center"></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-4">
-<div class="font-semibold text-amber-400 text-sm mb-1">Validação visual pós-build</div>
+<div class="font-semibold text-amber-400 text-sm mb-1">Validaçêo visual pós-build</div>
 <p class="text-neutral-400 text-sm">"Abra a página que acabei de criar e tire um screenshot" → abre localhost, captura, retorna imagem.</p>
 </div>
 </div>
@@ -248,8 +248,8 @@
 <div class="relative mb-5">
 <div class="absolute -left-5 w-4 h-4 rounded-full bg-amber-500 border-2 border-dark-900"></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-4">
-<div class="font-semibold text-amber-400 text-sm mb-1">Extração de dados</div>
-<p class="text-neutral-400 text-sm">"Acesse essa página e me diga quais são os títulos dos artigos" → snapshot + get text.</p>
+<div class="font-semibold text-amber-400 text-sm mb-1">Extraçêo de dados</div>
+<p class="text-neutral-400 text-sm">"Acesse essa página e me diga quais sêo os títulos dos artigos" → snapshot + get text.</p>
 </div>
 </div>
 <div class="relative">
@@ -269,13 +269,13 @@
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Capturar</div><div class="text-xs text-neutral-500">screenshot</div></div>
 </div>
 </section>
-<!-- SEÇÃO 3: Como melhora suas páginas -->
+<!-- SEÇêO 3: Como melhora suas páginas -->
 <section class="mb-10" id="topico-3">
 <div class="flex items-center gap-3 mb-6">
 <span class="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">3</span>
 <h2 class="text-2xl font-bold text-neutral-100">🚀 Como melhora suas páginas</h2>
 </div>
-<p class="text-neutral-300 leading-relaxed mb-6">O agent-browser é o <strong class="text-amber-400">olho fechando o loop de design</strong>. Sem ele, o Claude gera HTML às cegas — entrega código que pode estar quebrado no browser real. Com ele, a verificação visual entra no próprio ciclo de trabalho.</p>
+<p class="text-neutral-300 leading-relaxed mb-6">O agent-browser é o <strong class="text-amber-400">olho fechando o loop de design</strong>. Sem ele, o Claude gera HTML às cegas — entrega código que pode estar quebrado no browser real. Com ele, a verificaçêo visual entra no próprio ciclo de trabalho.</p>
 <!-- box dados / blue -->
 <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
 <h3 class="text-blue-400 font-bold mb-3 flex items-center gap-2">📊 O ciclo fechado com agent-browser</h3>
@@ -297,7 +297,7 @@
 <!-- tip box -->
 <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 mb-6">
 <p class="text-amber-300 font-semibold mb-1">Por que isso importa no design</p>
-<p class="text-neutral-300 text-sm">HTML é texto — bugs visuais (sobreposição, texto cortado, cor errada) são invisíveis no código. O screenshot devolve informação que só existe no browser renderizado. Isso transforma o Claude de "escritor de HTML" em "designer com olho no resultado".</p>
+<p class="text-neutral-300 text-sm">HTML é texto — bugs visuais (sobreposiçêo, texto cortado, cor errada) sêo invisíveis no código. O screenshot devolve informaçêo que só existe no browser renderizado. Isso transforma o Claude de "escritor de HTML" em "designer com olho no resultado".</p>
 </div>
 <!-- grid fazer/evitar 2 -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
@@ -307,7 +307,7 @@
 <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Layout validado pixel a pixel</li>
 <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Interações testadas antes de entregar</li>
 <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Erros de responsividade detectados no ato</li>
-<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Screenshot como evidência para revisão</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Screenshot como evidência para revisêo</li>
 </ul>
 </div>
 <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
@@ -316,7 +316,7 @@
 <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Bugs visuais só descobertos pelo usuário</li>
 <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Formulários entregues sem teste</li>
 <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Mobile-first nunca verificado</li>
-<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Loop de revisão é humano + lento</li>
+<li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Loop de revisêo é humano + lento</li>
 </ul>
 </div>
 </div>
@@ -324,11 +324,11 @@
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Loop fechado</div><div class="text-xs text-neutral-500">gerar → ver → corrigir</div></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Visual ground truth</div><div class="text-xs text-neutral-500">screenshot = realidade</div></div>
-<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Validação automática</div><div class="text-xs text-neutral-500">sem abrir browser manual</div></div>
+<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Validaçêo automática</div><div class="text-xs text-neutral-500">sem abrir browser manual</div></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Evidência</div><div class="text-xs text-neutral-500">screenshot como prova</div></div>
 </div>
 </section>
-<!-- SEÇÃO 4: Como funciona por dentro -->
+<!-- SEÇêO 4: Como funciona por dentro -->
 <section class="mb-10" id="topico-4">
 <div class="flex items-center gap-3 mb-6">
 <span class="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">4</span>
@@ -346,7 +346,7 @@
 <div class="space-y-2">
 <div class="text-cyan-400 font-semibold text-xs uppercase tracking-wider mb-2">Engine</div>
 <code class="block bg-dark-700 rounded px-3 py-2 text-cyan-300 font-mono">Playwright</code>
-<p class="text-neutral-500 text-xs">Microsoft — automação cross-browser</p>
+<p class="text-neutral-500 text-xs">Microsoft — automaçêo cross-browser</p>
 </div>
 <div class="space-y-2">
 <div class="text-neutral-400 font-semibold text-xs uppercase tracking-wider mb-2">Saída</div>
@@ -361,7 +361,7 @@
 <span class="text-xs text-neutral-500 font-mono">Comandos reais do SKILL.md</span>
 <span class="text-xs text-amber-400 font-mono">agent-browser CLI</span>
 </div>
-<pre class="p-5 overflow-x-auto text-sm leading-relaxed"><code class="text-neutral-300 font-mono"><span class="text-neutral-500"># Navegação</span>
+<pre class="p-5 overflow-x-auto text-sm leading-relaxed"><code class="text-neutral-300 font-mono"><span class="text-neutral-500"># Navegaçêo</span>
 <span class="text-amber-300">agent-browser open</span> <span class="text-cyan-300">&lt;url&gt;</span>          <span class="text-neutral-500"># Abrir URL</span>
 <span class="text-amber-300">agent-browser back</span>                  <span class="text-neutral-500"># Voltar</span>
 <span class="text-amber-300">agent-browser reload</span>                <span class="text-neutral-500"># Recarregar</span>
@@ -386,11 +386,11 @@
 <span class="text-amber-300">agent-browser screenshot</span>            <span class="text-neutral-500"># Captura full page</span>
 <span class="text-amber-300">agent-browser pdf</span>                   <span class="text-neutral-500"># Exportar PDF</span>
 
-<span class="text-neutral-500"># Gravação de vídeo</span>
-<span class="text-amber-300">agent-browser video start</span>           <span class="text-neutral-500"># Iniciar gravação</span>
+<span class="text-neutral-500"># Gravaçêo de vídeo</span>
+<span class="text-amber-300">agent-browser video start</span>           <span class="text-neutral-500"># Iniciar gravaçêo</span>
 <span class="text-amber-300">agent-browser video stop</span>            <span class="text-neutral-500"># Parar e salvar</span>
 
-<span class="text-neutral-500"># Wait / sincronização</span>
+<span class="text-neutral-500"># Wait / sincronizaçêo</span>
 <span class="text-amber-300">agent-browser wait --url</span> <span class="text-emerald-300">"**/done"</span>  <span class="text-neutral-500"># Aguardar URL</span>
 <span class="text-amber-300">agent-browser wait --text</span> <span class="text-emerald-300">"Sucesso"</span> <span class="text-neutral-500"># Aguardar texto</span>
 
@@ -403,24 +403,24 @@
 <span class="text-amber-300">agent-browser snapshot -i --json</span>
 <span class="text-amber-300">agent-browser get text</span> <span class="text-cyan-300">@e1</span> <span class="text-amber-300">--json</span>
 
-<span class="text-neutral-500"># Estado salvo (autenticação)</span>
+<span class="text-neutral-500"># Estado salvo (autenticaçêo)</span>
 <span class="text-amber-300">agent-browser state save</span> <span class="text-emerald-300">auth.json</span>
 <span class="text-amber-300">agent-browser state load</span> <span class="text-emerald-300">auth.json</span></code></pre>
 </div>
 <!-- box alerta -->
 <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5 mb-6">
-<h4 class="text-red-400 font-semibold mb-2">⚠️ Atenção: re-snapshot obrigatório</h4>
-<p class="text-neutral-300 text-sm">Após qualquer navegação ou mudança significativa no DOM, os <code class="bg-dark-700 px-1.5 py-0.5 rounded text-red-300 text-sm font-mono">@refs</code> ficam inválidos. Execute <code class="bg-dark-700 px-1.5 py-0.5 rounded text-red-300 text-sm font-mono">agent-browser snapshot -i</code> novamente antes de interagir com novos elementos.</p>
+<h4 class="text-red-400 font-semibold mb-2">⚠️ Atençêo: re-snapshot obrigatório</h4>
+<p class="text-neutral-300 text-sm">Após qualquer navegaçêo ou mudança significativa no DOM, os <code class="bg-dark-700 px-1.5 py-0.5 rounded text-red-300 text-sm font-mono">@refs</code> ficam inválidos. Execute <code class="bg-dark-700 px-1.5 py-0.5 rounded text-red-300 text-sm font-mono">agent-browser snapshot -i</code> novamente antes de interagir com novos elementos.</p>
 </div>
 <!-- conceitos-chave -->
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">allowed-tools</div><div class="text-xs text-neutral-500">Bash(agent-browser:*)</div></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Sessions</div><div class="text-xs text-neutral-500">Browsers paralelos</div></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">State save/load</div><div class="text-xs text-neutral-500">Auth persistida</div></div>
-<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Video record</div><div class="text-xs text-neutral-500">Gravação de interações</div></div>
+<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Video record</div><div class="text-xs text-neutral-500">Gravaçêo de interações</div></div>
 </div>
 </section>
-<!-- SEÇÃO 5: Exemplo prático -->
+<!-- SEÇêO 5: Exemplo prático -->
 <section class="mb-10" id="topico-5">
 <div class="flex items-center gap-3 mb-6">
 <span class="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">5</span>
@@ -439,7 +439,7 @@
 <pre class="p-5 overflow-x-auto text-sm leading-relaxed"><code class="text-neutral-200 font-mono">Crie uma landing page para o produto "DesignBot" usando frontend-design.
 Depois abra a página no browser com agent-browser, tire um screenshot
 e me diga se o layout está correto — verifica se hero, CTA e footer
-aparecem sem sobreposição. Se tiver algo errado, corrija com impeccable
+aparecem sem sobreposiçêo. Se tiver algo errado, corrija com impeccable
 e tire outro screenshot para confirmar.</code></pre>
 </div>
 <!-- exemplo form submission do SKILL.md -->
@@ -460,14 +460,14 @@ e tire outro screenshot para confirmar.</code></pre>
 <span class="text-amber-300">agent-browser fill</span> <span class="text-cyan-300">@e2</span> <span class="text-emerald-300">"maria@exemplo.com"</span>
 <span class="text-amber-300">agent-browser click</span> <span class="text-cyan-300">@e3</span>
 
-<span class="text-neutral-500"># 4. Aguardar confirmação</span>
+<span class="text-neutral-500"># 4. Aguardar confirmaçêo</span>
 <span class="text-amber-300">agent-browser wait --text</span> <span class="text-emerald-300">"Mensagem enviada"</span>
 
 <span class="text-neutral-500"># 5. Screenshot como evidência</span>
 <span class="text-amber-300">agent-browser screenshot</span></code></pre>
 </div>
-<!-- exemplo autenticação salva -->
-<h3 class="text-lg font-semibold text-neutral-200 mb-3">Exemplo real: autenticação salva (do SKILL.md)</h3>
+<!-- exemplo autenticaçêo salva -->
+<h3 class="text-lg font-semibold text-neutral-200 mb-3">Exemplo real: autenticaçêo salva (do SKILL.md)</h3>
 <div class="bg-dark-900 border border-amber-500/20 rounded-xl overflow-hidden mb-6">
 <div class="flex items-center justify-between px-4 py-2 bg-dark-800 border-b border-dark-700">
 <span class="text-xs text-neutral-500 font-mono">bash — state save / load</span>
@@ -493,7 +493,7 @@ e tire outro screenshot para confirmar.</code></pre>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Screenshot prova</div><div class="text-xs text-neutral-500">evidência visual</div></div>
 </div>
 </section>
-<!-- SEÇÃO 6: Combina com / limites -->
+<!-- SEÇêO 6: Combina com / limites -->
 <section class="mb-10" id="topico-6">
 <div class="flex items-center gap-3 mb-6">
 <span class="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm">6</span>
@@ -506,19 +506,19 @@ e tire outro screenshot para confirmar.</code></pre>
 <div class="bg-dark-900 border border-emerald-500/30 rounded-xl p-5">
 <div class="text-emerald-400 font-bold text-lg mb-1">✨ impeccable</div>
 <div class="text-xs text-emerald-400 uppercase tracking-wider mb-3">Trilha 1 — Construir</div>
-<p class="text-neutral-400 text-sm leading-relaxed">O skill que <strong class="text-neutral-300">itera sobre o design</strong> com foco em qualidade visual. Ele usa o agent-browser para ver o estado atual, identificar falhas e corrigir — formando o <em>olho + mão</em> do loop.</p>
+<p class="text-neutral-400 text-sm leading-relaxed">O skill que <strong class="text-neutral-300">itera sobre o design</strong> com foco em qualidade visual. Ele usa o agent-browser para ver o estado atual, identificar falhas e corrigir — formando o <em>olho + mêo</em> do loop.</p>
 <div class="mt-3 text-xs text-emerald-400 font-mono bg-dark-800 rounded px-2 py-1">impeccable → agent-browser → impeccable</div>
 </div>
 <div class="bg-dark-900 border border-emerald-500/30 rounded-xl p-5">
 <div class="text-emerald-400 font-bold text-lg mb-1">⚛️ frontend-design</div>
 <div class="text-xs text-emerald-400 uppercase tracking-wider mb-3">Trilha 1 — Construir</div>
-<p class="text-neutral-400 text-sm leading-relaxed">Gera a página React/HTML com Tailwind e shadcn. Após geração, agent-browser <strong class="text-neutral-300">abre e valida</strong> o que foi criado — fechando o ciclo sem sair do terminal.</p>
+<p class="text-neutral-400 text-sm leading-relaxed">Gera a página React/HTML com Tailwind e shadcn. Após geraçêo, agent-browser <strong class="text-neutral-300">abre e valida</strong> o que foi criado — fechando o ciclo sem sair do terminal.</p>
 <div class="mt-3 text-xs text-emerald-400 font-mono bg-dark-800 rounded px-2 py-1">frontend-design → agent-browser</div>
 </div>
 <div class="bg-dark-900 border border-amber-500/30 rounded-xl p-5">
 <div class="text-amber-400 font-bold text-lg mb-1">🔭 website-intelligence</div>
 <div class="text-xs text-amber-400 uppercase tracking-wider mb-3">Trilha 4 — Apoio</div>
-<p class="text-neutral-400 text-sm leading-relaxed">O próximo módulo. Usa Firecrawl para análise profunda de sites externos. Combina com agent-browser para o que Firecrawl não alcança: <strong class="text-neutral-300">páginas que precisam de interação</strong> (login, SPA, lazy-load).</p>
+<p class="text-neutral-400 text-sm leading-relaxed">O próximo módulo. Usa Firecrawl para análise profunda de sites externos. Combina com agent-browser para o que Firecrawl nêo alcança: <strong class="text-neutral-300">páginas que precisam de interaçêo</strong> (login, SPA, lazy-load).</p>
 <div class="mt-3 text-xs text-amber-400 font-mono bg-dark-800 rounded px-2 py-1">agent-browser + website-intelligence</div>
 </div>
 </div>
@@ -530,7 +530,7 @@ e tire outro screenshot para confirmar.</code></pre>
 <span class="text-2xl">📊</span>
 <div>
 <div class="font-semibold text-neutral-100 text-sm">beautiful-mermaid + agent-browser</div>
-<p class="text-neutral-400 text-sm">Gera diagrama → abre no browser → screenshot para embed em documentação.</p>
+<p class="text-neutral-400 text-sm">Gera diagrama → abre no browser → screenshot para embed em documentaçêo.</p>
 </div>
 </div>
 <div class="flex items-start gap-4 bg-dark-800 border border-dark-700 rounded-lg p-4">
@@ -544,11 +544,11 @@ e tire outro screenshot para confirmar.</code></pre>
 <span class="text-2xl">🎞️</span>
 <div>
 <div class="font-semibold text-neutral-100 text-sm">agent-browser video + animation-designer</div>
-<p class="text-neutral-400 text-sm">animation-designer cria as animações CSS → agent-browser grava o video da animação rodando no browser.</p>
+<p class="text-neutral-400 text-sm">animation-designer cria as animações CSS → agent-browser grava o video da animaçêo rodando no browser.</p>
 </div>
 </div>
 </div>
-<!-- limites / quando não usar -->
+<!-- limites / quando nêo usar -->
 <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-6 mb-6">
 <h4 class="text-red-400 font-bold mb-4">⚠️ Limites reais</h4>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
@@ -558,11 +558,11 @@ e tire outro screenshot para confirmar.</code></pre>
 </div>
 <div class="flex items-start gap-2">
 <span class="text-red-400 font-bold mt-0.5">✗</span>
-<div><strong class="text-neutral-200">Scraping massivo</strong> — agent-browser é interativo, não bulk. Para coletar centenas de páginas, use ferramentas dedicadas.</div>
+<div><strong class="text-neutral-200">Scraping massivo</strong> — agent-browser é interativo, nêo bulk. Para coletar centenas de páginas, use ferramentas dedicadas.</div>
 </div>
 <div class="flex items-start gap-2">
 <span class="text-red-400 font-bold mt-0.5">✗</span>
-<div><strong class="text-neutral-200">Análise de código-fonte</strong> — se você quer entender o HTML/CSS de um site, Read + Grep são mais eficientes que snapshot.</div>
+<div><strong class="text-neutral-200">Análise de código-fonte</strong> — se você quer entender o HTML/CSS de um site, Read + Grep sêo mais eficientes que snapshot.</div>
 </div>
 <div class="flex items-start gap-2">
 <span class="text-red-400 font-bold mt-0.5">✗</span>
@@ -572,10 +572,10 @@ e tire outro screenshot para confirmar.</code></pre>
 </div>
 <!-- conceitos-chave -->
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">impeccable</div><div class="text-xs text-neutral-500">mão do loop</div></div>
+<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">impeccable</div><div class="text-xs text-neutral-500">mêo do loop</div></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">frontend-design</div><div class="text-xs text-neutral-500">gera a página</div></div>
 <div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">website-intelligence</div><div class="text-xs text-neutral-500">análise de sites externos</div></div>
-<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Bot limits</div><div class="text-xs text-neutral-500">não é invencível</div></div>
+<div class="bg-dark-800 border border-dark-700 rounded-lg p-3 text-center"><div class="text-amber-400 font-bold text-sm mb-1">Bot limits</div><div class="text-xs text-neutral-500">nêo é invencível</div></div>
 </div>
 </section>
 <!-- RESUMO DO MÓDULO -->
@@ -601,7 +601,7 @@ e tire outro screenshot para confirmar.</code></pre>
 </div>
 <div class="flex items-start gap-3 bg-dark-800/60 rounded-lg p-3">
 <span class="text-emerald-400 font-bold mt-0.5">✓</span>
-<span class="text-neutral-300 text-sm">Suporta sessões paralelas, state save/load, JSON output e gravação de vídeo</span>
+<span class="text-neutral-300 text-sm">Suporta sessões paralelas, state save/load, JSON output e gravaçêo de vídeo</span>
 </div>
 <div class="flex items-start gap-3 bg-dark-800/60 rounded-lg p-3">
 <span class="text-emerald-400 font-bold mt-0.5">✓</span>

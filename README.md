@@ -1,4 +1,4 @@
-﻿# ðŸŽ¨ Skill Design â€” O arsenal de skills do Claude Code pra melhorar pÃ¡ginas
+ï»¿# ê°Å¸Å½Â¨ Skill Design ê¢â¬â O arsenal de skills do Claude Code pra melhorar pêÂ¡ginas
 
 <div align="center">
   <img src="capa/logo.svg" alt="Arckhé AI" height="48" />
@@ -6,44 +6,44 @@
 </div>
 
 
-Curso-catÃ¡logo, no formato **INEMA.CLUB**, que analisa os **16 skills** do Claude Code para **criar e melhorar pÃ¡ginas**:
+Curso-catêÂ¡logo, no formato **INEMA.CLUB**, que analisa os **16 skills** do Claude Code para **criar e melhorar pêÂ¡ginas**:
 o que cada skill faz, quando dispara, como melhora o resultado, como funciona por dentro, prompts prontos e com quais skills ele combina.
 
-## ðŸŒ Acesse o curso
+## ê°Å¸ÅÂ Acesse o curso
 
 **https://inematds.github.io/skill-design/**
 
-## ðŸ“š As 4 trilhas (16 skills)
+## ê°Å¸âÅ¡ As 4 trilhas (16 skills)
 
 | Trilha | Tema | Skills analisados |
 |--------|------|-------------------|
-| ðŸ—ï¸ **T1 â€” Construir interfaces** | Gerar e redesenhar UI | `frontend-design` Â· `impeccable` Â· `web-artifacts-builder` Â· `design-designer` |
-| ðŸŽ¨ **T2 â€” Identidade & temas** | Look & feel coerente | `theme-factory` Â· `brand-guidelines` Â· `canvas-design` Â· `algorithmic-art` |
-| ðŸŽžï¸ **T3 â€” MÃ­dia & vÃ­deo** | Movimento e vÃ­deo na pÃ¡gina | `animation-designer` Â· `3d-animation-creator` Â· `remotion` Â· `seedance` + `HyperFrames`/`FFmpeg` |
-| ðŸ”Ž **T4 â€” Diagramas, navegador & pesquisa** | Apoio Ã  pÃ¡gina | `beautiful-mermaid` Â· `excalidraw` Â· `agent-browser` (Playwright) Â· `website-intelligence` |
+| ê°Å¸Ââê¯Â¸Â **T1 ê¢â¬â Construir interfaces** | Gerar e redesenhar UI | `frontend-design` êÂ· `impeccable` êÂ· `web-artifacts-builder` êÂ· `design-designer` |
+| ê°Å¸Å½Â¨ **T2 ê¢â¬â Identidade & temas** | Look & feel coerente | `theme-factory` êÂ· `brand-guidelines` êÂ· `canvas-design` êÂ· `algorithmic-art` |
+| ê°Å¸Å½Å¾ê¯Â¸Â **T3 ê¢â¬â MêÂ­dia & vêÂ­deo** | Movimento e vêÂ­deo na pêÂ¡gina | `animation-designer` êÂ· `3d-animation-creator` êÂ· `remotion` êÂ· `seedance` + `HyperFrames`/`FFmpeg` |
+| ê°Å¸âÅ½ **T4 ê¢â¬â Diagramas, navegador & pesquisa** | Apoio êÂ  pêÂ¡gina | `beautiful-mermaid` êÂ· `excalidraw` êÂ· `agent-browser` (Playwright) êÂ· `website-intelligence` |
 
-Cada mÃ³dulo Ã© a **anÃ¡lise de um skill** em 6 Ã¢ngulos: o que faz Â· quando dispara Â· como melhora suas pÃ¡ginas Â·
-como funciona por dentro Â· exemplo + prompt pronto Â· combina com & limites.
+Cada mêÂ³dulo êÂ© a **anêÂ¡lise de um skill** em 6 êÂ¢ngulos: o que faz êÂ· quando dispara êÂ· como melhora suas pêÂ¡ginas êÂ·
+como funciona por dentro êÂ· exemplo + prompt pronto êÂ· combina com & limites.
 
-## ðŸ”— Curso irmÃ£o
+## ê°Å¸ââ Curso irmêÂ£o
 
-A trilha de vÃ­deo (HyperFrames/FFmpeg) Ã© aprofundada no curso **HyperFrames**:
+A trilha de vêÂ­deo (HyperFrames/FFmpeg) êÂ© aprofundada no curso **HyperFrames**:
 [inematds.github.io/skill-hyperframes-videos](https://inematds.github.io/skill-hyperframes-videos/)
 
-## ðŸ—‚ï¸ Estrutura
+## ê°Å¸ââê¯Â¸Â Estrutura
 
 ```
 index.html                 # Landing
 curso/
-  index.html               # Ãndice das trilhas
+  index.html               # êÂndice das trilhas
   trilha1..4/
-    index.html             # Ãndice da trilha (mapa + mÃ³dulos)
-    modulo-X-Y.html        # AnÃ¡lise de cada skill (16 no total)
+    index.html             # êÂndice da trilha (mapa + mêÂ³dulos)
+    modulo-X-Y.html        # AnêÂ¡lise de cada skill (16 no total)
 ```
 
 ---
 
-ConteÃºdo do [**INEMA.CLUB**](https://inema.club) Â· 2026
+ConteêÂºdo do [**INEMA.CLUB**](https://inema.club) êÂ· 2026
 
 ---
 
