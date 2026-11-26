@@ -6,12 +6,12 @@
 </div>
 
 
-Curso-catêÂ¡logo, no formato **INEMA.CLUB**, que analisa os **16 skills** do Claude Code para **criar e melhorar pêÂ¡ginas**:
+Curso-catêÂ¡logo, no formato **ARCKHÉ AI**, que analisa os **16 skills** do Claude Code para **criar e melhorar pêÂ¡ginas**:
 o que cada skill faz, quando dispara, como melhora o resultado, como funciona por dentro, prompts prontos e com quais skills ele combina.
 
 ## ê°Å¸ÅÂ Acesse o curso
 
-**https://inematds.github.io/skill-design/**
+**https://linnoff88-dev.github.io/arckhe-/**
 
 ## ê°Å¸âÅ¡ As 4 trilhas (16 skills)
 
@@ -28,7 +28,7 @@ como funciona por dentro êÂ· exemplo + prompt pronto êÂ· combina com &
 ## ê°Å¸ââ Curso irmêÂ£o
 
 A trilha de vêÂ­deo (HyperFrames/FFmpeg) êÂ© aprofundada no curso **HyperFrames**:
-[inematds.github.io/skill-hyperframes-videos](https://inematds.github.io/skill-hyperframes-videos/)
+[linnoff88-dev.github.io/arckhe-skill-hyperframes-videos](https://linnoff88-dev.github.io/arckhe-/)
 
 ## ê°Å¸ââê¯Â¸Â Estrutura
 
@@ -43,7 +43,7 @@ curso/
 
 ---
 
-ConteêÂºdo do [**INEMA.CLUB**](https://inema.club) êÂ· 2026
+ConteêÂºdo do [**ARCKHÉ AI**](https://ARCKHÉ AI) êÂ· 2026
 
 ---
 
